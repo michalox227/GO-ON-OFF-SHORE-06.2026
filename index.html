@@ -222,13 +222,16 @@
 
     // ─── MORZE ───────────────────────────────────────────────────────────────
     // Głębina
-    scene.add(Object.assign(new THREE.Mesh(
+    const deepSea = new THREE.Mesh(
       new THREE.PlaneGeometry(230, 740),
       new THREE.MeshLambertMaterial({ color: 0x003366 })
-    ), { rotation: new THREE.Euler(-Math.PI / 2, 0, 0), position: new THREE.Vector3(-275, 0, 0) }));
+    );
+    deepSea.rotation.x = -Math.PI / 2;
+    deepSea.position.set(-275, 0, 0);
+    scene.add(deepSea);
 
-    // Fale (animowane)
-    const seaGeo = new THREE.PlaneGeometry(210, 740, 90, 90 * 4);
+    // Fale (animowane) — niska liczba segmentów dla płynności
+    const seaGeo = new THREE.PlaneGeometry(210, 740, 40, 120);
     const seaMat = new THREE.MeshPhongMaterial({
       color: 0x0066cc, shininess: 160, specular: 0x5599ff,
       transparent: true, opacity: 0.9
