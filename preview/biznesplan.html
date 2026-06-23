@@ -335,6 +335,47 @@
   .ishikawa-head:before{content:''; position:absolute; left:-30px; top:50%; width:30px; height:2px; background:rgba(248,113,113,.5)}
   .ishikawa-head .head-title{display:block; font-size:11px; font-weight:800; color:#F87171; text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px}
   .ishikawa-head ul{margin:0; padding-left:14px; font-size:10px; color:var(--text); text-align:left}
+  .roadmap-detail .roadmap-q-details{display:none}
+  .roadmap-detail.detail-mode .roadmap-q-details{display:block}
+  .roadmap-detail .roadmap-summary{display:none}
+  .roadmap-detail.active .roadmap-summary{display:block}
+  .roadmap-detail.active.detail-mode .roadmap-summary{display:none}
+  .summary-intro{color:var(--muted); font-size:12px; margin:0 0 14px; line-height:1.5}
+  .summary-q-row{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px}
+  .summary-q-pill{display:flex; flex-direction:column; align-items:flex-start; gap:2px; border:none; cursor:pointer; padding:8px 14px; border-radius:10px; color:#fff; background:linear-gradient(135deg, rgba(var(--stage-rgb),.36), rgba(var(--stage-rgb),.13)); box-shadow:inset 0 0 0 1px rgba(var(--stage-rgb),.20)}
+  .summary-q-pill b{font-family:var(--display); font-size:14px; letter-spacing:.04em}
+  .summary-q-pill span{font-size:10px; color:#cdd6e0}
+  .summary-q-pill:hover{filter:brightness(1.18)}
+  .summary-cat{margin-bottom:16px; border:1px solid rgba(255,255,255,.10); border-radius:14px; padding:14px 16px; background:rgba(7,11,17,.4)}
+  .summary-cat-head{font-family:var(--display); font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,.10)}
+  .summary-cat-head.praca{color:#2DD4BF}
+  .summary-cat-head.efekt{color:#C084FC}
+  .summary-cat-head.zespol{color:#34D399}
+  .summary-cat-head.koszty{color:#F87171}
+  .summary-cat-head.przychody{color:#34D399}
+  .summary-cat-head.granty{color:#9FB3C8}
+  .summary-q-block{margin-bottom:12px}
+  .summary-q-block:last-child{margin-bottom:0}
+  .summary-q-link{display:inline-block; background:none; border:none; cursor:pointer; color:var(--gold); font-family:var(--display); font-size:12px; font-weight:700; letter-spacing:.03em; padding:0; margin-bottom:5px; text-decoration:underline; text-underline-offset:3px}
+  .summary-q-link:hover{color:#fff}
+  .summary-chips{display:flex; flex-wrap:wrap; gap:6px}
+  .summary-chips span{font-size:11px; color:var(--text); background:rgba(45,212,191,.10); border:1px solid rgba(45,212,191,.25); border-radius:6px; padding:3px 8px}
+  .summary-chips.team span{background:rgba(52,211,153,.10); border-color:rgba(52,211,153,.28)}
+  .summary-list{margin:2px 0 0; padding-left:16px; list-style:disc; font-size:11px; color:var(--text); line-height:1.5}
+  .summary-team-meta{font-size:11px; color:var(--muted); margin-top:5px}
+  .summary-team-meta b{color:#fff}
+  .summary-fin{width:100%; border-collapse:collapse; font-size:11px}
+  .summary-fin th{text-align:left; padding:4px 6px; color:#9fb3c8; border-bottom:1px solid rgba(255,255,255,.12); font-weight:700}
+  .summary-fin th.num, .summary-fin td.num{text-align:right; white-space:nowrap}
+  .summary-fin td{padding:5px 6px; color:#d4dde6; border-bottom:1px solid rgba(255,255,255,.05)}
+  .summary-fin td .summary-q-link{margin-bottom:0}
+  .summary-fin tr.total td{font-weight:700; color:#fff; border-top:1px solid rgba(255,255,255,.18)}
+  .summary-fin-koszty tr.total td.num{color:#F87171}
+  .summary-fin-przychody tr.total td.num{color:#34D399}
+  .summary-empty{color:var(--muted); font-size:12px; padding:10px 0}
+  .q-back{display:none; margin-bottom:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); color:var(--text); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-family:var(--display); font-weight:600}
+  .q-back:hover{background:rgba(45,212,191,.15); border-color:var(--teal); color:var(--teal)}
+  .roadmap-detail.detail-mode .q-back{display:inline-flex}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
@@ -1649,46 +1690,49 @@
   const roadmapQButtons = Array.from(document.querySelectorAll('.q-pill[data-roadmap-stage]'));
   const roadmapDetails = Array.from(document.querySelectorAll('[data-roadmap-detail]'));
 
-  let currentMindMapQuarter = null;
-
-  function showMindMapForQuarter(quarter) {
-    currentMindMapQuarter = quarter;
-    roadmapDetails.forEach(panel => {
-      const cards = Array.from(panel.querySelectorAll('.roadmap-q-card'));
-      const hasQuarter = cards.some(card => card.dataset.roadmapQ === quarter);
-      panel.classList.toggle('active', hasQuarter);
-      cards.forEach(card => {
-        if (card.dataset.roadmapQ === quarter) {
-          card.classList.add('mind-map-view');
-          card.style.display = '';
-        } else {
-          card.classList.remove('mind-map-view');
-          card.style.display = 'none';
-        }
-      });
-    });
-    roadmapQButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapQ === quarter));
-    roadmapTimelineButtons.forEach(btn => btn.classList.remove('active'));
-  }
-
-  function showRoadmapStage(stageId, quarter) {
-    currentMindMapQuarter = null;
+  function showRoadmapStage(stageId) {
     roadmapDetails.forEach(panel => {
       const isActive = panel.dataset.roadmapDetail === stageId;
       panel.classList.toggle('active', isActive);
-      if (isActive) {
-        Array.from(panel.querySelectorAll('.roadmap-q-card')).forEach(card => {
-          card.classList.remove('mind-map-view');
-          card.style.display = '';
-        });
-      }
+      panel.classList.remove('detail-mode');
+      panel.querySelectorAll('.roadmap-q-card').forEach(card => {
+        card.style.display = 'none';
+        card.classList.remove('mind-map-view');
+      });
     });
     roadmapTimelineButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapStage === stageId));
     roadmapQButtons.forEach(btn => btn.classList.remove('active'));
   }
 
+  function showQuarter(quarter) {
+    let activeStage = null;
+    roadmapDetails.forEach(panel => {
+      const cards = Array.from(panel.querySelectorAll('.roadmap-q-card'));
+      const hasQuarter = cards.some(card => card.dataset.roadmapQ === quarter);
+      panel.classList.toggle('active', hasQuarter);
+      panel.classList.toggle('detail-mode', hasQuarter);
+      if (hasQuarter) activeStage = panel.dataset.roadmapDetail;
+      cards.forEach(card => {
+        if (card.dataset.roadmapQ === quarter) {
+          card.style.display = '';
+          card.classList.add('mind-map-view');
+        } else {
+          card.style.display = 'none';
+          card.classList.remove('mind-map-view');
+        }
+      });
+    });
+    roadmapQButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapQ === quarter));
+    roadmapTimelineButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapStage === activeStage));
+  }
+
   roadmapTimelineButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
-  roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showMindMapForQuarter(btn.dataset.roadmapQ)));
+  roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showQuarter(btn.dataset.roadmapQ)));
+  // Delegacja: kliknięcie wersji w podsumowaniu otwiera szczegóły danego kwartału
+  document.addEventListener('click', e => {
+    const link = e.target.closest('[data-go-q]');
+    if (link) { e.preventDefault(); showQuarter(link.dataset.goQ); }
+  });
   // Wyciąga kategorie pracy (nazwa + zadania) z karty kwartału.
   // skipHeadings pozwala wykluczyć bloki, których nie traktujemy jako "pracę"
   // (np. CEL ETAPU / EFEKT KOŃCOWY przy generowaniu mapy myśli).
@@ -1807,6 +1851,119 @@
       container.innerHTML = buildIshikawaHTML(card);
       container.classList.add('open');
     });
+  });
+
+  // --- Podsumowania etapów: agregacja 6 kategorii z kwartałów danego etapu ---
+  function plnParse(s){ return parseInt(String(s).replace(/[^\d]/g, ''), 10) || 0; }
+  function plnFmt(n){ return n.toLocaleString('pl-PL').replace(/[  ]/g, ' ') + ' zł'; }
+
+  function cardData(card){
+    const wrapper = card.querySelector('div[style*="margin-top: 10px"]');
+    const strongEl = card.querySelector(':scope > strong');
+    const version = strongEl ? strongEl.textContent.trim() : '';
+    let efekt = [];
+    Array.from(wrapper.children).forEach(block => {
+      const h = block.querySelector(':scope > strong');
+      const ht = h ? h.textContent.trim().toUpperCase() : '';
+      if (ht.includes('EFEKT KOŃCOWY')) efekt = Array.from(block.querySelectorAll('li')).map(li => li.textContent.trim());
+    });
+    const work = extractWorkCategories(wrapper, ['CEL ETAPU', 'EFEKT KOŃCOWY']);
+    const roles = Array.from(card.querySelectorAll('.team-map .person-chip')).map(c => c.textContent.replace('+', '').trim());
+    const legend = {};
+    card.querySelectorAll('.team-legend .legend-item').forEach(it => {
+      const l = it.querySelector('.legend-label'); const n = it.querySelector('.number');
+      if (l && n) legend[l.textContent.trim()] = n.textContent.trim();
+    });
+    function totals(sel){
+      const t = card.querySelector(sel + ' tr.total');
+      if (!t) return null;
+      const nums = Array.from(t.querySelectorAll('td.num')).map(td => td.textContent.trim());
+      return { brutto: nums[0] || '0 zł', netto: nums[1] || '0 zł' };
+    }
+    const granty = Array.from(card.querySelectorAll('.granty-list li')).map(li => li.textContent.trim());
+    return { q: card.dataset.roadmapQ, version, efekt, work, roles, legend,
+             koszty: totals('.fin-tile-koszty'), przychody: totals('.fin-tile-przychody'), granty };
+  }
+
+  function verLink(d){ return '<button type="button" class="summary-q-link" data-go-q="' + d.q + '">' + d.version + '</button>'; }
+  function verShort(v){ return v.split('—')[0].trim() || v; }
+
+  function buildStageSummary(panel){
+    const cards = Array.from(panel.querySelectorAll('.roadmap-q-card')).filter(c => c.querySelector('.fin-tile'));
+    if (!cards.length) return null;
+    const data = cards.map(cardData);
+    const stageCls = ['stage-mvp1','stage-two','stage-three','stage-four','stage-five'].find(c => panel.classList.contains(c)) || 'stage-mvp1';
+
+    const pills = data.map(d =>
+      '<button type="button" class="summary-q-pill ' + stageCls + '" data-go-q="' + d.q + '"><b>' + verShort(d.version) + '</b><span>' + d.q + '</span></button>'
+    ).join('');
+
+    const sec = [];
+    sec.push('<div class="summary-cat"><div class="summary-cat-head praca">PRACA</div>' +
+      data.map(d => '<div class="summary-q-block">' + verLink(d) +
+        '<div class="summary-chips">' + d.work.map(w => '<span>' + w.name + '</span>').join('') + '</div></div>').join('') +
+      '</div>');
+
+    sec.push('<div class="summary-cat"><div class="summary-cat-head efekt">EFEKT KOŃCOWY</div>' +
+      data.map(d => '<div class="summary-q-block">' + verLink(d) +
+        '<ul class="summary-list">' + d.efekt.map(e => '<li>' + e + '</li>').join('') + '</ul></div>').join('') +
+      '</div>');
+
+    sec.push('<div class="summary-cat"><div class="summary-cat-head zespol">ZESPÓŁ &amp; REKRUTACJA</div>' +
+      data.map(d => '<div class="summary-q-block">' + verLink(d) +
+        '<div class="summary-chips team">' + d.roles.map(r => '<span>+ ' + r + '</span>').join('') + '</div>' +
+        '<div class="summary-team-meta">Zrekrutowani: <b>' + (d.legend['Zrekrutowani:'] || '0') + '</b> &bull; Aktualny zespół: <b>' + (d.legend['Aktualny zespół:'] || '-') + '</b></div></div>').join('') +
+      '</div>');
+
+    let kb = 0, kn = 0;
+    const kRows = data.filter(d => d.koszty).map(d => {
+      kb += plnParse(d.koszty.brutto); kn += plnParse(d.koszty.netto);
+      return '<tr><td>' + verLink(d) + '</td><td class="num">' + d.koszty.brutto + '</td><td class="num">' + d.koszty.netto + '</td></tr>';
+    }).join('');
+    sec.push('<div class="summary-cat"><div class="summary-cat-head koszty">KOSZTY</div>' +
+      '<table class="summary-fin summary-fin-koszty"><thead><tr><th>Kwartał</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead><tbody>' +
+      kRows + '<tr class="total"><td>SUMA ETAPU</td><td class="num">' + plnFmt(kb) + '</td><td class="num">' + plnFmt(kn) + '</td></tr></tbody></table></div>');
+
+    let pb = 0, pn = 0;
+    const pRows = data.filter(d => d.przychody).map(d => {
+      pb += plnParse(d.przychody.brutto); pn += plnParse(d.przychody.netto);
+      return '<tr><td>' + verLink(d) + '</td><td class="num">' + d.przychody.brutto + '</td><td class="num">' + d.przychody.netto + '</td></tr>';
+    }).join('');
+    sec.push('<div class="summary-cat"><div class="summary-cat-head przychody">PRZYCHODY</div>' +
+      '<table class="summary-fin summary-fin-przychody"><thead><tr><th>Kwartał</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead><tbody>' +
+      pRows + '<tr class="total"><td>SUMA ETAPU</td><td class="num">' + plnFmt(pb) + '</td><td class="num">' + plnFmt(pn) + '</td></tr></tbody></table></div>');
+
+    sec.push('<div class="summary-cat"><div class="summary-cat-head granty">DOFINANSOWANIA &amp; GRANTY</div>' +
+      data.map(d => '<div class="summary-q-block">' + verLink(d) +
+        '<ul class="summary-list">' + d.granty.map(g => '<li>' + g + '</li>').join('') + '</ul></div>').join('') +
+      '</div>');
+
+    const wrap = document.createElement('div');
+    wrap.className = 'roadmap-summary';
+    wrap.innerHTML = '<p class="summary-intro">Podsumowanie etapu — przegląd wszystkich kwartałów według kategorii. Kliknij wersję (np. „' +
+      data[0].version + '"), aby otworzyć pełne szczegóły danego kwartału.</p>' +
+      '<div class="summary-q-row">' + pills + '</div>' + sec.join('');
+    return wrap;
+  }
+
+  roadmapDetails.forEach(panel => {
+    const head = panel.querySelector('.roadmap-detail-head');
+    const summary = buildStageSummary(panel);
+    if (summary) {
+      head.insertAdjacentElement('afterend', summary);
+    } else {
+      const ph = document.createElement('p');
+      ph.className = 'roadmap-summary summary-empty';
+      ph.textContent = 'Szczegóły tego etapu są w przygotowaniu.';
+      head.insertAdjacentElement('afterend', ph);
+    }
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.className = 'q-back';
+    back.textContent = '← Wróć do podsumowania etapu';
+    back.addEventListener('click', () => showRoadmapStage(panel.dataset.roadmapDetail));
+    const qDetails = panel.querySelector('.roadmap-q-details');
+    qDetails.parentNode.insertBefore(back, qDetails);
   });
 
   showRoadmapStage('mvp1');
