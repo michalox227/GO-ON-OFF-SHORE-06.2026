@@ -249,12 +249,14 @@
   .team-map.active{display:flex}
   .person-chip{display:flex; align-items:center; justify-content:center; width:auto; height:auto; border-radius:6px; font-size:11px; text-align:center; padding:6px 8px; color:#fff; font-weight:600; line-height:1.2; background:rgba(52,211,153,.15); border:1px solid rgba(52,211,153,.35)}
   .person-chip new{color:#34D399}
-  .team-legend{display:flex; flex-direction:column; gap:6px; margin-top:12px; font-size:11px; color:var(--text)}
-  .team-legend span{display:flex; align-items:center; gap:8px}
-  .team-legend span strong{font-weight:700}
-  .team-legend .recruited{color:#34D399}
-  .team-legend .before{color:#FBBF24}
-  .team-legend .current{color:#2DD4BF}
+  .team-legend{display:flex; flex-direction:column; gap:6px; margin-top:12px; color:var(--text)}
+  .team-legend .legend-item{display:flex; align-items:center; gap:6px}
+  .team-legend .legend-label{font-weight:700; font-size:8px; color:#fff}
+  .team-legend .number{font-size:14px; font-weight:700}
+  .team-legend .number.recruited{color:#34D399}
+  .team-legend .number.before{color:#FBBF24}
+  .team-legend .number.current{color:#2DD4BF}
+  .team-legend .unit{font-size:8px; color:#fff}
   .org-view{padding:32px 0}
   .org-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; padding:0 30px}
   .org-filter-btn{background:rgba(255,255,255,.08); border:1px solid var(--line); color:var(--text); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-family:var(--display); font-weight:600; transition:all .2s ease}
@@ -880,9 +882,9 @@
                   <div class="person-chip"><span style="color:#34D399;">+ Researcher</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">6 osób</span></span>
-                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">0 osób</span></span>
-                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">6 osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">6</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">0</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">6</span> <span class="unit">osób</span></span>
                 </div>
               </div>
             </div>
@@ -950,9 +952,9 @@
                   <div class="person-chip"><span style="color:#34D399;">+ Marketing / Content</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">2 osób</span></span>
-                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">6 osób</span></span>
-                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">8 osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">2</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">6</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">8</span> <span class="unit">osób</span></span>
                 </div>
               </div>
             </div>
@@ -1018,9 +1020,9 @@
                   <div class="person-chip"><span style="color:#34D399;">+ BOK</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">3 osób</span></span>
-                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">8 osób</span></span>
-                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">11 osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">3</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">8</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">11</span> <span class="unit">osób</span></span>
                 </div>
               </div>
             </div>
@@ -1118,9 +1120,9 @@
                   <div class="person-chip"><span style="color:#34D399;">+ Administracja / granty</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">5 osób</span></span>
-                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">11 osób</span></span>
-                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">16 osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">5</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">11</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">16</span> <span class="unit">osób</span></span>
                 </div>
               </div>
             </div>
@@ -1216,9 +1218,9 @@
                   <div class="person-chip"><span style="color:#34D399;">+ Marketing / content dodatkowy</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">4 osób</span></span>
-                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">16 osób</span></span>
-                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">20 osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">4</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">16</span> <span class="unit">osób</span></span>
+                  <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">20</span> <span class="unit">osób</span></span>
                 </div>
               </div>
             </div>
