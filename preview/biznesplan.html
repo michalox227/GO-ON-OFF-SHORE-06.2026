@@ -893,8 +893,9 @@
                     <div class="person-chip new"><span>UI/UX Designer</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
-                  <span><i style="background:#FBBF24"></i> osoba kontynuująca z poprzedniego Q</span>
+                  <span><strong style="color:#fff;">Zrekrutowani:</strong> 6 osób</span>
+                  <span><strong style="color:#fff;">Zespół przed rekrutacją:</strong> 0 osób</span>
+                  <span><strong style="color:#fff;">Aktualny zespół:</strong> 6 osób</span>
                 </div>
               </div>
             </div>
@@ -967,7 +968,9 @@
                     <div class="person-chip new"><span>Marketing Spec.</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
+                  <span><strong style="color:#fff;">Zrekrutowani:</strong> 3 osoby</span>
+                  <span><strong style="color:#fff;">Zespół przed rekrutacją:</strong> 6 osób</span>
+                  <span><strong style="color:#fff;">Aktualny zespół:</strong> 9 osób</span>
                 </div>
               </div>
             </div>
@@ -1027,7 +1030,9 @@
                     <div class="person-chip new"><span>Ambasadorzy (250)</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
+                  <span><strong style="color:#fff;">Zrekrutowani:</strong> 250 osób</span>
+                  <span><strong style="color:#fff;">Zespół przed rekrutacją:</strong> 9 osób</span>
+                  <span><strong style="color:#fff;">Aktualny zespół:</strong> 259 osób</span>
                 </div>
               </div>
             </div>
@@ -1287,15 +1292,15 @@
   const stageMap = {all: ['i', 'ii', 'iii', 'iv', 'v'], i: ['i'], ii: ['ii'], iii: ['iii'], iv: ['iv'], v: ['v']};
   const allQuarters = Object.keys(orgData);
   let currentOrgStage = 'all';
-  let currentOrgQuarter = '';
+  let selectedQuarters = new Set();
 
   function renderOrgChart() {
     const chart = document.getElementById('org-chart');
     chart.innerHTML = '';
 
     const relevantStages = stageMap[currentOrgStage];
-    const relevantQuarters = currentOrgQuarter
-      ? [currentOrgQuarter].filter(q => orgData[q] && relevantStages.includes(orgData[q].stage))
+    const relevantQuarters = selectedQuarters.size
+      ? allQuarters.filter(q => selectedQuarters.has(q))
       : allQuarters.filter(q => relevantStages.includes(orgData[q].stage));
 
     if (relevantQuarters.length === 0) {
@@ -1349,20 +1354,36 @@
   const orgQFilters = document.querySelectorAll('#org-q-filters .org-q-filter-btn');
   const orgQFiltersDiv = document.getElementById('org-q-filters');
 
+  function syncOrgQButtons() {
+    orgQFilters.forEach(b => {
+      const q = b.dataset.orgQ;
+      b.classList.toggle('active', q === '' ? selectedQuarters.size === 0 : selectedQuarters.has(q));
+    });
+  }
+
   orgStageFilters.forEach(btn => {
     btn.addEventListener('click', () => {
       currentOrgStage = btn.dataset.orgStage;
       orgStageFilters.forEach(b => b.classList.toggle('active', b === btn));
       orgQFiltersDiv.style.display = currentOrgStage === 'all' ? 'none' : 'flex';
-      orgQFilters[0].click();
+      selectedQuarters = new Set(allQuarters.filter(q => stageMap[currentOrgStage].includes(orgData[q].stage)));
+      if (currentOrgStage === 'all') selectedQuarters = new Set();
+      syncOrgQButtons();
       renderOrgChart();
     });
   });
 
   orgQFilters.forEach(btn => {
     btn.addEventListener('click', () => {
-      currentOrgQuarter = btn.dataset.orgQ;
-      orgQFilters.forEach(b => b.classList.toggle('active', b === btn));
+      const q = btn.dataset.orgQ;
+      if (q === '') {
+        selectedQuarters = new Set(allQuarters.filter(qq => stageMap[currentOrgStage].includes(orgData[qq].stage)));
+      } else if (selectedQuarters.has(q)) {
+        selectedQuarters.delete(q);
+      } else {
+        selectedQuarters.add(q);
+      }
+      syncOrgQButtons();
       renderOrgChart();
     });
   });
