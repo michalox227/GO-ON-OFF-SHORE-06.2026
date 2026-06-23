@@ -302,6 +302,10 @@
   .roadmap-details.editing-active .rm-del-btn{display:inline-flex}
   .rm-del-btn{display:none; margin-left:8px; border:1px solid rgba(248,113,113,.4); background:rgba(248,113,113,.12); color:#F87171; border-radius:6px; padding:2px 8px; font-size:11px; cursor:pointer}
   .rm-del-btn:hover{background:rgba(248,113,113,.28)}
+  .org-editor-rolelist{display:flex; flex-direction:column; gap:6px; margin:10px 0}
+  .org-editor-rolelist .org-role-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:8px 10px; color:#fff; font-size:13px}
+  .org-editor-rolelist .org-role-row .rm-del-btn{display:inline-flex; margin-left:auto}
+  .org-editor-rolelist .org-role-meta{color:var(--muted); font-size:12px}
   .oc-close:hover{background:#fff; color:#000}
   .zespol-heading{color: #2DD4BF; display: block; margin-bottom: 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;}
   .fin-tile{margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);}
@@ -1811,6 +1815,37 @@
     <button class="org-filter-btn" type="button" id="rmAddQBtn">+ Dodaj nowy Q do etapu</button>
     <button class="org-filter-btn" type="button" id="rmAddStageBtn">+ Dodaj nowy etap</button>
   </div>
+
+  <h2 style="margin:32px 0 8px;">ORGANIZACJA</h2>
+  <p style="margin:0 0 6px; color:#c4ced8;">Dodawaj/usuwaj działy i role — zmiany zapisują się od razu i są widoczne na zakładce „Organizacja” w listach ZESPÓŁ / ZREKRUTOWANI, zgodnie z przypisanym kwartałem. „Wyświetl poprawione” pokaże listę zmian względem opublikowanej wersji do skopiowania.</p>
+  <div class="settings-actions">
+    <button class="org-filter-btn" type="button" id="orgReportBtn">Wyświetl poprawione</button>
+    <button class="org-filter-btn" type="button" id="orgResetBtn">Przywróć opublikowaną wersję</button>
+  </div>
+  <p class="org-filter-status" id="orgEditStatus"></p>
+  <textarea id="orgReport" readonly placeholder="Tu pojawi się lista zmian po kliknięciu „Wyświetl poprawione”..."></textarea>
+
+  <div class="rm-editor-target">
+    <label>Dział <select id="orgDeptSelect"></select></label>
+  </div>
+  <div id="orgRoleList" class="org-editor-rolelist"></div>
+
+  <div class="rm-editor-grid">
+    <form class="rm-editor-form" id="orgAddDeptForm">
+      <h3>Dodaj dział</h3>
+      <input type="text" id="orgNewDeptName" placeholder="Nazwa działu" required />
+      <button type="submit" class="org-filter-btn">+ Dodaj dział</button>
+      <button type="button" class="org-filter-btn" id="orgDelDeptBtn">Usuń wybrany dział</button>
+    </form>
+
+    <form class="rm-editor-form" id="orgAddRoleForm">
+      <h3>Dodaj rolę do wybranego działu</h3>
+      <input type="text" id="orgRoleName" placeholder="Nazwa roli / stanowiska" required />
+      <label>Kwartał (od kiedy obsadzona) <select id="orgRoleQ"></select></label>
+      <label>Podlega (opcjonalnie) <select id="orgRoleParent"><option value="">— brak —</option></select></label>
+      <button type="submit" class="org-filter-btn">+ Dodaj rolę</button>
+    </form>
+  </div>
 </div>
 </main>
 
@@ -2155,25 +2190,30 @@
     return wrap;
   }
 
-  roadmapDetails.forEach(panel => {
-    const head = panel.querySelector('.roadmap-detail-head');
-    const summary = buildStageSummary(panel);
-    if (summary) {
-      head.insertAdjacentElement('afterend', summary);
-    } else {
-      const ph = document.createElement('p');
-      ph.className = 'roadmap-summary summary-empty';
-      ph.textContent = 'Szczegóły tego etapu są w przygotowaniu.';
-      head.insertAdjacentElement('afterend', ph);
-    }
-    const back = document.createElement('button');
-    back.type = 'button';
-    back.className = 'q-back';
-    back.textContent = '← Wróć do podsumowania etapu';
-    back.addEventListener('click', () => showRoadmapStage(panel.dataset.roadmapDetail));
-    const qDetails = panel.querySelector('.roadmap-q-details');
-    qDetails.parentNode.insertBefore(back, qDetails);
-  });
+  function rebuildStageSummaries() {
+    roadmapDetails.forEach(panel => {
+      panel.querySelectorAll(':scope > .roadmap-summary, :scope > .q-back').forEach(el => el.remove());
+      const head = panel.querySelector('.roadmap-detail-head');
+      const summary = buildStageSummary(panel);
+      if (summary) {
+        head.insertAdjacentElement('afterend', summary);
+      } else {
+        const ph = document.createElement('p');
+        ph.className = 'roadmap-summary summary-empty';
+        ph.textContent = 'Szczegóły tego etapu są w przygotowaniu.';
+        head.insertAdjacentElement('afterend', ph);
+      }
+      const back = document.createElement('button');
+      back.type = 'button';
+      back.className = 'q-back';
+      back.textContent = '← Wróć do podsumowania etapu';
+      back.addEventListener('click', () => showRoadmapStage(panel.dataset.roadmapDetail));
+      const qDetails = panel.querySelector('.roadmap-q-details');
+      qDetails.parentNode.insertBefore(back, qDetails);
+    });
+  }
+
+  rebuildStageSummaries();
 
   showRoadmapStage('mvp1');
 
@@ -2200,7 +2240,7 @@
       return ORG_QUARTERS.indexOf(ORG_STAGE_LAST_Q[ORG_STAGE_ORDER[pos - 1]]) + 1;
     }
 
-    const ORG_DEPARTMENTS = [
+    const ORG_DEPARTMENTS_DEFAULT_RAW = [
       { title: 'Zarząd', roles: 'Founder / Product Owner@Q3 2026' },
       { title: 'Inwestorzy', roles: 'Runda inwestycyjna MVP1@Q3 2026' },
       { title: 'CEO', roles: 'Founder / Product Owner (CEO)@Q3 2026' },
@@ -2211,13 +2251,37 @@
       { title: 'BOK', roles: 'BOK@Q1 2027;BOK dodatkowy@Q2 2027' },
       { title: 'HR & Administracja', roles: 'Administracja / granty@Q2 2027' },
       { title: 'FINANSE', roles: 'Główna księgowa@Q1 2027;Księgowa pomocnicza@Q2 2027' }
-    ].map(dept => ({
-      title: dept.title,
-      roles: dept.roles.split(';').map(part => {
-        const [role, q, parent] = part.split('@');
-        return { role, q, parent: parent || null };
-      })
-    }));
+    ];
+
+    const ORG_STORAGE_KEY = 'goShoreOrgDepts_v1';
+
+    function buildDepartments(rawList) {
+      return rawList.map(dept => ({
+        title: dept.title,
+        roles: dept.roles.split(';').filter(Boolean).map(part => {
+          const [role, q, parent] = part.split('@');
+          return { role, q, parent: parent || null };
+        })
+      }));
+    }
+
+    function rawFromDepartments(depts) {
+      return depts.map(dept => ({
+        title: dept.title,
+        roles: dept.roles.map(r => r.role + '@' + r.q + (r.parent ? '@' + r.parent : '')).join(';')
+      }));
+    }
+
+    const ORIGINAL_ORG_DEPARTMENTS_RAW = JSON.parse(JSON.stringify(ORG_DEPARTMENTS_DEFAULT_RAW));
+
+    let ORG_DEPARTMENTS;
+    let savedOrgRaw = null;
+    try { savedOrgRaw = JSON.parse(localStorage.getItem(ORG_STORAGE_KEY) || 'null'); } catch (e) { savedOrgRaw = null; }
+    ORG_DEPARTMENTS = buildDepartments(savedOrgRaw || ORG_DEPARTMENTS_DEFAULT_RAW);
+
+    function persistOrgDepartments() {
+      localStorage.setItem(ORG_STORAGE_KEY, JSON.stringify(rawFromDepartments(ORG_DEPARTMENTS)));
+    }
 
     // Buduje czytelny opis hierarchii: rola wiodąca + podwładni wciągnięci pod nią ("↳").
     // Podwładni bez obecnego rodzica w danym oknie są wypisywani jako samodzielne role.
@@ -2300,6 +2364,176 @@
     }));
 
     applyFilter();
+
+    // --- Edytor Organizacji w Ustawieniach ---
+    const orgDeptSelect = document.getElementById('orgDeptSelect');
+    const orgRoleList = document.getElementById('orgRoleList');
+    const orgRoleQ = document.getElementById('orgRoleQ');
+    const orgRoleParent = document.getElementById('orgRoleParent');
+    const orgAddDeptForm = document.getElementById('orgAddDeptForm');
+    const orgNewDeptName = document.getElementById('orgNewDeptName');
+    const orgDelDeptBtn = document.getElementById('orgDelDeptBtn');
+    const orgAddRoleForm = document.getElementById('orgAddRoleForm');
+    const orgRoleName = document.getElementById('orgRoleName');
+    const orgReportBtn = document.getElementById('orgReportBtn');
+    const orgResetBtn = document.getElementById('orgResetBtn');
+    const orgEditStatus = document.getElementById('orgEditStatus');
+    const orgReport = document.getElementById('orgReport');
+
+    if (orgDeptSelect) {
+      function currentDept() {
+        return ORG_DEPARTMENTS[orgDeptSelect.selectedIndex] || null;
+      }
+
+      function refreshDeptSelect(keepIndex) {
+        const idx = keepIndex != null ? keepIndex : orgDeptSelect.selectedIndex;
+        orgDeptSelect.innerHTML = ORG_DEPARTMENTS.map(d => '<option>' + d.title + '</option>').join('');
+        orgDeptSelect.selectedIndex = Math.max(0, Math.min(idx, ORG_DEPARTMENTS.length - 1));
+      }
+
+      function refreshRoleQ() {
+        orgRoleQ.innerHTML = ORG_QUARTERS.map(q => '<option>' + q + '</option>').join('');
+      }
+
+      function refreshRoleParent() {
+        const dept = currentDept();
+        const opts = ['<option value="">— brak —</option>'];
+        if (dept) dept.roles.forEach(r => opts.push('<option>' + r.role + '</option>'));
+        orgRoleParent.innerHTML = opts.join('');
+      }
+
+      function refreshRoleList() {
+        const dept = currentDept();
+        if (!dept || !dept.roles.length) {
+          orgRoleList.innerHTML = '<p class="org-team-scope-empty">Ten dział nie ma jeszcze żadnych ról.</p>';
+          return;
+        }
+        orgRoleList.innerHTML = dept.roles.map((r, i) => (
+          '<div class="org-role-row" data-role-idx="' + i + '">' +
+            '<span><b>' + r.role + '</b></span>' +
+            '<span class="org-role-meta">' + r.q + (r.parent ? ' · podlega: ' + r.parent : '') + '</span>' +
+            '<button type="button" class="rm-del-btn" data-role-idx="' + i + '">Usuń</button>' +
+          '</div>'
+        )).join('');
+        orgRoleList.querySelectorAll('.rm-del-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const dept = currentDept();
+            dept.roles.splice(Number(btn.dataset.roleIdx), 1);
+            persistOrgDepartments();
+            refreshRoleList();
+            refreshRoleParent();
+            applyFilter();
+            orgEditStatus.textContent = 'Usunięto rolę. Zmiana zapisana.';
+          });
+        });
+      }
+
+      refreshDeptSelect(0);
+      refreshRoleQ();
+      refreshRoleParent();
+      refreshRoleList();
+
+      orgDeptSelect.addEventListener('change', () => {
+        refreshRoleParent();
+        refreshRoleList();
+      });
+
+      orgAddDeptForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = orgNewDeptName.value.trim();
+        if (!name) return;
+        ORG_DEPARTMENTS.push({ title: name, roles: [] });
+        persistOrgDepartments();
+        refreshDeptSelect(ORG_DEPARTMENTS.length - 1);
+        refreshRoleParent();
+        refreshRoleList();
+        applyFilter();
+        orgNewDeptName.value = '';
+        orgEditStatus.textContent = 'Dodano dział „' + name + '”. Zmiana zapisana.';
+      });
+
+      orgDelDeptBtn.addEventListener('click', () => {
+        if (ORG_DEPARTMENTS.length <= 1) {
+          orgEditStatus.textContent = 'Musi zostać przynajmniej jeden dział.';
+          return;
+        }
+        const dept = currentDept();
+        if (!dept || !confirm('Usunąć dział „' + dept.title + '” razem z jego rolami?')) return;
+        ORG_DEPARTMENTS.splice(orgDeptSelect.selectedIndex, 1);
+        persistOrgDepartments();
+        refreshDeptSelect(0);
+        refreshRoleParent();
+        refreshRoleList();
+        applyFilter();
+        orgEditStatus.textContent = 'Usunięto dział „' + dept.title + '”. Zmiana zapisana.';
+      });
+
+      orgAddRoleForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const dept = currentDept();
+        const name = orgRoleName.value.trim();
+        if (!dept || !name) return;
+        dept.roles.push({ role: name, q: orgRoleQ.value, parent: orgRoleParent.value || null });
+        persistOrgDepartments();
+        refreshRoleParent();
+        refreshRoleList();
+        applyFilter();
+        orgRoleName.value = '';
+        orgEditStatus.textContent = 'Dodano rolę „' + name + '” do działu „' + dept.title + '”. Zmiana zapisana.';
+      });
+
+      orgResetBtn.addEventListener('click', () => {
+        if (!confirm('Przywrócić opublikowaną wersję struktury Organizacji? Lokalne zmiany zostaną utracone.')) return;
+        localStorage.removeItem(ORG_STORAGE_KEY);
+        ORG_DEPARTMENTS = buildDepartments(ORIGINAL_ORG_DEPARTMENTS_RAW);
+        refreshDeptSelect(0);
+        refreshRoleParent();
+        refreshRoleList();
+        applyFilter();
+        orgReport.value = '';
+        orgEditStatus.textContent = 'Przywrócono opublikowaną wersję struktury Organizacji.';
+      });
+
+      orgReportBtn.addEventListener('click', () => {
+        const lines = ['ORGANIZACJA — lista zmian względem opublikowanej wersji:', ''];
+        const origByTitle = {};
+        ORIGINAL_ORG_DEPARTMENTS_RAW.forEach(d => { origByTitle[d.title] = d; });
+        const currentTitles = new Set(ORG_DEPARTMENTS.map(d => d.title));
+
+        ORG_DEPARTMENTS.forEach(dept => {
+          const orig = origByTitle[dept.title];
+          if (!orig) {
+            lines.push('+ NOWY DZIAŁ: ' + dept.title);
+            dept.roles.forEach(r => lines.push('    + rola: ' + r.role + ' (' + r.q + (r.parent ? ', podlega: ' + r.parent : '') + ')'));
+            lines.push('');
+            return;
+          }
+          const origRoles = buildDepartments([orig])[0].roles;
+          const origRoleNames = new Set(origRoles.map(r => r.role));
+          const currRoleNames = new Set(dept.roles.map(r => r.role));
+          const added = dept.roles.filter(r => !origRoleNames.has(r.role));
+          const removed = origRoles.filter(r => !currRoleNames.has(r.role));
+          if (added.length || removed.length) {
+            lines.push('DZIAŁ: ' + dept.title);
+            added.forEach(r => lines.push('    + rola: ' + r.role + ' (' + r.q + (r.parent ? ', podlega: ' + r.parent : '') + ')'));
+            removed.forEach(r => lines.push('    - rola: ' + r.role));
+            lines.push('');
+          }
+        });
+
+        ORIGINAL_ORG_DEPARTMENTS_RAW.forEach(d => {
+          if (!currentTitles.has(d.title)) lines.push('- USUNIĘTY DZIAŁ: ' + d.title);
+        });
+
+        const changeLines = lines.filter(l => l.trim().length);
+        if (changeLines.length <= 1) {
+          orgReport.value = 'Brak zmian względem opublikowanej wersji.';
+        } else {
+          orgReport.value = lines.join('\n');
+        }
+        orgEditStatus.textContent = 'Wygenerowano raport zmian — skopiuj treść poniżej.';
+      });
+    }
   })();
 
   (function initSiteSettings(){
@@ -2505,6 +2739,7 @@
     if (saved) rmContainer.innerHTML = saved;
     decorateExisting();
     rebindRoadmapNav();
+    rebuildStageSummaries();
     showRoadmapStage(roadmapDetails[0] ? roadmapDetails[0].dataset.roadmapDetail : 'mvp1');
 
     let editMode = false;
@@ -2521,6 +2756,7 @@
 
     saveBtn.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, rmContainer.innerHTML);
+      rebuildStageSummaries();
       statusEl.textContent = 'Zapisano do podglądu w tej przeglądarce — ' + new Date().toLocaleString('pl-PL') + '.';
     });
 
@@ -2530,6 +2766,7 @@
       decorateExisting();
       rebindRoadmapNav();
       refreshStageOptions();
+      rebuildStageSummaries();
       showRoadmapStage(roadmapDetails[0] ? roadmapDetails[0].dataset.roadmapDetail : 'mvp1');
       reportEl.value = '';
       statusEl.textContent = 'Przywrócono opublikowaną wersję Road Mapy.';
@@ -2757,6 +2994,7 @@
       decorateExisting();
       rebindRoadmapNav();
       refreshStageOptions();
+      rebuildStageSummaries();
       statusEl.textContent = 'Dodano nowy Q (' + qKey + ') do etapu — uzupełnij treść w trybie edycji.';
     });
 
@@ -2798,6 +3036,7 @@
       decorateExisting();
       rebindRoadmapNav();
       refreshStageOptions();
+      rebuildStageSummaries();
       statusEl.textContent = 'Dodano nowy etap (' + stageKey + ') — uzupełnij treść w trybie edycji.';
     });
   })();
