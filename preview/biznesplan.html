@@ -253,6 +253,23 @@
   .team-legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:10.5px; color:#97a4b2}
   .team-legend span{display:inline-flex; align-items:center; gap:5px}
   .team-legend i{width:10px; height:10px; border-radius:50%; display:inline-block}
+  .org-view{padding:32px 0}
+  .org-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; padding:0 30px}
+  .org-filter-btn{background:rgba(255,255,255,.08); border:1px solid var(--line); color:var(--text); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-family:var(--display); font-weight:600; transition:all .2s ease}
+  .org-filter-btn:hover{background:rgba(45,212,191,.15); border-color:var(--teal); color:var(--teal)}
+  .org-filter-btn.active{background:var(--teal); border-color:var(--teal); color:#000}
+  .org-q-filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; padding:0 30px; margin-top:-10px}
+  .org-q-filter-btn{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:#97a4b2; padding:5px 10px; border-radius:6px; cursor:pointer; font-size:11px; font-family:var(--body); transition:all .2s ease}
+  .org-q-filter-btn:hover{background:rgba(45,212,191,.08); border-color:rgba(45,212,191,.3); color:var(--text)}
+  .org-q-filter-btn.active{background:var(--gold); border-color:var(--gold); color:#000; font-weight:600}
+  .org-chart{padding:0 30px; background:rgba(255,255,255,.015); border-radius:14px; border:1px solid var(--line); padding:30px}
+  .org-level{margin-bottom:32px}
+  .org-level-title{font-family:var(--display); font-size:12px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px}
+  .org-positions{display:flex; flex-wrap:wrap; gap:16px; padding:16px 0}
+  .org-position{flex:0 1 calc(50% - 8px); background:rgba(45,212,191,.08); border:1px solid rgba(45,212,191,.2); border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:6px}
+  .org-position .pos-title{color:var(--text); font-weight:700; font-size:12px}
+  .org-position .pos-name{color:var(--teal); font-size:11px; font-family:var(--display)}
+  .org-position .pos-q{color:var(--muted); font-size:10px}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
@@ -263,6 +280,7 @@
     <button class="view-btn active" type="button" data-view="business-plan">Biznes Plan</button>
     <button class="view-btn" type="button" data-view="presentation">Prezentacja</button>
     <button class="view-btn" type="button" data-view="roadmap">Road Mapa</button>
+    <button class="view-btn" type="button" data-view="organization">Organizacja</button>
   </div>
 </nav>
 
@@ -942,21 +960,14 @@
                 </div>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 9 osób)</em></button>
+                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 3 nowe osoby)</em></button>
                 <div class="team-map">
-                  <div class="person-chip existing"><span>Founder / CEO</span></div>
-                    <div class="person-chip existing"><span>Lead Developer</span></div>
-                    <div class="person-chip existing"><span>Junior Dev #1</span></div>
-                    <div class="person-chip existing"><span>Junior Dev #2</span></div>
-                    <div class="person-chip existing"><span>Data Manager</span></div>
-                    <div class="person-chip existing"><span>UI/UX Designer</span></div>
                     <div class="person-chip new"><span>AI Developer</span></div>
                     <div class="person-chip new"><span>Key Account Mgr</span></div>
                     <div class="person-chip new"><span>Marketing Spec.</span></div>
                 </div>
                 <div class="team-legend">
                   <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
-                  <span><i style="background:#FBBF24"></i> osoba kontynuująca z poprzedniego Q</span>
                 </div>
               </div>
             </div>
@@ -1011,22 +1022,12 @@
                 </div>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — rdzeń 9 osób + do 250 ambasadorów)</em></button>
+                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — 250 ambasadorów)</em></button>
                 <div class="team-map">
-                  <div class="person-chip existing"><span>Founder / CEO</span></div>
-                    <div class="person-chip existing"><span>Lead Developer</span></div>
-                    <div class="person-chip existing"><span>Junior Dev #1</span></div>
-                    <div class="person-chip existing"><span>Junior Dev #2</span></div>
-                    <div class="person-chip existing"><span>Data Manager</span></div>
-                    <div class="person-chip existing"><span>UI/UX Designer</span></div>
-                    <div class="person-chip existing"><span>AI Developer</span></div>
-                    <div class="person-chip existing"><span>Key Account Mgr</span></div>
-                    <div class="person-chip existing"><span>Marketing Spec.</span></div>
                     <div class="person-chip new"><span>Ambasadorzy (250)</span></div>
                 </div>
                 <div class="team-legend">
                   <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
-                  <span><i style="background:#FBBF24"></i> osoba kontynuująca z poprzedniego Q</span>
                 </div>
               </div>
             </div>
@@ -1150,6 +1151,43 @@
   </div>
 </main>
 
+<main class="page-view" id="organization">
+  <div class="wrap org-view">
+    <h2 style="margin-bottom:20px;">ORGANIZACJA ZESPOŁU</h2>
+    <p style="margin-bottom:24px; color:#c4ced8;">Struktura sztabowo-liniowa zespołu GO ON [OFF] SHORE na poszczególnych etapach rozwoju. Wybierz etap (ALL pokazuje wszystkich członków od początku do końca) i opcjonalnie konkretny kwartał.</p>
+
+    <div class="org-filters" id="org-stage-filters">
+      <button class="org-filter-btn active" data-org-stage="all">ALL (wszyscy)</button>
+      <button class="org-filter-btn" data-org-stage="i">I — MVP (v1.1-v1.4)</button>
+      <button class="org-filter-btn" data-org-stage="ii">II — v1.5-v1.9</button>
+      <button class="org-filter-btn" data-org-stage="iii">III — v2.0-v2.9</button>
+      <button class="org-filter-btn" data-org-stage="iv">IV — v3.0-v3.9</button>
+      <button class="org-filter-btn" data-org-stage="v">V — v4.0-v4.9</button>
+    </div>
+
+    <div class="org-q-filters" id="org-q-filters" style="display:none;">
+      <span style="color:#97a4b2; font-size:11px; align-self:center; margin-right:8px;">Wybierz Q:</span>
+      <button class="org-q-filter-btn active" data-org-q="">wszystkie</button>
+      <button class="org-q-filter-btn" data-org-q="Q3 2026">Q3 2026</button>
+      <button class="org-q-filter-btn" data-org-q="Q4 2026">Q4 2026</button>
+      <button class="org-q-filter-btn" data-org-q="Q1 2027">Q1 2027</button>
+      <button class="org-q-filter-btn" data-org-q="Q2 2027">Q2 2027</button>
+      <button class="org-q-filter-btn" data-org-q="Q3 2027">Q3 2027</button>
+      <button class="org-q-filter-btn" data-org-q="Q4 2027">Q4 2027</button>
+      <button class="org-q-filter-btn" data-org-q="Q1 2028">Q1 2028</button>
+      <button class="org-q-filter-btn" data-org-q="Q2 2028">Q2 2028</button>
+      <button class="org-q-filter-btn" data-org-q="Q3 2028">Q3 2028</button>
+      <button class="org-q-filter-btn" data-org-q="Q4 2028">Q4 2028</button>
+      <button class="org-q-filter-btn" data-org-q="Q1 2029">Q1 2029</button>
+      <button class="org-q-filter-btn" data-org-q="Q2 2029">Q2 2029</button>
+    </div>
+
+    <div class="org-chart" id="org-chart">
+      <!-- Organization chart will be rendered here by JavaScript -->
+    </div>
+  </div>
+</main>
+
 <script>
 (function() {
   const buttons = Array.from(document.querySelectorAll('.view-btn'));
@@ -1229,6 +1267,107 @@
       if (map && map.classList.contains('team-map')) map.classList.toggle('active');
     });
   });
+
+  // Organization chart data
+  const orgData = {
+    'Q3 2026': {stage: 'i', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer']},
+    'Q4 2026': {stage: 'i', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.']},
+    'Q1 2027': {stage: 'i', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q2 2027': {stage: 'ii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q3 2027': {stage: 'ii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q4 2027': {stage: 'ii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q1 2028': {stage: 'iii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q2 2028': {stage: 'iii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q3 2028': {stage: 'iv', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q4 2028': {stage: 'iv', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q1 2029': {stage: 'v', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
+    'Q2 2029': {stage: 'v', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']}
+  };
+
+  const stageMap = {all: ['i', 'ii', 'iii', 'iv', 'v'], i: ['i'], ii: ['ii'], iii: ['iii'], iv: ['iv'], v: ['v']};
+  const allQuarters = Object.keys(orgData);
+  let currentOrgStage = 'all';
+  let currentOrgQuarter = '';
+
+  function renderOrgChart() {
+    const chart = document.getElementById('org-chart');
+    chart.innerHTML = '';
+
+    const relevantStages = stageMap[currentOrgStage];
+    const relevantQuarters = currentOrgQuarter
+      ? [currentOrgQuarter].filter(q => orgData[q] && relevantStages.includes(orgData[q].stage))
+      : allQuarters.filter(q => relevantStages.includes(orgData[q].stage));
+
+    if (relevantQuarters.length === 0) {
+      chart.innerHTML = '<p style="color:#97a4b2; text-align:center; padding:40px 0;">Brak danych dla wybranego okresu.</p>';
+      return;
+    }
+
+    const uniquePeople = new Set();
+    const personFirstAppearance = {};
+
+    relevantQuarters.forEach(q => {
+      orgData[q].people.forEach(p => {
+        if (!uniquePeople.has(p)) {
+          uniquePeople.add(p);
+          personFirstAppearance[p] = q;
+        }
+      });
+    });
+
+    const stageLabels = {i: 'I — MVP (v1.1-v1.4)', ii: 'II — v1.5-v1.9', iii: 'III — v2.0-v2.9', iv: 'IV — v3.0-v3.9', v: 'V — v4.0-v4.9'};
+    const stageLevels = {i: 'Executive', ii: 'Development', iii: 'Growth', iv: 'Scale', v: 'Mature'};
+
+    relevantStages.forEach(stage => {
+      const stageQuarters = relevantQuarters.filter(q => orgData[q].stage === stage);
+      const stageHTML = document.createElement('div');
+      stageHTML.className = 'org-level';
+
+      let titleHTML = `<div class="org-level-title">${stageLabels[stage] || stage}</div>`;
+      stageHTML.innerHTML = titleHTML + '<div class="org-positions" id="positions-' + stage + '"></div>';
+
+      const posDiv = stageHTML.querySelector('[id="positions-' + stage + '"]');
+
+      const stagePeople = new Set();
+      stageQuarters.forEach(q => {
+        orgData[q].people.forEach(p => stagePeople.add(p));
+      });
+
+      Array.from(stagePeople).forEach(person => {
+        const firstQ = personFirstAppearance[person];
+        const posHTML = document.createElement('div');
+        posHTML.className = 'org-position';
+        posHTML.innerHTML = `<div class="pos-title">${person}</div><div class="pos-q">od ${firstQ}</div>`;
+        posDiv.appendChild(posHTML);
+      });
+
+      chart.appendChild(stageHTML);
+    });
+  }
+
+  const orgStageFilters = document.querySelectorAll('#org-stage-filters .org-filter-btn');
+  const orgQFilters = document.querySelectorAll('#org-q-filters .org-q-filter-btn');
+  const orgQFiltersDiv = document.getElementById('org-q-filters');
+
+  orgStageFilters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentOrgStage = btn.dataset.orgStage;
+      orgStageFilters.forEach(b => b.classList.toggle('active', b === btn));
+      orgQFiltersDiv.style.display = currentOrgStage === 'all' ? 'none' : 'flex';
+      orgQFilters[0].click();
+      renderOrgChart();
+    });
+  });
+
+  orgQFilters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentOrgQuarter = btn.dataset.orgQ;
+      orgQFilters.forEach(b => b.classList.toggle('active', b === btn));
+      renderOrgChart();
+    });
+  });
+
+  renderOrgChart();
 
   document.addEventListener('keydown', event => {
     if (!document.getElementById('presentation').classList.contains('active')) return;
