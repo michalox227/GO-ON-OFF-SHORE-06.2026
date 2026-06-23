@@ -376,6 +376,33 @@
   .q-back{display:none; margin-bottom:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); color:var(--text); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-family:var(--display); font-weight:600}
   .q-back:hover{background:rgba(45,212,191,.15); border-color:var(--teal); color:var(--teal)}
   .roadmap-detail.detail-mode .q-back{display:inline-flex}
+  .summary-cols-wrap{overflow-x:auto; padding-bottom:6px; margin-bottom:18px}
+  .summary-cols{display:grid; gap:14px; min-width:min-content}
+  .summary-col{display:flex; flex-direction:column; border:1px solid rgba(var(--stage-rgb),.30); border-radius:14px; background:rgba(7,11,17,.5); overflow:hidden}
+  .summary-col-head{display:flex; flex-direction:column; align-items:flex-start; gap:2px; cursor:pointer; border:none; text-align:left; padding:12px 14px; color:#fff; background:linear-gradient(135deg, rgba(var(--stage-rgb),.40), rgba(var(--stage-rgb),.14)); border-bottom:1px solid rgba(var(--stage-rgb),.30)}
+  .summary-col-head b{font-family:var(--display); font-size:16px; letter-spacing:.04em}
+  .summary-col-head span{font-size:11px; color:#cdd6e0}
+  .summary-col-head:hover{filter:brightness(1.18)}
+  .summary-col-sec{padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.06)}
+  .sc-title{font-family:var(--display); font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; margin-bottom:6px}
+  .sc-title.praca{color:#2DD4BF}
+  .sc-title.efekt{color:#C084FC}
+  .sc-title.zespol{color:#34D399}
+  .sc-title.koszty{color:#F87171}
+  .sc-title.przychody{color:#34D399}
+  .sc-title.granty{color:#9FB3C8}
+  .sc-fin{display:flex; justify-content:space-between; align-items:baseline; font-size:11px; color:var(--muted); padding:2px 0}
+  .sc-fin b{color:#fff; font-size:12px}
+  .sc-empty{color:var(--muted); font-size:11px}
+  .summary-col-cta{margin:auto 0 0; cursor:pointer; border:none; background:rgba(255,255,255,.05); color:var(--gold); font-family:var(--display); font-weight:700; font-size:11px; letter-spacing:.03em; padding:10px 14px; text-align:left}
+  .summary-col-cta:hover{background:rgba(45,212,191,.14); color:var(--teal)}
+  .summary-totals{display:flex; flex-wrap:wrap; gap:14px}
+  .summary-total-item{flex:1 1 240px; display:flex; flex-direction:column; gap:2px; border:1px solid rgba(255,255,255,.10); border-radius:12px; padding:12px 16px; background:rgba(7,11,17,.4)}
+  .summary-total-item span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; font-weight:700}
+  .summary-total-item b{font-size:18px; color:#fff; font-family:var(--display)}
+  .summary-total-item i{font-size:11px; color:var(--muted); font-style:normal}
+  .summary-total-item.koszty b{color:#F87171}
+  .summary-total-item.przychody b{color:#34D399}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
@@ -1894,55 +1921,44 @@
     const data = cards.map(cardData);
     const stageCls = ['stage-mvp1','stage-two','stage-three','stage-four','stage-five'].find(c => panel.classList.contains(c)) || 'stage-mvp1';
 
-    const pills = data.map(d =>
-      '<button type="button" class="summary-q-pill ' + stageCls + '" data-go-q="' + d.q + '"><b>' + verShort(d.version) + '</b><span>' + d.q + '</span></button>'
-    ).join('');
+    function sec(cls, title, body){
+      return '<div class="summary-col-sec"><div class="sc-title ' + cls + '">' + title + '</div>' + body + '</div>';
+    }
+    function finBody(t){
+      return t ? '<div class="sc-fin"><span>Netto</span><b>' + t.netto + '</b></div><div class="sc-fin"><span>Brutto</span><b>' + t.brutto + '</b></div>' : '<div class="sc-empty">—</div>';
+    }
 
-    const sec = [];
-    sec.push('<div class="summary-cat"><div class="summary-cat-head praca">PRACA</div>' +
-      data.map(d => '<div class="summary-q-block">' + verLink(d) +
-        '<div class="summary-chips">' + d.work.map(w => '<span>' + w.name + '</span>').join('') + '</div></div>').join('') +
-      '</div>');
-
-    sec.push('<div class="summary-cat"><div class="summary-cat-head efekt">EFEKT KOŃCOWY</div>' +
-      data.map(d => '<div class="summary-q-block">' + verLink(d) +
-        '<ul class="summary-list">' + d.efekt.map(e => '<li>' + e + '</li>').join('') + '</ul></div>').join('') +
-      '</div>');
-
-    sec.push('<div class="summary-cat"><div class="summary-cat-head zespol">ZESPÓŁ &amp; REKRUTACJA</div>' +
-      data.map(d => '<div class="summary-q-block">' + verLink(d) +
-        '<div class="summary-chips team">' + d.roles.map(r => '<span>+ ' + r + '</span>').join('') + '</div>' +
-        '<div class="summary-team-meta">Zrekrutowani: <b>' + (d.legend['Zrekrutowani:'] || '0') + '</b> &bull; Aktualny zespół: <b>' + (d.legend['Aktualny zespół:'] || '-') + '</b></div></div>').join('') +
-      '</div>');
-
-    let kb = 0, kn = 0;
-    const kRows = data.filter(d => d.koszty).map(d => {
-      kb += plnParse(d.koszty.brutto); kn += plnParse(d.koszty.netto);
-      return '<tr><td>' + verLink(d) + '</td><td class="num">' + d.koszty.brutto + '</td><td class="num">' + d.koszty.netto + '</td></tr>';
+    const cols = data.map(d => {
+      return '<div class="summary-col ' + stageCls + '">' +
+        '<button type="button" class="summary-col-head" data-go-q="' + d.q + '"><b>' + verShort(d.version) + '</b><span>' + d.q + '</span></button>' +
+        sec('praca', 'PRACA', '<div class="summary-chips">' + d.work.map(w => '<span>' + w.name + '</span>').join('') + '</div>') +
+        sec('efekt', 'EFEKT KOŃCOWY', '<ul class="summary-list">' + d.efekt.map(e => '<li>' + e + '</li>').join('') + '</ul>') +
+        sec('zespol', 'ZESPÓŁ &amp; REKRUTACJA',
+          '<div class="summary-chips team">' + d.roles.map(r => '<span>+ ' + r + '</span>').join('') + '</div>' +
+          '<div class="summary-team-meta">Zrekrutowani: <b>' + (d.legend['Zrekrutowani:'] || '0') + '</b><br>Aktualny zespół: <b>' + (d.legend['Aktualny zespół:'] || '-') + '</b></div>') +
+        sec('koszty', 'KOSZTY', finBody(d.koszty)) +
+        sec('przychody', 'PRZYCHODY', finBody(d.przychody)) +
+        sec('granty', 'DOFINANSOWANIA &amp; GRANTY', '<ul class="summary-list">' + d.granty.map(g => '<li>' + g + '</li>').join('') + '</ul>') +
+        '<button type="button" class="summary-col-cta" data-go-q="' + d.q + '">Zobacz pełne szczegóły →</button>' +
+        '</div>';
     }).join('');
-    sec.push('<div class="summary-cat"><div class="summary-cat-head koszty">KOSZTY</div>' +
-      '<table class="summary-fin summary-fin-koszty"><thead><tr><th>Kwartał</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead><tbody>' +
-      kRows + '<tr class="total"><td>SUMA ETAPU</td><td class="num">' + plnFmt(kb) + '</td><td class="num">' + plnFmt(kn) + '</td></tr></tbody></table></div>');
 
-    let pb = 0, pn = 0;
-    const pRows = data.filter(d => d.przychody).map(d => {
-      pb += plnParse(d.przychody.brutto); pn += plnParse(d.przychody.netto);
-      return '<tr><td>' + verLink(d) + '</td><td class="num">' + d.przychody.brutto + '</td><td class="num">' + d.przychody.netto + '</td></tr>';
-    }).join('');
-    sec.push('<div class="summary-cat"><div class="summary-cat-head przychody">PRZYCHODY</div>' +
-      '<table class="summary-fin summary-fin-przychody"><thead><tr><th>Kwartał</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead><tbody>' +
-      pRows + '<tr class="total"><td>SUMA ETAPU</td><td class="num">' + plnFmt(pb) + '</td><td class="num">' + plnFmt(pn) + '</td></tr></tbody></table></div>');
-
-    sec.push('<div class="summary-cat"><div class="summary-cat-head granty">DOFINANSOWANIA &amp; GRANTY</div>' +
-      data.map(d => '<div class="summary-q-block">' + verLink(d) +
-        '<ul class="summary-list">' + d.granty.map(g => '<li>' + g + '</li>').join('') + '</ul></div>').join('') +
-      '</div>');
+    let kb = 0, kn = 0, pb = 0, pn = 0;
+    data.forEach(d => {
+      if (d.koszty) { kb += plnParse(d.koszty.brutto); kn += plnParse(d.koszty.netto); }
+      if (d.przychody) { pb += plnParse(d.przychody.brutto); pn += plnParse(d.przychody.netto); }
+    });
+    const totals = '<div class="summary-totals">' +
+      '<div class="summary-total-item koszty"><span>Suma KOSZTÓW etapu</span><b>' + plnFmt(kn) + ' netto</b><i>' + plnFmt(kb) + ' brutto</i></div>' +
+      '<div class="summary-total-item przychody"><span>Suma PRZYCHODÓW etapu</span><b>' + plnFmt(pn) + ' netto</b><i>' + plnFmt(pb) + ' brutto</i></div>' +
+      '</div>';
 
     const wrap = document.createElement('div');
     wrap.className = 'roadmap-summary';
-    wrap.innerHTML = '<p class="summary-intro">Podsumowanie etapu — przegląd wszystkich kwartałów według kategorii. Kliknij wersję (np. „' +
-      data[0].version + '"), aby otworzyć pełne szczegóły danego kwartału.</p>' +
-      '<div class="summary-q-row">' + pills + '</div>' + sec.join('');
+    wrap.innerHTML = '<p class="summary-intro">Etap podzielony na ' + data.length + ' ' + (data.length === 1 ? 'kwartał' : 'kwartały') +
+      ' — każdy w osobnej kolumnie. Kliknij nagłówek kwartału, aby otworzyć jego pełne szczegóły.</p>' +
+      '<div class="summary-cols-wrap"><div class="summary-cols" style="grid-template-columns:repeat(' + data.length + ', minmax(230px, 1fr))">' + cols + '</div></div>' +
+      totals;
     return wrap;
   }
 
