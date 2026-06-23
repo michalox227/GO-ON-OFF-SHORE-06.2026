@@ -286,6 +286,22 @@
   .pres-editor-row button{flex:0 0 auto; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; border-radius:8px; padding:6px 10px; font-size:12px; cursor:pointer}
   .pres-editor-row button:hover{background:rgba(255,255,255,.16)}
   .pres-editor-row button:disabled{opacity:.3; cursor:default}
+  #rmReport{width:100%; min-height:200px; margin-top:10px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:10px; color:#e7edf3; font-family:ui-monospace, monospace; font-size:12px; padding:14px; resize:vertical}
+  .roadmap-details.editing-active{outline:2px dashed rgba(45,212,191,.5); outline-offset:6px; border-radius:10px}
+  .roadmap-details.editing-active *[contenteditable]:focus{outline:1px solid rgba(45,212,191,.8); background:rgba(45,212,191,.06)}
+  .rm-editor-target{display:flex; gap:16px; flex-wrap:wrap; margin:10px 0; color:#fff; font-size:13px; align-items:center}
+  .rm-editor-target select{background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.16); border-radius:8px; color:#fff; padding:6px 10px; font-size:13px; margin-left:6px}
+  .rm-editor-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px; margin:10px 0}
+  .rm-editor-form{display:flex; flex-direction:column; gap:8px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px}
+  .rm-editor-form h3{margin:0 0 4px; color:#fff; font-size:13px; letter-spacing:.04em; text-transform:uppercase}
+  .rm-editor-form input, .rm-editor-form select, .rm-editor-form textarea{background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.16); border-radius:8px; color:#fff; padding:8px 10px; font-size:13px; font-family:inherit}
+  .rm-editor-form textarea{min-height:60px; resize:vertical}
+  .rm-editor-form .rm-inline{display:flex; align-items:center; gap:8px; font-size:12px; color:#d4dde6}
+  .rm-checkbox-row{display:flex; flex-wrap:wrap; gap:10px; font-size:12px; color:#d4dde6; align-items:center}
+  .rm-editor-form button[type="submit"]{margin-top:4px}
+  .roadmap-details.editing-active .rm-del-btn{display:inline-flex}
+  .rm-del-btn{display:none; margin-left:8px; border:1px solid rgba(248,113,113,.4); background:rgba(248,113,113,.12); color:#F87171; border-radius:6px; padding:2px 8px; font-size:11px; cursor:pointer}
+  .rm-del-btn:hover{background:rgba(248,113,113,.28)}
   .oc-close:hover{background:#fff; color:#000}
   .zespol-heading{color: #2DD4BF; display: block; margin-bottom: 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;}
   .fin-tile{margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);}
@@ -1677,7 +1693,7 @@
 <div class="wrap">
   <h2 style="margin:0 0 8px;">USTAWIENIA WITRYNY</h2>
   <p style="margin:0 0 6px; color:#c4ced8;">Edycja treści Biznes Planu na żywo w tej przeglądarce. Włącz edycję, popraw tekst klikając w niego, zapisz do podglądu, a gdy zbierzesz wszystkie poprawki — kliknij „Wyświetl poprawione”, skopiuj treść i wklej ją z powrotem, żebym wgrał ją na stałe do wszystkich odwiedzających.</p>
-  <p style="margin:0 0 14px; color:var(--muted); font-size:13px;">Edycja Road Mapy i Organizacji (etapy, Q, zespół, koszty, przychody, granty) dojdzie w kolejnym kroku — te widoki mają elementy generowane przez skrypt i wymagają osobnego edytora.</p>
+  <p style="margin:0 0 14px; color:var(--muted); font-size:13px;">Edycja Organizacji odbywa się przez filtry na samej zakładce „Organizacja” (diagram zastąpiony listami ZESPÓŁ / ZREKRUTOWANI). Edytor Road Mapy znajduje się poniżej.</p>
   <div class="settings-actions">
     <button class="org-filter-btn" type="button" id="settingsEditToggle">Włącz edycję Biznes Planu</button>
     <button class="org-filter-btn" type="button" id="settingsSaveBtn">Zapisz</button>
@@ -1696,6 +1712,105 @@
     <button class="org-filter-btn" type="button" id="presResetBtn">Przywróć opublikowaną wersję</button>
   </div>
   <p class="org-filter-status" id="presStatus"></p>
+
+  <h2 style="margin:32px 0 8px;">ROAD MAPA</h2>
+  <p style="margin:0 0 6px; color:#c4ced8;">Włącz edycję, popraw tekst (cel etapu, praca, efekt końcowy, opisy w tabelach, etykiety osób) klikając w niego na zakładce „Road Mapa”, zapisz do podglądu. Poniższe formularze dodają nowe wiersze kosztów/przychodów/grantów/osób do wybranego Etapu i Q — w trybie edycji przy istniejących pozycjach pojawi się przycisk „Usuń”.</p>
+  <div class="settings-actions">
+    <button class="org-filter-btn" type="button" id="rmEditToggle">Włącz edycję Road Mapy</button>
+    <button class="org-filter-btn" type="button" id="rmSaveBtn">Zapisz</button>
+    <button class="org-filter-btn" type="button" id="rmReportBtn">Wyświetl poprawione</button>
+    <button class="org-filter-btn" type="button" id="rmResetBtn">Przywróć opublikowaną wersję</button>
+  </div>
+  <p class="org-filter-status" id="rmStatus"></p>
+  <textarea id="rmReport" readonly placeholder="Tu pojawi się lista zmian po kliknięciu „Wyświetl poprawione”..."></textarea>
+
+  <div class="rm-editor-target">
+    <label>Etap <select id="rmStageSelect"></select></label>
+    <label>Q <select id="rmQSelect"></select></label>
+  </div>
+
+  <div class="rm-editor-grid">
+    <form class="rm-editor-form" id="rmCostForm">
+      <h3>Dodaj koszt</h3>
+      <label>Kategoria
+        <select id="rmCostCat">
+          <option value="JEDNORAZOWE / INWESTYCJE">Jednorazowy</option>
+          <option value="STAŁE">Stały</option>
+          <option value="ZMIENNE">Zmienny</option>
+          <option value="WYNAGRODZENIA">Wynagrodzenia</option>
+          <option value="TECHNOLOGIA">Technologia</option>
+          <option value="INNE">Inne</option>
+          <option value="__custom">— własna nazwa —</option>
+        </select>
+      </label>
+      <input type="text" id="rmCostCatCustom" placeholder="Własna nazwa kategorii" style="display:none;" />
+      <input type="text" id="rmCostName" placeholder="Nazwa pozycji / co wchodzi w skład" required />
+      <input type="number" id="rmCostAmount" placeholder="Kwota (zł)" required />
+      <label class="rm-inline"><input type="checkbox" id="rmCostRecurring" /> Powtarzający się</label>
+      <select id="rmCostInterval" disabled>
+        <option value="miesiąc">Miesiąc</option>
+        <option value="kwartał">Kwartał</option>
+        <option value="pół roku">Pół roku</option>
+        <option value="rok">Rok</option>
+      </select>
+      <button type="submit" class="org-filter-btn">+ Dodaj koszt</button>
+    </form>
+
+    <form class="rm-editor-form" id="rmRevForm">
+      <h3>Dodaj przychód</h3>
+      <input type="text" id="rmRevCat" placeholder="Nazwa kategorii" required />
+      <input type="text" id="rmRevName" placeholder="Nazwa pozycji" required />
+      <input type="number" id="rmRevNet" placeholder="Kwota netto (zł)" required />
+      <input type="number" id="rmRevGross" placeholder="Kwota brutto (zł)" required />
+      <button type="submit" class="org-filter-btn">+ Dodaj przychód</button>
+    </form>
+
+    <form class="rm-editor-form" id="rmGrantForm">
+      <h3>Dodaj dofinansowanie / grant</h3>
+      <input type="text" id="rmGrantName" placeholder="Nazwa" required />
+      <input type="text" id="rmGrantPurpose" placeholder="Na co przeznaczenie" required />
+      <input type="text" id="rmGrantDeadline" placeholder="Termin składania" />
+      <input type="text" id="rmGrantResults" placeholder="Kiedy wyniki" />
+      <input type="text" id="rmGrantAmount" placeholder="Kwota" />
+      <input type="text" id="rmGrantRules" placeholder="Zasady" />
+      <input type="url" id="rmGrantLink" placeholder="Link do strony (https://...)" />
+      <button type="submit" class="org-filter-btn">+ Dodaj grant</button>
+    </form>
+
+    <form class="rm-editor-form" id="rmPersonForm">
+      <h3>Dodaj osobę do zespołu</h3>
+      <input type="text" id="rmPersonRole" placeholder="Stanowisko" required />
+      <textarea id="rmPersonDesc" placeholder="Czym ma się zajmować"></textarea>
+      <div class="rm-checkbox-row">
+        <span>Umowa:</span>
+        <label><input type="checkbox" value="UoP" class="rm-contract" /> UoP</label>
+        <label><input type="checkbox" value="Zlecenie" class="rm-contract" /> Zlecenie</label>
+        <label><input type="checkbox" value="UoD" class="rm-contract" /> UoD</label>
+        <label><input type="checkbox" value="B2B" class="rm-contract" /> B2B</label>
+      </div>
+      <input type="number" id="rmPersonNet" placeholder="Wynagrodzenie netto" />
+      <input type="number" id="rmPersonGross" placeholder="Wynagrodzenie brutto" />
+      <input type="number" id="rmPersonEmployerCost" placeholder="Koszt pracodawcy" />
+      <input type="text" id="rmPersonDept" placeholder="Departament (np. IT, Marketing)" />
+      <select id="rmPersonLevel">
+        <option value="Junior">Junior</option>
+        <option value="Specjalista">Specjalista</option>
+        <option value="Lider">Lider</option>
+        <option value="Kierownik">Kierownik</option>
+        <option value="Manager">Manager</option>
+      </select>
+      <div class="rm-inline">
+        <input type="text" id="rmPersonReportsTo" placeholder="Komu podlega" />
+        <button type="button" class="org-filter-btn" id="rmPersonCeoBtn">Podlega CEO</button>
+      </div>
+      <button type="submit" class="org-filter-btn">+ Dodaj osobę</button>
+    </form>
+  </div>
+
+  <div class="settings-actions">
+    <button class="org-filter-btn" type="button" id="rmAddQBtn">+ Dodaj nowy Q do etapu</button>
+    <button class="org-filter-btn" type="button" id="rmAddStageBtn">+ Dodaj nowy etap</button>
+  </div>
 </div>
 </main>
 
@@ -1792,9 +1907,17 @@
   }
 
 
-  const roadmapTimelineButtons = Array.from(document.querySelectorAll('.stage-btn[data-roadmap-stage]'));
-  const roadmapQButtons = Array.from(document.querySelectorAll('.q-pill[data-roadmap-stage]'));
-  const roadmapDetails = Array.from(document.querySelectorAll('[data-roadmap-detail]'));
+  let roadmapTimelineButtons = Array.from(document.querySelectorAll('.stage-btn[data-roadmap-stage]'));
+  let roadmapQButtons = Array.from(document.querySelectorAll('.q-pill[data-roadmap-stage]'));
+  let roadmapDetails = Array.from(document.querySelectorAll('[data-roadmap-detail]'));
+
+  function rebindRoadmapNav() {
+    roadmapTimelineButtons = Array.from(document.querySelectorAll('.stage-btn[data-roadmap-stage]'));
+    roadmapQButtons = Array.from(document.querySelectorAll('.q-pill[data-roadmap-stage]'));
+    roadmapDetails = Array.from(document.querySelectorAll('[data-roadmap-detail]'));
+    roadmapTimelineButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
+    roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showQuarter(btn.dataset.roadmapQ)));
+  }
 
   function showRoadmapStage(stageId) {
     roadmapDetails.forEach(panel => {
@@ -2302,6 +2425,380 @@
       rebuildDeck(draftTitles);
       renderPresEditor();
       presStatusEl.textContent = 'Przywrócono opublikowaną wersję prezentacji.';
+    });
+  })();
+
+  (function initRoadmapEditor(){
+    const rmContainer = document.querySelector('.roadmap-details');
+    const editToggleBtn = document.getElementById('rmEditToggle');
+    const saveBtn = document.getElementById('rmSaveBtn');
+    const reportBtn = document.getElementById('rmReportBtn');
+    const resetBtn = document.getElementById('rmResetBtn');
+    const statusEl = document.getElementById('rmStatus');
+    const reportEl = document.getElementById('rmReport');
+    const stageSelect = document.getElementById('rmStageSelect');
+    const qSelect = document.getElementById('rmQSelect');
+    if (!rmContainer || !editToggleBtn) return;
+
+    const STORAGE_KEY = 'goShoreRoadmap_edited_v1';
+    const originalHTML = rmContainer.innerHTML;
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function addRowDelete(tr) {
+      if (tr.querySelector('.rm-del-btn')) return;
+      const lastTd = tr.querySelector('td:last-child');
+      if (!lastTd) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rm-del-btn';
+      btn.textContent = 'Usuń';
+      btn.addEventListener('click', () => tr.remove());
+      lastTd.appendChild(btn);
+    }
+
+    function addLiDelete(li) {
+      if (li.querySelector('.rm-del-btn')) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rm-del-btn';
+      btn.textContent = 'Usuń';
+      btn.addEventListener('click', () => li.remove());
+      li.appendChild(btn);
+    }
+
+    function addChipDelete(chip) {
+      if (chip.querySelector('.rm-del-btn')) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rm-del-btn';
+      btn.textContent = 'Usuń';
+      btn.addEventListener('click', () => {
+        const card = chip.closest('.roadmap-q-card');
+        chip.remove();
+        if (card) updateLegend(card);
+      });
+      chip.appendChild(btn);
+    }
+
+    function updateLegend(card) {
+      const legend = card.querySelector('.team-legend');
+      if (!legend) return;
+      const count = card.querySelectorAll('.team-map .person-chip').length;
+      const recruitedEl = legend.querySelector('.number.recruited');
+      const currentEl = legend.querySelector('.number.current');
+      if (recruitedEl) recruitedEl.textContent = String(count);
+      if (currentEl) currentEl.textContent = String(count);
+    }
+
+    function decorateExisting() {
+      document.querySelectorAll('.roadmap-q-card').forEach(card => {
+        card.querySelectorAll('.fin-table tbody tr[data-cat]').forEach(addRowDelete);
+        card.querySelectorAll('.granty-list li').forEach(addLiDelete);
+        card.querySelectorAll('.team-map .person-chip').forEach(addChipDelete);
+      });
+    }
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) rmContainer.innerHTML = saved;
+    decorateExisting();
+    rebindRoadmapNav();
+    showRoadmapStage(roadmapDetails[0] ? roadmapDetails[0].dataset.roadmapDetail : 'mvp1');
+
+    let editMode = false;
+
+    function setEditMode(on) {
+      editMode = on;
+      rmContainer.contentEditable = on ? 'true' : 'false';
+      rmContainer.classList.toggle('editing-active', on);
+      editToggleBtn.textContent = on ? 'Wyłącz edycję Road Mapy' : 'Włącz edycję Road Mapy';
+      statusEl.textContent = on ? 'Edycja włączona — przejdź na zakładkę „Road Mapa”, kliknij w tekst, popraw, wróć tu i kliknij „Zapisz”. Przy istniejących wierszach/osobach/grantach pojawił się przycisk „Usuń”.' : '';
+    }
+
+    editToggleBtn.addEventListener('click', () => setEditMode(!editMode));
+
+    saveBtn.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, rmContainer.innerHTML);
+      statusEl.textContent = 'Zapisano do podglądu w tej przeglądarce — ' + new Date().toLocaleString('pl-PL') + '.';
+    });
+
+    resetBtn.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      rmContainer.innerHTML = originalHTML;
+      decorateExisting();
+      rebindRoadmapNav();
+      refreshStageOptions();
+      showRoadmapStage(roadmapDetails[0] ? roadmapDetails[0].dataset.roadmapDetail : 'mvp1');
+      reportEl.value = '';
+      statusEl.textContent = 'Przywrócono opublikowaną wersję Road Mapy.';
+    });
+
+    reportBtn.addEventListener('click', () => {
+      const savedNow = localStorage.getItem(STORAGE_KEY);
+      if (!savedNow) {
+        reportEl.value = 'Nie zapisano jeszcze żadnych zmian.';
+        return;
+      }
+      const origRoot = new DOMParser().parseFromString('<div>' + originalHTML + '</div>', 'text/html').body.firstChild;
+      const newRoot = new DOMParser().parseFromString('<div>' + savedNow + '</div>', 'text/html').body.firstChild;
+      const origKids = Array.from(origRoot.children);
+      const newKids = Array.from(newRoot.children);
+      const lines = [];
+      const max = Math.max(origKids.length, newKids.length);
+      for (let i = 0; i < max; i++) {
+        const o = origKids[i] ? origKids[i].textContent.trim() : '';
+        const n = newKids[i] ? newKids[i].textContent.trim() : '';
+        if (o !== n) {
+          lines.push('--- Zmiana #' + (lines.filter(l => l.startsWith('--- Zmiana')).length + 1) + ' ---');
+          lines.push('PRZED: ' + (o ? o.slice(0, 300) : '(brak / nowy element)'));
+          lines.push('PO: ' + (n || '(usunięto)'));
+          lines.push('');
+        }
+      }
+      reportEl.value = lines.length ? lines.join('\n') : 'Brak zmian względem wersji opublikowanej.';
+    });
+
+    function refreshStageOptions() {
+      stageSelect.innerHTML = '';
+      document.querySelectorAll('[data-roadmap-detail]').forEach(panel => {
+        const opt = document.createElement('option');
+        opt.value = panel.dataset.roadmapDetail;
+        opt.textContent = (panel.querySelector('.roadmap-detail-title') || {}).textContent || panel.dataset.roadmapDetail;
+        stageSelect.appendChild(opt);
+      });
+      refreshQOptions();
+    }
+
+    function refreshQOptions() {
+      qSelect.innerHTML = '';
+      const panel = document.querySelector('[data-roadmap-detail="' + stageSelect.value + '"]');
+      if (!panel) return;
+      panel.querySelectorAll('.roadmap-q-card').forEach(card => {
+        const opt = document.createElement('option');
+        opt.value = card.dataset.roadmapQ;
+        opt.textContent = card.dataset.roadmapQ;
+        qSelect.appendChild(opt);
+      });
+    }
+
+    stageSelect.addEventListener('change', refreshQOptions);
+    refreshStageOptions();
+
+    function getCurrentCard() {
+      const panel = document.querySelector('[data-roadmap-detail="' + stageSelect.value + '"]');
+      if (!panel) return null;
+      return panel.querySelector('.roadmap-q-card[data-roadmap-q="' + qSelect.value + '"]');
+    }
+
+    const costForm = document.getElementById('rmCostForm');
+    const costCat = document.getElementById('rmCostCat');
+    const costCatCustom = document.getElementById('rmCostCatCustom');
+    const costRecurring = document.getElementById('rmCostRecurring');
+    const costInterval = document.getElementById('rmCostInterval');
+
+    costCat.addEventListener('change', () => {
+      costCatCustom.style.display = costCat.value === '__custom' ? '' : 'none';
+    });
+    costRecurring.addEventListener('change', () => { costInterval.disabled = !costRecurring.checked; });
+
+    costForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const card = getCurrentCard();
+      const tbody = card ? card.querySelector('.fin-tile-koszty .fin-table tbody') : null;
+      if (!tbody) { statusEl.textContent = 'Wybrany Q nie ma tabeli kosztów.'; return; }
+      const cat = costCat.value === '__custom' ? (document.getElementById('rmCostCatCustom').value.trim() || 'INNE') : costCat.value;
+      const name = document.getElementById('rmCostName').value.trim();
+      const amount = Number(document.getElementById('rmCostAmount').value) || 0;
+      const label = name + (costRecurring.checked ? ' (powtarzający się: ' + costInterval.value + ')' : '');
+      const tr = document.createElement('tr');
+      tr.dataset.cat = cat;
+      tr.innerHTML = '<td class="cat">' + escapeHtml(cat) + '</td><td><div class="fin-comp"><span>– ' + escapeHtml(label) + '</span></div></td><td class="num">' + plnFmt(amount) + '</td><td class="num">' + plnFmt(amount) + '</td>';
+      const totalRow = tbody.querySelector('tr.total');
+      if (totalRow) tbody.insertBefore(tr, totalRow); else tbody.appendChild(tr);
+      addRowDelete(tr);
+      costForm.reset();
+      costCatCustom.style.display = 'none';
+      costInterval.disabled = true;
+      statusEl.textContent = 'Dodano koszt do ' + stageSelect.value + ' / ' + qSelect.value + '.';
+    });
+
+    const revForm = document.getElementById('rmRevForm');
+    revForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const card = getCurrentCard();
+      const tbody = card ? card.querySelector('.fin-tile-przychody .fin-table tbody') : null;
+      if (!tbody) { statusEl.textContent = 'Wybrany Q nie ma tabeli przychodów.'; return; }
+      const cat = document.getElementById('rmRevCat').value.trim();
+      const name = document.getElementById('rmRevName').value.trim();
+      const net = Number(document.getElementById('rmRevNet').value) || 0;
+      const gross = Number(document.getElementById('rmRevGross').value) || 0;
+      const tr = document.createElement('tr');
+      tr.dataset.cat = cat;
+      tr.innerHTML = '<td class="cat">' + escapeHtml(cat) + '</td><td><div class="fin-comp"><span>– ' + escapeHtml(name) + '</span></div></td><td class="num">' + plnFmt(gross) + '</td><td class="num">' + plnFmt(net) + '</td>';
+      const totalRow = tbody.querySelector('tr.total');
+      if (totalRow) tbody.insertBefore(tr, totalRow); else tbody.appendChild(tr);
+      addRowDelete(tr);
+      revForm.reset();
+      statusEl.textContent = 'Dodano przychód do ' + stageSelect.value + ' / ' + qSelect.value + '.';
+    });
+
+    const grantForm = document.getElementById('rmGrantForm');
+    grantForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const card = getCurrentCard();
+      const list = card ? card.querySelector('.granty-list') : null;
+      if (!list) { statusEl.textContent = 'Wybrany Q nie ma listy grantów.'; return; }
+      const name = document.getElementById('rmGrantName').value.trim();
+      const purpose = document.getElementById('rmGrantPurpose').value.trim();
+      const deadline = document.getElementById('rmGrantDeadline').value.trim();
+      const results = document.getElementById('rmGrantResults').value.trim();
+      const amount = document.getElementById('rmGrantAmount').value.trim();
+      const rules = document.getElementById('rmGrantRules').value.trim();
+      const link = document.getElementById('rmGrantLink').value.trim();
+      const parts = [];
+      if (amount) parts.push(amount);
+      parts.push('Cel: ' + purpose);
+      if (deadline) parts.push('Termin składania: ' + deadline);
+      if (results) parts.push('Wyniki: ' + results);
+      if (rules) parts.push('Zasady: ' + rules);
+      const li = document.createElement('li');
+      li.innerHTML = '<strong>' + escapeHtml(name) + '</strong> — ' + escapeHtml(parts.join('. ')) +
+        (link ? ' <a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">link</a>' : '');
+      list.appendChild(li);
+      addLiDelete(li);
+      grantForm.reset();
+      statusEl.textContent = 'Dodano grant do ' + stageSelect.value + ' / ' + qSelect.value + '.';
+    });
+
+    const personForm = document.getElementById('rmPersonForm');
+    document.getElementById('rmPersonCeoBtn').addEventListener('click', () => {
+      document.getElementById('rmPersonReportsTo').value = 'CEO';
+    });
+    personForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const card = getCurrentCard();
+      const teamMap = card ? card.querySelector('.team-map') : null;
+      if (!teamMap) { statusEl.textContent = 'Wybrany Q nie ma listy zespołu.'; return; }
+      const role = document.getElementById('rmPersonRole').value.trim();
+      const desc = document.getElementById('rmPersonDesc').value.trim();
+      const contracts = Array.from(document.querySelectorAll('.rm-contract:checked')).map(c => c.value);
+      const net = document.getElementById('rmPersonNet').value;
+      const gross = document.getElementById('rmPersonGross').value;
+      const employerCost = document.getElementById('rmPersonEmployerCost').value;
+      const dept = document.getElementById('rmPersonDept').value.trim();
+      const level = document.getElementById('rmPersonLevel').value;
+      const reportsTo = document.getElementById('rmPersonReportsTo').value.trim();
+      const titleParts = [];
+      if (desc) titleParts.push(desc);
+      if (contracts.length) titleParts.push('Umowa: ' + contracts.join(', '));
+      if (net) titleParts.push('Netto: ' + net + ' zł');
+      if (gross) titleParts.push('Brutto: ' + gross + ' zł');
+      if (employerCost) titleParts.push('Koszt pracodawcy: ' + employerCost + ' zł');
+      if (dept) titleParts.push('Departament: ' + dept);
+      titleParts.push('Poziom: ' + level);
+      if (reportsTo) titleParts.push('Podlega: ' + reportsTo);
+      const chip = document.createElement('div');
+      chip.className = 'person-chip';
+      chip.title = titleParts.join(' | ');
+      chip.dataset.contract = contracts.join(',');
+      chip.dataset.net = net;
+      chip.dataset.gross = gross;
+      chip.dataset.employerCost = employerCost;
+      chip.dataset.dept = dept;
+      chip.dataset.level = level;
+      chip.dataset.reportsTo = reportsTo;
+      chip.innerHTML = '<span>+</span> ' + escapeHtml(role);
+      teamMap.appendChild(chip);
+      addChipDelete(chip);
+      updateLegend(card);
+      personForm.reset();
+      statusEl.textContent = 'Dodano osobę do ' + stageSelect.value + ' / ' + qSelect.value + '.';
+    });
+
+    document.getElementById('rmAddQBtn').addEventListener('click', () => {
+      const panel = document.querySelector('[data-roadmap-detail="' + stageSelect.value + '"]');
+      if (!panel) return;
+      const cards = panel.querySelectorAll('.roadmap-q-card');
+      const lastCard = cards[cards.length - 1];
+      if (!lastCard) return;
+      const label = prompt('Etykieta nowego Q (np. v1.9):');
+      if (!label) return;
+      const range = prompt('Zakres miesięcy (np. lipiec – wrzesień 2030):', '');
+      const qKey = prompt('Identyfikator Q (np. Q3 2030) — używany do nawigacji:', '');
+      if (!qKey) return;
+      const newCard = lastCard.cloneNode(true);
+      newCard.dataset.roadmapQ = qKey;
+      const strongEl = newCard.querySelector(':scope > strong');
+      if (strongEl) strongEl.textContent = label + ' — ' + qKey;
+      const spanEl = newCard.querySelector(':scope > span');
+      if (spanEl) spanEl.textContent = range || '';
+      newCard.querySelectorAll('.fin-table tbody tr[data-cat]').forEach(tr => tr.remove());
+      newCard.querySelectorAll('.granty-list li').forEach(li => li.remove());
+      newCard.querySelectorAll('.team-map .person-chip').forEach(chip => chip.remove());
+      const qDetails = panel.querySelector('.roadmap-q-details');
+      if (qDetails) qDetails.appendChild(newCard); else panel.appendChild(newCard);
+      const qPillTemplate = document.querySelector('.q-pill[data-roadmap-stage="' + stageSelect.value + '"]');
+      if (qPillTemplate) {
+        const newPill = qPillTemplate.cloneNode(true);
+        newPill.dataset.roadmapQ = qKey;
+        const qLabel = newPill.querySelector('.q-label');
+        const qNote = newPill.querySelector('.q-note');
+        if (qLabel) qLabel.textContent = label;
+        if (qNote) qNote.textContent = qKey;
+        qPillTemplate.closest('td').insertAdjacentElement('afterend', (() => {
+          const td = document.createElement('td');
+          td.className = 'q-cell';
+          td.appendChild(newPill);
+          return td;
+        })());
+      }
+      decorateExisting();
+      rebindRoadmapNav();
+      refreshStageOptions();
+      statusEl.textContent = 'Dodano nowy Q (' + qKey + ') do etapu — uzupełnij treść w trybie edycji.';
+    });
+
+    document.getElementById('rmAddStageBtn').addEventListener('click', () => {
+      const stageKey = prompt('Identyfikator nowego etapu (bez spacji, np. six):');
+      if (!stageKey) return;
+      const title = prompt('Tytuł etapu (np. VI. v5.0 — v5.9):', '');
+      const meta = prompt('Zakres dat (np. Q3 2029 – Q4 2029):', '');
+      const lastPanel = document.querySelector('.roadmap-detail:last-of-type');
+      if (!lastPanel) return;
+      const newPanel = lastPanel.cloneNode(true);
+      newPanel.dataset.roadmapDetail = stageKey;
+      newPanel.className = 'roadmap-detail stage-' + stageKey;
+      const titleEl = newPanel.querySelector('.roadmap-detail-title');
+      if (titleEl) titleEl.textContent = title || ('Nowy etap ' + stageKey);
+      const metaEl = newPanel.querySelector('.roadmap-detail-meta');
+      if (metaEl) metaEl.textContent = meta || '';
+      newPanel.querySelectorAll('.roadmap-summary').forEach(el => el.remove());
+      newPanel.querySelectorAll('.q-back').forEach(el => el.remove());
+      const qDetails = newPanel.querySelector('.roadmap-q-details');
+      if (qDetails) qDetails.innerHTML = '';
+      rmContainer.appendChild(newPanel);
+
+      const lastStageBtn = document.querySelector('.stage-btn[data-roadmap-stage]:last-of-type');
+      if (lastStageBtn) {
+        const newStageBtn = lastStageBtn.cloneNode(true);
+        newStageBtn.dataset.roadmapStage = stageKey;
+        newStageBtn.className = 'stage-btn stage-' + stageKey;
+        const spanEl = newStageBtn.querySelector('span');
+        if (spanEl) spanEl.textContent = title || stageKey;
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.className = 'version-col';
+        td.appendChild(newStageBtn);
+        tr.appendChild(td);
+        const tableBody = lastStageBtn.closest('table') ? lastStageBtn.closest('table').querySelector('tbody') : null;
+        if (tableBody) tableBody.appendChild(tr);
+      }
+      decorateExisting();
+      rebindRoadmapNav();
+      refreshStageOptions();
+      statusEl.textContent = 'Dodano nowy etap (' + stageKey + ') — uzupełnij treść w trybie edycji.';
     });
   })();
 
