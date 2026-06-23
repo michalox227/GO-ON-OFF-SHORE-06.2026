@@ -241,6 +241,18 @@
   .roadmap-q-card strong{display:block; color:var(--stage); font-family:var(--display); font-size:18px; line-height:1.1; letter-spacing:.04em; text-transform:uppercase}
   .roadmap-q-card span{display:block; margin-top:5px; color:#fff; font-size:13px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
   .roadmap-q-card p{margin:10px 0 0; color:var(--muted); font-size:12px; line-height:1.55}
+  .team-toggle{cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; width:100%; background:none; border:none; padding:0; color:#D4A85C; font-family:var(--display); font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
+  .team-toggle em{color:#97a4b2; font-size:10.5px; font-weight:400; text-transform:none; letter-spacing:0; font-style:normal}
+  .team-toggle:after{content:'▾'; font-size:11px; transition:transform .2s ease; margin-left:auto}
+  .team-toggle.active:after{transform:rotate(180deg)}
+  .team-map{display:none; flex-wrap:wrap; gap:8px; margin-top:10px; margin-left:0}
+  .team-map.active{display:flex}
+  .person-chip{display:flex; align-items:center; justify-content:center; width:72px; height:72px; border-radius:50%; font-size:9.5px; text-align:center; padding:6px; color:#06231c; font-weight:700; line-height:1.2}
+  .person-chip.new{background:#34D399; box-shadow:0 0 0 2px rgba(52,211,153,.35), 0 6px 14px rgba(52,211,153,.20)}
+  .person-chip.existing{background:#FBBF24; box-shadow:0 0 0 2px rgba(251,191,36,.35), 0 6px 14px rgba(251,191,36,.20)}
+  .team-legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:10.5px; color:#97a4b2}
+  .team-legend span{display:inline-flex; align-items:center; gap:5px}
+  .team-legend i{width:10px; height:10px; border-radius:50%; display:inline-block}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
@@ -784,12 +796,12 @@
           <span class="roadmap-detail-meta">Q3 2026 – Q2 2027</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q3 2026">
             <strong>MVP 1.1 — Q3 2026</strong>
             <span>lipiec – wrzesień 2026</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
               <div style="margin-bottom: 12px;">
-                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">📋 Praca</strong>
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">PRACA</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Fundamenty biznesowe</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -834,30 +846,7 @@
                 </div>
               </div>
               <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #D4A85C; display: block; margin-bottom: 6px;">👥 Zespół</strong>
-                <div style="margin-left: 12px;">
-                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Zarząd</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Founder / CEO (1)</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">IT</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Lead Developer (1)</li>
-                    <li>Junior Developer (2)</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Data</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Researcher &amp; Data Manager (1)</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Design</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>UI/UX Designer (1)</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px; background: rgba(45,212,191,.15); padding: 4px 6px; border-radius: 4px; display: inline-block;">Razem: 6 osób</p>
-                </div>
-              </div>
-              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">💰 Koszty</strong>
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">KOSZTY</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Jednorazowe</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -875,14 +864,29 @@
                   </ul>
                 </div>
               </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 6 osób)</em></button>
+                <div class="team-map">
+                  <div class="person-chip new"><span>Founder / CEO</span></div>
+                    <div class="person-chip new"><span>Lead Developer</span></div>
+                    <div class="person-chip new"><span>Junior Dev #1</span></div>
+                    <div class="person-chip new"><span>Junior Dev #2</span></div>
+                    <div class="person-chip new"><span>Data Manager</span></div>
+                    <div class="person-chip new"><span>UI/UX Designer</span></div>
+                </div>
+                <div class="team-legend">
+                  <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
+                  <span><i style="background:#FBBF24"></i> osoba kontynuująca z poprzedniego Q</span>
+                </div>
+              </div>
             </div>
           </article>
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q4 2026">
             <strong>MVP 1.2 — Q4 2026</strong>
             <span>październik – grudzień 2026</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
               <div style="margin-bottom: 12px;">
-                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">📋 Praca</strong>
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">PRACA</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Rozwój platformy</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -926,35 +930,7 @@
                 </div>
               </div>
               <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #D4A85C; display: block; margin-bottom: 6px;">👥 Zespół</strong>
-                <div style="margin-left: 12px;">
-                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">IT</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Lead Developer</li>
-                    <li>Junior Developer (2)</li>
-                    <li>AI Developer (1)</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Data</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Researcher &amp; Data Manager</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Design</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>UI/UX Designer</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Sprzedaż</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Key Account Manager (1)</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Marketing</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Marketing &amp; Social Media Specialist (1)</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px; background: rgba(45,212,191,.15); padding: 4px 6px; border-radius: 4px; display: inline-block;">Razem: 9 osób</p>
-                </div>
-              </div>
-              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">💰 Koszty</strong>
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">KOSZTY</strong>
                 <div style="margin-left: 12px;">
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
                     <li>Rozbudowa infrastruktury</li>
@@ -965,14 +941,32 @@
                   </ul>
                 </div>
               </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 9 osób)</em></button>
+                <div class="team-map">
+                  <div class="person-chip existing"><span>Founder / CEO</span></div>
+                    <div class="person-chip existing"><span>Lead Developer</span></div>
+                    <div class="person-chip existing"><span>Junior Dev #1</span></div>
+                    <div class="person-chip existing"><span>Junior Dev #2</span></div>
+                    <div class="person-chip existing"><span>Data Manager</span></div>
+                    <div class="person-chip existing"><span>UI/UX Designer</span></div>
+                    <div class="person-chip new"><span>AI Developer</span></div>
+                    <div class="person-chip new"><span>Key Account Mgr</span></div>
+                    <div class="person-chip new"><span>Marketing Spec.</span></div>
+                </div>
+                <div class="team-legend">
+                  <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
+                  <span><i style="background:#FBBF24"></i> osoba kontynuująca z poprzedniego Q</span>
+                </div>
+              </div>
             </div>
           </article>
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q1 2027">
             <strong>MVP 1.3 — Q1 2027</strong>
             <span>styczeń – marzec 2027</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
               <div style="margin-bottom: 12px;">
-                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">📋 Praca</strong>
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">PRACA</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Ukończenie podstawowych modułów</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -1004,22 +998,7 @@
                 </div>
               </div>
               <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #D4A85C; display: block; margin-bottom: 6px;">👥 Zespół</strong>
-                <div style="margin-left: 12px;">
-                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Rdzeń zespołu: 9 osób</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>Lead Developer, 2× Junior Dev, AI Developer</li>
-                    <li>Researcher &amp; Data Manager, UI/UX Designer</li>
-                    <li>Key Account Manager, Marketing Specialist, Founder/CEO</li>
-                  </ul>
-                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Plus</p>
-                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
-                    <li>do 250 ambasadorów branżowych</li>
-                  </ul>
-                </div>
-              </div>
-              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">💰 Koszty</strong>
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">KOSZTY</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Operacyjne</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -1031,9 +1010,28 @@
                   </ul>
                 </div>
               </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — rdzeń 9 osób + do 250 ambasadorów)</em></button>
+                <div class="team-map">
+                  <div class="person-chip existing"><span>Founder / CEO</span></div>
+                    <div class="person-chip existing"><span>Lead Developer</span></div>
+                    <div class="person-chip existing"><span>Junior Dev #1</span></div>
+                    <div class="person-chip existing"><span>Junior Dev #2</span></div>
+                    <div class="person-chip existing"><span>Data Manager</span></div>
+                    <div class="person-chip existing"><span>UI/UX Designer</span></div>
+                    <div class="person-chip existing"><span>AI Developer</span></div>
+                    <div class="person-chip existing"><span>Key Account Mgr</span></div>
+                    <div class="person-chip existing"><span>Marketing Spec.</span></div>
+                    <div class="person-chip new"><span>Ambasadorzy (250)</span></div>
+                </div>
+                <div class="team-legend">
+                  <span><i style="background:#34D399"></i> nowa osoba w tym Q</span>
+                  <span><i style="background:#FBBF24"></i> osoba kontynuująca z poprzedniego Q</span>
+                </div>
+              </div>
             </div>
           </article>
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q2 2027">
             <strong>MVP 1.4 — Q2 2027</strong>
             <span>kwiecień – czerwiec 2027</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1050,7 +1048,7 @@
           <span class="roadmap-detail-meta">Q3 2027 – Q4 2027</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q3 2027">
             <strong>v1.5 — Q3 2027</strong>
             <span>lipiec – wrzesień 2027</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1059,7 +1057,7 @@
               </div>
             </div>
           </article>
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q4 2027">
             <strong>v1.9 — Q4 2027</strong>
             <span>październik – grudzień 2027</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1076,7 +1074,7 @@
           <span class="roadmap-detail-meta">Q1 2028 – Q2 2028</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q1 2028">
             <strong>v2.0 — Q1 2028</strong>
             <span>styczeń – marzec 2028</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1085,7 +1083,7 @@
               </div>
             </div>
           </article>
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q2 2028">
             <strong>v2.9 — Q2 2028</strong>
             <span>kwiecień – czerwiec 2028</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1102,7 +1100,7 @@
           <span class="roadmap-detail-meta">Q3 2028 – Q4 2028</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q3 2028">
             <strong>v3.0 — Q3 2028</strong>
             <span>lipiec – wrzesień 2028</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1111,7 +1109,7 @@
               </div>
             </div>
           </article>
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q4 2028">
             <strong>v3.9 — Q4 2028</strong>
             <span>październik – grudzień 2028</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1128,7 +1126,7 @@
           <span class="roadmap-detail-meta">Q1 2029 – Q2 2029</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q1 2029">
             <strong>v4.0 — Q1 2029</strong>
             <span>styczeń – marzec 2029</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1137,7 +1135,7 @@
               </div>
             </div>
           </article>
-          <article class="roadmap-q-card">
+          <article class="roadmap-q-card" data-roadmap-q="Q2 2029">
             <strong>v4.9 — Q2 2029</strong>
             <span>kwiecień – czerwiec 2029</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
@@ -1202,16 +1200,35 @@
   dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.slideTarget))));
 
 
-  const roadmapStageButtons = Array.from(document.querySelectorAll('[data-roadmap-stage]'));
+  const roadmapTimelineButtons = Array.from(document.querySelectorAll('.stage-btn[data-roadmap-stage]'));
+  const roadmapQButtons = Array.from(document.querySelectorAll('.q-pill[data-roadmap-stage]'));
   const roadmapDetails = Array.from(document.querySelectorAll('[data-roadmap-detail]'));
 
-  function showRoadmapStage(stageId) {
-    roadmapDetails.forEach(panel => panel.classList.toggle('active', panel.dataset.roadmapDetail === stageId));
-    roadmapStageButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapStage === stageId));
+  function showRoadmapStage(stageId, quarter) {
+    roadmapDetails.forEach(panel => {
+      const isActive = panel.dataset.roadmapDetail === stageId;
+      panel.classList.toggle('active', isActive);
+      if (isActive) {
+        Array.from(panel.querySelectorAll('.roadmap-q-card')).forEach(card => {
+          card.style.display = (!quarter || card.dataset.roadmapQ === quarter) ? '' : 'none';
+        });
+      }
+    });
+    roadmapTimelineButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapStage === stageId && !quarter));
+    roadmapQButtons.forEach(btn => btn.classList.toggle('active', !!quarter && btn.dataset.roadmapStage === stageId && btn.dataset.roadmapQ === quarter));
   }
 
-  roadmapStageButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
+  roadmapTimelineButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
+  roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage, btn.dataset.roadmapQ)));
   showRoadmapStage('mvp1');
+
+  document.querySelectorAll('.team-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active');
+      const map = btn.nextElementSibling;
+      if (map && map.classList.contains('team-map')) map.classList.toggle('active');
+    });
+  });
 
   document.addEventListener('keydown', event => {
     if (!document.getElementById('presentation').classList.contains('active')) return;
