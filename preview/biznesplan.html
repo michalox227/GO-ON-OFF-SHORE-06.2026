@@ -280,9 +280,6 @@
   .org-dept-card{flex:0 1 calc(33.333% - 10px); background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px; padding:18px 14px; text-align:center}
   .org-dept-card .dept-name{font-family:var(--display); font-size:12px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:.04em}
   .org-hint{color:var(--muted); font-size:11px; text-align:center; padding:8px 0 0}
-  .roadmap-q-card.mind-map-view > strong,
-  .roadmap-q-card.mind-map-view > span,
-  .roadmap-q-card.mind-map-view .detail-block {display:none}
   .mind-map{display:none; flex-direction:column; gap:36px; padding:20px 0}
   .roadmap-q-card.mind-map-view .mind-map{display:flex}
   .mind-map-item{display:flex; flex-direction:column; align-items:center}
@@ -293,6 +290,39 @@
   .mind-map-tasks:before{content:''; position:absolute; top:0; left:12%; right:12%; height:2px; background:rgba(45,212,191,.35)}
   .mind-map-task{position:relative; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:10px 14px; font-size:11px; color:var(--text); text-align:center}
   .mind-map-task:before{content:''; position:absolute; top:-16px; left:50%; transform:translateX(-50%); width:2px; height:16px; background:rgba(45,212,191,.35)}
+  .zespol-heading{color: #2DD4BF; display: block; margin-bottom: 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;}
+  .fin-tile{margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);}
+  .fin-table{width:100%; border-collapse:collapse; font-size:10px; margin-top:6px}
+  .fin-table th{text-align:left; padding:4px 6px; color:#9fb3c8; border-bottom:1px solid rgba(255,255,255,.12); font-weight:700}
+  .fin-table th.num, .fin-table td.num{text-align:right}
+  .fin-table td{padding:4px 6px; color:#d4dde6; vertical-align:top}
+  .fin-table td.cat{color:#fff; font-weight:600; white-space:nowrap}
+  .fin-table tr.total td{font-weight:700; color:#fff; border-top:1px solid rgba(255,255,255,.15)}
+  .fin-tile-koszty .fin-table tr.total td.num{color:#F87171}
+  .fin-tile-przychody .fin-table tr.total td.num{color:#34D399}
+  .granty-list{margin:4px 0 0; padding-left:16px; list-style:disc; font-size:11px; color:#d4dde6}
+  .granty-list li{margin-bottom:6px}
+  .granty-list strong{color:#fff}
+  .ishikawa-toggle{display:block; width:100%; text-align:center; background:rgba(192,132,252,.12); border:1px solid rgba(192,132,252,.4); color:#C084FC; padding:8px 14px; border-radius:8px; cursor:pointer; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-family:var(--display)}
+  .ishikawa-toggle em{color:#97a4b2; font-weight:400; text-transform:none; font-style:italic; margin-left:6px; font-size:10px}
+  .ishikawa-toggle:hover{background:rgba(192,132,252,.22)}
+  .ishikawa{display:none; margin-top:16px}
+  .ishikawa.open{display:block}
+  .ishikawa-diagram{display:flex; align-items:center; position:relative; padding:40px 6px; overflow-x:auto}
+  .ishikawa-bones{display:flex; flex-direction:column; gap:48px; flex:1; position:relative; min-width:480px}
+  .ishikawa-bones:before{content:''; position:absolute; top:50%; left:0; right:0; height:2px; background:rgba(255,255,255,.25)}
+  .ishikawa-row{display:flex; justify-content:space-around; gap:14px; position:relative; z-index:1}
+  .ishikawa-bone{position:relative; width:140px; background:rgba(45,212,191,.10); border:1px solid rgba(45,212,191,.3); border-radius:8px; padding:8px 10px}
+  .ishikawa-row.bottom .ishikawa-bone{background:rgba(96,165,250,.10); border-color:rgba(96,165,250,.3)}
+  .ishikawa-bone .bone-title{display:block; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; color:var(--teal); margin-bottom:4px}
+  .ishikawa-row.bottom .ishikawa-bone .bone-title{color:#60A5FA}
+  .ishikawa-bone ul{margin:0; padding-left:12px; font-size:9px; color:var(--text); line-height:1.4}
+  .ishikawa-row.top .ishikawa-bone:after{content:''; position:absolute; bottom:-24px; left:50%; width:2px; height:24px; background:rgba(45,212,191,.35)}
+  .ishikawa-row.bottom .ishikawa-bone:before{content:''; position:absolute; top:-24px; left:50%; width:2px; height:24px; background:rgba(96,165,250,.35)}
+  .ishikawa-head{position:relative; flex:0 0 160px; margin-left:30px; background:rgba(248,113,113,.14); border:2px solid rgba(248,113,113,.5); border-radius:10px; padding:14px; text-align:center}
+  .ishikawa-head:before{content:''; position:absolute; left:-30px; top:50%; width:30px; height:2px; background:rgba(248,113,113,.5)}
+  .ishikawa-head .head-title{display:block; font-size:11px; font-weight:800; color:#F87171; text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px}
+  .ishikawa-head ul{margin:0; padding-left:14px; font-size:10px; color:var(--text); text-align:left}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
@@ -891,6 +921,7 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong class="zespol-heading">ZESPÓŁ &amp; REKRUTACJA</strong>
                 <div class="team-map">
                   <div class="person-chip"><span>+</span> Founder / Product Owner</div>
                   <div class="person-chip"><span>+</span> Lead Developer / CTO (fractional)</div>
@@ -904,6 +935,41 @@
                   <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">0</span> <span class="unit">osób</span></span>
                   <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">6</span> <span class="unit">osób</span></span>
                 </div>
+              </div>
+              <div class="fin-tile fin-tile-koszty">
+                <strong style="color: #F87171; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Rejestracja spółki, sprzęt komputerowy, branding, logo, podstawowe licencje startowe</td><td class="num">55 350 zł</td><td class="num">45 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro wirtualne / coworking, księgowość zewnętrzna, domeny, opłaty bankowe (3 mies.)</td><td class="num">22 140 zł</td><td class="num">18 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Marketing wstępny, materiały, podróże, drobne usługi</td><td class="num">14 760 zł</td><td class="num">12 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Founder, CTO (fractional), 2× Developer, UI/UX Designer, Researcher — 6 osób</td><td class="num">202 950 zł</td><td class="num">165 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Hosting, narzędzia SaaS, licencje deweloperskie, API</td><td class="num">43 050 zł</td><td class="num">35 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa na nieprzewidziane wydatki</td><td class="num">12 300 zł</td><td class="num">10 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">350 550 zł</td><td class="num">285 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile fin-tile-przychody">
+                <strong style="color: #34D399; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRZYCHODY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="BRAK PRZYCHODÓW"><td class="cat">BRAK PRZYCHODÓW</td><td>Etap przedrewenowy — budowa szkieletu aplikacji, brak płacących klientów</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile">
+                <strong style="color: #9FB3C8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">DOFINANSOWANIA &amp; GRANTY</strong>
+                <ul class="granty-list">
+                  <li><strong>Research programów dotacyjnych</strong> — 0 zł netto. Cel: rozpoznanie ścieżek finansowania. Etap analizy — PARP / NCBR / FENG, brak jeszcze złożonych wniosków.</li>
+                </ul>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="ishikawa-toggle">DIAGRAM CELÓW <em>(kliknij, aby zobaczyć diagram Ishikawy)</em></button>
+                <div class="ishikawa"></div>
               </div>
             </div>
           </article>
@@ -964,6 +1030,7 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong class="zespol-heading">ZESPÓŁ &amp; REKRUTACJA</strong>
                 <div class="team-map">
                   <div class="person-chip"><span>+</span> Sprzedaż / KAM</div>
                   <div class="person-chip"><span>+</span> Marketing / Content</div>
@@ -973,6 +1040,41 @@
                   <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">6</span> <span class="unit">osób</span></span>
                   <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">8</span> <span class="unit">osób</span></span>
                 </div>
+              </div>
+              <div class="fin-tile fin-tile-koszty">
+                <strong style="color: #F87171; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Sprzęt dla nowych osób, materiały sprzedażowe startowe</td><td class="num">24 600 zł</td><td class="num">20 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro/coworking, księgowość, opłaty (3 mies.)</td><td class="num">29 520 zł</td><td class="num">24 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Marketing pozyskania pierwszych firm i partnerów, ankiety, wywiady</td><td class="num">31 980 zł</td><td class="num">26 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 8 osób (w tym Sprzedaż/KAM, Marketing/Content)</td><td class="num">239 850 zł</td><td class="num">195 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Hosting, CRM sprzedażowy, narzędzia analityczne</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">381 300 zł</td><td class="num">310 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile fin-tile-przychody">
+                <strong style="color: #34D399; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRZYCHODY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="BRAK PRZYCHODÓW"><td class="cat">BRAK PRZYCHODÓW</td><td>Zamknięta beta — walidacja produktu, brak modelu płatności</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile">
+                <strong style="color: #9FB3C8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">DOFINANSOWANIA &amp; GRANTY</strong>
+                <ul class="granty-list">
+                  <li><strong>Wniosek PARP — Ścieżka SMART</strong> — 200 000 zł netto. Cel: dofinansowanie rozwoju platformy IT i modułu AI matching. Przygotowanie dokumentacji projektowej do złożenia na początku 2027.</li>
+                </ul>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="ishikawa-toggle">DIAGRAM CELÓW <em>(kliknij, aby zobaczyć diagram Ishikawy)</em></button>
+                <div class="ishikawa"></div>
               </div>
             </div>
           </article>
@@ -1030,6 +1132,7 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong class="zespol-heading">ZESPÓŁ &amp; REKRUTACJA</strong>
                 <div class="team-map">
                   <div class="person-chip"><span>+</span> Główna księgowa</div>
                   <div class="person-chip"><span>+</span> Główny programista</div>
@@ -1040,6 +1143,41 @@
                   <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">8</span> <span class="unit">osób</span></span>
                   <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">11</span> <span class="unit">osób</span></span>
                 </div>
+              </div>
+              <div class="fin-tile fin-tile-koszty">
+                <strong style="color: #F87171; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Onboarding głównej księgowej i głównego programisty, licencje księgowe startowe</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro, księgowość zewnętrzna (do przejęcia wewnętrznego), opłaty</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Testy usługi księgowej (5–10 klientów), marketing</td><td class="num">30 750 zł</td><td class="num">25 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 11 osób (w tym Główna księgowa, Główny programista, BOK)</td><td class="num">270 600 zł</td><td class="num">220 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Narzędzia księgowe, bezpieczeństwo dokumentów, backup danych</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">412 050 zł</td><td class="num">335 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile fin-tile-przychody">
+                <strong style="color: #34D399; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRZYCHODY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="OBSŁUGA KSIĘGOWA (TESTY)"><td class="cat">OBSŁUGA KSIĘGOWA (TESTY)</td><td>5–10 klientów testowych, stawki promocyjne pilotażowe</td><td class="num">6 150 zł</td><td class="num">5 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">6 150 zł</td><td class="num">5 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile">
+                <strong style="color: #9FB3C8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">DOFINANSOWANIA &amp; GRANTY</strong>
+                <ul class="granty-list">
+                  <li><strong>Wniosek NCBR — Szybka Ścieżka (B+R)</strong> — 500 000 zł netto. Cel: rozwój silnika AI Matching 2.0 i compliance API. Złożenie wniosku równolegle z budową modułu księgowego; decyzja oczekiwana w Q3 2027.</li>
+                </ul>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="ishikawa-toggle">DIAGRAM CELÓW <em>(kliknij, aby zobaczyć diagram Ishikawy)</em></button>
+                <div class="ishikawa"></div>
               </div>
             </div>
           </article>
@@ -1127,6 +1265,7 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong class="zespol-heading">ZESPÓŁ &amp; REKRUTACJA</strong>
                 <div class="team-map">
                   <div class="person-chip"><span>+</span> Księgowa pomocnicza</div>
                   <div class="person-chip"><span>+</span> Handlowiec #1</div>
@@ -1139,6 +1278,41 @@
                   <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">11</span> <span class="unit">osób</span></span>
                   <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">16</span> <span class="unit">osób</span></span>
                 </div>
+              </div>
+              <div class="fin-tile fin-tile-koszty">
+                <strong style="color: #F87171; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Doradca prawny i finansowy do oferty obligacji, dokumentacja grantowa</td><td class="num">30 750 zł</td><td class="num">25 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro, księgowość, opłaty (3 mies., większy zespół)</td><td class="num">44 280 zł</td><td class="num">36 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Audyt bezpieczeństwa i wydajności, materiały sprzedażowe obligacji</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 16 osób (w tym Księgowa pomocnicza, 2× Handlowiec, BOK dodatkowy, Administracja/granty)</td><td class="num">295 200 zł</td><td class="num">240 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>System płatności, panele BOK/sprzedaży, infrastruktura</td><td class="num">27 060 zł</td><td class="num">22 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">14 760 zł</td><td class="num">12 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">448 950 zł</td><td class="num">365 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile fin-tile-przychody">
+                <strong style="color: #34D399; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRZYCHODY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="OBSŁUGA KSIĘGOWA (SOFT START)"><td class="cat">OBSŁUGA KSIĘGOWA (SOFT START)</td><td>Pierwsi płatni klienci księgowości przed publicznym startem</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile">
+                <strong style="color: #9FB3C8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">DOFINANSOWANIA &amp; GRANTY</strong>
+                <ul class="granty-list">
+                  <li><strong>Wniosek FENG / regionalny — internacjonalizacja MŚP</strong> — 150 000 zł netto. Cel: ekspansję na rynki UE (DE/NL), działania marketingowe i prawne za granicą. Przygotowanie wniosku równolegle z ofertą obligacji korporacyjnych.</li>
+                </ul>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="ishikawa-toggle">DIAGRAM CELÓW <em>(kliknij, aby zobaczyć diagram Ishikawy)</em></button>
+                <div class="ishikawa"></div>
               </div>
             </div>
           </article>
@@ -1225,6 +1399,7 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong class="zespol-heading">ZESPÓŁ &amp; REKRUTACJA</strong>
                 <div class="team-map">
                   <div class="person-chip"><span>+</span> Główny programista aplikacji / mobile / v2</div>
                   <div class="person-chip"><span>+</span> Developer dodatkowy #1</div>
@@ -1236,6 +1411,45 @@
                   <span class="legend-item"><strong class="legend-label">Zespół przed rekrutacją:</strong> <span class="number before">16</span> <span class="unit">osób</span></span>
                   <span class="legend-item"><strong class="legend-label">Aktualny zespół:</strong> <span class="number current">20</span> <span class="unit">osób</span></span>
                 </div>
+              </div>
+              <div class="fin-tile fin-tile-koszty">
+                <strong style="color: #F87171; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Kampania startowa publicznej publikacji, materiały launchowe</td><td class="num">73 800 zł</td><td class="num">60 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro, księgowość, opłaty (3 mies., zespół 20 osób)</td><td class="num">55 350 zł</td><td class="num">45 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Marketing performance, obsługa inwestorska, podróże handlowe</td><td class="num">61 500 zł</td><td class="num">50 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 20 osób (w tym Główny programista aplikacji/mobile/v2, 2× Developer dodatkowy, Marketing/content dodatkowy)</td><td class="num">344 400 zł</td><td class="num">280 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Infrastruktura na pełny ruch produkcyjny, monitoring, skalowanie</td><td class="num">49 200 zł</td><td class="num">40 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">24 600 zł</td><td class="num">20 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">608 850 zł</td><td class="num">495 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile fin-tile-przychody">
+                <strong style="color: #34D399; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRZYCHODY</strong>
+                <table class="fin-table">
+                  <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
+                  <tbody>
+                  <tr data-cat="SUBSKRYPCJE UŻYTKOWNIKÓW"><td class="cat">SUBSKRYPCJE UŻYTKOWNIKÓW</td><td>200 kont subskrypcyjnych w ramach rampy startowej (niepełny kwartał)</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="OBSŁUGA KSIĘGOWA"><td class="cat">OBSŁUGA KSIĘGOWA</td><td>70 klientów księgowości, ramp-up w trakcie kwartału</td><td class="num">43 050 zł</td><td class="num">35 000 zł</td></tr>
+                  <tr data-cat="OBLIGACJE KORPORACYJNE (EMISJA)"><td class="cat">OBLIGACJE KORPORACYJNE (EMISJA)</td><td>Pierwsza transza sprzedanych obligacji — cel 350 000 zł</td><td class="num">430 500 zł</td><td class="num">350 000 zł</td></tr>
+                  <tr data-cat="MARKETPLACE PARTNERÓW"><td class="cat">MARKETPLACE PARTNERÓW</td><td>Leady i prowizje od 20–30 partnerów</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  <tr data-cat="PIERWSZE PROJEKTY REKRUTACYJNE"><td class="cat">PIERWSZE PROJEKTY REKRUTACYJNE</td><td>5–15 pierwszych realnych rekrutacji projektowych</td><td class="num">12 300 zł</td><td class="num">10 000 zł</td></tr>
+                    <tr class="total"><td colspan="2">SUMA</td><td class="num">541 200 zł</td><td class="num">440 000 zł</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fin-tile">
+                <strong style="color: #9FB3C8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">DOFINANSOWANIA &amp; GRANTY</strong>
+                <ul class="granty-list">
+                  <li><strong>Decyzja NCBR (wniosek z Q1 2027)</strong> — 500 000 zł netto. Cel: finansowanie dalszego rozwoju AI Matching 2.0. Oczekiwane wejście środków równolegle z wpływami z obligacji i subskrypcji.</li>
+                </ul>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <button type="button" class="ishikawa-toggle">DIAGRAM CELÓW <em>(kliknij, aby zobaczyć diagram Ishikawy)</em></button>
+                <div class="ishikawa"></div>
               </div>
             </div>
           </article>
@@ -1463,28 +1677,16 @@
 
   roadmapTimelineButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
   roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showMindMapForQuarter(btn.dataset.roadmapQ)));
-  // Generuj mapy myśli dla każdej karty
-  const SKIP_HEADINGS = ['CEL ETAPU', 'EFEKT KOŃCOWY'];
-  document.querySelectorAll('.roadmap-q-card').forEach(card => {
-    const wrapper = card.querySelector('div[style*="margin-top: 10px"]');
-    if (!wrapper) return;
-
+  // Wyciąga kategorie pracy (nazwa + zadania) z karty kwartału.
+  // skipHeadings pozwala wykluczyć bloki, których nie traktujemy jako "pracę"
+  // (np. CEL ETAPU / EFEKT KOŃCOWY przy generowaniu mapy myśli).
+  function extractWorkCategories(wrapper, skipHeadings) {
     const categories = [];
-
-    // Otaguj bloki: sekcja zespołu (zawiera team-map) zostaje widoczna w widoku mapy,
-    // pozostałe bloki (CEL ETAPU, PRACA / nagłówki sekcji, EFEKT) chowamy w widoku mapy.
-    let teamSection = null;
     Array.from(wrapper.children).forEach(block => {
-      if (block.querySelector('.team-map')) {
-        block.classList.add('team-section');
-        teamSection = block;
-        return;
-      }
-      block.classList.add('detail-block');
-
+      if (block.querySelector('.team-map') || block.classList.contains('fin-tile')) return;
       const heading = block.querySelector(':scope > strong');
       const headingText = heading ? heading.textContent.trim().toUpperCase() : '';
-      if (SKIP_HEADINGS.some(h => headingText.includes(h))) return;
+      if (skipHeadings.some(h => headingText.includes(h))) return;
 
       // Elementy treści są w wewnętrznym divie (margin-left:12px) lub bezpośrednio w bloku
       const inner = block.querySelector(':scope > div') || block;
@@ -1507,7 +1709,28 @@
         if (tasks.length) categories.push({ name: heading.textContent.trim(), tasks });
       }
     });
+    return categories;
+  }
 
+  // Generuj mapy myśli dla każdej karty
+  const MIND_MAP_SKIP = ['CEL ETAPU', 'EFEKT KOŃCOWY'];
+  document.querySelectorAll('.roadmap-q-card').forEach(card => {
+    const wrapper = card.querySelector('div[style*="margin-top: 10px"]');
+    if (!wrapper) return;
+
+    // Otaguj bloki: sekcja zespołu (zawiera team-map) i kafelki finansowe
+    // zostają widoczne; klikniecie Q teraz pokazuje WSZYSTKIE dane danego kwartału.
+    let teamSection = null;
+    Array.from(wrapper.children).forEach(block => {
+      if (block.querySelector('.team-map')) {
+        block.classList.add('team-section');
+        teamSection = block;
+      } else if (!block.classList.contains('fin-tile')) {
+        block.classList.add('detail-block');
+      }
+    });
+
+    const categories = extractWorkCategories(wrapper, MIND_MAP_SKIP);
     if (!categories.length) return;
 
     const mindMap = document.createElement('div');
@@ -1518,6 +1741,60 @@
 
     if (teamSection) wrapper.insertBefore(mindMap, teamSection);
     else wrapper.appendChild(mindMap);
+  });
+
+  // Diagram Ishikawy (rybia ość) — łączy PRACA, EFEKT KOŃCOWY, ZESPÓŁ i KOSZTY
+  // danego kwartału w jeden widok przyczynowo-skutkowy, od lewej do prawej.
+  function buildIshikawaHTML(card) {
+    const wrapper = card.querySelector('div[style*="margin-top: 10px"]');
+    const bones = extractWorkCategories(wrapper, ['CEL ETAPU', 'EFEKT KOŃCOWY']);
+
+    const teamMap = card.querySelector('.team-map');
+    if (teamMap) {
+      const tasks = Array.from(teamMap.querySelectorAll('.person-chip')).map(c => c.textContent.replace('+', '').trim());
+      if (tasks.length) bones.push({ name: 'ZESPÓŁ & REKRUTACJA', tasks });
+    }
+
+    const kosztyRows = card.querySelectorAll('.fin-tile-koszty tbody tr[data-cat]');
+    if (kosztyRows.length) {
+      bones.push({ name: 'KOSZTY', tasks: Array.from(kosztyRows).map(r => r.dataset.cat) });
+    }
+
+    let headTasks = [];
+    Array.from(wrapper.children).forEach(block => {
+      const heading = block.querySelector(':scope > strong');
+      if (heading && heading.textContent.trim().toUpperCase().includes('EFEKT KOŃCOWY')) {
+        headTasks = Array.from(block.querySelectorAll('li')).map(li => li.textContent.trim());
+      }
+    });
+
+    const half = Math.ceil(bones.length / 2);
+    const topBones = bones.slice(0, half);
+    const bottomBones = bones.slice(half);
+    const boneHTML = b => `<div class="ishikawa-bone"><span class="bone-title">${b.name}</span><ul>${b.tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+
+    return `<div class="ishikawa-diagram">
+      <div class="ishikawa-bones">
+        <div class="ishikawa-row top">${topBones.map(boneHTML).join('')}</div>
+        <div class="ishikawa-row bottom">${bottomBones.map(boneHTML).join('')}</div>
+      </div>
+      <div class="ishikawa-head"><span class="head-title">EFEKT KOŃCOWY</span><ul>${headTasks.map(t => `<li>${t}</li>`).join('')}</ul></div>
+    </div>`;
+  }
+
+  document.querySelectorAll('.ishikawa-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.roadmap-q-card');
+      const container = btn.nextElementSibling;
+      const isOpen = container.classList.contains('open');
+      if (isOpen) {
+        container.classList.remove('open');
+        container.innerHTML = '';
+        return;
+      }
+      container.innerHTML = buildIshikawaHTML(card);
+      container.classList.add('open');
+    });
   });
 
   showRoadmapStage('mvp1');
