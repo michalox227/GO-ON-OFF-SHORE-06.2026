@@ -253,7 +253,7 @@
   .team-legend .number.before{color:#FBBF24}
   .team-legend .number.current{color:#2DD4BF}
   .team-legend .unit{font-size:13px; color:#fff}
-  .org-view{padding:32px 0}
+  .org-view{min-height:calc(100vh - 72px); max-width:1600px; margin:0 auto; padding:54px 28px 110px}
   .oc-scroll{overflow-x:auto; padding:10px 30px 24px}
   .oc-chart{position:relative; width:1420px; height:560px; margin:20px auto}
   .oc-box{position:absolute; min-width:180px; min-height:84px; padding:14px 20px; border:2px solid #fff; border-radius:8px; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; font-size:20px; font-weight:800; letter-spacing:.5px; cursor:pointer; user-select:none; transition:.2s ease; z-index:3}
@@ -1628,9 +1628,9 @@
 </main>
 
 <main class="page-view" id="organization">
-  <div class="wrap org-view">
-    <h2 style="margin:0 0 8px; padding:0 30px;">STRUKTURA ORGANIZACYJNA</h2>
-    <p style="margin:0 0 6px; padding:0 30px; color:#c4ced8;">Schemat organizacyjny GO ON [OFF] SHORE. Kliknij dowolne okienko, aby zobaczyć szczegóły danej roli lub działu. Dane o stanowiskach pochodzą z Road Mapy.</p>
+  <div class="org-view">
+    <h2 style="margin:0 0 8px;">STRUKTURA ORGANIZACYJNA</h2>
+    <p style="margin:0 0 6px; color:#c4ced8;">Schemat organizacyjny GO ON [OFF] SHORE. Kliknij dowolne okienko, aby zobaczyć szczegóły danej roli lub działu. Dane o stanowiskach pochodzą z Road Mapy.</p>
     <div class="oc-scroll">
       <section class="oc-chart">
         <div class="oc-line h oc-line-board-investors"></div>
