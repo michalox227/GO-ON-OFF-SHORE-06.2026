@@ -241,22 +241,18 @@
   .roadmap-q-card strong{display:block; color:var(--stage); font-family:var(--display); font-size:18px; line-height:1.1; letter-spacing:.04em; text-transform:uppercase}
   .roadmap-q-card span{display:block; margin-top:5px; color:#fff; font-size:13px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
   .roadmap-q-card p{margin:10px 0 0; color:var(--muted); font-size:12px; line-height:1.55}
-  .team-toggle{cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px; width:100%; background:none; border:none; padding:0; color:#D4A85C; font-family:var(--display); font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
-  .team-toggle em{color:#97a4b2; font-size:10.5px; font-weight:400; text-transform:none; letter-spacing:0; font-style:normal}
-  .team-toggle:after{content:'▾'; font-size:11px; transition:transform .2s ease; margin-left:auto}
-  .team-toggle.active:after{transform:rotate(180deg)}
-  .team-map{display:none; flex-wrap:wrap; gap:8px; margin-top:10px; margin-left:0}
-  .team-map.active{display:flex}
-  .person-chip{display:flex; align-items:center; justify-content:center; width:auto; height:auto; border-radius:6px; font-size:11px; text-align:center; padding:6px 8px; color:#fff; font-weight:600; line-height:1.2; background:rgba(52,211,153,.15); border:1px solid rgba(52,211,153,.35)}
-  .person-chip new{color:#34D399}
-  .team-legend{display:flex; flex-direction:column; gap:6px; margin-top:12px; color:var(--text)}
-  .team-legend .legend-item{display:flex; align-items:center; gap:6px}
-  .team-legend .legend-label{font-weight:700; font-size:8px; color:#fff}
-  .team-legend .number{font-size:14px; font-weight:700}
+  .team-toggle{display:none}
+  .team-map{display:flex; flex-direction:column; gap:8px; margin-top:12px; margin-left:0}
+  .person-chip{display:flex; align-items:center; gap:6px; width:auto; height:auto; font-size:12px; padding:6px 0; color:var(--text); font-weight:500; line-height:1.3}
+  .person-chip span{color:#2DD4BF; font-weight:700; font-size:14px}
+  .team-legend{display:flex; flex-direction:column; gap:12px; margin-top:20px; color:var(--text)}
+  .team-legend .legend-item{display:flex; align-items:center; gap:8px}
+  .team-legend .legend-label{font-weight:700; font-size:16px; color:#fff}
+  .team-legend .number{font-size:28px; font-weight:700}
   .team-legend .number.recruited{color:#34D399}
   .team-legend .number.before{color:#FBBF24}
   .team-legend .number.current{color:#2DD4BF}
-  .team-legend .unit{font-size:8px; color:#fff}
+  .team-legend .unit{font-size:16px; color:#fff}
   .org-view{padding:32px 0}
   .org-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; padding:0 30px}
   .org-filter-btn{background:rgba(255,255,255,.08); border:1px solid var(--line); color:var(--text); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-family:var(--display); font-weight:600; transition:all .2s ease}
@@ -284,6 +280,17 @@
   .org-dept-card{flex:0 1 calc(33.333% - 10px); background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px; padding:18px 14px; text-align:center}
   .org-dept-card .dept-name{font-family:var(--display); font-size:12px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:.04em}
   .org-hint{color:var(--muted); font-size:11px; text-align:center; padding:8px 0 0}
+  .roadmap-q-card.mind-map-view > strong,
+  .roadmap-q-card.mind-map-view > span,
+  .roadmap-q-card.mind-map-view > div > div:not(.team-map):not(.team-legend) {display:none}
+  .roadmap-q-card.mind-map-view > div {display:block !important}
+  .mind-map{display:flex; flex-direction:column; gap:24px; padding:20px 0}
+  .mind-map-item{display:flex; align-items:flex-start; gap:30px}
+  .mind-map-category{background:rgba(45,212,191,.16); border:1px solid rgba(45,212,191,.35); border-radius:10px; padding:14px 16px; min-width:200px; flex-shrink:0}
+  .mind-map-category .cat-title{color:var(--teal); font-family:var(--display); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px; display:block}
+  .mind-map-tasks{display:flex; flex-direction:column; gap:10px}
+  .mind-map-task{background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:10px 14px; font-size:11px; color:var(--text); position:relative; padding-left:20px}
+  .mind-map-task:before{content:''; position:absolute; left:8px; top:50%; width:12px; height:2px; background:rgba(45,212,191,.55); transform:translateY(-50%)}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
@@ -882,14 +889,13 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 6 nowe osoby)</em></button>
                 <div class="team-map">
-                  <div class="person-chip"><span style="color:#34D399;">+ Founder / Product Owner</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Lead Developer / CTO (fractional)</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Developer #1</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Developer #2</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ UI/UX Designer</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Researcher</span></div>
+                  <div class="person-chip"><span>+</span> Founder / Product Owner</div>
+                  <div class="person-chip"><span>+</span> Lead Developer / CTO (fractional)</div>
+                  <div class="person-chip"><span>+</span> Developer #1</div>
+                  <div class="person-chip"><span>+</span> Developer #2</div>
+                  <div class="person-chip"><span>+</span> UI/UX Designer</div>
+                  <div class="person-chip"><span>+</span> Researcher</div>
                 </div>
                 <div class="team-legend">
                   <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">6</span> <span class="unit">osób</span></span>
@@ -956,10 +962,9 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 2 nowe osoby)</em></button>
                 <div class="team-map">
-                  <div class="person-chip"><span style="color:#34D399;">+ Sprzedaż / KAM</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Marketing / Content</span></div>
+                  <div class="person-chip"><span>+</span> Sprzedaż / KAM</div>
+                  <div class="person-chip"><span>+</span> Marketing / Content</div>
                 </div>
                 <div class="team-legend">
                   <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">2</span> <span class="unit">osób</span></span>
@@ -1023,11 +1028,10 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 3 nowe osoby)</em></button>
                 <div class="team-map">
-                  <div class="person-chip"><span style="color:#34D399;">+ Główna księgowa</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Główny programista</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ BOK</span></div>
+                  <div class="person-chip"><span>+</span> Główna księgowa</div>
+                  <div class="person-chip"><span>+</span> Główny programista</div>
+                  <div class="person-chip"><span>+</span> BOK</div>
                 </div>
                 <div class="team-legend">
                   <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">3</span> <span class="unit">osób</span></span>
@@ -1121,13 +1125,12 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 5 nowe osoby)</em></button>
                 <div class="team-map">
-                  <div class="person-chip"><span style="color:#34D399;">+ Księgowa pomocnicza</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Handlowiec #1</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Handlowiec #2</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ BOK dodatkowy</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Administracja / granty</span></div>
+                  <div class="person-chip"><span>+</span> Księgowa pomocnicza</div>
+                  <div class="person-chip"><span>+</span> Handlowiec #1</div>
+                  <div class="person-chip"><span>+</span> Handlowiec #2</div>
+                  <div class="person-chip"><span>+</span> BOK dodatkowy</div>
+                  <div class="person-chip"><span>+</span> Administracja / granty</div>
                 </div>
                 <div class="team-legend">
                   <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">5</span> <span class="unit">osób</span></span>
@@ -1220,12 +1223,11 @@
                 </ul>
               </div>
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 4 nowe osoby)</em></button>
                 <div class="team-map">
-                  <div class="person-chip"><span style="color:#34D399;">+ Główny programista aplikacji / mobile / v2</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Developer dodatkowy #1</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Developer dodatkowy #2</span></div>
-                  <div class="person-chip"><span style="color:#34D399;">+ Marketing / content dodatkowy</span></div>
+                  <div class="person-chip"><span>+</span> Główny programista aplikacji / mobile / v2</div>
+                  <div class="person-chip"><span>+</span> Developer dodatkowy #1</div>
+                  <div class="person-chip"><span>+</span> Developer dodatkowy #2</div>
+                  <div class="person-chip"><span>+</span> Marketing / content dodatkowy</div>
                 </div>
                 <div class="team-legend">
                   <span class="legend-item"><strong class="legend-label">Zrekrutowani:</strong> <span class="number recruited">4</span> <span class="unit">osób</span></span>
@@ -1419,31 +1421,72 @@
   const roadmapQButtons = Array.from(document.querySelectorAll('.q-pill[data-roadmap-stage]'));
   const roadmapDetails = Array.from(document.querySelectorAll('[data-roadmap-detail]'));
 
+  let currentMindMapQuarter = null;
+
+  function showMindMapForQuarter(quarter) {
+    currentMindMapQuarter = quarter;
+    roadmapDetails.forEach(panel => {
+      const cards = Array.from(panel.querySelectorAll('.roadmap-q-card'));
+      cards.forEach(card => {
+        const cardQ = card.dataset.roadmapQ;
+        if (cardQ === quarter) {
+          panel.classList.add('active');
+          card.classList.add('mind-map-view');
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+    roadmapQButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapQ === quarter));
+    roadmapTimelineButtons.forEach(btn => btn.classList.remove('active'));
+  }
+
   function showRoadmapStage(stageId, quarter) {
+    currentMindMapQuarter = null;
     roadmapDetails.forEach(panel => {
       const isActive = panel.dataset.roadmapDetail === stageId;
       panel.classList.toggle('active', isActive);
       if (isActive) {
         Array.from(panel.querySelectorAll('.roadmap-q-card')).forEach(card => {
-          card.style.display = (!quarter || card.dataset.roadmapQ === quarter) ? '' : 'none';
+          card.classList.remove('mind-map-view');
+          card.style.display = '';
         });
       }
     });
-    roadmapTimelineButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapStage === stageId && !quarter));
-    roadmapQButtons.forEach(btn => btn.classList.toggle('active', !!quarter && btn.dataset.roadmapStage === stageId && btn.dataset.roadmapQ === quarter));
+    roadmapTimelineButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapStage === stageId));
+    roadmapQButtons.forEach(btn => btn.classList.remove('active'));
   }
 
   roadmapTimelineButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
-  roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage, btn.dataset.roadmapQ)));
-  showRoadmapStage('mvp1');
+  roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showMindMapForQuarter(btn.dataset.roadmapQ)));
+  // Generuj mapy myśli dla każdej karty
+  document.querySelectorAll('.roadmap-q-card').forEach(card => {
+    const wrapper = card.querySelector('div[style*="margin-top: 10px"]');
+    if (!wrapper) return;
+    const sections = Array.from(wrapper.children);
+    const praceSection = sections.find(s => s.textContent.includes('PRACA'));
+    if (!praceSection) return;
 
-  document.querySelectorAll('.team-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('active');
-      const map = btn.nextElementSibling;
-      if (map && map.classList.contains('team-map')) map.classList.toggle('active');
+    const categories = [];
+    let currentCat = null;
+    Array.from(praceSection.children).forEach(el => {
+      if (el.tagName === 'P' && el.style.fontWeight === '600') {
+        currentCat = { name: el.textContent, tasks: [] };
+        categories.push(currentCat);
+      } else if (el.tagName === 'UL' && currentCat) {
+        currentCat.tasks = Array.from(el.querySelectorAll('li')).map(li => li.textContent);
+      }
     });
+
+    const mindMapHTML = '<div class="mind-map" style="margin-top:20px;">' + categories.map(cat =>
+      `<div class="mind-map-item"><div class="mind-map-category"><span class="cat-title">${cat.name}</span></div><div class="mind-map-tasks">${cat.tasks.map(t => `<div class="mind-map-task">${t}</div>`).join('')}</div></div>`
+    ).join('') + '</div>';
+
+    wrapper.insertAdjacentHTML('beforeend', mindMapHTML);
   });
+
+  showRoadmapStage('mvp1');
 
   // Organization chart data — pochodzi bezpośrednio z Road Mapy (nowe stanowiska per kwartał)
   const orgData = {
