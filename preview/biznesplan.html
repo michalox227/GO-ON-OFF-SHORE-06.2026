@@ -254,7 +254,8 @@
   .team-legend .number.current{color:#2DD4BF}
   .team-legend .unit{font-size:13px; color:#fff}
   .org-view{min-height:calc(100vh - 72px); max-width:1600px; margin:0 auto; padding:30px 28px 110px}
-  .org-filter-row{display:flex; align-items:center; flex-wrap:nowrap; overflow-x:auto; gap:6px; margin:0 0 22px; padding-bottom:10px}
+  .org-filter-rows{display:flex; flex-direction:column; gap:8px; margin:0 0 22px}
+  .org-filter-row{display:flex; align-items:center; flex-wrap:nowrap; overflow-x:auto; gap:6px; padding-bottom:6px}
   .org-filter-divider{flex:0 0 auto; width:1px; height:22px; background:rgba(255,255,255,.18); margin:0 4px}
   .org-all-btn{flex:0 0 auto; border:2px solid #fff; border-radius:999px; background:#000; color:#fff; padding:9px 22px; font-family:var(--display); font-weight:900; letter-spacing:.1em; font-size:12px; cursor:pointer; transition:.18s ease; white-space:nowrap}
   .org-all-btn:hover{background:rgba(255,255,255,.18)}
@@ -1644,32 +1645,36 @@
 
 <main class="page-view" id="organization">
   <div class="org-view">
-    <div class="org-filter-row">
-      <button class="org-all-btn active" type="button" data-org-all>ALL</button>
-      <span class="org-filter-divider"></span>
-      <button class="org-filter-btn org-stage-btn stage-mvp1" type="button" data-org-stage="mvp1"><span class="org-tag">#1</span> MVP 1.1 → 1.4</button>
-      <button class="org-filter-btn org-stage-btn stage-two" type="button" data-org-stage="two"><span class="org-tag">#2</span> v1.5 → v1.9</button>
-      <button class="org-filter-btn org-stage-btn stage-three" type="button" data-org-stage="three"><span class="org-tag">#3</span> v2.0 → v2.9</button>
-      <button class="org-filter-btn org-stage-btn stage-four" type="button" data-org-stage="four"><span class="org-tag">#4</span> v3.0 → v3.9</button>
-      <button class="org-filter-btn org-stage-btn stage-five" type="button" data-org-stage="five"><span class="org-tag">#5</span> v4.0 → v4.9</button>
-      <span class="org-filter-divider"></span>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2026"><span class="org-tag" style="background:#facc15"></span>Q3 2026</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2026"><span class="org-tag" style="background:#fb923c"></span>Q4 2026</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2027"><span class="org-tag" style="background:#f87171"></span>Q1 2027</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2027"><span class="org-tag" style="background:#e879f9"></span>Q2 2027</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2027"><span class="org-tag" style="background:#22c55e"></span>Q3 2027</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2027"><span class="org-tag" style="background:#4ade80"></span>Q4 2027</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2028"><span class="org-tag" style="background:#2dd4bf"></span>Q1 2028</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2028"><span class="org-tag" style="background:#38bdf8"></span>Q2 2028</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2028"><span class="org-tag" style="background:#60a5fa"></span>Q3 2028</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2028"><span class="org-tag" style="background:#818cf8"></span>Q4 2028</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2029"><span class="org-tag" style="background:#a78bfa"></span>Q1 2029</button>
-      <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2029"><span class="org-tag" style="background:#f472b6"></span>Q2 2029</button>
-      <span class="org-filter-divider"></span>
-      <button class="org-filter-btn org-year-btn" type="button" data-org-year="2026">2026</button>
-      <button class="org-filter-btn org-year-btn" type="button" data-org-year="2027">2027</button>
-      <button class="org-filter-btn org-year-btn" type="button" data-org-year="2028">2028</button>
-      <button class="org-filter-btn org-year-btn" type="button" data-org-year="2029">2029</button>
+    <div class="org-filter-rows">
+      <div class="org-filter-row">
+        <button class="org-all-btn active" type="button" data-org-all>ALL</button>
+        <span class="org-filter-divider"></span>
+        <button class="org-filter-btn org-stage-btn stage-mvp1" type="button" data-org-stage="mvp1"><span class="org-tag">#1</span> MVP 1.1 → 1.4</button>
+        <button class="org-filter-btn org-stage-btn stage-two" type="button" data-org-stage="two"><span class="org-tag">#2</span> v1.5 → v1.9</button>
+        <button class="org-filter-btn org-stage-btn stage-three" type="button" data-org-stage="three"><span class="org-tag">#3</span> v2.0 → v2.9</button>
+        <button class="org-filter-btn org-stage-btn stage-four" type="button" data-org-stage="four"><span class="org-tag">#4</span> v3.0 → v3.9</button>
+        <button class="org-filter-btn org-stage-btn stage-five" type="button" data-org-stage="five"><span class="org-tag">#5</span> v4.0 → v4.9</button>
+      </div>
+      <div class="org-filter-row">
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2026"><span class="org-tag" style="background:#facc15"></span>Q3 2026</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2026"><span class="org-tag" style="background:#fb923c"></span>Q4 2026</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2027"><span class="org-tag" style="background:#f87171"></span>Q1 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2027"><span class="org-tag" style="background:#e879f9"></span>Q2 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2027"><span class="org-tag" style="background:#22c55e"></span>Q3 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2027"><span class="org-tag" style="background:#4ade80"></span>Q4 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2028"><span class="org-tag" style="background:#2dd4bf"></span>Q1 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2028"><span class="org-tag" style="background:#38bdf8"></span>Q2 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2028"><span class="org-tag" style="background:#60a5fa"></span>Q3 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2028"><span class="org-tag" style="background:#818cf8"></span>Q4 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2029"><span class="org-tag" style="background:#a78bfa"></span>Q1 2029</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2029"><span class="org-tag" style="background:#f472b6"></span>Q2 2029</button>
+      </div>
+      <div class="org-filter-row">
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2026">2026</button>
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2027">2027</button>
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2028">2028</button>
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2029">2029</button>
+      </div>
     </div>
     <h2 style="margin:0 0 8px;">STRUKTURA ORGANIZACYJNA</h2>
     <p style="margin:0 0 6px; color:#c4ced8;">Schemat organizacyjny GO ON [OFF] SHORE. Kliknij dowolne okienko, aby zobaczyć szczegóły danej roli lub działu. Dane o stanowiskach pochodzą z Road Mapy.</p>
