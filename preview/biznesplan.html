@@ -279,6 +279,13 @@
   #settingsReport{width:100%; min-height:260px; margin-top:10px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:10px; color:#e7edf3; font-family:ui-monospace, monospace; font-size:12px; padding:14px; resize:vertical}
   #business-plan.editing-active .wrap{outline:2px dashed rgba(45,212,191,.5); outline-offset:6px; border-radius:10px}
   #business-plan.editing-active .wrap *[contenteditable]:focus{outline:1px solid rgba(45,212,191,.8); background:rgba(45,212,191,.06)}
+  .pres-editor-list{display:flex; flex-direction:column; gap:8px; margin:10px 0}
+  .pres-editor-row{display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:8px 10px}
+  .pres-editor-row .pres-num{flex:0 0 28px; color:var(--muted); font-size:12px; font-weight:800}
+  .pres-editor-row input[type="text"]{flex:1 1 auto; background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.16); border-radius:8px; color:#fff; padding:8px 10px; font-size:13px; font-family:inherit}
+  .pres-editor-row button{flex:0 0 auto; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; border-radius:8px; padding:6px 10px; font-size:12px; cursor:pointer}
+  .pres-editor-row button:hover{background:rgba(255,255,255,.16)}
+  .pres-editor-row button:disabled{opacity:.3; cursor:default}
   .oc-close:hover{background:#fff; color:#000}
   .zespol-heading{color: #2DD4BF; display: block; margin-bottom: 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;}
   .fin-tile{margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);}
@@ -1670,7 +1677,7 @@
 <div class="wrap">
   <h2 style="margin:0 0 8px;">USTAWIENIA WITRYNY</h2>
   <p style="margin:0 0 6px; color:#c4ced8;">Edycja treści Biznes Planu na żywo w tej przeglądarce. Włącz edycję, popraw tekst klikając w niego, zapisz do podglądu, a gdy zbierzesz wszystkie poprawki — kliknij „Wyświetl poprawione”, skopiuj treść i wklej ją z powrotem, żebym wgrał ją na stałe do wszystkich odwiedzających.</p>
-  <p style="margin:0 0 14px; color:var(--muted); font-size:13px;">Edycja Prezentacji, Road Mapy i Organizacji (tytuły slajdów, kolejność, Q, zespół, koszty, granty) dojdzie w kolejnym kroku — te widoki mają elementy generowane przez skrypt i wymagają osobnego edytora.</p>
+  <p style="margin:0 0 14px; color:var(--muted); font-size:13px;">Edycja Road Mapy i Organizacji (etapy, Q, zespół, koszty, przychody, granty) dojdzie w kolejnym kroku — te widoki mają elementy generowane przez skrypt i wymagają osobnego edytora.</p>
   <div class="settings-actions">
     <button class="org-filter-btn" type="button" id="settingsEditToggle">Włącz edycję Biznes Planu</button>
     <button class="org-filter-btn" type="button" id="settingsSaveBtn">Zapisz</button>
@@ -1679,6 +1686,16 @@
   </div>
   <p class="org-filter-status" id="settingsStatus"></p>
   <textarea id="settingsReport" readonly placeholder="Tu pojawi się lista zmian po kliknięciu „Wyświetl poprawione”..."></textarea>
+
+  <h2 style="margin:32px 0 8px;">PREZENTACJA — slajdy</h2>
+  <p style="margin:0 0 6px; color:#c4ced8;">Edytuj tytuły slajdów, zmień ich kolejność lub dodaj/usuń slajd. Po kliknięciu „Zapisz prezentację” zmiany działają od razu w zakładce Prezentacja (zapisane w tej przeglądarce).</p>
+  <div id="presEditorList" class="pres-editor-list"></div>
+  <div class="settings-actions">
+    <button class="org-filter-btn" type="button" id="presAddSlideBtn">+ Dodaj slajd</button>
+    <button class="org-filter-btn" type="button" id="presSaveBtn">Zapisz prezentację</button>
+    <button class="org-filter-btn" type="button" id="presResetBtn">Przywróć opublikowaną wersję</button>
+  </div>
+  <p class="org-filter-status" id="presStatus"></p>
 </div>
 </main>
 
@@ -1686,12 +1703,12 @@
 (function() {
   const buttons = Array.from(document.querySelectorAll('.view-btn'));
   const views = Array.from(document.querySelectorAll('.page-view'));
-  const slides = Array.from(document.querySelectorAll('.deck-slide'));
-  const dots = Array.from(document.querySelectorAll('.slide-dot'));
+  let slides = Array.from(document.querySelectorAll('.deck-slide'));
+  let dots = Array.from(document.querySelectorAll('.slide-dot'));
   const counter = document.getElementById('slideCounter');
   const titleHash = document.getElementById('slideTitleHash');
   const titleName = document.getElementById('slideTitleName');
-  const slideTitles = [
+  let slideTitles = [
     'STRESZCZENIE INWESTYCYJNE',
     'PROBLEM RYNKOWY',
     'ROZWIĄZANIE PRODUKTOWE',
@@ -1729,13 +1746,50 @@
 
   buttons.forEach(btn => btn.addEventListener('click', () => showView(btn.dataset.view)));
   document.querySelectorAll('[data-slide-move]').forEach(btn => btn.addEventListener('click', () => showSlide(currentSlide + Number(btn.dataset.slideMove))));
-  dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.slideTarget))));
+  function bindDots() {
+    dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.slideTarget))));
+  }
+  bindDots();
   document.querySelectorAll('.topic-present-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       showView('presentation');
       showSlide(Number(btn.dataset.gotoSlide));
     });
   });
+
+  const PRES_STORAGE_KEY = 'goSharePresentation_titles_v1';
+  const deckStage = document.querySelector('.slide-stage');
+  const dotsContainer = document.querySelector('.slide-dots');
+
+  function rebuildDeck(titles) {
+    slideTitles = titles.slice();
+    deckStage.querySelectorAll('.deck-slide').forEach(el => el.remove());
+    dotsContainer.innerHTML = '';
+    const arrowPrev = deckStage.querySelector('.slide-arrow.prev');
+    titles.forEach((title, i) => {
+      const n = i + 1;
+      const section = document.createElement('section');
+      section.className = 'deck-slide' + (n === 1 ? ' active' : '');
+      section.dataset.slide = String(n);
+      deckStage.insertBefore(section, arrowPrev);
+      const dot = document.createElement('button');
+      dot.className = 'slide-dot' + (n === 1 ? ' active' : '');
+      dot.type = 'button';
+      dot.dataset.slideTarget = String(n);
+      dot.setAttribute('aria-label', 'Przejdź do slajdu ' + n);
+      dotsContainer.appendChild(dot);
+    });
+    slides = Array.from(document.querySelectorAll('.deck-slide'));
+    dots = Array.from(document.querySelectorAll('.slide-dot'));
+    bindDots();
+    currentSlide = 1;
+    showSlide(1);
+  }
+
+  const presSaved = localStorage.getItem(PRES_STORAGE_KEY);
+  if (presSaved) {
+    try { rebuildDeck(JSON.parse(presSaved)); } catch (e) {}
+  }
 
 
   const roadmapTimelineButtons = Array.from(document.querySelectorAll('.stage-btn[data-roadmap-stage]'));
@@ -2188,6 +2242,66 @@
         }
       }
       reportEl.value = lines.length ? lines.join('\n') : 'Brak zmian względem wersji opublikowanej.';
+    });
+
+    const ORIGINAL_PRES_TITLES = slideTitles.slice();
+    let draftTitles = slideTitles.slice();
+    const presListEl = document.getElementById('presEditorList');
+    const presAddBtn = document.getElementById('presAddSlideBtn');
+    const presSaveBtn = document.getElementById('presSaveBtn');
+    const presResetBtn = document.getElementById('presResetBtn');
+    const presStatusEl = document.getElementById('presStatus');
+
+    function renderPresEditor() {
+      presListEl.innerHTML = '';
+      draftTitles.forEach((title, i) => {
+        const row = document.createElement('div');
+        row.className = 'pres-editor-row';
+        row.innerHTML =
+          '<span class="pres-num">#' + (i + 1) + '</span>' +
+          '<input type="text" value="" />' +
+          '<button type="button" data-act="up">↑</button>' +
+          '<button type="button" data-act="down">↓</button>' +
+          '<button type="button" data-act="del">Usuń</button>';
+        row.querySelector('input').value = title;
+        row.querySelector('input').addEventListener('input', e => { draftTitles[i] = e.target.value; });
+        row.querySelector('[data-act="up"]').disabled = i === 0;
+        row.querySelector('[data-act="down"]').disabled = i === draftTitles.length - 1;
+        row.querySelector('[data-act="up"]').addEventListener('click', () => {
+          [draftTitles[i - 1], draftTitles[i]] = [draftTitles[i], draftTitles[i - 1]];
+          renderPresEditor();
+        });
+        row.querySelector('[data-act="down"]').addEventListener('click', () => {
+          [draftTitles[i + 1], draftTitles[i]] = [draftTitles[i], draftTitles[i + 1]];
+          renderPresEditor();
+        });
+        row.querySelector('[data-act="del"]').addEventListener('click', () => {
+          draftTitles.splice(i, 1);
+          renderPresEditor();
+        });
+        presListEl.appendChild(row);
+      });
+    }
+
+    renderPresEditor();
+
+    presAddBtn.addEventListener('click', () => {
+      draftTitles.push('NOWY SLAJD ' + draftTitles.length);
+      renderPresEditor();
+    });
+
+    presSaveBtn.addEventListener('click', () => {
+      localStorage.setItem(PRES_STORAGE_KEY, JSON.stringify(draftTitles));
+      rebuildDeck(draftTitles);
+      presStatusEl.textContent = 'Zapisano prezentację (' + draftTitles.length + ' slajdów) — ' + new Date().toLocaleString('pl-PL') + '.';
+    });
+
+    presResetBtn.addEventListener('click', () => {
+      localStorage.removeItem(PRES_STORAGE_KEY);
+      draftTitles = ORIGINAL_PRES_TITLES.slice();
+      rebuildDeck(draftTitles);
+      renderPresEditor();
+      presStatusEl.textContent = 'Przywrócono opublikowaną wersję prezentacji.';
     });
   })();
 
