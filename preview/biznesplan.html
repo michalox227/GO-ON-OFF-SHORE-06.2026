@@ -254,32 +254,43 @@
   .team-legend .number.current{color:#2DD4BF}
   .team-legend .unit{font-size:16px; color:#fff}
   .org-view{padding:32px 0}
-  .org-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; padding:0 30px}
-  .org-filter-btn{background:rgba(255,255,255,.08); border:1px solid var(--line); color:var(--text); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-family:var(--display); font-weight:600; transition:all .2s ease}
-  .org-filter-btn:hover{background:rgba(45,212,191,.15); border-color:var(--teal); color:var(--teal)}
-  .org-filter-btn.active{background:var(--teal); border-color:var(--teal); color:#000}
-  .org-q-filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; padding:0 30px; margin-top:-10px}
-  .org-q-filter-btn{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); color:#97a4b2; padding:5px 10px; border-radius:6px; cursor:pointer; font-size:11px; font-family:var(--body); transition:all .2s ease}
-  .org-q-filter-btn:hover{background:rgba(45,212,191,.08); border-color:rgba(45,212,191,.3); color:var(--text)}
-  .org-q-filter-btn.active{background:var(--gold); border-color:var(--gold); color:#000; font-weight:600}
-  .org-chart{padding:0 30px; background:rgba(255,255,255,.015); border-radius:14px; border:1px solid var(--line); padding:30px}
-  .org-level{margin-bottom:32px}
-  .org-level-title{font-family:var(--display); font-size:12px; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px}
-  .org-positions{display:flex; flex-wrap:wrap; gap:16px; padding:16px 0}
-  .org-position{flex:0 1 calc(50% - 8px); background:rgba(45,212,191,.08); border:1px solid rgba(45,212,191,.2); border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:6px}
-  .org-position .pos-title{color:var(--text); font-weight:700; font-size:12px}
-  .org-position .pos-name{color:var(--teal); font-size:11px; font-family:var(--display)}
-  .org-position .pos-q{color:var(--muted); font-size:10px}
-  .org-position.existing{background:rgba(255,255,255,.04); border-color:var(--line)}
-  .org-position.existing .pos-title{color:var(--text)}
-  .org-position.new{background:rgba(212,168,92,.16); border-color:rgba(212,168,92,.55)}
-  .org-position.new .pos-title{color:var(--gold)}
-  .org-position.stage-mvp1,.org-position.stage-two,.org-position.stage-three,.org-position.stage-four,.org-position.stage-five{background:rgba(var(--stage-rgb),.14); border-color:rgba(var(--stage-rgb),.45)}
-  .org-position.stage-mvp1 .pos-title,.org-position.stage-two .pos-title,.org-position.stage-three .pos-title,.org-position.stage-four .pos-title,.org-position.stage-five .pos-title{color:var(--stage)}
-  .org-dept-grid{display:flex; flex-wrap:wrap; gap:14px; padding:10px 0}
-  .org-dept-card{flex:0 1 calc(33.333% - 10px); background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px; padding:18px 14px; text-align:center}
-  .org-dept-card .dept-name{font-family:var(--display); font-size:12px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:.04em}
-  .org-hint{color:var(--muted); font-size:11px; text-align:center; padding:8px 0 0}
+  .oc-scroll{overflow-x:auto; padding:10px 30px 24px}
+  .oc-chart{position:relative; width:1420px; height:560px; margin:20px auto}
+  .oc-box{position:absolute; min-width:180px; min-height:84px; padding:14px 20px; border:2px solid #fff; border-radius:8px; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; font-size:20px; font-weight:800; letter-spacing:.5px; cursor:pointer; user-select:none; transition:.2s ease; z-index:3}
+  .oc-box:hover{background:#fff; color:#000; transform:translateY(-4px); box-shadow:0 0 22px rgba(255,255,255,.35)}
+  .oc-box:active{transform:translateY(-1px)}
+  .oc-box.small{min-width:170px; min-height:72px; font-size:18px}
+  .oc-box.two-lines{line-height:1.25}
+  .oc-board{top:0; left:520px; width:280px}
+  .oc-investors{top:0; left:880px; width:280px}
+  .oc-ceo{top:160px; left:520px; width:280px}
+  .oc-it{top:440px; left:0; width:180px}
+  .oc-rd{top:440px; left:210px; width:180px}
+  .oc-sales{top:440px; left:420px; width:210px}
+  .oc-marketing{top:440px; left:660px; width:230px}
+  .oc-bok{top:440px; left:920px; width:180px}
+  .oc-hr{top:440px; left:1130px; width:230px}
+  .oc-finance{top:440px; left:1390px; width:180px}
+  .oc-line{position:absolute; background:#fff; z-index:1}
+  .oc-line.v{width:2px}
+  .oc-line.h{height:2px}
+  .oc-line-board-investors{top:45px; left:800px; width:80px}
+  .oc-line-board-ceo{top:92px; left:660px; height:68px}
+  .oc-line-ceo-down{top:252px; left:660px; height:120px}
+  .oc-line-departments-main{top:372px; left:90px; width:1390px}
+  .oc-line-to-it{top:372px; left:90px; height:68px}
+  .oc-line-to-rd{top:372px; left:300px; height:68px}
+  .oc-line-to-sales{top:372px; left:525px; height:68px}
+  .oc-line-to-marketing{top:372px; left:775px; height:68px}
+  .oc-line-to-bok{top:372px; left:1010px; height:68px}
+  .oc-line-to-hr{top:372px; left:1245px; height:68px}
+  .oc-line-to-finance{top:372px; left:1480px; height:68px}
+  .oc-details{width:880px; max-width:92%; margin:8px auto 0; border:2px solid #fff; border-radius:10px; padding:24px 28px; background:#000; color:#fff; display:none}
+  .oc-details.active{display:block}
+  .oc-details-title{margin:0 0 12px; font-size:24px; font-weight:900; text-transform:uppercase; letter-spacing:1px}
+  .oc-details-text{margin:0; font-size:15px; line-height:1.55; color:#e8e8e8}
+  .oc-close{margin-top:18px; border:2px solid #fff; background:#000; color:#fff; border-radius:999px; padding:10px 18px; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; cursor:pointer; transition:.2s ease}
+  .oc-close:hover{background:#fff; color:#000}
   .mind-map{display:none; flex-direction:column; gap:36px; padding:20px 0}
   .roadmap-q-card.mind-map-view .mind-map{display:flex}
   .mind-map-item{display:flex; flex-direction:column; align-items:center}
@@ -297,6 +308,7 @@
   .fin-table th.num, .fin-table td.num{text-align:right}
   .fin-table td{padding:4px 6px; color:#d4dde6; vertical-align:top}
   .fin-table td.cat{color:#fff; font-weight:600; white-space:nowrap}
+  .fin-comp{display:flex; flex-direction:column; gap:2px}
   .fin-table tr.total td{font-weight:700; color:#fff; border-top:1px solid rgba(255,255,255,.15)}
   .fin-tile-koszty .fin-table tr.total td.num{color:#F87171}
   .fin-tile-przychody .fin-table tr.total td.num{color:#34D399}
@@ -941,12 +953,12 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Rejestracja spółki, sprzęt komputerowy, branding, logo, podstawowe licencje startowe</td><td class="num">55 350 zł</td><td class="num">45 000 zł</td></tr>
-                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro wirtualne / coworking, księgowość zewnętrzna, domeny, opłaty bankowe (3 mies.)</td><td class="num">22 140 zł</td><td class="num">18 000 zł</td></tr>
-                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Marketing wstępny, materiały, podróże, drobne usługi</td><td class="num">14 760 zł</td><td class="num">12 000 zł</td></tr>
-                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Founder, CTO (fractional), 2× Developer, UI/UX Designer, Researcher — 6 osób</td><td class="num">202 950 zł</td><td class="num">165 000 zł</td></tr>
-                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Hosting, narzędzia SaaS, licencje deweloperskie, API</td><td class="num">43 050 zł</td><td class="num">35 000 zł</td></tr>
-                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa na nieprzewidziane wydatki</td><td class="num">12 300 zł</td><td class="num">10 000 zł</td></tr>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td><div class="fin-comp"><span>– Rejestracja spółki</span><span>– sprzęt komputerowy</span><span>– branding</span><span>– logo</span><span>– podstawowe licencje startowe</span></div></td><td class="num">55 350 zł</td><td class="num">45 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td><div class="fin-comp"><span>– Biuro wirtualne / coworking</span><span>– księgowość zewnętrzna</span><span>– domeny</span><span>– opłaty bankowe (3 mies.)</span></div></td><td class="num">22 140 zł</td><td class="num">18 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td><div class="fin-comp"><span>– Marketing wstępny</span><span>– materiały</span><span>– podróże</span><span>– drobne usługi</span></div></td><td class="num">14 760 zł</td><td class="num">12 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td><div class="fin-comp"><span>– Founder</span><span>– CTO (fractional)</span><span>– 2× Developer</span><span>– UI/UX Designer</span><span>– Researcher — 6 osób</span></div></td><td class="num">202 950 zł</td><td class="num">165 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td><div class="fin-comp"><span>– Hosting</span><span>– narzędzia SaaS</span><span>– licencje deweloperskie</span><span>– API</span></div></td><td class="num">43 050 zł</td><td class="num">35 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td><div class="fin-comp"><span>– Rezerwa na nieprzewidziane wydatki</span></div></td><td class="num">12 300 zł</td><td class="num">10 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">350 550 zł</td><td class="num">285 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -956,7 +968,7 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="BRAK PRZYCHODÓW"><td class="cat">BRAK PRZYCHODÓW</td><td>Etap przedrewenowy — budowa szkieletu aplikacji, brak płacących klientów</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
+                  <tr data-cat="BRAK PRZYCHODÓW"><td class="cat">BRAK PRZYCHODÓW</td><td><div class="fin-comp"><span>– Etap przedrewenowy — budowa szkieletu aplikacji</span><span>– brak płacących klientów</span></div></td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
                   </tbody>
                 </table>
@@ -1046,12 +1058,12 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Sprzęt dla nowych osób, materiały sprzedażowe startowe</td><td class="num">24 600 zł</td><td class="num">20 000 zł</td></tr>
-                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro/coworking, księgowość, opłaty (3 mies.)</td><td class="num">29 520 zł</td><td class="num">24 000 zł</td></tr>
-                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Marketing pozyskania pierwszych firm i partnerów, ankiety, wywiady</td><td class="num">31 980 zł</td><td class="num">26 000 zł</td></tr>
-                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 8 osób (w tym Sprzedaż/KAM, Marketing/Content)</td><td class="num">239 850 zł</td><td class="num">195 000 zł</td></tr>
-                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Hosting, CRM sprzedażowy, narzędzia analityczne</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
-                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td><div class="fin-comp"><span>– Sprzęt dla nowych osób</span><span>– materiały sprzedażowe startowe</span></div></td><td class="num">24 600 zł</td><td class="num">20 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td><div class="fin-comp"><span>– Biuro/coworking</span><span>– księgowość</span><span>– opłaty (3 mies.)</span></div></td><td class="num">29 520 zł</td><td class="num">24 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td><div class="fin-comp"><span>– Marketing pozyskania pierwszych firm i partnerów</span><span>– ankiety</span><span>– wywiady</span></div></td><td class="num">31 980 zł</td><td class="num">26 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td><div class="fin-comp"><span>– Zespół 8 osób (w tym Sprzedaż/KAM</span><span>– Marketing/Content)</span></div></td><td class="num">239 850 zł</td><td class="num">195 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td><div class="fin-comp"><span>– Hosting</span><span>– CRM sprzedażowy</span><span>– narzędzia analityczne</span></div></td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td><div class="fin-comp"><span>– Rezerwa</span></div></td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">381 300 zł</td><td class="num">310 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -1061,7 +1073,7 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="BRAK PRZYCHODÓW"><td class="cat">BRAK PRZYCHODÓW</td><td>Zamknięta beta — walidacja produktu, brak modelu płatności</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
+                  <tr data-cat="BRAK PRZYCHODÓW"><td class="cat">BRAK PRZYCHODÓW</td><td><div class="fin-comp"><span>– Zamknięta beta — walidacja produktu</span><span>– brak modelu płatności</span></div></td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">0 zł</td><td class="num">0 zł</td></tr>
                   </tbody>
                 </table>
@@ -1149,12 +1161,12 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Onboarding głównej księgowej i głównego programisty, licencje księgowe startowe</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
-                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro, księgowość zewnętrzna (do przejęcia wewnętrznego), opłaty</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
-                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Testy usługi księgowej (5–10 klientów), marketing</td><td class="num">30 750 zł</td><td class="num">25 000 zł</td></tr>
-                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 11 osób (w tym Główna księgowa, Główny programista, BOK)</td><td class="num">270 600 zł</td><td class="num">220 000 zł</td></tr>
-                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Narzędzia księgowe, bezpieczeństwo dokumentów, backup danych</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
-                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td><div class="fin-comp"><span>– Onboarding głównej księgowej i głównego programisty</span><span>– licencje księgowe startowe</span></div></td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td><div class="fin-comp"><span>– Biuro</span><span>– księgowość zewnętrzna (do przejęcia wewnętrznego)</span><span>– opłaty</span></div></td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td><div class="fin-comp"><span>– Testy usługi księgowej (5–10 klientów)</span><span>– marketing</span></div></td><td class="num">30 750 zł</td><td class="num">25 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td><div class="fin-comp"><span>– Zespół 11 osób (w tym Główna księgowa</span><span>– Główny programista</span><span>– BOK)</span></div></td><td class="num">270 600 zł</td><td class="num">220 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td><div class="fin-comp"><span>– Narzędzia księgowe</span><span>– bezpieczeństwo dokumentów</span><span>– backup danych</span></div></td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td><div class="fin-comp"><span>– Rezerwa</span></div></td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">412 050 zł</td><td class="num">335 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -1164,7 +1176,7 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="OBSŁUGA KSIĘGOWA (TESTY)"><td class="cat">OBSŁUGA KSIĘGOWA (TESTY)</td><td>5–10 klientów testowych, stawki promocyjne pilotażowe</td><td class="num">6 150 zł</td><td class="num">5 000 zł</td></tr>
+                  <tr data-cat="OBSŁUGA KSIĘGOWA (TESTY)"><td class="cat">OBSŁUGA KSIĘGOWA (TESTY)</td><td><div class="fin-comp"><span>– 5–10 klientów testowych</span><span>– stawki promocyjne pilotażowe</span></div></td><td class="num">6 150 zł</td><td class="num">5 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">6 150 zł</td><td class="num">5 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -1284,12 +1296,12 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Doradca prawny i finansowy do oferty obligacji, dokumentacja grantowa</td><td class="num">30 750 zł</td><td class="num">25 000 zł</td></tr>
-                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro, księgowość, opłaty (3 mies., większy zespół)</td><td class="num">44 280 zł</td><td class="num">36 000 zł</td></tr>
-                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Audyt bezpieczeństwa i wydajności, materiały sprzedażowe obligacji</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
-                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 16 osób (w tym Księgowa pomocnicza, 2× Handlowiec, BOK dodatkowy, Administracja/granty)</td><td class="num">295 200 zł</td><td class="num">240 000 zł</td></tr>
-                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>System płatności, panele BOK/sprzedaży, infrastruktura</td><td class="num">27 060 zł</td><td class="num">22 000 zł</td></tr>
-                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">14 760 zł</td><td class="num">12 000 zł</td></tr>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td><div class="fin-comp"><span>– Doradca prawny i finansowy do oferty obligacji</span><span>– dokumentacja grantowa</span></div></td><td class="num">30 750 zł</td><td class="num">25 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td><div class="fin-comp"><span>– Biuro</span><span>– księgowość</span><span>– opłaty (3 mies.</span><span>– większy zespół)</span></div></td><td class="num">44 280 zł</td><td class="num">36 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td><div class="fin-comp"><span>– Audyt bezpieczeństwa i wydajności</span><span>– materiały sprzedażowe obligacji</span></div></td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td><div class="fin-comp"><span>– Zespół 16 osób (w tym Księgowa pomocnicza</span><span>– 2× Handlowiec</span><span>– BOK dodatkowy</span><span>– Administracja/granty)</span></div></td><td class="num">295 200 zł</td><td class="num">240 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td><div class="fin-comp"><span>– System płatności</span><span>– panele BOK/sprzedaży</span><span>– infrastruktura</span></div></td><td class="num">27 060 zł</td><td class="num">22 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td><div class="fin-comp"><span>– Rezerwa</span></div></td><td class="num">14 760 zł</td><td class="num">12 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">448 950 zł</td><td class="num">365 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -1299,7 +1311,7 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="OBSŁUGA KSIĘGOWA (SOFT START)"><td class="cat">OBSŁUGA KSIĘGOWA (SOFT START)</td><td>Pierwsi płatni klienci księgowości przed publicznym startem</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  <tr data-cat="OBSŁUGA KSIĘGOWA (SOFT START)"><td class="cat">OBSŁUGA KSIĘGOWA (SOFT START)</td><td><div class="fin-comp"><span>– Pierwsi płatni klienci księgowości przed publicznym startem</span></div></td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -1417,12 +1429,12 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td>Kampania startowa publicznej publikacji, materiały launchowe</td><td class="num">73 800 zł</td><td class="num">60 000 zł</td></tr>
-                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td>Biuro, księgowość, opłaty (3 mies., zespół 20 osób)</td><td class="num">55 350 zł</td><td class="num">45 000 zł</td></tr>
-                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td>Marketing performance, obsługa inwestorska, podróże handlowe</td><td class="num">61 500 zł</td><td class="num">50 000 zł</td></tr>
-                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td>Zespół 20 osób (w tym Główny programista aplikacji/mobile/v2, 2× Developer dodatkowy, Marketing/content dodatkowy)</td><td class="num">344 400 zł</td><td class="num">280 000 zł</td></tr>
-                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td>Infrastruktura na pełny ruch produkcyjny, monitoring, skalowanie</td><td class="num">49 200 zł</td><td class="num">40 000 zł</td></tr>
-                  <tr data-cat="INNE"><td class="cat">INNE</td><td>Rezerwa</td><td class="num">24 600 zł</td><td class="num">20 000 zł</td></tr>
+                  <tr data-cat="JEDNORAZOWE / INWESTYCJE"><td class="cat">JEDNORAZOWE / INWESTYCJE</td><td><div class="fin-comp"><span>– Kampania startowa publicznej publikacji</span><span>– materiały launchowe</span></div></td><td class="num">73 800 zł</td><td class="num">60 000 zł</td></tr>
+                  <tr data-cat="STAŁE"><td class="cat">STAŁE</td><td><div class="fin-comp"><span>– Biuro</span><span>– księgowość</span><span>– opłaty (3 mies.</span><span>– zespół 20 osób)</span></div></td><td class="num">55 350 zł</td><td class="num">45 000 zł</td></tr>
+                  <tr data-cat="ZMIENNE"><td class="cat">ZMIENNE</td><td><div class="fin-comp"><span>– Marketing performance</span><span>– obsługa inwestorska</span><span>– podróże handlowe</span></div></td><td class="num">61 500 zł</td><td class="num">50 000 zł</td></tr>
+                  <tr data-cat="WYNAGRODZENIA"><td class="cat">WYNAGRODZENIA</td><td><div class="fin-comp"><span>– Zespół 20 osób (w tym Główny programista aplikacji/mobile/v2</span><span>– 2× Developer dodatkowy</span><span>– Marketing/content dodatkowy)</span></div></td><td class="num">344 400 zł</td><td class="num">280 000 zł</td></tr>
+                  <tr data-cat="TECHNOLOGIA"><td class="cat">TECHNOLOGIA</td><td><div class="fin-comp"><span>– Infrastruktura na pełny ruch produkcyjny</span><span>– monitoring</span><span>– skalowanie</span></div></td><td class="num">49 200 zł</td><td class="num">40 000 zł</td></tr>
+                  <tr data-cat="INNE"><td class="cat">INNE</td><td><div class="fin-comp"><span>– Rezerwa</span></div></td><td class="num">24 600 zł</td><td class="num">20 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">608 850 zł</td><td class="num">495 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -1432,11 +1444,11 @@
                 <table class="fin-table">
                   <thead><tr><th>Kategoria</th><th>Co wchodzi w skład</th><th class="num">Brutto</th><th class="num">Netto</th></tr></thead>
                   <tbody>
-                  <tr data-cat="SUBSKRYPCJE UŻYTKOWNIKÓW"><td class="cat">SUBSKRYPCJE UŻYTKOWNIKÓW</td><td>200 kont subskrypcyjnych w ramach rampy startowej (niepełny kwartał)</td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
-                  <tr data-cat="OBSŁUGA KSIĘGOWA"><td class="cat">OBSŁUGA KSIĘGOWA</td><td>70 klientów księgowości, ramp-up w trakcie kwartału</td><td class="num">43 050 zł</td><td class="num">35 000 zł</td></tr>
-                  <tr data-cat="OBLIGACJE KORPORACYJNE (EMISJA)"><td class="cat">OBLIGACJE KORPORACYJNE (EMISJA)</td><td>Pierwsza transza sprzedanych obligacji — cel 350 000 zł</td><td class="num">430 500 zł</td><td class="num">350 000 zł</td></tr>
-                  <tr data-cat="MARKETPLACE PARTNERÓW"><td class="cat">MARKETPLACE PARTNERÓW</td><td>Leady i prowizje od 20–30 partnerów</td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
-                  <tr data-cat="PIERWSZE PROJEKTY REKRUTACYJNE"><td class="cat">PIERWSZE PROJEKTY REKRUTACYJNE</td><td>5–15 pierwszych realnych rekrutacji projektowych</td><td class="num">12 300 zł</td><td class="num">10 000 zł</td></tr>
+                  <tr data-cat="SUBSKRYPCJE UŻYTKOWNIKÓW"><td class="cat">SUBSKRYPCJE UŻYTKOWNIKÓW</td><td><div class="fin-comp"><span>– 200 kont subskrypcyjnych w ramach rampy startowej (niepełny kwartał)</span></div></td><td class="num">36 900 zł</td><td class="num">30 000 zł</td></tr>
+                  <tr data-cat="OBSŁUGA KSIĘGOWA"><td class="cat">OBSŁUGA KSIĘGOWA</td><td><div class="fin-comp"><span>– 70 klientów księgowości</span><span>– ramp-up w trakcie kwartału</span></div></td><td class="num">43 050 zł</td><td class="num">35 000 zł</td></tr>
+                  <tr data-cat="OBLIGACJE KORPORACYJNE (EMISJA)"><td class="cat">OBLIGACJE KORPORACYJNE (EMISJA)</td><td><div class="fin-comp"><span>– Pierwsza transza sprzedanych obligacji — cel 350 000 zł</span></div></td><td class="num">430 500 zł</td><td class="num">350 000 zł</td></tr>
+                  <tr data-cat="MARKETPLACE PARTNERÓW"><td class="cat">MARKETPLACE PARTNERÓW</td><td><div class="fin-comp"><span>– Leady i prowizje od 20–30 partnerów</span></div></td><td class="num">18 450 zł</td><td class="num">15 000 zł</td></tr>
+                  <tr data-cat="PIERWSZE PROJEKTY REKRUTACYJNE"><td class="cat">PIERWSZE PROJEKTY REKRUTACYJNE</td><td><div class="fin-comp"><span>– 5–15 pierwszych realnych rekrutacji projektowych</span></div></td><td class="num">12 300 zł</td><td class="num">10 000 zł</td></tr>
                     <tr class="total"><td colspan="2">SUMA</td><td class="num">541 200 zł</td><td class="num">440 000 zł</td></tr>
                   </tbody>
                 </table>
@@ -1548,38 +1560,38 @@
 
 <main class="page-view" id="organization">
   <div class="wrap org-view">
-    <h2 style="margin-bottom:20px;">ORGANIZACJA ZESPOŁU</h2>
-    <p style="margin-bottom:24px; color:#c4ced8;">Struktura sztabowo-liniowa zespołu GO ON [OFF] SHORE na poszczególnych etapach rozwoju. Wybierz etap, aby zobaczyć stanowiska (nowe osoby podświetlone na żółto) — ALL pokazuje wszystkich, kolorowanych według etapu z Road Mapy, w którym dana osoba została zrekrutowana.</p>
-
-    <div class="org-filters" id="org-stage-filters">
-      <button class="org-filter-btn" data-org-stage="all">ALL (wszyscy)</button>
-      <button class="org-filter-btn" data-org-stage="i">I — MVP (v1.1-v1.4)</button>
-      <button class="org-filter-btn" data-org-stage="ii">II — v1.5-v1.9</button>
-      <button class="org-filter-btn" data-org-stage="iii">III — v2.0-v2.9</button>
-      <button class="org-filter-btn" data-org-stage="iv">IV — v3.0-v3.9</button>
-      <button class="org-filter-btn" data-org-stage="v">V — v4.0-v4.9</button>
+    <h2 style="margin:0 0 8px; padding:0 30px;">STRUKTURA ORGANIZACYJNA</h2>
+    <p style="margin:0 0 6px; padding:0 30px; color:#c4ced8;">Schemat organizacyjny GO ON [OFF] SHORE. Kliknij dowolne okienko, aby zobaczyć szczegóły danej roli lub działu. Dane o stanowiskach pochodzą z Road Mapy.</p>
+    <div class="oc-scroll">
+      <section class="oc-chart">
+        <div class="oc-line h oc-line-board-investors"></div>
+        <div class="oc-line v oc-line-board-ceo"></div>
+        <div class="oc-line v oc-line-ceo-down"></div>
+        <div class="oc-line h oc-line-departments-main"></div>
+        <div class="oc-line v oc-line-to-it"></div>
+        <div class="oc-line v oc-line-to-rd"></div>
+        <div class="oc-line v oc-line-to-sales"></div>
+        <div class="oc-line v oc-line-to-marketing"></div>
+        <div class="oc-line v oc-line-to-bok"></div>
+        <div class="oc-line v oc-line-to-hr"></div>
+        <div class="oc-line v oc-line-to-finance"></div>
+        <button class="oc-box oc-board" data-title="Zarząd" data-text="Najwyższy poziom decyzyjny. Odpowiada za nadzór strategiczny, kierunek rozwoju, decyzje właścicielskie oraz kontrolę realizacji głównych celów projektu. Rola startowa: Founder / Product Owner.">Zarząd</button>
+        <button class="oc-box oc-investors" data-title="Inwestorzy" data-text="Osoby lub podmioty finansujące rozwój projektu (runda MVP1, obligacje korporacyjne, granty). Wspierają spółkę kapitałowo, strategicznie oraz relacyjnie.">Inwestorzy</button>
+        <button class="oc-box oc-ceo" data-title="CEO" data-text="Osoba odpowiedzialna za zarządzanie operacyjne, realizację strategii z Road Mapy, koordynację działów oraz raportowanie do Zarządu i Inwestorów.">CEO</button>
+        <button class="oc-box small oc-it" data-title="IT" data-text="Dział technologii: architektura systemu, programowanie, wdrożenia, bezpieczeństwo i utrzymanie aplikacji. Role z Road Mapy: Lead Developer / CTO (fractional), Developer #1 i #2, Główny programista, Główny programista aplikacji / mobile / v2 oraz Developerzy dodatkowi.">IT</button>
+        <button class="oc-box small oc-rd" data-title="R&amp;D" data-text="Dział badań i rozwoju: research rynku i zawodów, analiza danych, projektowanie UX/UI oraz budowa bazy zawodów, firm i partnerów. Role z Road Mapy: Researcher oraz UI/UX Designer.">R&amp;D</button>
+        <button class="oc-box small oc-sales" data-title="SPRZEDAŻ" data-text="Dział handlowy: pozyskiwanie klientów, rozmowy handlowe, partnerstwa B2B oraz komercjalizacja usług platformy (subskrypcje, księgowość, obligacje). Role z Road Mapy: Sprzedaż / KAM, Handlowiec #1 i #2.">SPRZEDAŻ</button>
+        <button class="oc-box small oc-marketing" data-title="MARKETING" data-text="Dział marketingu: komunikacja marki, content, kampanie, materiały inwestorskie i sprzedażowe oraz generowanie leadów. Role z Road Mapy: Marketing / Content oraz Marketing / content dodatkowy.">MARKETING</button>
+        <button class="oc-box small oc-bok" data-title="BOK" data-text="Biuro Obsługi Klienta: wsparcie użytkowników, firm i partnerów oraz bieżąca komunikacja operacyjna. Role z Road Mapy: BOK oraz BOK dodatkowy.">BOK</button>
+        <button class="oc-box small oc-hr two-lines" data-title="HR &amp; Administracja" data-text="Dział odpowiedzialny za rekrutację, onboarding, dokumentację pracowniczą, administrację wewnętrzną, procedury, organizację pracy oraz obsługę grantów. Rola z Road Mapy: Administracja / granty.">HR &amp;<br />ADMINISTRACJA</button>
+        <button class="oc-box small oc-finance" data-title="FINANSE" data-text="Dział finansów: budżet, controlling, księgowość, rozliczenia, prognozy oraz raportowanie kosztów i przychodów (KOSZTY / PRZYCHODY z Road Mapy). Role z Road Mapy: Główna księgowa oraz Księgowa pomocnicza.">FINANSE</button>
+      </section>
     </div>
-
-    <div class="org-q-filters" id="org-q-filters" style="display:none;">
-      <span style="color:#97a4b2; font-size:11px; align-self:center; margin-right:8px;">Wybierz Q:</span>
-      <button class="org-q-filter-btn active" data-org-q="">wszystkie</button>
-      <button class="org-q-filter-btn" data-org-q="Q3 2026">Q3 2026</button>
-      <button class="org-q-filter-btn" data-org-q="Q4 2026">Q4 2026</button>
-      <button class="org-q-filter-btn" data-org-q="Q1 2027">Q1 2027</button>
-      <button class="org-q-filter-btn" data-org-q="Q2 2027">Q2 2027</button>
-      <button class="org-q-filter-btn" data-org-q="Q3 2027">Q3 2027</button>
-      <button class="org-q-filter-btn" data-org-q="Q4 2027">Q4 2027</button>
-      <button class="org-q-filter-btn" data-org-q="Q1 2028">Q1 2028</button>
-      <button class="org-q-filter-btn" data-org-q="Q2 2028">Q2 2028</button>
-      <button class="org-q-filter-btn" data-org-q="Q3 2028">Q3 2028</button>
-      <button class="org-q-filter-btn" data-org-q="Q4 2028">Q4 2028</button>
-      <button class="org-q-filter-btn" data-org-q="Q1 2029">Q1 2029</button>
-      <button class="org-q-filter-btn" data-org-q="Q2 2029">Q2 2029</button>
-    </div>
-
-    <div class="org-chart" id="org-chart">
-      <!-- Organization chart will be rendered here by JavaScript -->
-    </div>
+    <section class="oc-details" id="ocDetails">
+      <h2 class="oc-details-title" id="ocDetailsTitle">Tytuł</h2>
+      <p class="oc-details-text" id="ocDetailsText">Opis</p>
+      <button class="oc-close" id="ocClose">Zamknij</button>
+    </section>
   </div>
 </main>
 
@@ -1799,179 +1811,24 @@
 
   showRoadmapStage('mvp1');
 
-  // Organization chart data — pochodzi bezpośrednio z Road Mapy (nowe stanowiska per kwartał)
-  const orgData = {
-    'Q3 2026': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Founder / Product Owner', 'Lead Developer / CTO (fractional)', 'Developer #1', 'Developer #2', 'UI/UX Designer', 'Researcher']},
-    'Q4 2026': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Sprzedaż / KAM', 'Marketing / Content']},
-    'Q1 2027': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Główna księgowa', 'Główny programista', 'BOK']},
-    'Q2 2027': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Księgowa pomocnicza', 'Handlowiec #1', 'Handlowiec #2', 'BOK dodatkowy', 'Administracja / granty']},
-    'Q3 2027': {stage: 'ii', roadmapStage: 'stage-two', newRoles: ['Główny programista aplikacji / mobile / v2', 'Developer dodatkowy #1', 'Developer dodatkowy #2', 'Marketing / content dodatkowy']},
-    'Q4 2027': {stage: 'ii', roadmapStage: 'stage-two', newRoles: []},
-    'Q1 2028': {stage: 'iii', roadmapStage: 'stage-three', newRoles: []},
-    'Q2 2028': {stage: 'iii', roadmapStage: 'stage-three', newRoles: []},
-    'Q3 2028': {stage: 'iv', roadmapStage: 'stage-four', newRoles: []},
-    'Q4 2028': {stage: 'iv', roadmapStage: 'stage-four', newRoles: []},
-    'Q1 2029': {stage: 'v', roadmapStage: 'stage-five', newRoles: []},
-    'Q2 2029': {stage: 'v', roadmapStage: 'stage-five', newRoles: []}
-  };
-
-  // Przypisanie stanowisk do działów (struktura sztabowo-liniowa)
-  const roleDept = {
-    'Founder / Product Owner': 'Zarząd',
-    'Lead Developer / CTO (fractional)': 'Produkt & Technologia',
-    'Developer #1': 'Produkt & Technologia',
-    'Developer #2': 'Produkt & Technologia',
-    'UI/UX Designer': 'Produkt & Technologia',
-    'Researcher': 'Produkt & Technologia',
-    'Sprzedaż / KAM': 'Sprzedaż & Klient',
-    'Marketing / Content': 'Marketing',
-    'Główna księgowa': 'Księgowość',
-    'Główny programista': 'Produkt & Technologia',
-    'BOK': 'Sprzedaż & Klient',
-    'Księgowa pomocnicza': 'Księgowość',
-    'Handlowiec #1': 'Sprzedaż & Klient',
-    'Handlowiec #2': 'Sprzedaż & Klient',
-    'BOK dodatkowy': 'Sprzedaż & Klient',
-    'Administracja / granty': 'Administracja',
-    'Główny programista aplikacji / mobile / v2': 'Produkt & Technologia',
-    'Developer dodatkowy #1': 'Produkt & Technologia',
-    'Developer dodatkowy #2': 'Produkt & Technologia',
-    'Marketing / content dodatkowy': 'Marketing'
-  };
-  const deptOrder = ['Zarząd', 'Produkt & Technologia', 'Sprzedaż & Klient', 'Księgowość', 'Marketing', 'Administracja'];
-
-  const stageMap = {all: ['i', 'ii', 'iii', 'iv', 'v'], i: ['i'], ii: ['ii'], iii: ['iii'], iv: ['iv'], v: ['v']};
-  const stageLabels = {i: 'I — MVP (v1.1-v1.4)', ii: 'II — v1.5-v1.9', iii: 'III — v2.0-v2.9', iv: 'IV — v3.0-v3.9', v: 'V — v4.0-v4.9'};
-  const allQuarters = Object.keys(orgData);
-  let currentOrgStage = null;
-  let selectedQuarters = new Set();
-
-  function rolesByQuarters(quarters) {
-    const roles = new Set();
-    quarters.forEach(q => orgData[q].newRoles.forEach(r => roles.add(r)));
-    return roles;
-  }
-
-  function renderDeptGrid() {
-    const chart = document.getElementById('org-chart');
-    chart.innerHTML = '<div class="org-dept-grid">' +
-      deptOrder.map(d => `<div class="org-dept-card"><div class="dept-name">${d}</div></div>`).join('') +
-      '</div><p class="org-hint">Kliknij etap powyżej, aby zobaczyć stanowiska w każdym dziale.</p>';
-  }
-
-  function renderOrgChart() {
-    const chart = document.getElementById('org-chart');
-    chart.innerHTML = '';
-
-    if (currentOrgStage === null) {
-      renderDeptGrid();
-      return;
-    }
-
-    if (currentOrgStage === 'all') {
-      // ALL: wszystkie stanowiska, kolorowane według etapu Road Mapy, w którym dana osoba została zrekrutowana
-      const roleStage = {};
-      allQuarters.forEach(q => {
-        orgData[q].newRoles.forEach(r => { if (!(r in roleStage)) roleStage[r] = orgData[q].roadmapStage; });
+  // Organizacja — interaktywny schemat organizacyjny
+  (function initOrgChart(){
+    const ocBoxes = document.querySelectorAll('#organization .oc-box');
+    const ocPanel = document.getElementById('ocDetails');
+    if (!ocBoxes.length || !ocPanel) return;
+    const ocTitle = document.getElementById('ocDetailsTitle');
+    const ocText = document.getElementById('ocDetailsText');
+    const ocClose = document.getElementById('ocClose');
+    ocBoxes.forEach(box => {
+      box.addEventListener('click', () => {
+        ocTitle.textContent = box.dataset.title;
+        ocText.textContent = box.dataset.text;
+        ocPanel.classList.add('active');
+        ocPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
       });
-      deptOrder.forEach(dept => {
-        const roles = Object.keys(roleStage).filter(r => roleDept[r] === dept);
-        if (!roles.length) return;
-        const level = document.createElement('div');
-        level.className = 'org-level';
-        level.innerHTML = `<div class="org-level-title">${dept}</div><div class="org-positions" id="dept-${dept}"></div>`;
-        const posDiv = level.querySelector('.org-positions');
-        roles.forEach(role => {
-          const pos = document.createElement('div');
-          pos.className = 'org-position ' + roleStage[role];
-          pos.innerHTML = `<div class="pos-title">${role}</div>`;
-          posDiv.appendChild(pos);
-        });
-        chart.appendChild(level);
-      });
-      return;
-    }
-
-    // Konkretny etap (i / ii / iii / iv / v): nowe stanowiska (żółto) vs istniejące (bez podświetlenia)
-    const relevantStages = stageMap[currentOrgStage];
-    const stageQuarters = allQuarters.filter(q => relevantStages.includes(orgData[q].stage));
-    const earlierQuarters = allQuarters.filter(q => allQuarters.indexOf(q) < allQuarters.indexOf(stageQuarters[0]));
-
-    const activeQuarters = selectedQuarters.size ? stageQuarters.filter(q => selectedQuarters.has(q)) : stageQuarters;
-
-    if (!activeQuarters.length) {
-      chart.innerHTML = '<p style="color:#97a4b2; text-align:center; padding:40px 0;">Brak danych dla wybranego okresu.</p>';
-      return;
-    }
-
-    const existingRoles = rolesByQuarters(earlierQuarters);
-    const newRoles = rolesByQuarters(activeQuarters);
-
-    deptOrder.forEach(dept => {
-      const deptExisting = Array.from(existingRoles).filter(r => roleDept[r] === dept);
-      const deptNew = Array.from(newRoles).filter(r => roleDept[r] === dept);
-      if (!deptExisting.length && !deptNew.length) return;
-
-      const level = document.createElement('div');
-      level.className = 'org-level';
-      level.innerHTML = `<div class="org-level-title">${dept}</div><div class="org-positions" id="dept-${dept}"></div>`;
-      const posDiv = level.querySelector('.org-positions');
-
-      deptExisting.forEach(role => {
-        const pos = document.createElement('div');
-        pos.className = 'org-position existing';
-        pos.innerHTML = `<div class="pos-title">${role}</div>`;
-        posDiv.appendChild(pos);
-      });
-      deptNew.forEach(role => {
-        const pos = document.createElement('div');
-        pos.className = 'org-position new';
-        pos.innerHTML = `<div class="pos-title">${role}</div>`;
-        posDiv.appendChild(pos);
-      });
-
-      chart.appendChild(level);
     });
-  }
-
-  const orgStageFilters = document.querySelectorAll('#org-stage-filters .org-filter-btn');
-  const orgQFilters = document.querySelectorAll('#org-q-filters .org-q-filter-btn');
-  const orgQFiltersDiv = document.getElementById('org-q-filters');
-
-  function syncOrgQButtons() {
-    orgQFilters.forEach(b => {
-      const q = b.dataset.orgQ;
-      b.classList.toggle('active', q === '' ? selectedQuarters.size === 0 : selectedQuarters.has(q));
-    });
-  }
-
-  orgStageFilters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentOrgStage = btn.dataset.orgStage;
-      orgStageFilters.forEach(b => b.classList.toggle('active', b === btn));
-      orgQFiltersDiv.style.display = currentOrgStage === 'all' ? 'none' : 'flex';
-      selectedQuarters = new Set();
-      syncOrgQButtons();
-      renderOrgChart();
-    });
-  });
-
-  orgQFilters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const q = btn.dataset.orgQ;
-      if (q === '') {
-        selectedQuarters = new Set();
-      } else if (selectedQuarters.has(q)) {
-        selectedQuarters.delete(q);
-      } else {
-        selectedQuarters.add(q);
-      }
-      syncOrgQButtons();
-      renderOrgChart();
-    });
-  });
-
-  renderOrgChart();
+    ocClose.addEventListener('click', () => ocPanel.classList.remove('active'));
+  })();
 
   document.addEventListener('keydown', event => {
     if (!document.getElementById('presentation').classList.contains('active')) return;
