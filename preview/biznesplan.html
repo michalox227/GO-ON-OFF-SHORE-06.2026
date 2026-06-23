@@ -253,15 +253,18 @@
   .team-legend .number.before{color:#FBBF24}
   .team-legend .number.current{color:#2DD4BF}
   .team-legend .unit{font-size:13px; color:#fff}
-  .org-view{min-height:calc(100vh - 72px); max-width:1600px; margin:0 auto; padding:30px 28px 110px}
+  .org-view{min-height:calc(100vh - 72px); max-width:1600px; margin:0 auto; padding:24px 28px 50px}
   .org-filter-rows{display:flex; flex-direction:column; gap:8px; margin:0 0 22px}
   .org-filter-row{display:flex; align-items:center; flex-wrap:nowrap; overflow-x:auto; gap:6px; padding-bottom:6px}
   .org-filter-divider{flex:0 0 auto; width:1px; height:22px; background:rgba(255,255,255,.18); margin:0 4px}
   .org-all-btn{flex:0 0 auto; border:2px solid #fff; border-radius:999px; background:#000; color:#fff; padding:9px 22px; font-family:var(--display); font-weight:900; letter-spacing:.1em; font-size:12px; cursor:pointer; transition:.18s ease; white-space:nowrap}
   .org-all-btn:hover{background:rgba(255,255,255,.18)}
   .org-all-btn.active{background:#fff; color:#000}
-  .org-filter-status{text-align:center; color:var(--muted); font-size:12px; margin:-4px 0 20px}
+  .org-filter-status{text-align:center; color:var(--muted); font-size:12px; margin:-4px 0 10px}
   .org-filter-status b{color:#fff}
+  .org-team-scope{display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:center; max-width:1200px; margin:0 auto 12px; font-size:11px; color:#d4dde6}
+  .org-team-scope-dept b{color:#2DD4BF; margin-right:4px}
+  .org-team-scope-empty{color:var(--muted)}
   .org-filter-btn{flex:0 0 auto; display:flex; align-items:center; gap:7px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.04); color:#fff; padding:8px 12px; border-radius:10px; font-size:11px; font-weight:700; text-align:left; cursor:pointer; transition:.18s ease; font-family:inherit; white-space:nowrap}
   .org-filter-btn:hover{background:rgba(255,255,255,.11)}
   .org-filter-btn.active{background:rgba(255,255,255,.20); box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
@@ -270,8 +273,9 @@
   .org-q-btn .org-tag{width:12px; height:12px; min-width:12px; border-radius:50%; padding:0}
   .org-year-btn{justify-content:center; text-align:center}
   .oc-box.inactive{opacity:.32; filter:grayscale(.7); box-shadow:none}
-  .oc-scroll{overflow-x:auto; padding:10px 30px 24px}
-  .oc-chart{position:relative; width:1420px; height:560px; margin:20px auto}
+  .oc-scroll{overflow-x:auto; padding:0 30px 14px}
+  .oc-chart-wrap{width:880px; height:347px; margin:0 auto; overflow:hidden}
+  .oc-chart{position:relative; width:1420px; height:560px; margin:0; transform:scale(.62); transform-origin:top left}
   .oc-box{position:absolute; min-width:180px; min-height:84px; padding:14px 20px; border:2px solid #fff; border-radius:8px; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; font-size:20px; font-weight:800; letter-spacing:.5px; cursor:pointer; user-select:none; transition:.2s ease; z-index:3}
   .oc-box:hover{background:#fff; color:#000; transform:translateY(-4px); box-shadow:0 0 22px rgba(255,255,255,.35)}
   .oc-box:active{transform:translateY(-1px)}
@@ -1679,7 +1683,9 @@
     <h2 style="margin:0 0 8px;">STRUKTURA ORGANIZACYJNA</h2>
     <p style="margin:0 0 6px; color:#c4ced8;">Schemat organizacyjny GO ON [OFF] SHORE. Kliknij dowolne okienko, aby zobaczyć szczegóły danej roli lub działu. Dane o stanowiskach pochodzą z Road Mapy.</p>
     <p class="org-filter-status" id="orgFilterStatus">Widok: <b>cała struktura</b></p>
+    <div class="org-team-scope" id="orgTeamScope"></div>
       <div class="oc-scroll">
+      <div class="oc-chart-wrap">
       <section class="oc-chart">
         <div class="oc-line h oc-line-board-investors"></div>
         <div class="oc-line v oc-line-board-ceo"></div>
@@ -1703,6 +1709,7 @@
         <button class="oc-box small oc-hr two-lines" data-title="HR &amp; Administracja" data-roles="Administracja / granty@Q2 2027" data-text="Dział odpowiedzialny za rekrutację, onboarding, dokumentację pracowniczą, administrację wewnętrzną, procedury, organizację pracy oraz obsługę grantów. Rola z Road Mapy: Administracja / granty.">HR &amp;<br />ADMINISTRACJA</button>
         <button class="oc-box small oc-finance" data-title="FINANSE" data-roles="Główna księgowa@Q1 2027;Księgowa pomocnicza@Q2 2027" data-text="Dział finansów: budżet, controlling, księgowość, rozliczenia, prognozy oraz raportowanie kosztów i przychodów (KOSZTY / PRZYCHODY z Road Mapy). Role z Road Mapy: Główna księgowa oraz Księgowa pomocnicza.">FINANSE</button>
       </section>
+      </div>
       </div>
     <section class="oc-details" id="ocDetails">
       <h2 class="oc-details-title" id="ocDetailsTitle">Tytuł</h2>
@@ -2039,6 +2046,7 @@
     const ocText = document.getElementById('ocDetailsText');
     const ocClose = document.getElementById('ocClose');
     const statusEl = document.getElementById('orgFilterStatus');
+    const teamScopeEl = document.getElementById('orgTeamScope');
     const allBtn = document.querySelector('.org-all-btn');
     const stageBtns = Array.from(document.querySelectorAll('.org-stage-btn'));
     const qBtns = Array.from(document.querySelectorAll('.org-q-btn'));
@@ -2099,6 +2107,19 @@
         const openBox = Array.from(ocBoxes).find(b => b.dataset.title === ocPanel.dataset.openBox);
         if (openBox) showDetails(openBox);
       }
+
+      renderTeamScope();
+    }
+
+    function renderTeamScope() {
+      const parts = [];
+      ocBoxes.forEach(box => {
+        const activeRoles = (box.dataset.activeRoles || '').split('; ').filter(Boolean);
+        if (activeRoles.length) {
+          parts.push('<span class="org-team-scope-dept"><b>' + box.dataset.title + ':</b> ' + activeRoles.join(', ') + '</span>');
+        }
+      });
+      teamScopeEl.innerHTML = parts.length ? parts.join('') : '<span class="org-team-scope-empty">Brak obsadzonych ról w wybranym widoku.</span>';
     }
 
     function showDetails(box) {
