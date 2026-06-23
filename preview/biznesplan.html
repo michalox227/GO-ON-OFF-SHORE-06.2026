@@ -274,6 +274,16 @@
   .org-position .pos-title{color:var(--text); font-weight:700; font-size:12px}
   .org-position .pos-name{color:var(--teal); font-size:11px; font-family:var(--display)}
   .org-position .pos-q{color:var(--muted); font-size:10px}
+  .org-position.existing{background:rgba(255,255,255,.04); border-color:var(--line)}
+  .org-position.existing .pos-title{color:var(--text)}
+  .org-position.new{background:rgba(212,168,92,.16); border-color:rgba(212,168,92,.55)}
+  .org-position.new .pos-title{color:var(--gold)}
+  .org-position.stage-mvp1,.org-position.stage-two,.org-position.stage-three,.org-position.stage-four,.org-position.stage-five{background:rgba(var(--stage-rgb),.14); border-color:rgba(var(--stage-rgb),.45)}
+  .org-position.stage-mvp1 .pos-title,.org-position.stage-two .pos-title,.org-position.stage-three .pos-title,.org-position.stage-four .pos-title,.org-position.stage-five .pos-title{color:var(--stage)}
+  .org-dept-grid{display:flex; flex-wrap:wrap; gap:14px; padding:10px 0}
+  .org-dept-card{flex:0 1 calc(33.333% - 10px); background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:10px; padding:18px 14px; text-align:center}
+  .org-dept-card .dept-name{font-family:var(--display); font-size:12px; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:.04em}
+  .org-hint{color:var(--muted); font-size:11px; text-align:center; padding:8px 0 0}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
@@ -1321,10 +1331,10 @@
 <main class="page-view" id="organization">
   <div class="wrap org-view">
     <h2 style="margin-bottom:20px;">ORGANIZACJA ZESPOŁU</h2>
-    <p style="margin-bottom:24px; color:#c4ced8;">Struktura sztabowo-liniowa zespołu GO ON [OFF] SHORE na poszczególnych etapach rozwoju. Wybierz etap (ALL pokazuje wszystkich członków od początku do końca) i opcjonalnie konkretny kwartał.</p>
+    <p style="margin-bottom:24px; color:#c4ced8;">Struktura sztabowo-liniowa zespołu GO ON [OFF] SHORE na poszczególnych etapach rozwoju. Wybierz etap, aby zobaczyć stanowiska (nowe osoby podświetlone na żółto) — ALL pokazuje wszystkich, kolorowanych według etapu z Road Mapy, w którym dana osoba została zrekrutowana.</p>
 
     <div class="org-filters" id="org-stage-filters">
-      <button class="org-filter-btn active" data-org-stage="all">ALL (wszyscy)</button>
+      <button class="org-filter-btn" data-org-stage="all">ALL (wszyscy)</button>
       <button class="org-filter-btn" data-org-stage="i">I — MVP (v1.1-v1.4)</button>
       <button class="org-filter-btn" data-org-stage="ii">II — v1.5-v1.9</button>
       <button class="org-filter-btn" data-org-stage="iii">III — v2.0-v2.9</button>
@@ -1435,80 +1445,138 @@
     });
   });
 
-  // Organization chart data
+  // Organization chart data — pochodzi bezpośrednio z Road Mapy (nowe stanowiska per kwartał)
   const orgData = {
-    'Q3 2026': {stage: 'i', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer']},
-    'Q4 2026': {stage: 'i', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.']},
-    'Q1 2027': {stage: 'i', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q2 2027': {stage: 'ii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q3 2027': {stage: 'ii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q4 2027': {stage: 'ii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q1 2028': {stage: 'iii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q2 2028': {stage: 'iii', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q3 2028': {stage: 'iv', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q4 2028': {stage: 'iv', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q1 2029': {stage: 'v', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']},
-    'Q2 2029': {stage: 'v', people: ['Founder / CEO', 'Lead Developer', 'Junior Dev #1', 'Junior Dev #2', 'Data Manager', 'UI/UX Designer', 'AI Developer', 'Key Account Mgr', 'Marketing Spec.', 'Ambasadorzy (250)']}
+    'Q3 2026': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Founder / Product Owner', 'Lead Developer / CTO (fractional)', 'Developer #1', 'Developer #2', 'UI/UX Designer', 'Researcher']},
+    'Q4 2026': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Sprzedaż / KAM', 'Marketing / Content']},
+    'Q1 2027': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Główna księgowa', 'Główny programista', 'BOK']},
+    'Q2 2027': {stage: 'i', roadmapStage: 'stage-mvp1', newRoles: ['Księgowa pomocnicza', 'Handlowiec #1', 'Handlowiec #2', 'BOK dodatkowy', 'Administracja / granty']},
+    'Q3 2027': {stage: 'ii', roadmapStage: 'stage-two', newRoles: ['Główny programista aplikacji / mobile / v2', 'Developer dodatkowy #1', 'Developer dodatkowy #2', 'Marketing / content dodatkowy']},
+    'Q4 2027': {stage: 'ii', roadmapStage: 'stage-two', newRoles: []},
+    'Q1 2028': {stage: 'iii', roadmapStage: 'stage-three', newRoles: []},
+    'Q2 2028': {stage: 'iii', roadmapStage: 'stage-three', newRoles: []},
+    'Q3 2028': {stage: 'iv', roadmapStage: 'stage-four', newRoles: []},
+    'Q4 2028': {stage: 'iv', roadmapStage: 'stage-four', newRoles: []},
+    'Q1 2029': {stage: 'v', roadmapStage: 'stage-five', newRoles: []},
+    'Q2 2029': {stage: 'v', roadmapStage: 'stage-five', newRoles: []}
   };
 
+  // Przypisanie stanowisk do działów (struktura sztabowo-liniowa)
+  const roleDept = {
+    'Founder / Product Owner': 'Zarząd',
+    'Lead Developer / CTO (fractional)': 'Produkt & Technologia',
+    'Developer #1': 'Produkt & Technologia',
+    'Developer #2': 'Produkt & Technologia',
+    'UI/UX Designer': 'Produkt & Technologia',
+    'Researcher': 'Produkt & Technologia',
+    'Sprzedaż / KAM': 'Sprzedaż & Klient',
+    'Marketing / Content': 'Marketing',
+    'Główna księgowa': 'Księgowość',
+    'Główny programista': 'Produkt & Technologia',
+    'BOK': 'Sprzedaż & Klient',
+    'Księgowa pomocnicza': 'Księgowość',
+    'Handlowiec #1': 'Sprzedaż & Klient',
+    'Handlowiec #2': 'Sprzedaż & Klient',
+    'BOK dodatkowy': 'Sprzedaż & Klient',
+    'Administracja / granty': 'Administracja',
+    'Główny programista aplikacji / mobile / v2': 'Produkt & Technologia',
+    'Developer dodatkowy #1': 'Produkt & Technologia',
+    'Developer dodatkowy #2': 'Produkt & Technologia',
+    'Marketing / content dodatkowy': 'Marketing'
+  };
+  const deptOrder = ['Zarząd', 'Produkt & Technologia', 'Sprzedaż & Klient', 'Księgowość', 'Marketing', 'Administracja'];
+
   const stageMap = {all: ['i', 'ii', 'iii', 'iv', 'v'], i: ['i'], ii: ['ii'], iii: ['iii'], iv: ['iv'], v: ['v']};
+  const stageLabels = {i: 'I — MVP (v1.1-v1.4)', ii: 'II — v1.5-v1.9', iii: 'III — v2.0-v2.9', iv: 'IV — v3.0-v3.9', v: 'V — v4.0-v4.9'};
   const allQuarters = Object.keys(orgData);
-  let currentOrgStage = 'all';
+  let currentOrgStage = null;
   let selectedQuarters = new Set();
+
+  function rolesByQuarters(quarters) {
+    const roles = new Set();
+    quarters.forEach(q => orgData[q].newRoles.forEach(r => roles.add(r)));
+    return roles;
+  }
+
+  function renderDeptGrid() {
+    const chart = document.getElementById('org-chart');
+    chart.innerHTML = '<div class="org-dept-grid">' +
+      deptOrder.map(d => `<div class="org-dept-card"><div class="dept-name">${d}</div></div>`).join('') +
+      '</div><p class="org-hint">Kliknij etap powyżej, aby zobaczyć stanowiska w każdym dziale.</p>';
+  }
 
   function renderOrgChart() {
     const chart = document.getElementById('org-chart');
     chart.innerHTML = '';
 
-    const relevantStages = stageMap[currentOrgStage];
-    const relevantQuarters = selectedQuarters.size
-      ? allQuarters.filter(q => selectedQuarters.has(q))
-      : allQuarters.filter(q => relevantStages.includes(orgData[q].stage));
+    if (currentOrgStage === null) {
+      renderDeptGrid();
+      return;
+    }
 
-    if (relevantQuarters.length === 0) {
+    if (currentOrgStage === 'all') {
+      // ALL: wszystkie stanowiska, kolorowane według etapu Road Mapy, w którym dana osoba została zrekrutowana
+      const roleStage = {};
+      allQuarters.forEach(q => {
+        orgData[q].newRoles.forEach(r => { if (!(r in roleStage)) roleStage[r] = orgData[q].roadmapStage; });
+      });
+      deptOrder.forEach(dept => {
+        const roles = Object.keys(roleStage).filter(r => roleDept[r] === dept);
+        if (!roles.length) return;
+        const level = document.createElement('div');
+        level.className = 'org-level';
+        level.innerHTML = `<div class="org-level-title">${dept}</div><div class="org-positions" id="dept-${dept}"></div>`;
+        const posDiv = level.querySelector('.org-positions');
+        roles.forEach(role => {
+          const pos = document.createElement('div');
+          pos.className = 'org-position ' + roleStage[role];
+          pos.innerHTML = `<div class="pos-title">${role}</div>`;
+          posDiv.appendChild(pos);
+        });
+        chart.appendChild(level);
+      });
+      return;
+    }
+
+    // Konkretny etap (i / ii / iii / iv / v): nowe stanowiska (żółto) vs istniejące (bez podświetlenia)
+    const relevantStages = stageMap[currentOrgStage];
+    const stageQuarters = allQuarters.filter(q => relevantStages.includes(orgData[q].stage));
+    const earlierQuarters = allQuarters.filter(q => allQuarters.indexOf(q) < allQuarters.indexOf(stageQuarters[0]));
+
+    const activeQuarters = selectedQuarters.size ? stageQuarters.filter(q => selectedQuarters.has(q)) : stageQuarters;
+
+    if (!activeQuarters.length) {
       chart.innerHTML = '<p style="color:#97a4b2; text-align:center; padding:40px 0;">Brak danych dla wybranego okresu.</p>';
       return;
     }
 
-    const uniquePeople = new Set();
-    const personFirstAppearance = {};
+    const existingRoles = rolesByQuarters(earlierQuarters);
+    const newRoles = rolesByQuarters(activeQuarters);
 
-    relevantQuarters.forEach(q => {
-      orgData[q].people.forEach(p => {
-        if (!uniquePeople.has(p)) {
-          uniquePeople.add(p);
-          personFirstAppearance[p] = q;
-        }
+    deptOrder.forEach(dept => {
+      const deptExisting = Array.from(existingRoles).filter(r => roleDept[r] === dept);
+      const deptNew = Array.from(newRoles).filter(r => roleDept[r] === dept);
+      if (!deptExisting.length && !deptNew.length) return;
+
+      const level = document.createElement('div');
+      level.className = 'org-level';
+      level.innerHTML = `<div class="org-level-title">${dept}</div><div class="org-positions" id="dept-${dept}"></div>`;
+      const posDiv = level.querySelector('.org-positions');
+
+      deptExisting.forEach(role => {
+        const pos = document.createElement('div');
+        pos.className = 'org-position existing';
+        pos.innerHTML = `<div class="pos-title">${role}</div>`;
+        posDiv.appendChild(pos);
       });
-    });
-
-    const stageLabels = {i: 'I — MVP (v1.1-v1.4)', ii: 'II — v1.5-v1.9', iii: 'III — v2.0-v2.9', iv: 'IV — v3.0-v3.9', v: 'V — v4.0-v4.9'};
-    const stageLevels = {i: 'Executive', ii: 'Development', iii: 'Growth', iv: 'Scale', v: 'Mature'};
-
-    relevantStages.forEach(stage => {
-      const stageQuarters = relevantQuarters.filter(q => orgData[q].stage === stage);
-      const stageHTML = document.createElement('div');
-      stageHTML.className = 'org-level';
-
-      let titleHTML = `<div class="org-level-title">${stageLabels[stage] || stage}</div>`;
-      stageHTML.innerHTML = titleHTML + '<div class="org-positions" id="positions-' + stage + '"></div>';
-
-      const posDiv = stageHTML.querySelector('[id="positions-' + stage + '"]');
-
-      const stagePeople = new Set();
-      stageQuarters.forEach(q => {
-        orgData[q].people.forEach(p => stagePeople.add(p));
+      deptNew.forEach(role => {
+        const pos = document.createElement('div');
+        pos.className = 'org-position new';
+        pos.innerHTML = `<div class="pos-title">${role}</div>`;
+        posDiv.appendChild(pos);
       });
 
-      Array.from(stagePeople).forEach(person => {
-        const firstQ = personFirstAppearance[person];
-        const posHTML = document.createElement('div');
-        posHTML.className = 'org-position';
-        posHTML.innerHTML = `<div class="pos-title">${person}</div><div class="pos-q">od ${firstQ}</div>`;
-        posDiv.appendChild(posHTML);
-      });
-
-      chart.appendChild(stageHTML);
+      chart.appendChild(level);
     });
   }
 
@@ -1528,8 +1596,7 @@
       currentOrgStage = btn.dataset.orgStage;
       orgStageFilters.forEach(b => b.classList.toggle('active', b === btn));
       orgQFiltersDiv.style.display = currentOrgStage === 'all' ? 'none' : 'flex';
-      selectedQuarters = new Set(allQuarters.filter(q => stageMap[currentOrgStage].includes(orgData[q].stage)));
-      if (currentOrgStage === 'all') selectedQuarters = new Set();
+      selectedQuarters = new Set();
       syncOrgQButtons();
       renderOrgChart();
     });
@@ -1539,7 +1606,7 @@
     btn.addEventListener('click', () => {
       const q = btn.dataset.orgQ;
       if (q === '') {
-        selectedQuarters = new Set(allQuarters.filter(qq => stageMap[currentOrgStage].includes(orgData[qq].stage)));
+        selectedQuarters = new Set();
       } else if (selectedQuarters.has(q)) {
         selectedQuarters.delete(q);
       } else {
