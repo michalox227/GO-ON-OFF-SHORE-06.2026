@@ -282,9 +282,9 @@
   .org-hint{color:var(--muted); font-size:11px; text-align:center; padding:8px 0 0}
   .roadmap-q-card.mind-map-view > strong,
   .roadmap-q-card.mind-map-view > span,
-  .roadmap-q-card.mind-map-view > div > div:not(.team-map):not(.team-legend) {display:none}
-  .roadmap-q-card.mind-map-view > div {display:block !important}
-  .mind-map{display:flex; flex-direction:column; gap:24px; padding:20px 0}
+  .roadmap-q-card.mind-map-view .detail-block {display:none}
+  .mind-map{display:none; flex-direction:column; gap:24px; padding:20px 0}
+  .roadmap-q-card.mind-map-view .mind-map{display:flex}
   .mind-map-item{display:flex; align-items:flex-start; gap:30px}
   .mind-map-category{background:rgba(45,212,191,.16); border:1px solid rgba(45,212,191,.35); border-radius:10px; padding:14px 16px; min-width:200px; flex-shrink:0}
   .mind-map-category .cat-title{color:var(--teal); font-family:var(--display); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px; display:block}
@@ -1427,13 +1427,14 @@
     currentMindMapQuarter = quarter;
     roadmapDetails.forEach(panel => {
       const cards = Array.from(panel.querySelectorAll('.roadmap-q-card'));
+      const hasQuarter = cards.some(card => card.dataset.roadmapQ === quarter);
+      panel.classList.toggle('active', hasQuarter);
       cards.forEach(card => {
-        const cardQ = card.dataset.roadmapQ;
-        if (cardQ === quarter) {
-          panel.classList.add('active');
+        if (card.dataset.roadmapQ === quarter) {
           card.classList.add('mind-map-view');
           card.style.display = '';
         } else {
+          card.classList.remove('mind-map-view');
           card.style.display = 'none';
         }
       });
@@ -1461,29 +1462,60 @@
   roadmapTimelineButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
   roadmapQButtons.forEach(btn => btn.addEventListener('click', () => showMindMapForQuarter(btn.dataset.roadmapQ)));
   // Generuj mapy myśli dla każdej karty
+  const SKIP_HEADINGS = ['CEL ETAPU', 'EFEKT KOŃCOWY'];
   document.querySelectorAll('.roadmap-q-card').forEach(card => {
     const wrapper = card.querySelector('div[style*="margin-top: 10px"]');
     if (!wrapper) return;
-    const sections = Array.from(wrapper.children);
-    const praceSection = sections.find(s => s.textContent.includes('PRACA'));
-    if (!praceSection) return;
 
     const categories = [];
-    let currentCat = null;
-    Array.from(praceSection.children).forEach(el => {
-      if (el.tagName === 'P' && el.style.fontWeight === '600') {
-        currentCat = { name: el.textContent, tasks: [] };
-        categories.push(currentCat);
-      } else if (el.tagName === 'UL' && currentCat) {
-        currentCat.tasks = Array.from(el.querySelectorAll('li')).map(li => li.textContent);
+
+    // Otaguj bloki: sekcja zespołu (zawiera team-map) zostaje widoczna w widoku mapy,
+    // pozostałe bloki (CEL ETAPU, PRACA / nagłówki sekcji, EFEKT) chowamy w widoku mapy.
+    let teamSection = null;
+    Array.from(wrapper.children).forEach(block => {
+      if (block.querySelector('.team-map')) {
+        block.classList.add('team-section');
+        teamSection = block;
+        return;
+      }
+      block.classList.add('detail-block');
+
+      const heading = block.querySelector(':scope > strong');
+      const headingText = heading ? heading.textContent.trim().toUpperCase() : '';
+      if (SKIP_HEADINGS.some(h => headingText.includes(h))) return;
+
+      // Elementy treści są w wewnętrznym divie (margin-left:12px) lub bezpośrednio w bloku
+      const inner = block.querySelector(':scope > div') || block;
+      const titleParagraphs = Array.from(inner.children).filter(el => el.tagName === 'P' && el.style.fontWeight === '600');
+
+      if (titleParagraphs.length) {
+        // Sekcja typu PRACA: każdy <p> (font-weight 600) to osobna kategoria
+        let currentCat = null;
+        Array.from(inner.children).forEach(el => {
+          if (el.tagName === 'P' && el.style.fontWeight === '600') {
+            currentCat = { name: el.textContent.trim(), tasks: [] };
+            categories.push(currentCat);
+          } else if (el.tagName === 'UL' && currentCat) {
+            currentCat.tasks = Array.from(el.querySelectorAll('li')).map(li => li.textContent.trim());
+          }
+        });
+      } else if (heading) {
+        // Nagłówek sekcji (np. "APLIKACJA PRZED PUBLIKACJĄ") = jedna kategoria, zadania to wszystkie <li>
+        const tasks = Array.from(block.querySelectorAll('li')).map(li => li.textContent.trim());
+        if (tasks.length) categories.push({ name: heading.textContent.trim(), tasks });
       }
     });
 
-    const mindMapHTML = '<div class="mind-map" style="margin-top:20px;">' + categories.map(cat =>
-      `<div class="mind-map-item"><div class="mind-map-category"><span class="cat-title">${cat.name}</span></div><div class="mind-map-tasks">${cat.tasks.map(t => `<div class="mind-map-task">${t}</div>`).join('')}</div></div>`
-    ).join('') + '</div>';
+    if (!categories.length) return;
 
-    wrapper.insertAdjacentHTML('beforeend', mindMapHTML);
+    const mindMap = document.createElement('div');
+    mindMap.className = 'mind-map';
+    mindMap.innerHTML = categories.map(cat =>
+      `<div class="mind-map-item"><div class="mind-map-category"><span class="cat-title">${cat.name}</span></div><div class="mind-map-tasks">${cat.tasks.map(t => `<div class="mind-map-task">${t}</div>`).join('')}</div></div>`
+    ).join('');
+
+    if (teamSection) wrapper.insertBefore(mindMap, teamSection);
+    else wrapper.appendChild(mindMap);
   });
 
   showRoadmapStage('mvp1');
