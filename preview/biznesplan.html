@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>GO ON [OFF] SHORE · Biznesplan inwestycyjny v4.31</title>
+<title>GO ON [OFF] SHORE · Biznesplan inwestycyjny v4.35 (roadmap clickable Q versions)</title>
 <style>
   :root{
     --bg:#070B11; --panel:#0F1822; --line:rgba(255,255,255,.10);
@@ -189,11 +189,12 @@
   .page-view.active{display:block}
   .presentation-shell{max-width:1400px; min-height:calc(100vh - 72px); margin:0 auto; padding:34px 24px 80px; display:flex; flex-direction:column; justify-content:center}
   .presentation-top{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:18px; color:var(--muted); font-family:var(--display); font-size:12px; letter-spacing:.18em; text-transform:uppercase}
-  .slide-stage{position:relative; border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; min-height:738px; background:radial-gradient(1000px 525px at 80% 10%, rgba(45,212,191,.12), transparent 62%), linear-gradient(135deg, rgba(15,24,34,.98), rgba(8,13,20,.98)); box-shadow:0 32px 80px rgba(0,0,0,.42)}
-  .deck-slide{display:none; min-height:738px; padding:80px 98px; align-items:center; justify-content:center; text-align:center}
+  .slide-titlebar{display:flex; align-items:center; justify-content:center; gap:12px; text-align:center; margin:0 auto 24px; font-family:var(--display); font-size:clamp(18px,2vw,30px); line-height:1.2; font-weight:900; letter-spacing:.06em; text-transform:uppercase; color:#fff; text-shadow:0 0 26px rgba(45,212,191,.14)}
+  .slide-titlebar .hash{color:var(--teal); letter-spacing:-.02em}
+  .slide-titlebar .name{max-width:980px}
+  .slide-stage{position:relative; border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; min-height:960px; background:radial-gradient(1000px 525px at 80% 10%, rgba(45,212,191,.12), transparent 62%), linear-gradient(135deg, rgba(15,24,34,.98), rgba(8,13,20,.98)); box-shadow:0 32px 80px rgba(0,0,0,.42)}
+  .deck-slide{display:none; min-height:960px; padding:80px 98px; align-items:center; justify-content:center; text-align:center}
   .deck-slide.active{display:flex}
-  .slide-number{font-family:var(--display); font-size:clamp(74px,14vw,164px); line-height:.9; letter-spacing:-.06em; color:#fff; text-shadow:0 0 38px rgba(45,212,191,.18)}
-  .slide-number span{color:var(--teal)}
   .slide-arrow{position:absolute; top:50%; transform:translateY(-50%); width:54px; height:54px; border-radius:50%; border:1px solid rgba(255,255,255,.16); background:rgba(7,11,17,.74); color:#fff; cursor:pointer; font-size:34px; line-height:1; display:flex; align-items:center; justify-content:center; transition:background .18s ease, border-color .18s ease, transform .18s ease}
   .slide-arrow:hover{background:rgba(45,212,191,.18); border-color:rgba(45,212,191,.58); transform:translateY(-50%) scale(1.04)}
   .slide-arrow.prev{left:22px}
@@ -201,9 +202,46 @@
   .slide-dots{display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:20px}
   .slide-dot{width:9px; height:9px; border-radius:50%; border:0; background:rgba(255,255,255,.24); cursor:pointer; padding:0}
   .slide-dot.active{background:var(--teal); box-shadow:0 0 0 5px rgba(45,212,191,.10)}
-  .roadmap-view{min-height:calc(100vh - 72px); max-width:1040px; margin:0 auto; padding:72px 28px 110px; display:flex; align-items:center; justify-content:center; text-align:center}
-  .roadmap-view h1{font-size:clamp(26px,4.5vw,49px); color:#fff; border-bottom:1px solid rgba(255,255,255,.10); padding-bottom:17px}
-  @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:575px}.deck-slide{min-height:575px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}}
+  .roadmap-view{min-height:calc(100vh - 72px); max-width:1320px; margin:0 auto; padding:54px 28px 110px; text-align:center}
+  .roadmap-hero{margin:0 auto 28px; max-width:980px}
+  .roadmap-hero h1{font-size:clamp(20px,2.6vw,34px); line-height:1.15; color:#fff; margin:0 0 10px; letter-spacing:.10em; text-transform:uppercase}
+  .roadmap-hero p{margin:0; color:var(--muted); font-size:13px; letter-spacing:.08em; text-transform:uppercase}
+  .roadmap-table-wrap{overflow-x:auto; border:1px solid rgba(255,255,255,.12); border-radius:22px; background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)); box-shadow:0 28px 70px rgba(0,0,0,.30)}
+  .roadmap-q-table{width:100%; min-width:1120px; border-collapse:separate; border-spacing:0; font-size:12px; color:#dbe6ee}
+  .roadmap-q-table th,.roadmap-q-table td{border-right:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08); padding:10px 8px; vertical-align:middle}
+  .roadmap-q-table th:last-child,.roadmap-q-table td:last-child{border-right:0}
+  .roadmap-q-table tr:last-child td{border-bottom:0}
+  .roadmap-q-table thead th{position:sticky; top:0; z-index:1; background:rgba(11,18,27,.96); color:var(--teal); font-family:var(--display); font-size:11px; letter-spacing:.10em; text-transform:uppercase; white-space:nowrap}
+  .roadmap-q-table .version-col{width:190px; min-width:190px; text-align:left; background:rgba(255,255,255,.025)}
+  .stage-btn{width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; border:1px solid rgba(255,255,255,.10); border-radius:14px; padding:12px 12px; background:rgba(255,255,255,.035); color:#fff; cursor:pointer; text-align:left; transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease}
+  .stage-btn:hover,.stage-btn.active{transform:translateY(-1px); border-color:rgba(255,255,255,.28); background:rgba(255,255,255,.075); box-shadow:0 12px 30px rgba(0,0,0,.20)}
+  .stage-btn span{font-family:var(--display); font-size:13px; line-height:1.15; font-weight:900; letter-spacing:.04em; text-transform:uppercase}
+  .stage-dot{width:10px; min-width:10px; height:10px; border-radius:50%; box-shadow:0 0 0 5px rgba(255,255,255,.06)}
+  .q-cell{height:70px; color:rgba(255,255,255,.22); text-align:center; font-weight:700}
+  .q-cell.empty{background:rgba(255,255,255,.01)}
+  .q-pill{width:100%; min-height:54px; border:1px solid rgba(255,255,255,.12); border-radius:15px; color:#fff; cursor:pointer; padding:9px 8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; transition:transform .18s ease, border-color .18s ease, filter .18s ease, box-shadow .18s ease}
+  .q-pill:hover,.q-pill.active{transform:translateY(-2px); border-color:rgba(255,255,255,.42); filter:brightness(1.08); box-shadow:0 12px 26px rgba(0,0,0,.24)}
+  .q-label{display:block; color:#fff; font-family:var(--display); font-size:13px; line-height:1.1; text-transform:uppercase; letter-spacing:.04em}
+  .q-note{display:block; color:rgba(255,255,255,.78); font-size:10px; line-height:1.15; font-weight:600}
+  .stage-mvp1{--stage:#facc15; --stage-rgb:250,204,21}
+  .stage-two{--stage:#22c55e; --stage-rgb:34,197,94}
+  .stage-three{--stage:#166534; --stage-rgb:22,101,52}
+  .stage-four{--stage:#38bdf8; --stage-rgb:56,189,248}
+  .stage-five{--stage:#1d4ed8; --stage-rgb:29,78,216}
+  .stage-mvp1 .stage-dot,.stage-two .stage-dot,.stage-three .stage-dot,.stage-four .stage-dot,.stage-five .stage-dot{background:var(--stage)}
+  .q-pill.stage-mvp1,.q-pill.stage-two,.q-pill.stage-three,.q-pill.stage-four,.q-pill.stage-five{background:linear-gradient(135deg, rgba(var(--stage-rgb),.36), rgba(var(--stage-rgb),.13)); box-shadow:inset 0 0 0 1px rgba(var(--stage-rgb),.20)}
+  .roadmap-details{margin:28px auto 0; max-width:1180px; text-align:left}
+  .roadmap-detail{display:none; border:1px solid rgba(255,255,255,.12); border-radius:24px; padding:24px; background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018)); box-shadow:0 24px 60px rgba(0,0,0,.22)}
+  .roadmap-detail.active{display:block}
+  .roadmap-detail-head{display:flex; align-items:flex-start; justify-content:space-between; gap:18px; margin-bottom:18px}
+  .roadmap-detail-title{margin:0; color:#fff; font-family:var(--display); font-size:22px; line-height:1.12; letter-spacing:.05em; text-transform:uppercase}
+  .roadmap-detail-meta{display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(var(--stage-rgb),.30); border-radius:999px; padding:7px 11px; color:#fff; background:rgba(var(--stage-rgb),.12); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap}
+  .roadmap-q-details{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px}
+  .roadmap-q-card{border:1px solid rgba(255,255,255,.10); border-radius:18px; padding:16px; background:rgba(7,11,17,.46)}
+  .roadmap-q-card strong{display:block; color:var(--stage); font-family:var(--display); font-size:18px; line-height:1.1; letter-spacing:.04em; text-transform:uppercase}
+  .roadmap-q-card span{display:block; margin-top:5px; color:#fff; font-size:13px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
+  .roadmap-q-card p{margin:10px 0 0; color:var(--muted); font-size:12px; line-height:1.55}
+  @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
 </style>
 </head>
@@ -590,55 +628,43 @@
       <span>GO ON [OFF] SHORE · Prezentacja</span>
       <span id="slideCounter">1 / 16</span>
     </div>
+    <div class="slide-titlebar" aria-live="polite">
+      <span class="hash" id="slideTitleHash">#1</span>
+      <span class="name" id="slideTitleName">STRESZCZENIE INWESTYCYJNE</span>
+    </div>
     <div class="slide-stage" aria-label="Prezentacja 16 slajdów">
       <section class="deck-slide active" data-slide="1">
-        <div class="slide-number"><span>#</span>1</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="2">
-        <div class="slide-number"><span>#</span>2</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="3">
-        <div class="slide-number"><span>#</span>3</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="4">
-        <div class="slide-number"><span>#</span>4</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="5">
-        <div class="slide-number"><span>#</span>5</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="6">
-        <div class="slide-number"><span>#</span>6</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="7">
-        <div class="slide-number"><span>#</span>7</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="8">
-        <div class="slide-number"><span>#</span>8</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="9">
-        <div class="slide-number"><span>#</span>9</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="10">
-        <div class="slide-number"><span>#</span>10</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="11">
-        <div class="slide-number"><span>#</span>11</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="12">
-        <div class="slide-number"><span>#</span>12</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="13">
-        <div class="slide-number"><span>#</span>13</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="14">
-        <div class="slide-number"><span>#</span>14</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="15">
-        <div class="slide-number"><span>#</span>15</div>
-      </section>
+        </section>
       <section class="deck-slide" data-slide="16">
-        <div class="slide-number"><span>#</span>16</div>
-      </section>
+        </section>
       <button class="slide-arrow prev" type="button" aria-label="Poprzedni slajd" data-slide-move="-1">‹</button>
       <button class="slide-arrow next" type="button" aria-label="Następny slajd" data-slide-move="1">›</button>
     </div>
@@ -665,7 +691,194 @@
 
 <main class="page-view" id="roadmap">
   <div class="roadmap-view">
-    <h1>Road Map</h1>
+    <div class="roadmap-hero">
+      <h1>ROAD MAP - GO ON [OFF] SHORE</h1>
+      <p>Kliknij etap albo kwartał, aby zobaczyć szczegóły pod mapą</p>
+    </div>
+    <div class="roadmap-table-wrap">
+      <table class="roadmap-q-table" aria-label="Road Map GO ON OFF SHORE 2026–2029 w podziale na kwartały">
+        <thead><tr><th class="version-col">Etap / wersja</th><th>Q3 2026</th><th>Q4 2026</th><th>Q1 2027</th><th>Q2 2027</th><th>Q3 2027</th><th>Q4 2027</th><th>Q1 2028</th><th>Q2 2028</th><th>Q3 2028</th><th>Q4 2028</th><th>Q1 2029</th><th>Q2 2029</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="version-col"><button class="stage-btn stage-mvp1" type="button" data-roadmap-stage="mvp1" aria-label="Pokaż szczegóły etapu MVP 1.1 → MVP 1.4"><span>MVP 1.1 → MVP 1.4</span><i class="stage-dot" aria-hidden="true"></i></button></td>
+            <td class="q-cell"><button class="q-pill stage-mvp1" type="button" data-roadmap-stage="mvp1" data-roadmap-q="Q3 2026" aria-label="Pokaż szczegóły Q3 2026 MVP 1.1"><span class="q-label">MVP 1.1</span><span class="q-note">Q3 2026</span></button></td>
+            <td class="q-cell"><button class="q-pill stage-mvp1" type="button" data-roadmap-stage="mvp1" data-roadmap-q="Q4 2026" aria-label="Pokaż szczegóły Q4 2026 MVP 1.2"><span class="q-label">MVP 1.2</span><span class="q-note">Q4 2026</span></button></td>
+            <td class="q-cell"><button class="q-pill stage-mvp1" type="button" data-roadmap-stage="mvp1" data-roadmap-q="Q1 2027" aria-label="Pokaż szczegóły Q1 2027 MVP 1.3"><span class="q-label">MVP 1.3</span><span class="q-note">Q1 2027</span></button></td>
+            <td class="q-cell"><button class="q-pill stage-mvp1" type="button" data-roadmap-stage="mvp1" data-roadmap-q="Q2 2027" aria-label="Pokaż szczegóły Q2 2027 MVP 1.4"><span class="q-label">MVP 1.4</span><span class="q-note">Q2 2027</span></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+          </tr>
+          <tr>
+            <td class="version-col"><button class="stage-btn stage-two" type="button" data-roadmap-stage="two" aria-label="Pokaż szczegóły etapu V1.5 → V1.8"><span>V1.5 → V1.8</span><i class="stage-dot" aria-hidden="true"></i></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell"><button class="q-pill stage-two" type="button" data-roadmap-stage="two" data-roadmap-q="Q3 2027" aria-label="Pokaż szczegóły Q3 2027 V1.5"><span class="q-label">V1.5</span><span class="q-note">Q3 2027</span></button></td>
+            <td class="q-cell"><button class="q-pill stage-two" type="button" data-roadmap-stage="two" data-roadmap-q="Q4 2027" aria-label="Pokaż szczegóły Q4 2027 V1.8"><span class="q-label">V1.8</span><span class="q-note">Q4 2027</span></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+          </tr>
+          <tr>
+            <td class="version-col"><button class="stage-btn stage-three" type="button" data-roadmap-stage="three" aria-label="Pokaż szczegóły etapu V2.0 → V2.8"><span>V2.0 → V2.8</span><i class="stage-dot" aria-hidden="true"></i></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell"><button class="q-pill stage-three" type="button" data-roadmap-stage="three" data-roadmap-q="Q1 2028" aria-label="Pokaż szczegóły Q1 2028 V2.0"><span class="q-label">V2.0</span><span class="q-note">Q1 2028</span></button></td>
+            <td class="q-cell"><button class="q-pill stage-three" type="button" data-roadmap-stage="three" data-roadmap-q="Q2 2028" aria-label="Pokaż szczegóły Q2 2028 V2.8"><span class="q-label">V2.8</span><span class="q-note">Q2 2028</span></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+          </tr>
+          <tr>
+            <td class="version-col"><button class="stage-btn stage-four" type="button" data-roadmap-stage="four" aria-label="Pokaż szczegóły etapu V3.0 → V3.8"><span>V3.0 → V3.8</span><i class="stage-dot" aria-hidden="true"></i></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell"><button class="q-pill stage-four" type="button" data-roadmap-stage="four" data-roadmap-q="Q3 2028" aria-label="Pokaż szczegóły Q3 2028 V3.0"><span class="q-label">V3.0</span><span class="q-note">Q3 2028</span></button></td>
+            <td class="q-cell"><button class="q-pill stage-four" type="button" data-roadmap-stage="four" data-roadmap-q="Q4 2028" aria-label="Pokaż szczegóły Q4 2028 V3.8"><span class="q-label">V3.8</span><span class="q-note">Q4 2028</span></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+          </tr>
+          <tr>
+            <td class="version-col"><button class="stage-btn stage-five" type="button" data-roadmap-stage="five" aria-label="Pokaż szczegóły etapu V4.0 → V4.8"><span>V4.0 → V4.8</span><i class="stage-dot" aria-hidden="true"></i></button></td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell empty">—</td>
+            <td class="q-cell"><button class="q-pill stage-five" type="button" data-roadmap-stage="five" data-roadmap-q="Q1 2029" aria-label="Pokaż szczegóły Q1 2029 V4.0"><span class="q-label">V4.0</span><span class="q-note">Q1 2029</span></button></td>
+            <td class="q-cell"><button class="q-pill stage-five" type="button" data-roadmap-stage="five" data-roadmap-q="Q2 2029" aria-label="Pokaż szczegóły Q2 2029 V4.8"><span class="q-label">V4.8</span><span class="q-note">Q2 2029</span></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="roadmap-details" aria-live="polite">
+      <section class="roadmap-detail stage-mvp1" data-roadmap-detail="mvp1">
+        <div class="roadmap-detail-head">
+          <h2 class="roadmap-detail-title">MVP 1: MVP 1.1 → MVP 1.4</h2>
+          <span class="roadmap-detail-meta">Q3 2026 – Q2 2027</span>
+        </div>
+        <div class="roadmap-q-details">
+          <article class="roadmap-q-card">
+            <strong>Q3 2026</strong>
+            <span>MVP 1.1</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+          <article class="roadmap-q-card">
+            <strong>Q4 2026</strong>
+            <span>MVP 1.2</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+          <article class="roadmap-q-card">
+            <strong>Q1 2027</strong>
+            <span>MVP 1.3</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+          <article class="roadmap-q-card">
+            <strong>Q2 2027</strong>
+            <span>MVP 1.4</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+        </div>
+      </section>
+      <section class="roadmap-detail stage-two" data-roadmap-detail="two">
+        <div class="roadmap-detail-head">
+          <h2 class="roadmap-detail-title">ETAP 2: V1.5 → V1.8</h2>
+          <span class="roadmap-detail-meta">Q3 2027 – Q4 2027</span>
+        </div>
+        <div class="roadmap-q-details">
+          <article class="roadmap-q-card">
+            <strong>Q3 2027</strong>
+            <span>V1.5</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+          <article class="roadmap-q-card">
+            <strong>Q4 2027</strong>
+            <span>V1.8</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+        </div>
+      </section>
+      <section class="roadmap-detail stage-three" data-roadmap-detail="three">
+        <div class="roadmap-detail-head">
+          <h2 class="roadmap-detail-title">ETAP 3: V2.0 → V2.8</h2>
+          <span class="roadmap-detail-meta">Q1 2028 – Q2 2028</span>
+        </div>
+        <div class="roadmap-q-details">
+          <article class="roadmap-q-card">
+            <strong>Q1 2028</strong>
+            <span>V2.0</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+          <article class="roadmap-q-card">
+            <strong>Q2 2028</strong>
+            <span>V2.8</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+        </div>
+      </section>
+      <section class="roadmap-detail stage-four" data-roadmap-detail="four">
+        <div class="roadmap-detail-head">
+          <h2 class="roadmap-detail-title">ETAP 4: V3.0 → V3.8</h2>
+          <span class="roadmap-detail-meta">Q3 2028 – Q4 2028</span>
+        </div>
+        <div class="roadmap-q-details">
+          <article class="roadmap-q-card">
+            <strong>Q3 2028</strong>
+            <span>V3.0</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+          <article class="roadmap-q-card">
+            <strong>Q4 2028</strong>
+            <span>V3.8</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+        </div>
+      </section>
+      <section class="roadmap-detail stage-five" data-roadmap-detail="five">
+        <div class="roadmap-detail-head">
+          <h2 class="roadmap-detail-title">ETAP 5: V4.0 → V4.8</h2>
+          <span class="roadmap-detail-meta">Q1 2029 – Q2 2029</span>
+        </div>
+        <div class="roadmap-q-details">
+          <article class="roadmap-q-card">
+            <strong>Q1 2029</strong>
+            <span>V4.0</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+          <article class="roadmap-q-card">
+            <strong>Q2 2029</strong>
+            <span>V4.8</span>
+            <p>Szczegóły etapu do uzupełnienia: zakres funkcji, cele operacyjne, KPI, zespół i rezultat końcowy danego kwartału.</p>
+          </article>
+        </div>
+      </section>
+    </div>
   </div>
 </main>
 
@@ -676,6 +889,26 @@
   const slides = Array.from(document.querySelectorAll('.deck-slide'));
   const dots = Array.from(document.querySelectorAll('.slide-dot'));
   const counter = document.getElementById('slideCounter');
+  const titleHash = document.getElementById('slideTitleHash');
+  const titleName = document.getElementById('slideTitleName');
+  const slideTitles = [
+    'STRESZCZENIE INWESTYCYJNE',
+    'PROBLEM RYNKOWY',
+    'ROZWIĄZANIE PRODUKTOWE',
+    'RYNEK I SKALA MOŻLIWOŚCI',
+    'MODEL BIZNESOWY I MONETYZACJA',
+    'ANALIZA KONKURENCJI I PRZEWAGA OBRONNA',
+    'STRATEGIA WEJŚCIA NA RYNEK',
+    'ZESPÓŁ I FOUNDER-MARKET FIT',
+    'ROADMAPA ROZWOJU I KAMIENIE MILOWE',
+    'MODEL FINANSOWY I PROGNOZY',
+    'FINANSOWANIE PUBLICZNE I GRANTY',
+    'RYZYKA I PLAN MITYGACJI',
+    'RUNDA INWESTYCYJNA I WYKORZYSTANIE ŚRODKÓW',
+    'MATERIAŁY UZUPEŁNIAJĄCE',
+    'OTWARTE DECYZJE I NASTĘPNE KROKI',
+    'Q&A / KONTAKT INWESTORSKI'
+  ];
   let currentSlide = 1;
 
   function showView(viewId) {
@@ -690,11 +923,25 @@
     slides.forEach(slide => slide.classList.toggle('active', Number(slide.dataset.slide) === currentSlide));
     dots.forEach(dot => dot.classList.toggle('active', Number(dot.dataset.slideTarget) === currentSlide));
     if (counter) counter.textContent = currentSlide + ' / ' + total;
+    if (titleHash) titleHash.textContent = '#' + currentSlide;
+    if (titleName) titleName.textContent = slideTitles[currentSlide - 1] || ('SLAJD ' + currentSlide);
   }
 
   buttons.forEach(btn => btn.addEventListener('click', () => showView(btn.dataset.view)));
   document.querySelectorAll('[data-slide-move]').forEach(btn => btn.addEventListener('click', () => showSlide(currentSlide + Number(btn.dataset.slideMove))));
   dots.forEach(dot => dot.addEventListener('click', () => showSlide(Number(dot.dataset.slideTarget))));
+
+
+  const roadmapStageButtons = Array.from(document.querySelectorAll('[data-roadmap-stage]'));
+  const roadmapDetails = Array.from(document.querySelectorAll('[data-roadmap-detail]'));
+
+  function showRoadmapStage(stageId) {
+    roadmapDetails.forEach(panel => panel.classList.toggle('active', panel.dataset.roadmapDetail === stageId));
+    roadmapStageButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.roadmapStage === stageId));
+  }
+
+  roadmapStageButtons.forEach(btn => btn.addEventListener('click', () => showRoadmapStage(btn.dataset.roadmapStage)));
+  showRoadmapStage('mvp1');
 
   document.addEventListener('keydown', event => {
     if (!document.getElementById('presentation').classList.contains('active')) return;
