@@ -275,6 +275,10 @@
   .org-team-columns{display:flex; gap:24px; flex-wrap:wrap; margin-top:6px}
   .org-team-col{flex:1 1 380px; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:18px 22px; background:rgba(255,255,255,.03)}
   .org-team-col h3{margin:0 0 12px; font-family:var(--display); font-size:13px; letter-spacing:.08em; color:#2DD4BF; text-transform:uppercase}
+  .settings-actions{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 14px}
+  #settingsReport{width:100%; min-height:260px; margin-top:10px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:10px; color:#e7edf3; font-family:ui-monospace, monospace; font-size:12px; padding:14px; resize:vertical}
+  #business-plan.editing-active .wrap{outline:2px dashed rgba(45,212,191,.5); outline-offset:6px; border-radius:10px}
+  #business-plan.editing-active .wrap *[contenteditable]:focus{outline:1px solid rgba(45,212,191,.8); background:rgba(45,212,191,.06)}
   .oc-close:hover{background:#fff; color:#000}
   .zespol-heading{color: #2DD4BF; display: block; margin-bottom: 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;}
   .fin-tile{margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);}
@@ -400,6 +404,7 @@
     <button class="view-btn" type="button" data-view="presentation">Prezentacja</button>
     <button class="view-btn" type="button" data-view="roadmap">Road Mapa</button>
     <button class="view-btn" type="button" data-view="organization">Organizacja</button>
+    <button class="view-btn" type="button" data-view="settings">Ustawienia witryny</button>
   </div>
 </nav>
 
@@ -1661,6 +1666,22 @@
   </div>
 </main>
 
+<main class="page-view" id="settings">
+<div class="wrap">
+  <h2 style="margin:0 0 8px;">USTAWIENIA WITRYNY</h2>
+  <p style="margin:0 0 6px; color:#c4ced8;">Edycja treści Biznes Planu na żywo w tej przeglądarce. Włącz edycję, popraw tekst klikając w niego, zapisz do podglądu, a gdy zbierzesz wszystkie poprawki — kliknij „Wyświetl poprawione”, skopiuj treść i wklej ją z powrotem, żebym wgrał ją na stałe do wszystkich odwiedzających.</p>
+  <p style="margin:0 0 14px; color:var(--muted); font-size:13px;">Edycja Prezentacji, Road Mapy i Organizacji (tytuły slajdów, kolejność, Q, zespół, koszty, granty) dojdzie w kolejnym kroku — te widoki mają elementy generowane przez skrypt i wymagają osobnego edytora.</p>
+  <div class="settings-actions">
+    <button class="org-filter-btn" type="button" id="settingsEditToggle">Włącz edycję Biznes Planu</button>
+    <button class="org-filter-btn" type="button" id="settingsSaveBtn">Zapisz</button>
+    <button class="org-filter-btn" type="button" id="settingsReportBtn">Wyświetl poprawione</button>
+    <button class="org-filter-btn" type="button" id="settingsResetBtn">Przywróć opublikowaną wersję</button>
+  </div>
+  <p class="org-filter-status" id="settingsStatus"></p>
+  <textarea id="settingsReport" readonly placeholder="Tu pojawi się lista zmian po kliknięciu „Wyświetl poprawione”..."></textarea>
+</div>
+</main>
+
 <script>
 (function() {
   const buttons = Array.from(document.querySelectorAll('.view-btn'));
@@ -2102,6 +2123,72 @@
     }));
 
     applyFilter();
+  })();
+
+  (function initSiteSettings(){
+    const bpContainer = document.querySelector('#business-plan .wrap');
+    const editToggleBtn = document.getElementById('settingsEditToggle');
+    const saveBtn = document.getElementById('settingsSaveBtn');
+    const reportBtn = document.getElementById('settingsReportBtn');
+    const resetBtn = document.getElementById('settingsResetBtn');
+    const statusEl = document.getElementById('settingsStatus');
+    const reportEl = document.getElementById('settingsReport');
+    if (!bpContainer || !editToggleBtn) return;
+
+    const STORAGE_KEY = 'goShoreBP_edited_v1';
+    const originalHTML = bpContainer.innerHTML;
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) bpContainer.innerHTML = saved;
+
+    let editMode = false;
+
+    function setEditMode(on) {
+      editMode = on;
+      bpContainer.contentEditable = on ? 'true' : 'false';
+      document.getElementById('business-plan').classList.toggle('editing-active', on);
+      editToggleBtn.textContent = on ? 'Wyłącz edycję Biznes Planu' : 'Włącz edycję Biznes Planu';
+      statusEl.textContent = on ? 'Edycja włączona — przejdź na zakładkę „Biznes Plan”, kliknij w tekst, popraw, wróć tu i kliknij „Zapisz”.' : '';
+    }
+
+    editToggleBtn.addEventListener('click', () => setEditMode(!editMode));
+
+    saveBtn.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, bpContainer.innerHTML);
+      statusEl.textContent = 'Zapisano do podglądu w tej przeglądarce — ' + new Date().toLocaleString('pl-PL') + '.';
+    });
+
+    resetBtn.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      bpContainer.innerHTML = originalHTML;
+      reportEl.value = '';
+      statusEl.textContent = 'Przywrócono opublikowaną wersję Biznes Planu.';
+    });
+
+    reportBtn.addEventListener('click', () => {
+      const savedNow = localStorage.getItem(STORAGE_KEY);
+      if (!savedNow) {
+        reportEl.value = 'Nie zapisano jeszcze żadnych zmian.';
+        return;
+      }
+      const origRoot = new DOMParser().parseFromString('<div>' + originalHTML + '</div>', 'text/html').body.firstChild;
+      const newRoot = new DOMParser().parseFromString('<div>' + savedNow + '</div>', 'text/html').body.firstChild;
+      const origKids = Array.from(origRoot.children);
+      const newKids = Array.from(newRoot.children);
+      const lines = [];
+      const max = Math.max(origKids.length, newKids.length);
+      for (let i = 0; i < max; i++) {
+        const o = origKids[i] ? origKids[i].textContent.trim() : '';
+        const n = newKids[i] ? newKids[i].textContent.trim() : '';
+        if (o !== n) {
+          lines.push('--- Zmiana #' + (lines.filter(l => l.startsWith('--- Zmiana')).length + 1) + ' ---');
+          lines.push('PRZED: ' + (o ? o.slice(0, 300) : '(brak / nowy element)'));
+          lines.push('PO: ' + (n || '(usunięto)'));
+          lines.push('');
+        }
+      }
+      reportEl.value = lines.length ? lines.join('\n') : 'Brak zmian względem wersji opublikowanej.';
+    });
   })();
 
   document.addEventListener('keydown', event => {
