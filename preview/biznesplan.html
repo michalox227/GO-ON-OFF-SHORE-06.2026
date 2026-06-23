@@ -254,6 +254,25 @@
   .team-legend .number.current{color:#2DD4BF}
   .team-legend .unit{font-size:13px; color:#fff}
   .org-view{min-height:calc(100vh - 72px); max-width:1600px; margin:0 auto; padding:54px 28px 110px}
+  .org-all-row{display:flex; justify-content:center; margin:18px 0 22px}
+  .org-all-btn{border:2px solid #fff; border-radius:999px; background:#000; color:#fff; padding:12px 34px; font-family:var(--display); font-weight:900; letter-spacing:.12em; font-size:14px; cursor:pointer; transition:.18s ease}
+  .org-all-btn:hover{background:rgba(255,255,255,.18)}
+  .org-all-btn.active{background:#fff; color:#000}
+  .org-filter-status{text-align:center; color:var(--muted); font-size:12px; margin:-4px 0 20px}
+  .org-filter-status b{color:#fff}
+  .org-layout{display:flex; gap:26px; align-items:flex-start; justify-content:center; flex-wrap:wrap}
+  .org-side{display:flex; flex-direction:column; gap:9px; min-width:210px}
+  .org-side-label{font-family:var(--display); font-size:11px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; margin:16px 0 2px}
+  .org-side-label:first-child{margin-top:0}
+  .org-filter-btn{display:flex; align-items:center; gap:9px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.04); color:#fff; padding:10px 14px; border-radius:10px; font-size:12px; font-weight:700; text-align:left; cursor:pointer; transition:.18s ease; font-family:inherit}
+  .org-filter-btn:hover{background:rgba(255,255,255,.11)}
+  .org-filter-btn.active{background:rgba(255,255,255,.20); box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
+  .org-tag{display:inline-flex; align-items:center; justify-content:center; min-width:24px; height:20px; padding:0 5px; border-radius:6px; font-size:10px; font-weight:800; flex:0 0 auto}
+  .org-stage-btn .org-tag{background:var(--stage); color:#06151b}
+  .org-q-btn .org-tag{width:14px; height:14px; min-width:14px; border-radius:50%; padding:0}
+  .org-year-btn{justify-content:center; text-align:center}
+  .oc-box.inactive{opacity:.32; filter:grayscale(.7); box-shadow:none}
+  @media(max-width:1180px){.org-layout{flex-direction:column; align-items:center}.org-side{flex-direction:row; flex-wrap:wrap; justify-content:center; min-width:0; max-width:1000px}.org-side-label{flex-basis:100%; margin:10px 0 2px}}
   .oc-scroll{overflow-x:auto; padding:10px 30px 24px}
   .oc-chart{position:relative; width:1420px; height:560px; margin:20px auto}
   .oc-box{position:absolute; min-width:180px; min-height:84px; padding:14px 20px; border:2px solid #fff; border-radius:8px; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; font-size:20px; font-weight:800; letter-spacing:.5px; cursor:pointer; user-select:none; transition:.2s ease; z-index:3}
@@ -1631,7 +1650,20 @@
   <div class="org-view">
     <h2 style="margin:0 0 8px;">STRUKTURA ORGANIZACYJNA</h2>
     <p style="margin:0 0 6px; color:#c4ced8;">Schemat organizacyjny GO ON [OFF] SHORE. Kliknij dowolne okienko, aby zobaczyć szczegóły danej roli lub działu. Dane o stanowiskach pochodzą z Road Mapy.</p>
-    <div class="oc-scroll">
+    <div class="org-all-row">
+      <button class="org-all-btn active" type="button" data-org-all>ALL</button>
+    </div>
+    <p class="org-filter-status" id="orgFilterStatus">Widok: <b>cała struktura</b></p>
+    <div class="org-layout">
+      <aside class="org-side org-side-left">
+        <div class="org-side-label">Etapy Road Mapy</div>
+        <button class="org-filter-btn org-stage-btn stage-mvp1" type="button" data-org-stage="mvp1"><span class="org-tag">#1</span> MVP 1.1 → 1.4</button>
+        <button class="org-filter-btn org-stage-btn stage-two" type="button" data-org-stage="two"><span class="org-tag">#2</span> v1.5 → v1.9</button>
+        <button class="org-filter-btn org-stage-btn stage-three" type="button" data-org-stage="three"><span class="org-tag">#3</span> v2.0 → v2.9</button>
+        <button class="org-filter-btn org-stage-btn stage-four" type="button" data-org-stage="four"><span class="org-tag">#4</span> v3.0 → v3.9</button>
+        <button class="org-filter-btn org-stage-btn stage-five" type="button" data-org-stage="five"><span class="org-tag">#5</span> v4.0 → v4.9</button>
+      </aside>
+      <div class="oc-scroll">
       <section class="oc-chart">
         <div class="oc-line h oc-line-board-investors"></div>
         <div class="oc-line v oc-line-board-ceo"></div>
@@ -1644,17 +1676,38 @@
         <div class="oc-line v oc-line-to-bok"></div>
         <div class="oc-line v oc-line-to-hr"></div>
         <div class="oc-line v oc-line-to-finance"></div>
-        <button class="oc-box oc-board" data-title="Zarząd" data-text="Najwyższy poziom decyzyjny. Odpowiada za nadzór strategiczny, kierunek rozwoju, decyzje właścicielskie oraz kontrolę realizacji głównych celów projektu. Rola startowa: Founder / Product Owner.">Zarząd</button>
-        <button class="oc-box oc-investors" data-title="Inwestorzy" data-text="Osoby lub podmioty finansujące rozwój projektu (runda MVP1, obligacje korporacyjne, granty). Wspierają spółkę kapitałowo, strategicznie oraz relacyjnie.">Inwestorzy</button>
-        <button class="oc-box oc-ceo" data-title="CEO" data-text="Osoba odpowiedzialna za zarządzanie operacyjne, realizację strategii z Road Mapy, koordynację działów oraz raportowanie do Zarządu i Inwestorów.">CEO</button>
-        <button class="oc-box small oc-it" data-title="IT" data-text="Dział technologii: architektura systemu, programowanie, wdrożenia, bezpieczeństwo i utrzymanie aplikacji. Role z Road Mapy: Lead Developer / CTO (fractional), Developer #1 i #2, Główny programista, Główny programista aplikacji / mobile / v2 oraz Developerzy dodatkowi.">IT</button>
-        <button class="oc-box small oc-rd" data-title="R&amp;D" data-text="Dział badań i rozwoju: research rynku i zawodów, analiza danych, projektowanie UX/UI oraz budowa bazy zawodów, firm i partnerów. Role z Road Mapy: Researcher oraz UI/UX Designer.">R&amp;D</button>
-        <button class="oc-box small oc-sales" data-title="SPRZEDAŻ" data-text="Dział handlowy: pozyskiwanie klientów, rozmowy handlowe, partnerstwa B2B oraz komercjalizacja usług platformy (subskrypcje, księgowość, obligacje). Role z Road Mapy: Sprzedaż / KAM, Handlowiec #1 i #2.">SPRZEDAŻ</button>
-        <button class="oc-box small oc-marketing" data-title="MARKETING" data-text="Dział marketingu: komunikacja marki, content, kampanie, materiały inwestorskie i sprzedażowe oraz generowanie leadów. Role z Road Mapy: Marketing / Content oraz Marketing / content dodatkowy.">MARKETING</button>
-        <button class="oc-box small oc-bok" data-title="BOK" data-text="Biuro Obsługi Klienta: wsparcie użytkowników, firm i partnerów oraz bieżąca komunikacja operacyjna. Role z Road Mapy: BOK oraz BOK dodatkowy.">BOK</button>
-        <button class="oc-box small oc-hr two-lines" data-title="HR &amp; Administracja" data-text="Dział odpowiedzialny za rekrutację, onboarding, dokumentację pracowniczą, administrację wewnętrzną, procedury, organizację pracy oraz obsługę grantów. Rola z Road Mapy: Administracja / granty.">HR &amp;<br />ADMINISTRACJA</button>
-        <button class="oc-box small oc-finance" data-title="FINANSE" data-text="Dział finansów: budżet, controlling, księgowość, rozliczenia, prognozy oraz raportowanie kosztów i przychodów (KOSZTY / PRZYCHODY z Road Mapy). Role z Road Mapy: Główna księgowa oraz Księgowa pomocnicza.">FINANSE</button>
+        <button class="oc-box oc-board" data-title="Zarząd" data-roles="Founder / Product Owner@Q3 2026" data-text="Najwyższy poziom decyzyjny. Odpowiada za nadzór strategiczny, kierunek rozwoju, decyzje właścicielskie oraz kontrolę realizacji głównych celów projektu. Rola startowa: Founder / Product Owner.">Zarząd</button>
+        <button class="oc-box oc-investors" data-title="Inwestorzy" data-roles="Runda inwestycyjna MVP1@Q3 2026" data-text="Osoby lub podmioty finansujące rozwój projektu (runda MVP1, obligacje korporacyjne, granty). Wspierają spółkę kapitałowo, strategicznie oraz relacyjnie.">Inwestorzy</button>
+        <button class="oc-box oc-ceo" data-title="CEO" data-roles="Founder / Product Owner (CEO)@Q3 2026" data-text="Osoba odpowiedzialna za zarządzanie operacyjne, realizację strategii z Road Mapy, koordynację działów oraz raportowanie do Zarządu i Inwestorów.">CEO</button>
+        <button class="oc-box small oc-it" data-title="IT" data-roles="Lead Developer / CTO (fractional)@Q3 2026;Developer #1@Q3 2026;Developer #2@Q3 2026;Główny programista@Q1 2027;Główny programista aplikacji / mobile / v2@Q3 2027;Developer dodatkowy #1@Q3 2027;Developer dodatkowy #2@Q3 2027" data-text="Dział technologii: architektura systemu, programowanie, wdrożenia, bezpieczeństwo i utrzymanie aplikacji. Role z Road Mapy: Lead Developer / CTO (fractional), Developer #1 i #2, Główny programista, Główny programista aplikacji / mobile / v2 oraz Developerzy dodatkowi.">IT</button>
+        <button class="oc-box small oc-rd" data-title="R&amp;D" data-roles="UI/UX Designer@Q3 2026;Researcher@Q3 2026" data-text="Dział badań i rozwoju: research rynku i zawodów, analiza danych, projektowanie UX/UI oraz budowa bazy zawodów, firm i partnerów. Role z Road Mapy: Researcher oraz UI/UX Designer.">R&amp;D</button>
+        <button class="oc-box small oc-sales" data-title="SPRZEDAŻ" data-roles="Sprzedaż / KAM@Q4 2026;Handlowiec #1@Q2 2027;Handlowiec #2@Q2 2027" data-text="Dział handlowy: pozyskiwanie klientów, rozmowy handlowe, partnerstwa B2B oraz komercjalizacja usług platformy (subskrypcje, księgowość, obligacje). Role z Road Mapy: Sprzedaż / KAM, Handlowiec #1 i #2.">SPRZEDAŻ</button>
+        <button class="oc-box small oc-marketing" data-title="MARKETING" data-roles="Marketing / Content@Q4 2026;Marketing / content dodatkowy@Q3 2027" data-text="Dział marketingu: komunikacja marki, content, kampanie, materiały inwestorskie i sprzedażowe oraz generowanie leadów. Role z Road Mapy: Marketing / Content oraz Marketing / content dodatkowy.">MARKETING</button>
+        <button class="oc-box small oc-bok" data-title="BOK" data-roles="BOK@Q1 2027;BOK dodatkowy@Q2 2027" data-text="Biuro Obsługi Klienta: wsparcie użytkowników, firm i partnerów oraz bieżąca komunikacja operacyjna. Role z Road Mapy: BOK oraz BOK dodatkowy.">BOK</button>
+        <button class="oc-box small oc-hr two-lines" data-title="HR &amp; Administracja" data-roles="Administracja / granty@Q2 2027" data-text="Dział odpowiedzialny za rekrutację, onboarding, dokumentację pracowniczą, administrację wewnętrzną, procedury, organizację pracy oraz obsługę grantów. Rola z Road Mapy: Administracja / granty.">HR &amp;<br />ADMINISTRACJA</button>
+        <button class="oc-box small oc-finance" data-title="FINANSE" data-roles="Główna księgowa@Q1 2027;Księgowa pomocnicza@Q2 2027" data-text="Dział finansów: budżet, controlling, księgowość, rozliczenia, prognozy oraz raportowanie kosztów i przychodów (KOSZTY / PRZYCHODY z Road Mapy). Role z Road Mapy: Główna księgowa oraz Księgowa pomocnicza.">FINANSE</button>
       </section>
+      </div>
+      <aside class="org-side org-side-right">
+        <div class="org-side-label">Kwartały</div>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2026"><span class="org-tag" style="background:#facc15"></span>Q3 2026</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2026"><span class="org-tag" style="background:#fb923c"></span>Q4 2026</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2027"><span class="org-tag" style="background:#f87171"></span>Q1 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2027"><span class="org-tag" style="background:#e879f9"></span>Q2 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2027"><span class="org-tag" style="background:#22c55e"></span>Q3 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2027"><span class="org-tag" style="background:#4ade80"></span>Q4 2027</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2028"><span class="org-tag" style="background:#2dd4bf"></span>Q1 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2028"><span class="org-tag" style="background:#38bdf8"></span>Q2 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2028"><span class="org-tag" style="background:#60a5fa"></span>Q3 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2028"><span class="org-tag" style="background:#818cf8"></span>Q4 2028</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2029"><span class="org-tag" style="background:#a78bfa"></span>Q1 2029</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2029"><span class="org-tag" style="background:#f472b6"></span>Q2 2029</button>
+        <div class="org-side-label">Lata</div>
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2026">2026</button>
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2027">2027</button>
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2028">2028</button>
+        <button class="org-filter-btn org-year-btn" type="button" data-org-year="2029">2029</button>
+      </aside>
     </div>
     <section class="oc-details" id="ocDetails">
       <h2 class="oc-details-title" id="ocDetailsTitle">Tytuł</h2>
@@ -1982,7 +2035,7 @@
 
   showRoadmapStage('mvp1');
 
-  // Organizacja — interaktywny schemat organizacyjny
+  // Organizacja — interaktywny schemat organizacyjny + filtry etap/kwartał/rok
   (function initOrgChart(){
     const ocBoxes = document.querySelectorAll('#organization .oc-box');
     const ocPanel = document.getElementById('ocDetails');
@@ -1990,15 +2043,99 @@
     const ocTitle = document.getElementById('ocDetailsTitle');
     const ocText = document.getElementById('ocDetailsText');
     const ocClose = document.getElementById('ocClose');
+    const statusEl = document.getElementById('orgFilterStatus');
+    const allBtn = document.querySelector('.org-all-btn');
+    const stageBtns = Array.from(document.querySelectorAll('.org-stage-btn'));
+    const qBtns = Array.from(document.querySelectorAll('.org-q-btn'));
+    const yearBtns = Array.from(document.querySelectorAll('.org-year-btn'));
+
+    const ORG_QUARTERS = ['Q3 2026','Q4 2026','Q1 2027','Q2 2027','Q3 2027','Q4 2027','Q1 2028','Q2 2028','Q3 2028','Q4 2028','Q1 2029','Q2 2029'];
+    const ORG_STAGE_LAST_Q = { mvp1:'Q2 2027', two:'Q4 2027', three:'Q2 2028', four:'Q4 2028', five:'Q2 2029' };
+    const ORG_YEAR_LAST_Q = { '2026':'Q4 2026', '2027':'Q4 2027', '2028':'Q4 2028', '2029':'Q2 2029' };
+
+    const boxRoles = new Map();
     ocBoxes.forEach(box => {
-      box.addEventListener('click', () => {
-        ocTitle.textContent = box.dataset.title;
-        ocText.textContent = box.dataset.text;
-        ocPanel.classList.add('active');
-        ocPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
-      });
+      const raw = box.dataset.roles || '';
+      const roles = raw ? raw.split(';').map(part => {
+        const [role, q] = part.split('@');
+        return { role, q };
+      }) : [];
+      boxRoles.set(box, roles);
     });
-    ocClose.addEventListener('click', () => ocPanel.classList.remove('active'));
+
+    let cutoffIndex = ORG_QUARTERS.length - 1;
+    let filterMode = 'all';
+    let filterValue = null;
+
+    function setCutoff(mode, value, index) {
+      filterMode = mode;
+      filterValue = value;
+      cutoffIndex = index;
+      applyFilter();
+    }
+
+    function applyFilter() {
+      ocBoxes.forEach(box => {
+        const roles = boxRoles.get(box);
+        const activeRoles = roles.filter(r => ORG_QUARTERS.indexOf(r.q) <= cutoffIndex);
+        box.classList.toggle('inactive', roles.length > 0 && activeRoles.length === 0);
+        box.dataset.activeRoles = activeRoles.map(r => r.role).join('; ');
+      });
+
+      [allBtn, ...stageBtns, ...qBtns, ...yearBtns].forEach(btn => btn && btn.classList.remove('active'));
+      if (filterMode === 'all') {
+        allBtn.classList.add('active');
+        statusEl.innerHTML = 'Widok: <b>cała struktura</b>';
+      } else if (filterMode === 'stage') {
+        const btn = stageBtns.find(b => b.dataset.orgStage === filterValue);
+        if (btn) btn.classList.add('active');
+        statusEl.innerHTML = 'Widok: <b>etap ' + (btn ? btn.textContent.trim() : filterValue) + '</b> — stan struktury do ' + ORG_STAGE_LAST_Q[filterValue];
+      } else if (filterMode === 'quarter') {
+        const btn = qBtns.find(b => b.dataset.orgQ === filterValue);
+        if (btn) btn.classList.add('active');
+        statusEl.innerHTML = 'Widok: <b>' + filterValue + '</b> — stan struktury narastająco do tego kwartału';
+      } else if (filterMode === 'year') {
+        const btn = yearBtns.find(b => b.dataset.orgYear === filterValue);
+        if (btn) btn.classList.add('active');
+        statusEl.innerHTML = 'Widok: <b>' + filterValue + '</b> — stan struktury narastająco do ' + ORG_YEAR_LAST_Q[filterValue];
+      }
+
+      if (ocPanel.classList.contains('active') && ocPanel.dataset.openBox) {
+        const openBox = Array.from(ocBoxes).find(b => b.dataset.title === ocPanel.dataset.openBox);
+        if (openBox) showDetails(openBox);
+      }
+    }
+
+    function showDetails(box) {
+      ocPanel.dataset.openBox = box.dataset.title;
+      ocTitle.textContent = box.dataset.title;
+      const activeRoles = (box.dataset.activeRoles || '').split('; ').filter(Boolean);
+      const roleNote = boxRoles.get(box).length === 0 ? '' :
+        (activeRoles.length ? '\n\nObsadzone role w wybranym widoku: ' + activeRoles.join(', ') + '.' :
+        '\n\nW wybranym widoku ten dział nie ma jeszcze obsadzonych ról.');
+      ocText.textContent = box.dataset.text + roleNote;
+      ocPanel.classList.add('active');
+      ocPanel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+
+    ocBoxes.forEach(box => box.addEventListener('click', () => showDetails(box)));
+    ocClose.addEventListener('click', () => { ocPanel.classList.remove('active'); delete ocPanel.dataset.openBox; });
+
+    allBtn.addEventListener('click', () => setCutoff('all', null, ORG_QUARTERS.length - 1));
+    stageBtns.forEach(btn => btn.addEventListener('click', () => {
+      const stage = btn.dataset.orgStage;
+      setCutoff('stage', stage, ORG_QUARTERS.indexOf(ORG_STAGE_LAST_Q[stage]));
+    }));
+    qBtns.forEach(btn => btn.addEventListener('click', () => {
+      const q = btn.dataset.orgQ;
+      setCutoff('quarter', q, ORG_QUARTERS.indexOf(q));
+    }));
+    yearBtns.forEach(btn => btn.addEventListener('click', () => {
+      const year = btn.dataset.orgYear;
+      setCutoff('year', year, ORG_QUARTERS.indexOf(ORG_YEAR_LAST_Q[year]));
+    }));
+
+    applyFilter();
   })();
 
   document.addEventListener('keydown', event => {
