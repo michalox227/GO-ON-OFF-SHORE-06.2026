@@ -240,11 +240,6 @@
   .roadmap-q-card{border:1px solid rgba(255,255,255,.10); border-radius:18px; padding:16px; background:rgba(7,11,17,.46)}
   .roadmap-q-card strong{display:block; color:var(--stage); font-family:var(--display); font-size:18px; line-height:1.1; letter-spacing:.04em; text-transform:uppercase}
   .roadmap-q-card span{display:block; margin-top:5px; color:#fff; font-size:13px; font-weight:800; letter-spacing:.04em; text-transform:uppercase}
-  .roadmap-q-header{grid-column:1/-1; background:rgba(45,212,191,.08); border-color:rgba(45,212,191,.20); padding:12px 16px}
-  .roadmap-q-header strong{font-size:16px; color:#fff; text-transform:none}
-  .roadmap-q-header span{margin-top:3px; font-size:11px; letter-spacing:.05em; text-transform:capitalize}
-  .roadmap-section-label{grid-column:1/-1; background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.08); padding:10px 16px; text-align:center}
-  .roadmap-section-label strong{font-size:12px; text-transform:uppercase; letter-spacing:.10em; color:#fff; margin:0}
   .roadmap-q-card p{margin:10px 0 0; color:var(--muted); font-size:12px; line-height:1.55}
   @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
 
@@ -782,279 +777,374 @@
         </tbody>
       </table>
     </div>
-                <div class="roadmap-details" aria-live="polite">
+            <div class="roadmap-details" aria-live="polite">
       <section class="roadmap-detail stage-mvp1" data-roadmap-detail="mvp1">
         <div class="roadmap-detail-head">
           <h2 class="roadmap-detail-title">I. MVP — v1.4</h2>
           <span class="roadmap-detail-meta">Q3 2026 – Q2 2027</span>
         </div>
         <div class="roadmap-q-details">
-          <!-- MVP 1.1 -->
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>MVP 1.1 — Q3 2026</strong>
-            <span style="font-size: 11px; color: #97a4b2;">lipiec – wrzesień 2026</span>
+            <span>lipiec – wrzesień 2026</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
+              <div style="margin-bottom: 12px;">
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">📋 Praca</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Fundamenty biznesowe</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Rejestracja działalności / spółki</li>
+                    <li>Przygotowanie dokumentacji formalnej</li>
+                    <li>Opracowanie modelu biznesowego</li>
+                    <li>Zakup domen i zabezpieczenie marki</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Infrastruktura</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Wynajem biura</li>
+                    <li>Zakup komputerów i wyposażenia</li>
+                    <li>Konfiguracja środowisk programistycznych</li>
+                    <li>Narzędzia do zarządzania projektem</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Rekrutacja</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Pozyskanie głównego programisty</li>
+                    <li>Rekrutacja 2 Junior Developerów</li>
+                    <li>Rekrutacja Researchera &amp; Data Managera</li>
+                    <li>Rekrutacja UI/UX Designera</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Produkt</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Projekt identyfikacji wizualnej</li>
+                    <li>Opracowanie stylu platformy</li>
+                    <li>Budowa strony internetowej projektu</li>
+                    <li>Architektura systemu CRM</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">CRM</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Projekt panelu administratora</li>
+                    <li>Projekt struktury baz danych</li>
+                    <li>Pierwsze funkcje użytkowników</li>
+                    <li>System zarządzania zawodami i sektorami</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Dane</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Rozpoczęcie budowy bazy zawodów</li>
+                    <li>Research sektorów: Offshore, Maritime, Oil &amp; Gas, Construction, Wind Energy</li>
+                  </ul>
+                </div>
+              </div>
+              <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong style="color: #D4A85C; display: block; margin-bottom: 6px;">👥 Zespół</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Zarząd</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Founder / CEO (1)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">IT</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Lead Developer (1)</li>
+                    <li>Junior Developer (2)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Data</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Researcher &amp; Data Manager (1)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Design</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>UI/UX Designer (1)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px; background: rgba(45,212,191,.15); padding: 4px 6px; border-radius: 4px; display: inline-block;">Razem: 6 osób</p>
+                </div>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">💰 Koszty</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Jednorazowe</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Rejestracja firmy</li>
+                    <li>Sprzęt komputerowy</li>
+                    <li>Wyposażenie biura</li>
+                    <li>Domeny i hosting</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Stałe</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Wynajem biura</li>
+                    <li>Wynagrodzenia zespołu</li>
+                    <li>Oprogramowanie</li>
+                    <li>Chmura i serwery</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </article>
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #2DD4BF;">📋 PRACA</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Rejestracja działalności / spółki</strong></article>
-          <article class="roadmap-q-card"><strong>Przygotowanie dokumentacji formalnej</strong></article>
-          <article class="roadmap-q-card"><strong>Opracowanie modelu biznesowego</strong></article>
-          <article class="roadmap-q-card"><strong>Zakup domen i zabezpieczenie marki</strong></article>
-          <article class="roadmap-q-card"><strong>Wynajem biura</strong></article>
-          <article class="roadmap-q-card"><strong>Zakup komputerów i wyposażenia</strong></article>
-          <article class="roadmap-q-card"><strong>Konfiguracja środowisk programistycznych</strong></article>
-          <article class="roadmap-q-card"><strong>Narzędzia do zarządzania projektem</strong></article>
-          <article class="roadmap-q-card"><strong>Pozyskanie głównego programisty</strong></article>
-          <article class="roadmap-q-card"><strong>Rekrutacja 2 Junior Developerów</strong></article>
-          <article class="roadmap-q-card"><strong>Rekrutacja Researchera &amp; Data Managera</strong></article>
-          <article class="roadmap-q-card"><strong>Rekrutacja UI/UX Designera</strong></article>
-          <article class="roadmap-q-card"><strong>Projekt identyfikacji wizualnej</strong></article>
-          <article class="roadmap-q-card"><strong>Opracowanie stylu platformy</strong></article>
-          <article class="roadmap-q-card"><strong>Budowa strony internetowej projektu</strong></article>
-          <article class="roadmap-q-card"><strong>Architektura systemu CRM</strong></article>
-          <article class="roadmap-q-card"><strong>Projekt panelu administratora</strong></article>
-          <article class="roadmap-q-card"><strong>Projekt struktury baz danych</strong></article>
-          <article class="roadmap-q-card"><strong>Pierwsze funkcje użytkowników</strong></article>
-          <article class="roadmap-q-card"><strong>System zarządzania zawodami i sektorami</strong></article>
-          <article class="roadmap-q-card"><strong>Rozpoczęcie budowy bazy zawodów</strong></article>
-          <article class="roadmap-q-card"><strong>Research: Offshore, Maritime, Oil &amp; Gas, Construction, Wind Energy</strong></article>
-          
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #D4A85C;">👥 ZESPÓŁ</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Founder / CEO</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Lead Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Junior Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">2 osoby</p></article>
-          <article class="roadmap-q-card"><strong>Researcher &amp; Data Manager</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>UI/UX Designer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #6E8BA8;">💰 KOSZTY</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Rejestracja firmy</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">jednorazowo</p></article>
-          <article class="roadmap-q-card"><strong>Sprzęt komputerowy</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">jednorazowo</p></article>
-          <article class="roadmap-q-card"><strong>Wyposażenie biura</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">jednorazowo</p></article>
-          <article class="roadmap-q-card"><strong>Domeny i hosting</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">jednorazowo</p></article>
-          <article class="roadmap-q-card"><strong>Wynajem biura</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">stały koszt</p></article>
-          <article class="roadmap-q-card"><strong>Wynagrodzenia zespołu</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">stały koszt</p></article>
-          <article class="roadmap-q-card"><strong>Oprogramowanie</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">stały koszt</p></article>
-          <article class="roadmap-q-card"><strong>Chmura i serwery</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">stały koszt</p></article>
-
-          <!-- MVP 1.2 -->
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>MVP 1.2 — Q4 2026</strong>
-            <span style="font-size: 11px; color: #97a4b2;">październik – grudzień 2026</span>
+            <span>październik – grudzień 2026</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
+              <div style="margin-bottom: 12px;">
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">📋 Praca</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Rozwój platformy</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Konta użytkowników</li>
+                    <li>Konta firm</li>
+                    <li>Podstawowe profile kandydatów</li>
+                    <li>Moduł ogłoszeń pracy</li>
+                    <li>Moduł kontaktów CRM</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Formularze</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Opracowanie formularzy dla 5 sektorów &amp; 50 zawodów</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Baza danych</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Poszerzenie danych dla wszystkich sektorów</li>
+                    <li>Analiza kompetencji dla 50 zawodów</li>
+                    <li>Tworzenie profili kompetencyjnych</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Partnerzy</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Budowa bazy partnerów</li>
+                    <li>Budowa bazy klientów firmowych</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">AI</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Projekt silnika dopasowań</li>
+                    <li>Pierwsze modele scoringowe</li>
+                    <li>Analiza danych użytkowników</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Marketing</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Uruchomienie wszystkich kanałów Social Media</li>
+                    <li>Publikacja pierwszych materiałów</li>
+                    <li>Pozyskanie pierwszych użytkowników i firm</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Walidacja produktu</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Testy beta, zbieranie opinii, analizy funkcjonalne</li>
+                  </ul>
+                </div>
+              </div>
+              <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong style="color: #D4A85C; display: block; margin-bottom: 6px;">👥 Zespół</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">IT</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Lead Developer</li>
+                    <li>Junior Developer (2)</li>
+                    <li>AI Developer (1)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Data</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Researcher &amp; Data Manager</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Design</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>UI/UX Designer</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Sprzedaż</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Key Account Manager (1)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Marketing</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Marketing &amp; Social Media Specialist (1)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px; background: rgba(45,212,191,.15); padding: 4px 6px; border-radius: 4px; display: inline-block;">Razem: 9 osób</p>
+                </div>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">💰 Koszty</strong>
+                <div style="margin-left: 12px;">
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Rozbudowa infrastruktury</li>
+                    <li>Wynagrodzenia zespołu</li>
+                    <li>Marketing i reklama</li>
+                    <li>Narzędzia AI</li>
+                    <li>Rozbudowa serwerów</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </article>
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #2DD4BF;">📋 PRACA</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Konta użytkowników</strong></article>
-          <article class="roadmap-q-card"><strong>Konta firm</strong></article>
-          <article class="roadmap-q-card"><strong>Podstawowe profile kandydatów</strong></article>
-          <article class="roadmap-q-card"><strong>Moduł ogłoszeń pracy</strong></article>
-          <article class="roadmap-q-card"><strong>Moduł kontaktów CRM</strong></article>
-          <article class="roadmap-q-card"><strong>Formularze dla 5 sektorów</strong></article>
-          <article class="roadmap-q-card"><strong>Formularze dla 50 zawodów</strong></article>
-          <article class="roadmap-q-card"><strong>Poszerzenie danych sektorów</strong></article>
-          <article class="roadmap-q-card"><strong>Analiza kompetencji zawodów</strong></article>
-          <article class="roadmap-q-card"><strong>Tworzenie profili kompetencyjnych</strong></article>
-          <article class="roadmap-q-card"><strong>Budowa bazy partnerów</strong></article>
-          <article class="roadmap-q-card"><strong>Budowa bazy klientów firmowych</strong></article>
-          <article class="roadmap-q-card"><strong>Projekt silnika dopasowań</strong></article>
-          <article class="roadmap-q-card"><strong>Pierwsze modele scoringowe</strong></article>
-          <article class="roadmap-q-card"><strong>Analiza danych użytkowników</strong></article>
-          <article class="roadmap-q-card"><strong>Uruchomienie Social Media</strong></article>
-          <article class="roadmap-q-card"><strong>Publikacja pierwszych materiałów</strong></article>
-          <article class="roadmap-q-card"><strong>Pozyskanie pierwszych użytkowników</strong></article>
-          <article class="roadmap-q-card"><strong>Pozyskanie pierwszych firm</strong></article>
-          <article class="roadmap-q-card"><strong>Testy beta</strong></article>
-          <article class="roadmap-q-card"><strong>Zbieranie opinii</strong></article>
-          <article class="roadmap-q-card"><strong>Analizy funkcjonalne</strong></article>
-          
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #D4A85C;">👥 ZESPÓŁ</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Lead Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Junior Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">2 osoby</p></article>
-          <article class="roadmap-q-card"><strong>AI Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Researcher &amp; Data Manager</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>UI/UX Designer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Key Account Manager</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Marketing &amp; Social Media Specialist</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #6E8BA8;">💰 KOSZTY</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Rozbudowa infrastruktury</strong></article>
-          <article class="roadmap-q-card"><strong>Wynagrodzenia zespołu</strong></article>
-          <article class="roadmap-q-card"><strong>Marketing i reklama</strong></article>
-          <article class="roadmap-q-card"><strong>Narzędzia AI</strong></article>
-          <article class="roadmap-q-card"><strong>Rozbudowa serwerów</strong></article>
-
-          <!-- MVP 1.3 -->
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>MVP 1.3 — Q1 2027</strong>
-            <span style="font-size: 11px; color: #97a4b2;">styczeń – marzec 2027</span>
+            <span>styczeń – marzec 2027</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
+              <div style="margin-bottom: 12px;">
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">📋 Praca</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Ukończenie podstawowych modułów</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Konto użytkownika, profil zawodowy, certyfikaty, dokumenty, kalendarz</li>
+                    <li>Konto firmy, zarządzanie ofertami, baza kandydatów</li>
+                    <li>Komunikacja, konto partnera, zarządzanie społecznością</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Moduły platformy</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Baza wiedzy, Forum, Blog, Komunikator</li>
+                    <li>Oferty pracy, Sklep, Organizacja spotkań i zarządzanie wydarzeniami</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Partnerzy</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Pozyskanie minimum 15 partnerów strategicznych</li>
+                    <li>Rekrutacja 250 ambasadorów branżowych (5 na zawód × 50 zawodów)</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Sprzedaż</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Pozyskanie pierwszych 10 klientów firmowych</li>
+                    <li>Rozpoczęcie sprzedaży abonamentów</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Marketing</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Materiały edukacyjne dla wszystkich zawodów</li>
+                    <li>Rozbudowa bloga i bazy wiedzy</li>
+                    <li>Kampanie employer branding</li>
+                  </ul>
+                </div>
+              </div>
+              <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong style="color: #D4A85C; display: block; margin-bottom: 6px;">👥 Zespół</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Rdzeń zespołu: 9 osób</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Lead Developer, 2× Junior Dev, AI Developer</li>
+                    <li>Researcher &amp; Data Manager, UI/UX Designer</li>
+                    <li>Key Account Manager, Marketing Specialist, Founder/CEO</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Plus</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>do 250 ambasadorów branżowych</li>
+                  </ul>
+                </div>
+              </div>
+              <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">💰 Koszty</strong>
+                <div style="margin-left: 12px;">
+                  <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Operacyjne</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Wynagrodzenia, Marketing, Serwery, AI</li>
+                  </ul>
+                  <p style="margin: 8px 0 4px; font-weight: 600; color: #fff; font-size: 11px;">Rozwojowe</p>
+                  <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
+                    <li>Program ambasadorski, Eventy branżowe, Pozyskanie partnerów</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </article>
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #2DD4BF;">📋 PRACA</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Konto użytkownika</strong></article>
-          <article class="roadmap-q-card"><strong>Profil zawodowy</strong></article>
-          <article class="roadmap-q-card"><strong>Certyfikaty</strong></article>
-          <article class="roadmap-q-card"><strong>Dokumenty</strong></article>
-          <article class="roadmap-q-card"><strong>Kalendarz</strong></article>
-          <article class="roadmap-q-card"><strong>Konto firmy</strong></article>
-          <article class="roadmap-q-card"><strong>Zarządzanie ofertami</strong></article>
-          <article class="roadmap-q-card"><strong>Baza kandydatów</strong></article>
-          <article class="roadmap-q-card"><strong>Komunikacja</strong></article>
-          <article class="roadmap-q-card"><strong>Konto partnera</strong></article>
-          <article class="roadmap-q-card"><strong>Zarządzanie społecznością</strong></article>
-          <article class="roadmap-q-card"><strong>Baza wiedzy</strong></article>
-          <article class="roadmap-q-card"><strong>Forum</strong></article>
-          <article class="roadmap-q-card"><strong>Blog</strong></article>
-          <article class="roadmap-q-card"><strong>Komunikator</strong></article>
-          <article class="roadmap-q-card"><strong>Oferty pracy</strong></article>
-          <article class="roadmap-q-card"><strong>Sklep</strong></article>
-          <article class="roadmap-q-card"><strong>Organizacja spotkań</strong></article>
-          <article class="roadmap-q-card"><strong>Zarządzanie wydarzeniami</strong></article>
-          <article class="roadmap-q-card"><strong>Pozyskanie 15+ partnerów strategicznych</strong></article>
-          <article class="roadmap-q-card"><strong>Rekrutacja 250 ambasadorów branżowych</strong></article>
-          <article class="roadmap-q-card"><strong>Pozyskanie 10 pierwszych klientów firmowych</strong></article>
-          <article class="roadmap-q-card"><strong>Rozpoczęcie sprzedaży abonamentów</strong></article>
-          <article class="roadmap-q-card"><strong>Materiały edukacyjne dla zawodów</strong></article>
-          <article class="roadmap-q-card"><strong>Rozbudowa bloga</strong></article>
-          <article class="roadmap-q-card"><strong>Rozbudowa bazy wiedzy</strong></article>
-          <article class="roadmap-q-card"><strong>Kampanie employer branding</strong></article>
-          
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #D4A85C;">👥 ZESPÓŁ</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Lead Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Junior Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">2 osoby</p></article>
-          <article class="roadmap-q-card"><strong>AI Developer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Researcher &amp; Data Manager</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>UI/UX Designer</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Key Account Manager</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Marketing Specialist</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Founder / CEO</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">1 osoba</p></article>
-          <article class="roadmap-q-card"><strong>Ambasadorzy branżowi</strong><p style="margin: 4px 0 0; font-size: 11px; color: #97a4b2;">do 250 osób</p></article>
-          
-          <article class="roadmap-q-card roadmap-section-label">
-            <strong style="color: #6E8BA8;">💰 KOSZTY</strong>
-          </article>
-          <article class="roadmap-q-card"><strong>Wynagrodzenia</strong></article>
-          <article class="roadmap-q-card"><strong>Marketing</strong></article>
-          <article class="roadmap-q-card"><strong>Serwery</strong></article>
-          <article class="roadmap-q-card"><strong>AI &amp; narzędzia</strong></article>
-          <article class="roadmap-q-card"><strong>Program ambasadorski</strong></article>
-          <article class="roadmap-q-card"><strong>Eventy branżowe</strong></article>
-          <article class="roadmap-q-card"><strong>Pozyskanie partnerów</strong></article>
-
-          <!-- MVP 1.4 -->
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>MVP 1.4 — Q2 2027</strong>
-            <span style="font-size: 11px; color: #97a4b2;">kwiecień – czerwiec 2027</span>
-          </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
+            <span>kwiecień – czerwiec 2027</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
         </div>
       </section>
-      
       <section class="roadmap-detail stage-two" data-roadmap-detail="two">
         <div class="roadmap-detail-head">
           <h2 class="roadmap-detail-title">II. v1.5 — v1.9</h2>
           <span class="roadmap-detail-meta">Q3 2027 – Q4 2027</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v1.5 — Q3 2027</strong>
-            <span style="font-size: 11px; color: #97a4b2;">lipiec – wrzesień 2027</span>
+            <span>lipiec – wrzesień 2027</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
-          </article>
-          
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v1.9 — Q4 2027</strong>
-            <span style="font-size: 11px; color: #97a4b2;">październik – grudzień 2027</span>
-          </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
+            <span>październik – grudzień 2027</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
         </div>
       </section>
-      
       <section class="roadmap-detail stage-three" data-roadmap-detail="three">
         <div class="roadmap-detail-head">
           <h2 class="roadmap-detail-title">III. v2.0 — v2.9</h2>
           <span class="roadmap-detail-meta">Q1 2028 – Q2 2028</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v2.0 — Q1 2028</strong>
-            <span style="font-size: 11px; color: #97a4b2;">styczeń – marzec 2028</span>
+            <span>styczeń – marzec 2028</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
-          </article>
-          
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v2.9 — Q2 2028</strong>
-            <span style="font-size: 11px; color: #97a4b2;">kwiecień – czerwiec 2028</span>
-          </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
+            <span>kwiecień – czerwiec 2028</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
         </div>
       </section>
-      
       <section class="roadmap-detail stage-four" data-roadmap-detail="four">
         <div class="roadmap-detail-head">
           <h2 class="roadmap-detail-title">IV. v3.0 — v3.9</h2>
           <span class="roadmap-detail-meta">Q3 2028 – Q4 2028</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v3.0 — Q3 2028</strong>
-            <span style="font-size: 11px; color: #97a4b2;">lipiec – wrzesień 2028</span>
+            <span>lipiec – wrzesień 2028</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
-          </article>
-          
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v3.9 — Q4 2028</strong>
-            <span style="font-size: 11px; color: #97a4b2;">październik – grudzień 2028</span>
-          </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
+            <span>październik – grudzień 2028</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
         </div>
       </section>
-      
       <section class="roadmap-detail stage-five" data-roadmap-detail="five">
         <div class="roadmap-detail-head">
           <h2 class="roadmap-detail-title">V. v4.0 — v4.9</h2>
           <span class="roadmap-detail-meta">Q1 2029 – Q2 2029</span>
         </div>
         <div class="roadmap-q-details">
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v4.0 — Q1 2029</strong>
-            <span style="font-size: 11px; color: #97a4b2;">styczeń – marzec 2029</span>
+            <span>styczeń – marzec 2029</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
-          </article>
-          
-          <article class="roadmap-q-card roadmap-q-header">
+          <article class="roadmap-q-card">
             <strong>v4.9 — Q2 2029</strong>
-            <span style="font-size: 11px; color: #97a4b2;">kwiecień – czerwiec 2029</span>
-          </article>
-          <article class="roadmap-q-card roadmap-section-label" style="grid-column: 1/-1;">
-            <div style="color: #97a4b2; font-style: italic; text-align: center;">do uzupełnienia</div>
+            <span>kwiecień – czerwiec 2029</span>
+            <div style="margin-top: 10px; font-size: 12px; color: #d4dde6;">
+              <div style="color: #97a4b2; font-style: italic;">
+                (do uzupełnienia)
+              </div>
+            </div>
           </article>
         </div>
       </section>
