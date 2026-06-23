@@ -247,12 +247,14 @@
   .team-toggle.active:after{transform:rotate(180deg)}
   .team-map{display:none; flex-wrap:wrap; gap:8px; margin-top:10px; margin-left:0}
   .team-map.active{display:flex}
-  .person-chip{display:flex; align-items:center; justify-content:center; width:72px; height:72px; border-radius:50%; font-size:9.5px; text-align:center; padding:6px; color:#06231c; font-weight:700; line-height:1.2}
-  .person-chip.new{background:#34D399; box-shadow:0 0 0 2px rgba(52,211,153,.35), 0 6px 14px rgba(52,211,153,.20)}
-  .person-chip.existing{background:#FBBF24; box-shadow:0 0 0 2px rgba(251,191,36,.35), 0 6px 14px rgba(251,191,36,.20)}
-  .team-legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:10.5px; color:#97a4b2}
-  .team-legend span{display:inline-flex; align-items:center; gap:5px}
-  .team-legend i{width:10px; height:10px; border-radius:50%; display:inline-block}
+  .person-chip{display:flex; align-items:center; justify-content:center; width:auto; height:auto; border-radius:6px; font-size:11px; text-align:center; padding:6px 8px; color:#fff; font-weight:600; line-height:1.2; background:rgba(52,211,153,.15); border:1px solid rgba(52,211,153,.35)}
+  .person-chip new{color:#34D399}
+  .team-legend{display:flex; flex-direction:column; gap:6px; margin-top:12px; font-size:11px; color:var(--text)}
+  .team-legend span{display:flex; align-items:center; gap:8px}
+  .team-legend span strong{font-weight:700}
+  .team-legend .recruited{color:#34D399}
+  .team-legend .before{color:#FBBF24}
+  .team-legend .current{color:#2DD4BF}
   .org-view{padding:32px 0}
   .org-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; padding:0 30px}
   .org-filter-btn{background:rgba(255,255,255,.08); border:1px solid var(--line); color:var(--text); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:12px; font-family:var(--display); font-weight:600; transition:all .2s ease}
@@ -819,7 +821,7 @@
             <span>lipiec – wrzesień 2026</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
               <div style="margin-bottom: 12px;">
-                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">PRACA</strong>
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRACA</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Fundamenty biznesowe</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -864,7 +866,7 @@
                 </div>
               </div>
               <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">KOSZTY</strong>
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Jednorazowe</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -885,17 +887,17 @@
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
                 <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 6 osób)</em></button>
                 <div class="team-map">
-                  <div class="person-chip new"><span>Founder / CEO</span></div>
-                    <div class="person-chip new"><span>Lead Developer</span></div>
-                    <div class="person-chip new"><span>Junior Dev #1</span></div>
-                    <div class="person-chip new"><span>Junior Dev #2</span></div>
-                    <div class="person-chip new"><span>Data Manager</span></div>
-                    <div class="person-chip new"><span>UI/UX Designer</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Founder / CEO</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Lead Developer</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Junior Dev #1</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Junior Dev #2</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Data Manager</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ UI/UX Designer</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong style="color:#fff;">Zrekrutowani:</strong> 6 osób</span>
-                  <span><strong style="color:#fff;">Zespół przed rekrutacją:</strong> 0 osób</span>
-                  <span><strong style="color:#fff;">Aktualny zespół:</strong> 6 osób</span>
+                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">6 osób</span></span>
+                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">0 osób</span></span>
+                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">6 osób</span></span>
                 </div>
               </div>
             </div>
@@ -905,7 +907,7 @@
             <span>październik – grudzień 2026</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
               <div style="margin-bottom: 12px;">
-                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">PRACA</strong>
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRACA</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Rozwój platformy</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -949,7 +951,7 @@
                 </div>
               </div>
               <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">KOSZTY</strong>
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
                 <div style="margin-left: 12px;">
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
                     <li>Rozbudowa infrastruktury</li>
@@ -963,14 +965,14 @@
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
                 <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — Razem: 3 nowe osoby)</em></button>
                 <div class="team-map">
-                    <div class="person-chip new"><span>AI Developer</span></div>
-                    <div class="person-chip new"><span>Key Account Mgr</span></div>
-                    <div class="person-chip new"><span>Marketing Spec.</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ AI Developer</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Key Account Mgr</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Marketing Spec.</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong style="color:#fff;">Zrekrutowani:</strong> 3 osoby</span>
-                  <span><strong style="color:#fff;">Zespół przed rekrutacją:</strong> 6 osób</span>
-                  <span><strong style="color:#fff;">Aktualny zespół:</strong> 9 osób</span>
+                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">3 osoby</span></span>
+                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">6 osób</span></span>
+                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">9 osób</span></span>
                 </div>
               </div>
             </div>
@@ -980,7 +982,7 @@
             <span>styczeń – marzec 2027</span>
             <div style="margin-top: 10px; font-size: 12px; color: #d4dde6; line-height: 1.5;">
               <div style="margin-bottom: 12px;">
-                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px;">PRACA</strong>
+                <strong style="color: #2DD4BF; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">PRACA</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Ukończenie podstawowych modułów</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -1012,7 +1014,7 @@
                 </div>
               </div>
               <div style="margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
-                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px;">KOSZTY</strong>
+                <strong style="color: #6E8BA8; display: block; margin-bottom: 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;">KOSZTY</strong>
                 <div style="margin-left: 12px;">
                   <p style="margin: 4px 0; font-weight: 600; color: #fff; font-size: 11px;">Operacyjne</p>
                   <ul style="margin: 4px 0 0; padding-left: 16px; list-style: disc;">
@@ -1027,12 +1029,12 @@
               <div style="padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);">
                 <button type="button" class="team-toggle">ZESPÓŁ <em>(kliknij, aby zobaczyć mapę osób — 250 ambasadorów)</em></button>
                 <div class="team-map">
-                    <div class="person-chip new"><span>Ambasadorzy (250)</span></div>
+                  <div class="person-chip"><span style="color:#34D399;">+ Ambasadorzy (250)</span></div>
                 </div>
                 <div class="team-legend">
-                  <span><strong style="color:#fff;">Zrekrutowani:</strong> 250 osób</span>
-                  <span><strong style="color:#fff;">Zespół przed rekrutacją:</strong> 9 osób</span>
-                  <span><strong style="color:#fff;">Aktualny zespół:</strong> 259 osób</span>
+                  <span><strong class="recruited">Zrekrutowani:</strong> <span class="recruited">250 osób</span></span>
+                  <span><strong class="before">Zespół przed rekrutacją:</strong> <span class="before">9 osób</span></span>
+                  <span><strong class="current">Aktualny zespół:</strong> <span class="current">259 osób</span></span>
                 </div>
               </div>
             </div>
