@@ -276,11 +276,14 @@
   .oc-scroll{overflow-x:auto; padding:0 30px 14px}
   .oc-chart-wrap{width:880px; height:347px; margin:0 auto; overflow:hidden}
   .oc-chart{position:relative; width:1420px; height:560px; margin:0; transform:scale(.62); transform-origin:top left}
-  .oc-box{position:absolute; min-width:180px; min-height:84px; padding:14px 20px; border:2px solid #fff; border-radius:8px; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; text-align:center; font-size:20px; font-weight:800; letter-spacing:.5px; cursor:pointer; user-select:none; transition:.2s ease; z-index:3}
+  .oc-box{position:absolute; min-width:180px; min-height:84px; padding:14px 20px; border:2px solid #fff; border-radius:8px; background:#000; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center; font-size:20px; font-weight:800; letter-spacing:.5px; cursor:pointer; user-select:none; transition:.2s ease; z-index:3}
   .oc-box:hover{background:#fff; color:#000; transform:translateY(-4px); box-shadow:0 0 22px rgba(255,255,255,.35)}
   .oc-box:active{transform:translateY(-1px)}
   .oc-box.small{min-width:170px; min-height:72px; font-size:18px}
   .oc-box.two-lines{line-height:1.25}
+  .oc-box-role{font-size:12px; font-weight:600; letter-spacing:normal; text-transform:none; color:#2DD4BF}
+  .oc-box:hover .oc-box-role{color:#0f766e}
+  .oc-box-role:empty{display:none}
   .oc-board{top:0; left:520px; width:280px}
   .oc-investors{top:0; left:880px; width:280px}
   .oc-ceo{top:160px; left:520px; width:280px}
@@ -1698,16 +1701,16 @@
         <div class="oc-line v oc-line-to-bok"></div>
         <div class="oc-line v oc-line-to-hr"></div>
         <div class="oc-line v oc-line-to-finance"></div>
-        <button class="oc-box oc-board" data-title="Zarząd" data-roles="Founder / Product Owner@Q3 2026" data-text="Najwyższy poziom decyzyjny. Odpowiada za nadzór strategiczny, kierunek rozwoju, decyzje właścicielskie oraz kontrolę realizacji głównych celów projektu. Rola startowa: Founder / Product Owner.">Zarząd</button>
-        <button class="oc-box oc-investors" data-title="Inwestorzy" data-roles="Runda inwestycyjna MVP1@Q3 2026" data-text="Osoby lub podmioty finansujące rozwój projektu (runda MVP1, obligacje korporacyjne, granty). Wspierają spółkę kapitałowo, strategicznie oraz relacyjnie.">Inwestorzy</button>
-        <button class="oc-box oc-ceo" data-title="CEO" data-roles="Founder / Product Owner (CEO)@Q3 2026" data-text="Osoba odpowiedzialna za zarządzanie operacyjne, realizację strategii z Road Mapy, koordynację działów oraz raportowanie do Zarządu i Inwestorów.">CEO</button>
-        <button class="oc-box small oc-it" data-title="IT" data-roles="Lead Developer / CTO (fractional)@Q3 2026;Developer #1@Q3 2026;Developer #2@Q3 2026;Główny programista@Q1 2027;Główny programista aplikacji / mobile / v2@Q3 2027;Developer dodatkowy #1@Q3 2027;Developer dodatkowy #2@Q3 2027" data-text="Dział technologii: architektura systemu, programowanie, wdrożenia, bezpieczeństwo i utrzymanie aplikacji. Role z Road Mapy: Lead Developer / CTO (fractional), Developer #1 i #2, Główny programista, Główny programista aplikacji / mobile / v2 oraz Developerzy dodatkowi.">IT</button>
-        <button class="oc-box small oc-rd" data-title="R&amp;D" data-roles="UI/UX Designer@Q3 2026;Researcher@Q3 2026" data-text="Dział badań i rozwoju: research rynku i zawodów, analiza danych, projektowanie UX/UI oraz budowa bazy zawodów, firm i partnerów. Role z Road Mapy: Researcher oraz UI/UX Designer.">R&amp;D</button>
-        <button class="oc-box small oc-sales" data-title="SPRZEDAŻ" data-roles="Sprzedaż / KAM@Q4 2026;Handlowiec #1@Q2 2027;Handlowiec #2@Q2 2027" data-text="Dział handlowy: pozyskiwanie klientów, rozmowy handlowe, partnerstwa B2B oraz komercjalizacja usług platformy (subskrypcje, księgowość, obligacje). Role z Road Mapy: Sprzedaż / KAM, Handlowiec #1 i #2.">SPRZEDAŻ</button>
-        <button class="oc-box small oc-marketing" data-title="MARKETING" data-roles="Marketing / Content@Q4 2026;Marketing / content dodatkowy@Q3 2027" data-text="Dział marketingu: komunikacja marki, content, kampanie, materiały inwestorskie i sprzedażowe oraz generowanie leadów. Role z Road Mapy: Marketing / Content oraz Marketing / content dodatkowy.">MARKETING</button>
-        <button class="oc-box small oc-bok" data-title="BOK" data-roles="BOK@Q1 2027;BOK dodatkowy@Q2 2027" data-text="Biuro Obsługi Klienta: wsparcie użytkowników, firm i partnerów oraz bieżąca komunikacja operacyjna. Role z Road Mapy: BOK oraz BOK dodatkowy.">BOK</button>
-        <button class="oc-box small oc-hr two-lines" data-title="HR &amp; Administracja" data-roles="Administracja / granty@Q2 2027" data-text="Dział odpowiedzialny za rekrutację, onboarding, dokumentację pracowniczą, administrację wewnętrzną, procedury, organizację pracy oraz obsługę grantów. Rola z Road Mapy: Administracja / granty.">HR &amp;<br />ADMINISTRACJA</button>
-        <button class="oc-box small oc-finance" data-title="FINANSE" data-roles="Główna księgowa@Q1 2027;Księgowa pomocnicza@Q2 2027" data-text="Dział finansów: budżet, controlling, księgowość, rozliczenia, prognozy oraz raportowanie kosztów i przychodów (KOSZTY / PRZYCHODY z Road Mapy). Role z Road Mapy: Główna księgowa oraz Księgowa pomocnicza.">FINANSE</button>
+        <button class="oc-box oc-board" data-title="Zarząd" data-roles="Founder / Product Owner@Q3 2026" data-text="Najwyższy poziom decyzyjny. Odpowiada za nadzór strategiczny, kierunek rozwoju, decyzje właścicielskie oraz kontrolę realizacji głównych celów projektu. Rola startowa: Founder / Product Owner."><span class="oc-box-label">Zarząd</span><span class="oc-box-role"></span></button>
+        <button class="oc-box oc-investors" data-title="Inwestorzy" data-roles="Runda inwestycyjna MVP1@Q3 2026" data-text="Osoby lub podmioty finansujące rozwój projektu (runda MVP1, obligacje korporacyjne, granty). Wspierają spółkę kapitałowo, strategicznie oraz relacyjnie."><span class="oc-box-label">Inwestorzy</span><span class="oc-box-role"></span></button>
+        <button class="oc-box oc-ceo" data-title="CEO" data-roles="Founder / Product Owner (CEO)@Q3 2026" data-text="Osoba odpowiedzialna za zarządzanie operacyjne, realizację strategii z Road Mapy, koordynację działów oraz raportowanie do Zarządu i Inwestorów."><span class="oc-box-label">CEO</span><span class="oc-box-role"></span></button>
+        <button class="oc-box small oc-it" data-title="IT" data-roles="Starszy Programista Full Stack@Q3 2026;Junior Front-end programmer@Q3 2026@Starszy Programista Full Stack;Junior Back-end programmer@Q3 2026@Starszy Programista Full Stack;Główny programista@Q1 2027;Główny programista aplikacji / mobile / v2@Q3 2027;Developer dodatkowy #1@Q3 2027;Developer dodatkowy #2@Q3 2027" data-text="Dział technologii: architektura systemu, programowanie, wdrożenia, bezpieczeństwo i utrzymanie aplikacji. Role z Road Mapy: Starszy Programista Full Stack (z Junior Front-end programmer i Junior Back-end programmer pod sobą), Główny programista, Główny programista aplikacji / mobile / v2 oraz Developerzy dodatkowi."><span class="oc-box-label">IT</span><span class="oc-box-role"></span></button>
+        <button class="oc-box small oc-rd" data-title="R&amp;D" data-roles="Researcher@Q3 2026" data-text="Dział badań i rozwoju: research rynku i zawodów, analiza danych oraz budowa bazy zawodów, firm i partnerów. Rola z Road Mapy: Researcher."><span class="oc-box-label">R&amp;D</span><span class="oc-box-role"></span></button>
+        <button class="oc-box small oc-sales" data-title="SPRZEDAŻ" data-roles="Sprzedaż / KAM@Q4 2026;Handlowiec #1@Q2 2027;Handlowiec #2@Q2 2027" data-text="Dział handlowy: pozyskiwanie klientów, rozmowy handlowe, partnerstwa B2B oraz komercjalizacja usług platformy (subskrypcje, księgowość, obligacje). Role z Road Mapy: Sprzedaż / KAM, Handlowiec #1 i #2."><span class="oc-box-label">SPRZEDAŻ</span><span class="oc-box-role"></span></button>
+        <button class="oc-box small oc-marketing" data-title="MARKETING" data-roles="UI/UX Designer@Q3 2026;Marketing / Content@Q4 2026;Marketing / content dodatkowy@Q3 2027" data-text="Dział marketingu: komunikacja marki, content, kampanie, materiały inwestorskie i sprzedażowe, projektowanie UX/UI oraz generowanie leadów. Role z Road Mapy: UI/UX Designer, Marketing / Content oraz Marketing / content dodatkowy."><span class="oc-box-label">MARKETING</span><span class="oc-box-role"></span></button>
+        <button class="oc-box small oc-bok" data-title="BOK" data-roles="BOK@Q1 2027;BOK dodatkowy@Q2 2027" data-text="Biuro Obsługi Klienta: wsparcie użytkowników, firm i partnerów oraz bieżąca komunikacja operacyjna. Role z Road Mapy: BOK oraz BOK dodatkowy."><span class="oc-box-label">BOK</span><span class="oc-box-role"></span></button>
+        <button class="oc-box small oc-hr two-lines" data-title="HR &amp; Administracja" data-roles="Administracja / granty@Q2 2027" data-text="Dział odpowiedzialny za rekrutację, onboarding, dokumentację pracowniczą, administrację wewnętrzną, procedury, organizację pracy oraz obsługę grantów. Rola z Road Mapy: Administracja / granty."><span class="oc-box-label">HR &amp;<br />ADMINISTRACJA</span><span class="oc-box-role"></span></button>
+        <button class="oc-box small oc-finance" data-title="FINANSE" data-roles="Główna księgowa@Q1 2027;Księgowa pomocnicza@Q2 2027" data-text="Dział finansów: budżet, controlling, księgowość, rozliczenia, prognozy oraz raportowanie kosztów i przychodów (KOSZTY / PRZYCHODY z Road Mapy). Role z Road Mapy: Główna księgowa oraz Księgowa pomocnicza."><span class="oc-box-label">FINANSE</span><span class="oc-box-role"></span></button>
       </section>
       </div>
       </div>
@@ -2057,14 +2060,30 @@
     const ORG_YEAR_LAST_Q = { '2026':'Q4 2026', '2027':'Q4 2027', '2028':'Q4 2028', '2029':'Q2 2029' };
 
     const boxRoles = new Map();
+    const boxActiveRoles = new Map();
+    const boxRoleEl = new Map();
     ocBoxes.forEach(box => {
       const raw = box.dataset.roles || '';
       const roles = raw ? raw.split(';').map(part => {
-        const [role, q] = part.split('@');
-        return { role, q };
+        const [role, q, parent] = part.split('@');
+        return { role, q, parent: parent || null };
       }) : [];
       boxRoles.set(box, roles);
+      boxRoleEl.set(box, box.querySelector('.oc-box-role'));
     });
+
+    // Buduje czytelny opis hierarchii: rola wiodąca + podwładni wciągnięci pod nią ("↳").
+    function formatRoleTree(activeRoles, separator) {
+      const top = activeRoles.filter(r => !r.parent);
+      const subsByParent = {};
+      activeRoles.filter(r => r.parent).forEach(r => {
+        (subsByParent[r.parent] = subsByParent[r.parent] || []).push(r.role);
+      });
+      return top.map(t => {
+        const subs = subsByParent[t.role];
+        return t.role + (subs && subs.length ? ' (↳ ' + subs.join(', ') + ')' : '');
+      }).join(separator);
+    }
 
     let cutoffIndex = ORG_QUARTERS.length - 1;
     let filterMode = 'all';
@@ -2082,7 +2101,12 @@
         const roles = boxRoles.get(box);
         const activeRoles = roles.filter(r => ORG_QUARTERS.indexOf(r.q) <= cutoffIndex);
         box.classList.toggle('inactive', roles.length > 0 && activeRoles.length === 0);
-        box.dataset.activeRoles = activeRoles.map(r => r.role).join('; ');
+        boxActiveRoles.set(box, activeRoles);
+        const roleEl = boxRoleEl.get(box);
+        if (roleEl) {
+          const topRoles = activeRoles.filter(r => !r.parent).map(r => r.role);
+          roleEl.textContent = topRoles.length ? '— ' + topRoles.join(', ') : '';
+        }
       });
 
       [allBtn, ...stageBtns, ...qBtns, ...yearBtns].forEach(btn => btn && btn.classList.remove('active'));
@@ -2114,9 +2138,9 @@
     function renderTeamScope() {
       const parts = [];
       ocBoxes.forEach(box => {
-        const activeRoles = (box.dataset.activeRoles || '').split('; ').filter(Boolean);
+        const activeRoles = boxActiveRoles.get(box) || [];
         if (activeRoles.length) {
-          parts.push('<span class="org-team-scope-dept"><b>' + box.dataset.title + ':</b> ' + activeRoles.join(', ') + '</span>');
+          parts.push('<span class="org-team-scope-dept"><b>' + box.dataset.title + ':</b> ' + formatRoleTree(activeRoles, ', ') + '</span>');
         }
       });
       teamScopeEl.innerHTML = parts.length ? parts.join('') : '<span class="org-team-scope-empty">Brak obsadzonych ról w wybranym widoku.</span>';
@@ -2125,9 +2149,9 @@
     function showDetails(box) {
       ocPanel.dataset.openBox = box.dataset.title;
       ocTitle.textContent = box.dataset.title;
-      const activeRoles = (box.dataset.activeRoles || '').split('; ').filter(Boolean);
+      const activeRoles = boxActiveRoles.get(box) || [];
       const roleNote = boxRoles.get(box).length === 0 ? '' :
-        (activeRoles.length ? '\n\nObsadzone role w wybranym widoku: ' + activeRoles.join(', ') + '.' :
+        (activeRoles.length ? '\n\nObsadzone role w wybranym widoku: ' + formatRoleTree(activeRoles, ', ') + '.' :
         '\n\nW wybranym widoku ten dział nie ma jeszcze obsadzonych ról.');
       ocText.textContent = box.dataset.text + roleNote;
       ocPanel.classList.add('active');
