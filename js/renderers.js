@@ -1,6 +1,4 @@
-/* renderers.js — stosuje GoShoreSettings (z settings-config.js) na DOM-ie strony:
-   kolory/font/zaokrąglenie/cień jako CSS-variable, tryb jasny/ciemny, nazwa/slogan, widoczność zakładek.
-   Wywoływane przy starcie strony oraz przy każdej zmianie w panelu ustawień (settings-panel.js). */
+/* renderers.js — global settings + presentation slide patches. */
 (function () {
   const GS = window.GoShoreSettings || {};
   let brandTitleOriginal = null;
@@ -29,11 +27,8 @@
     const h1 = document.querySelector('header.cover h1');
     if (h1) {
       if (brandTitleOriginal === null) brandTitleOriginal = h1.innerHTML;
-      if (settings.siteName && settings.siteName.trim()) {
-        h1.textContent = settings.siteName.trim();
-      } else {
-        h1.innerHTML = brandTitleOriginal;
-      }
+      if (settings.siteName && settings.siteName.trim()) h1.textContent = settings.siteName.trim();
+      else h1.innerHTML = brandTitleOriginal;
     }
 
     let sloganEl = document.getElementById('gsSloganDisplay');
@@ -76,259 +71,170 @@
   Object.assign(window.GoShoreSettings, { applyGlobalStyles, applyVisibility });
 })();
 
-/* Prezentacja — uzupełnienie slajdu 06: Analiza konkurencji i przewaga obronna.
-   Utrzymuje zgodność numeracji: jeśli slajd 5 jest pusty, przenosi tam aktualny model biznesowy ze slajdu 6. */
 (function () {
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  function slide(n) {
+    return document.querySelector('.deck-slide[data-slide="' + n + '"]');
+  }
+
+  function rows(items) {
+    return items.map(row => '<tr>' + row.map(cell => '<td>' + cell + '</td>').join('') + '</tr>').join('');
+  }
+
+  function card(title, body, tone) {
+    return '<div class="slide-card ' + (tone || '') + '"><h4>' + title + '</h4>' + body + '</div>';
+  }
+
+  function infoBox(title, body, color) {
+    return '<div style="background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-left:3px solid ' + (color || '#2DD4BF') + '; border-radius:10px; padding:12px 14px;"><strong style="display:block; color:' + (color || '#2DD4BF') + '; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">' + title + '</strong><p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">' + body + '</p></div>';
+  }
+
   function patchCompetitionSlide() {
-    const slide5 = document.querySelector('.deck-slide[data-slide="5"]');
-    const slide6 = document.querySelector('.deck-slide[data-slide="6"]');
-    if (!slide6 || slide6.dataset.competitionPatched === '1') return;
+    const s5 = slide(5);
+    const s6 = slide(6);
+    if (!s6 || s6.dataset.competitionPatched === '1') return;
+    if (s5 && !s5.textContent.trim() && s6.textContent.includes('Platforma monetyzuje cały cykl kontraktu')) s5.innerHTML = s6.innerHTML;
 
-    if (slide5 && !slide5.textContent.trim() && slide6.textContent.includes('Platforma monetyzuje cały cykl kontraktu')) {
-      slide5.innerHTML = slide6.innerHTML;
-    }
-
-    slide6.innerHTML = `
+    s6.innerHTML = `
       <div class="slide-content competition-slide-content">
         <p class="slide-thesis">Rynek ma wiele kanałów rekrutacji, ale nie ma jednej warstwy zaufania operacyjnego.</p>
-
         <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:16px;">
-          <div class="slide-card accent-amber">
-            <h4>1. Obecne kanały</h4>
-            <p>LinkedIn / Indeed / Pracuj.pl / OLX / Facebook / agencje / job boardy offshore / polecenia.</p>
-            <p style="margin-top:8px; color:#fff; font-weight:700;">Problem: kandydat i firma nadal ręcznie sprawdzają dokumenty, dostępność, certyfikaty i ryzyko.</p>
-          </div>
-          <div class="slide-card accent-teal">
-            <h4>2. Luka rynkowa</h4>
-            <p>Brakuje jednego miejsca do potwierdzenia: kim jest specjalista, jakie ma certyfikaty, czy jest dostępny i czy spełnia wymagania projektu.</p>
-            <p style="margin-top:8px; color:#fff; font-weight:700;">Rynek nie ma statusu: „ten człowiek jest gotowy do wyjazdu na ten projekt”.</p>
-          </div>
-          <div class="slide-card accent-green">
-            <h4>3. Przewaga GO ON [OFF] SHORE</h4>
-            <p>Nie sam AI matching, tylko infrastruktura zaufania operacyjnego.</p>
-            <p style="margin-top:8px; color:#fff; font-weight:700;">Professional Identity + Certificate Vault + Compliance Layer + Availability Status + Marketplace + Trust Score + Digital Offshore ID.</p>
-          </div>
+          ${card('1. Obecne kanały','<p>LinkedIn / Indeed / Pracuj.pl / OLX / Facebook / agencje / job boardy offshore / polecenia.</p><p style="margin-top:8px; color:#fff; font-weight:700;">Problem: kandydat i firma nadal ręcznie sprawdzają dokumenty, dostępność, certyfikaty i ryzyko.</p>','accent-amber')}
+          ${card('2. Luka rynkowa','<p>Brakuje jednego miejsca do potwierdzenia: kim jest specjalista, jakie ma certyfikaty, czy jest dostępny i czy spełnia wymagania projektu.</p><p style="margin-top:8px; color:#fff; font-weight:700;">Rynek nie ma statusu: „ten człowiek jest gotowy do wyjazdu na ten projekt”.</p>','accent-teal')}
+          ${card('3. Przewaga GO ON [OFF] SHORE','<p>Nie sam AI matching, tylko infrastruktura zaufania operacyjnego.</p><p style="margin-top:8px; color:#fff; font-weight:700;">Professional Identity + Certificate Vault + Compliance Layer + Availability Status + Marketplace + Trust Score + Digital Offshore ID.</p>','accent-green')}
         </div>
-
-        <div class="slide-tablewrap" style="margin-bottom:14px;">
-          <table class="slide-table" style="min-width:0; font-size:11.5px;">
-            <thead>
-              <tr><th>Kryterium</th><th>LinkedIn / Indeed / OLX / Pracuj</th><th>Agencje</th><th>Job boardy offshore</th><th>GO ON [OFF] SHORE</th></tr>
-            </thead>
-            <tbody>
-              <tr><td style="font-weight:800; color:#fff;">Oferty pracy</td><td>✅</td><td>✅</td><td>✅</td><td style="color:#34D399; font-weight:800;">✅</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Profil zawodowy high-risk</td><td>◐</td><td>◐</td><td>◐</td><td style="color:#34D399; font-weight:800;">✅</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Certyfikaty i daty ważności</td><td>❌</td><td>◐</td><td>◐</td><td style="color:#34D399; font-weight:800;">✅</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Alerty wygasania</td><td>❌</td><td>◐</td><td>❌</td><td style="color:#34D399; font-weight:800;">✅</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Gotowość mobilizacyjna</td><td>❌</td><td>◐</td><td>❌</td><td style="color:#34D399; font-weight:800;">✅</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Compliance per projekt</td><td>❌</td><td>◐</td><td>◐</td><td style="color:#34D399; font-weight:800;">✅</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Marketplace szkoleń/usług/produktów</td><td>❌</td><td>❌</td><td>❌</td><td style="color:#34D399; font-weight:800;">✅</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Trust Score / Digital Offshore ID</td><td>◐ / ❌</td><td>◐ / ❌</td><td>❌ / ❌</td><td style="color:#34D399; font-weight:800;">✅ / ✅</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="responsive-grid-3b" style="margin-bottom:14px;">
-          <div style="background:rgba(45,212,191,.06); border:1px solid rgba(45,212,191,.28); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#2DD4BF; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">UE — substytuty</strong>
-            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">Energy Jobline, Rigzone, Atlas Professionals, Brunel/Taylor Hopkinson, NES Fircroft, Airswift, Orion Group, Sea Career, Maritime Connector, LinkedIn/Indeed.</p>
-          </div>
-          <div style="background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.32); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#FBBF24; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Polska — kanały</strong>
-            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">Pracuj.pl, OLX Praca, LinkedIn Polska, grupy Facebook, agencje, centra GWO/OPITO/STCW, sklepy BHP i brokerzy/ubezpieczyciele.</p>
-          </div>
-          <div style="background:rgba(52,211,153,.06); border:1px solid rgba(52,211,153,.28); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#34D399; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Luka produktów i kompetencji</strong>
-            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">Sklepy, szkolenia i doradcy istnieją osobno, ale nie są dopasowane do zawodu, kraju, projektu, certyfikatów i ścieżki wyższej stawki.</p>
-          </div>
-        </div>
-
+        <div class="slide-tablewrap" style="margin-bottom:14px;"><table class="slide-table" style="min-width:0; font-size:11.5px;"><thead><tr><th>Kryterium</th><th>LinkedIn / Indeed / OLX / Pracuj</th><th>Agencje</th><th>Job boardy offshore</th><th>GO ON [OFF] SHORE</th></tr></thead><tbody>${rows([
+          ['<strong>Oferty pracy</strong>','✅','✅','✅','<strong style="color:#34D399">✅</strong>'],
+          ['<strong>Profil zawodowy high-risk</strong>','◐','◐','◐','<strong style="color:#34D399">✅</strong>'],
+          ['<strong>Certyfikaty i daty ważności</strong>','❌','◐','◐','<strong style="color:#34D399">✅</strong>'],
+          ['<strong>Alerty wygasania</strong>','❌','◐','❌','<strong style="color:#34D399">✅</strong>'],
+          ['<strong>Gotowość mobilizacyjna</strong>','❌','◐','❌','<strong style="color:#34D399">✅</strong>'],
+          ['<strong>Compliance per projekt</strong>','❌','◐','◐','<strong style="color:#34D399">✅</strong>'],
+          ['<strong>Marketplace szkoleń/usług/produktów</strong>','❌','❌','❌','<strong style="color:#34D399">✅</strong>'],
+          ['<strong>Trust Score / Digital Offshore ID</strong>','◐ / ❌','◐ / ❌','❌ / ❌','<strong style="color:#34D399">✅ / ✅</strong>']
+        ])}</tbody></table></div>
+        <div class="responsive-grid-3b" style="margin-bottom:14px;">${infoBox('UE — substytuty','Energy Jobline, Rigzone, Atlas Professionals, Brunel/Taylor Hopkinson, NES Fircroft, Airswift, Orion Group, Sea Career, Maritime Connector, LinkedIn/Indeed.','#2DD4BF')}${infoBox('Polska — kanały','Pracuj.pl, OLX Praca, LinkedIn Polska, grupy Facebook, agencje, centra GWO/OPITO/STCW, sklepy BHP i brokerzy/ubezpieczyciele.','#FBBF24')}${infoBox('Luka produktów i kompetencji','Sklepy, szkolenia i doradcy istnieją osobno, ale nie są dopasowane do zawodu, kraju, projektu, certyfikatów i ścieżki wyższej stawki.','#34D399')}</div>
         <div class="slide-conclusion">Konkurenci pomagają znaleźć ofertę albo kandydata. GO ON [OFF] SHORE ma potwierdzić, kto realnie jest gotowy do projektu.</div>
       </div>`;
-
-    slide6.dataset.competitionPatched = '1';
+    s6.dataset.competitionPatched = '1';
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchCompetitionSlide);
-  else patchCompetitionSlide();
-})();
-
-/* Prezentacja — uzupełnienie slajdu 07: Strategia wejścia na rynek. */
-(function () {
   function patchMarketEntrySlide() {
-    const slide7 = document.querySelector('.deck-slide[data-slide="7"]');
-    if (!slide7 || slide7.dataset.marketEntryPatched === '1') return;
-
-    slide7.innerHTML = `
+    const s7 = slide(7);
+    if (!s7 || s7.dataset.marketEntryPatched === '1') return;
+    s7.innerHTML = `
       <div class="slide-content market-entry-slide-content">
         <p class="slide-thesis">Startujemy wąsko: 8 zawodów, Pomorze i Zachodniopomorskie, ambasadorzy zawodów, ankiety, wywiady i pierwsze firmy. Skalujemy dopiero po walidacji danych, potrzeb i płatności.</p>
-
         <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">
-          <div class="slide-card accent-teal">
-            <h4>Beachhead: 8 zawodów</h4>
-            <p>Wind Turbine Technician, Rope Access / IRATA, Offshore Electrician, Welder Offshore/Stoczniowy, Rigger/Slinger, NDT Inspector, Marine Engineer, HSE Officer.</p>
-            <p style="margin-top:8px; color:#fff; font-weight:800;">3 ambasadorów na zawód = 24 ambasadorów startowych.</p>
-          </div>
-          <div class="slide-card accent-amber">
-            <h4>Proces wejścia</h4>
-            <p><strong>Q2 2027:</strong> ankiety, wywiady, ambasadorzy, pierwsze firmy, test profilu i certyfikatów.</p>
-            <p><strong>Q3 2027:</strong> oficjalny start, pakiety firmowe, partnerzy, treści zawodowe, kampanie LinkedIn.</p>
-            <p><strong>Q4 2027+:</strong> skalowanie zawodów, partnerów, marketplace, webinarów i społeczności.</p>
-          </div>
-          <div class="slide-card accent-green">
-            <h4>Mini-ekosystem per zawód</h4>
-            <p>Firmy, projekty, certyfikaty, centra szkoleniowe, produkty, źródła branżowe, ścieżka kariery, doradcy, materiały marketingowe i wywiady z rynkiem.</p>
-          </div>
+          ${card('Beachhead: 8 zawodów','<p>Wind Turbine Technician, Rope Access / IRATA, Offshore Electrician, Welder Offshore/Stoczniowy, Rigger/Slinger, NDT Inspector, Marine Engineer, HSE Officer.</p><p style="margin-top:8px; color:#fff; font-weight:800;">3 ambasadorów na zawód = 24 ambasadorów startowych.</p>','accent-teal')}
+          ${card('Proces wejścia','<p><strong>Q2 2027:</strong> ankiety, wywiady, ambasadorzy, pierwsze firmy, test profilu i certyfikatów.</p><p><strong>Q3 2027:</strong> oficjalny start, pakiety firmowe, partnerzy, treści zawodowe, kampanie LinkedIn.</p><p><strong>Q4 2027+:</strong> skalowanie zawodów, partnerów, marketplace, webinarów i społeczności.</p>','accent-amber')}
+          ${card('Mini-ekosystem per zawód','<p>Firmy, projekty, certyfikaty, centra szkoleniowe, produkty, źródła branżowe, ścieżka kariery, doradcy, materiały marketingowe i wywiady z rynkiem.</p>','accent-green')}
         </div>
-
-        <div class="slide-tablewrap" style="margin-bottom:12px;">
-          <table class="slide-table" style="min-width:0; font-size:11.2px;">
-            <thead><tr><th>Zawód startowy</th><th>Dlaczego startowy</th><th>Zawód startowy</th><th>Dlaczego startowy</th></tr></thead>
-            <tbody>
-              <tr><td style="font-weight:800; color:#fff;">Wind Turbine Technician</td><td>rdzeń offshore wind</td><td style="font-weight:800; color:#fff;">Rope Access / IRATA</td><td>wysokość i trudno dostępne miejsca</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Offshore Electrician</td><td>kluczowy profil techniczny</td><td style="font-weight:800; color:#fff;">Welder Offshore / Stoczniowy</td><td>offshore, stocznie, konstrukcje</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Rigger / Slinger Signaller</td><td>lifting i heavy operations</td><td style="font-weight:800; color:#fff;">NDT Inspector</td><td>kontrola jakości i certyfikacja</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Marine Engineer</td><td>maritime, CTV/SOV, serwis</td><td style="font-weight:800; color:#fff;">HSE Officer</td><td>compliance, safety, audyty, BHP</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="responsive-grid-3b" style="margin-bottom:12px;">
-          <div style="background:rgba(45,212,191,.06); border:1px solid rgba(45,212,191,.28); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#2DD4BF; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Pierwsze firmy — Polska</strong>
-            <p style="margin:0; font-size:11.6px; line-height:1.5; color:#dfe6ee;">ORLEN/Baltic Power, PGE Baltica/Baltica 2, Ørsted Polska, Polenergia/Equinor Bałtyk 2 i 3, RWE Offshore Wind Poland, Vestas Poland, Siemens Gamesa/Siemens Energy, CRIST, Remontowa, Port Gdańsk/Port Gdynia.</p>
-          </div>
-          <div style="background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.32); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#FBBF24; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Pierwsze firmy — Europa</strong>
-            <p style="margin:0; font-size:11.6px; line-height:1.5; color:#dfe6ee;">Ørsted, Equinor, RWE Offshore Wind, Vestas, Siemens Gamesa, Van Oord, DEME Offshore, Boskalis, Jan De Nul, Seaway7 / Saipem / Heerema.</p>
-          </div>
-          <div style="background:rgba(52,211,153,.06); border:1px solid rgba(52,211,153,.28); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#34D399; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Partnerzy startowi</strong>
-            <p style="margin:0; font-size:11.6px; line-height:1.5; color:#dfe6ee;">10 produktowych, 10 usługowych, 10 doradców/ekspertów i 10 placówek szkoleniowych: PPE, IRATA, GWO, BOSIET, OPITO, STCW, NDT, SEP, UDT, ISO 9606, HSE, offshore medical.</p>
-          </div>
-        </div>
-
-        <div class="slide-tablewrap" style="margin-bottom:12px;">
-          <table class="slide-table" style="min-width:0; font-size:11.2px;">
-            <thead><tr><th>Obszar</th><th>Działanie</th><th>KPI Q2–Q3 2027</th></tr></thead>
-            <tbody>
-              <tr><td style="font-weight:800; color:#fff;">Marketing</td><td>LinkedIn founder-led, ambasadorzy, webinary, newsletter, podcast/video, SEO content hub, case study „od 0 do pierwszego kontraktu offshore”.</td><td>24 ambasadorów, 400–800 ankiet, 40–80 wywiadów, 80–120 publikacji, 8–16 webinarów, 1 500–3 000 kontaktów, 300–800 użytkowników testowych.</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Sprzedaż</td><td>Spotkania z firmami offshore/onshore, agencjami, centrami szkoleń, partnerami produktowymi, doradcami i firmami usługowymi.</td><td>60–100 firm w rozmowach, min. 20 testujących, 10 partnerów produktowych, 10 usługowych, 10 ekspertów, 10 placówek, 10–30 płatnych pakietów.</td></tr>
-              <tr><td style="font-weight:800; color:#fff;">Operacje / Product / Community</td><td>Checklisty zawodowe, mapa certyfikatów, test profilu, test centrum certyfikatów, test panelu firmy, Q&A ambasadorów i grupy zawodowe.</td><td>Pełna walidacja profilu, certyfikatów, ofert, statusów aplikacji, partnerów i feedbacku od ambasadorów.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div style="background:rgba(110,139,168,.08); border-left:3px solid #2DD4BF; border-radius:8px; padding:12px 16px; margin-bottom:12px;">
-          <p style="margin:0; font-size:12.5px; line-height:1.55; color:#dfe6ee;">Strategia wejścia na rynek zakłada start w województwach pomorskim i zachodniopomorskim oraz koncentrację na 8 zawodach wysokiego ryzyka. Dla każdego zawodu budujemy mini-ekosystem: ambasadorzy, ankiety, wywiady, mapa firm, mapa projektów, certyfikaty, centra szkoleniowe, produkty, usługi, doradcy i treści edukacyjne. Q2 2027 to faza testów z pierwszymi klientami i partnerami, a Q3 2027 to oficjalny start platformy z pierwszą bazą użytkowników, firm i ambasadorów.</p>
-        </div>
-
+        <div class="slide-tablewrap" style="margin-bottom:12px;"><table class="slide-table" style="min-width:0; font-size:11.2px;"><thead><tr><th>Zawód startowy</th><th>Dlaczego startowy</th><th>Zawód startowy</th><th>Dlaczego startowy</th></tr></thead><tbody>${rows([
+          ['<strong>Wind Turbine Technician</strong>','rdzeń offshore wind','<strong>Rope Access / IRATA</strong>','wysokość i trudno dostępne miejsca'],
+          ['<strong>Offshore Electrician</strong>','kluczowy profil techniczny','<strong>Welder Offshore / Stoczniowy</strong>','offshore, stocznie, konstrukcje'],
+          ['<strong>Rigger / Slinger Signaller</strong>','lifting i heavy operations','<strong>NDT Inspector</strong>','kontrola jakości i certyfikacja'],
+          ['<strong>Marine Engineer</strong>','maritime, CTV/SOV, serwis','<strong>HSE Officer</strong>','compliance, safety, audyty, BHP']
+        ])}</tbody></table></div>
+        <div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('Pierwsze firmy — Polska','ORLEN/Baltic Power, PGE Baltica/Baltica 2, Ørsted Polska, Polenergia/Equinor Bałtyk 2 i 3, RWE Offshore Wind Poland, Vestas Poland, Siemens Gamesa/Siemens Energy, CRIST, Remontowa, Port Gdańsk/Port Gdynia.','#2DD4BF')}${infoBox('Pierwsze firmy — Europa','Ørsted, Equinor, RWE Offshore Wind, Vestas, Siemens Gamesa, Van Oord, DEME Offshore, Boskalis, Jan De Nul, Seaway7 / Saipem / Heerema.','#FBBF24')}${infoBox('Partnerzy startowi','10 produktowych, 10 usługowych, 10 doradców/ekspertów i 10 placówek szkoleniowych: PPE, IRATA, GWO, BOSIET, OPITO, STCW, NDT, SEP, UDT, ISO 9606, HSE, offshore medical.','#34D399')}</div>
+        <div class="slide-tablewrap" style="margin-bottom:12px;"><table class="slide-table" style="min-width:0; font-size:11.2px;"><thead><tr><th>Obszar</th><th>Działanie</th><th>KPI Q2–Q3 2027</th></tr></thead><tbody>${rows([
+          ['<strong>Marketing</strong>','LinkedIn founder-led, ambasadorzy, webinary, newsletter, podcast/video, SEO content hub, case study „od 0 do pierwszego kontraktu offshore”.','24 ambasadorów, 400–800 ankiet, 40–80 wywiadów, 80–120 publikacji, 8–16 webinarów, 1 500–3 000 kontaktów, 300–800 użytkowników testowych.'],
+          ['<strong>Sprzedaż</strong>','Spotkania z firmami offshore/onshore, agencjami, centrami szkoleń, partnerami produktowymi, doradcami i firmami usługowymi.','60–100 firm w rozmowach, min. 20 testujących, 10 partnerów produktowych, 10 usługowych, 10 ekspertów, 10 placówek, 10–30 płatnych pakietów.'],
+          ['<strong>Operacje / Product / Community</strong>','Checklisty zawodowe, mapa certyfikatów, test profilu, test centrum certyfikatów, test panelu firmy, Q&A ambasadorów i grupy zawodowe.','Pełna walidacja profilu, certyfikatów, ofert, statusów aplikacji, partnerów i feedbacku od ambasadorów.']
+        ])}</tbody></table></div>
+        <div style="background:rgba(110,139,168,.08); border-left:3px solid #2DD4BF; border-radius:8px; padding:12px 16px; margin-bottom:12px;"><p style="margin:0; font-size:12.5px; line-height:1.55; color:#dfe6ee;">Strategia wejścia na rynek zakłada start w województwach pomorskim i zachodniopomorskim oraz koncentrację na 8 zawodach wysokiego ryzyka. Dla każdego zawodu budujemy mini-ekosystem: ambasadorzy, ankiety, wywiady, mapa firm, mapa projektów, certyfikaty, centra szkoleniowe, produkty, usługi, doradcy i treści edukacyjne. Q2 2027 to faza testów z pierwszymi klientami i partnerami, a Q3 2027 to oficjalny start platformy z pierwszą bazą użytkowników, firm i ambasadorów.</p></div>
         <div class="slide-conclusion">Nie startujemy jako ogólny portal pracy. Startujemy jako wyspecjalizowany system dla 8 zawodów, budowany razem z ludźmi z rynku.</div>
       </div>`;
-
-    slide7.dataset.marketEntryPatched = '1';
+    s7.dataset.marketEntryPatched = '1';
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchMarketEntrySlide);
-  else patchMarketEntrySlide();
-})();
-
-/* Prezentacja — uzupełnienie slajdu 08: Zespół i Founder-Market Fit. */
-(function () {
   function patchTeamSlide() {
-    const slide8 = document.querySelector('.deck-slide[data-slide="8"]');
-    if (!slide8 || slide8.dataset.teamPatched === '1') return;
-
-    slide8.innerHTML = `
+    const s8 = slide(8);
+    if (!s8 || s8.dataset.teamPatched === '1') return;
+    s8.innerHTML = `
       <div class="slide-content team-slide-content">
         <p class="slide-thesis">Founder zna rynek wysokiego ryzyka od strony realnych potrzeb pracowników: ubezpieczeń, odpowiedzialności, kontraktów, ryzyk i decyzji finansowych. Zespół budowany jest etapowo: od 7 osób w MVP 1.1 do 27 osób w V2.0.</p>
-
         <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">
-          <div class="slide-card accent-teal">
-            <h4>Founder-Market Fit</h4>
-            <p style="font-size:18px; font-weight:900; color:#fff; margin:0 0 8px;">Michał Ćwikła</p>
-            <p>Ekspert ds. ubezpieczeń sektora high-risk. 3. rok pracy w obszarze zawodów wysokiego ryzyka.</p>
-            <div class="slide-chips" style="margin-top:10px;"><span class="slide-chip">220+ klientów</span><span class="slide-chip">~7 000 obserwujących</span><span class="slide-chip">kontrakty / ryzyko / odpowiedzialność</span></div>
-          </div>
-          <div class="slide-card accent-amber">
-            <h4>Team Ramp</h4>
-            <p style="font-size:26px; font-weight:900; color:#fff; margin:0 0 8px;">7 → 27 osób</p>
-            <p><strong>Q3 2026:</strong> core product team.</p>
-            <p><strong>Q2 2027:</strong> sprzedaż + obsługa + administracja.</p>
-            <p><strong>Q3–Q4 2027:</strong> mobile + HR + AI.</p>
-            <p><strong>Q1 2028:</strong> AI + SEO + automatyzacje + kadry/płace.</p>
-          </div>
-          <div class="slide-card accent-green">
-            <h4>Koszt zespołu</h4>
-            <table class="slide-table" style="min-width:0; font-size:11.5px; margin-top:4px;">
-              <tbody>
-                <tr><td style="font-weight:800; color:#fff;">Start MVP 1.1</td><td>65 655,81 zł / msc</td></tr>
-                <tr><td style="font-weight:800; color:#fff;">Po MVP 1.4</td><td>152 268,56 zł / msc</td></tr>
-                <tr><td style="font-weight:800; color:#fff;">Po V2.0</td><td>290 928,42 zł / msc</td></tr>
-                <tr><td style="font-weight:800; color:#fff;">Q3 2026–Q1 2028</td><td>3 427 530,42 zł</td></tr>
-              </tbody>
-            </table>
-          </div>
+          ${card('Founder-Market Fit','<p style="font-size:18px; font-weight:900; color:#fff; margin:0 0 8px;">Michał Ćwikła</p><p>Ekspert ds. ubezpieczeń sektora high-risk. 3. rok pracy w obszarze zawodów wysokiego ryzyka.</p><div class="slide-chips" style="margin-top:10px;"><span class="slide-chip">220+ klientów</span><span class="slide-chip">~7 000 obserwujących</span><span class="slide-chip">kontrakty / ryzyko / odpowiedzialność</span></div>','accent-teal')}
+          ${card('Team Ramp','<p style="font-size:26px; font-weight:900; color:#fff; margin:0 0 8px;">7 → 27 osób</p><p><strong>Q3 2026:</strong> core product team.</p><p><strong>Q2 2027:</strong> sprzedaż + obsługa + administracja.</p><p><strong>Q3–Q4 2027:</strong> mobile + HR + AI.</p><p><strong>Q1 2028:</strong> AI + SEO + automatyzacje + kadry/płace.</p>','accent-amber')}
+          ${card('Koszt zespołu','<table class="slide-table" style="min-width:0; font-size:11.5px; margin-top:4px;"><tbody>' + rows([['<strong>Start MVP 1.1</strong>','65 655,81 zł / msc'],['<strong>Po MVP 1.4</strong>','152 268,56 zł / msc'],['<strong>Po V2.0</strong>','290 928,42 zł / msc'],['<strong>Q3 2026–Q1 2028</strong>','3 427 530,42 zł']]) + '</tbody></table>','accent-green')}
         </div>
-
-        <div class="slide-tablewrap" style="margin-bottom:12px;">
-          <table class="slide-table" style="min-width:0; font-size:11px;">
-            <thead><tr><th>Q</th><th>Wersja</th><th>Cel zespołu</th><th>Nowe osoby</th><th>Łącznie</th><th>Koszt / msc</th><th>Koszt Q</th></tr></thead>
-            <tbody>
-              <tr><td>Q3 2026</td><td style="font-weight:800; color:#fff;">MVP 1.1</td><td>rdzeń MVP: zarządzanie, web dev, UI/UX, research</td><td>7</td><td>7</td><td>65 655,81 zł</td><td>196 967,43 zł</td></tr>
-              <tr><td>Q4 2026</td><td style="font-weight:800; color:#fff;">MVP 1.2</td><td>sprzedaż, marketing, komercjalizacja</td><td>2</td><td>9</td><td>81 645,81 zł</td><td>244 937,43 zł</td></tr>
-              <tr><td>Q1 2027</td><td style="font-weight:800; color:#fff;">MVP 1.3</td><td>finanse, BOK, architektura</td><td>3</td><td>12</td><td>120 899,04 zł</td><td>362 697,12 zł</td></tr>
-              <tr><td>Q2 2027</td><td style="font-weight:800; color:#fff;">MVP 1.4</td><td>sprzedaż, administracja, obsługa, księgowość</td><td>5</td><td>17</td><td>152 268,56 zł</td><td>456 805,68 zł</td></tr>
-              <tr><td>Q3 2027</td><td style="font-weight:800; color:#fff;">V1.5</td><td>mobile + marketing</td><td>3</td><td>20</td><td>193 530,79 zł</td><td>580 592,37 zł</td></tr>
-              <tr><td>Q4 2027</td><td style="font-weight:800; color:#fff;">V1.8</td><td>HR + AI</td><td>2</td><td>22</td><td>237 581,71 zł</td><td>712 745,13 zł</td></tr>
-              <tr><td>Q1 2028</td><td style="font-weight:800; color:#fff;">V2.0</td><td>AI, content, SEO, automatyzacje, kadry/płace</td><td>5</td><td>27</td><td>290 928,42 zł</td><td>872 785,26 zł</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="responsive-grid-3b" style="margin-bottom:12px;">
-          <div style="background:rgba(45,212,191,.06); border:1px solid rgba(45,212,191,.28); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#2DD4BF; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Start zespołu</strong>
-            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">7 osób: CEO, senior full stack, junior front-end, junior back-end, UI/UX, researcher i obsługa biura.</p>
-          </div>
-          <div style="background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.32); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#FBBF24; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Po MVP 1.4</strong>
-            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">17 osób: dołącza sprzedaż, marketing, BOK, księgowość, architektura, przedstawiciel handlowy i administracja.</p>
-          </div>
-          <div style="background:rgba(52,211,153,.06); border:1px solid rgba(52,211,153,.28); border-radius:10px; padding:12px 14px;">
-            <strong style="display:block; color:#34D399; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Po V2.0</strong>
-            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">27 osób: mobile, HR, AI, content, SEO, automatyzacja marketingu oraz kadry, płace i rozliczenia.</p>
-          </div>
-        </div>
-
-        <details style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;">
-          <summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Tabela szczegółowa stanowisk do rozwinięcia</summary>
-          <div class="slide-tablewrap" style="margin-top:10px; max-height:210px; overflow:auto;">
-            <table class="slide-table" style="font-size:10.5px; min-width:980px;">
-              <thead><tr><th>Stanowisko</th><th>Forma</th><th>Netto / msc</th><th>Pełny koszt / msc</th><th>12 msc</th><th>Opis</th></tr></thead>
-              <tbody>
-                <tr><td>CEO</td><td>B2B VAT 23%</td><td>8 000,00 zł</td><td>9 840,00 zł</td><td>118 080,00 zł</td><td>Strategia, inwestorzy, finanse, produkt i tempo realizacji roadmapy.</td></tr>
-                <tr><td>Starszy Programista Full Stack</td><td>B2B VAT 23%</td><td>19 000,00 zł</td><td>23 370,00 zł</td><td>280 440,00 zł</td><td>Rdzeń aplikacji webowej, integracje i code review.</td></tr>
-                <tr><td>Junior Front-end / Junior Back-end</td><td>zlecenie student &lt;26</td><td>7 000,00 zł</td><td>7 000,00 zł</td><td>84 000,00 zł</td><td>Widoki, komponenty, API, dane i logika backendowa.</td></tr>
-                <tr><td>UI/UX Designer</td><td>B2B VAT 23%</td><td>7 000,00 zł</td><td>8 610,00 zł</td><td>103 320,00 zł</td><td>Makiety, prototypy, UX, design system i przepływy użytkownika.</td></tr>
-                <tr><td>Researcher</td><td>zlecenie student &lt;26</td><td>6 500,00 zł</td><td>6 500,00 zł</td><td>78 000,00 zł</td><td>Dane rynkowe, zawody, certyfikaty, konkurencja i potrzeby użytkowników.</td></tr>
-                <tr><td>KAM / Marketing & Social Media</td><td>B2B VAT 23%</td><td>6 500,00 zł</td><td>7 995,00 zł</td><td>95 940,00 zł</td><td>Relacje B2B, pipeline, content, kampanie i lead generation.</td></tr>
-                <tr><td>Główna Księgowa</td><td>zlecenie pełny ZUS → UoP</td><td>M1–6: 8 000 / M7–12: 10 000 zł</td><td>M1–6: 13 343,23 / M7–12: 17 090,46 zł</td><td>182 602,20 zł</td><td>Finanse, rozliczenia, budżet, podatki i raportowanie inwestorskie.</td></tr>
-                <tr><td>Specjalista BOK</td><td>zlecenie student &lt;26</td><td>5 000,00 zł</td><td>5 000,00 zł</td><td>60 000,00 zł</td><td>Obsługa użytkowników, zgłoszenia, wsparcie kont i feedback.</td></tr>
-                <tr><td>Software Architect</td><td>B2B VAT 23%</td><td>17 000,00 zł</td><td>20 910,00 zł</td><td>250 920,00 zł</td><td>Architektura systemu, standardy, skalowalność i bezpieczeństwo.</td></tr>
-                <tr><td>Mobile / AI / SEO / Automatyzacje</td><td>B2B / zlecenia</td><td>5 000–22 500 zł</td><td>5 000–27 675 zł</td><td>60 000–332 100 zł</td><td>Mobile, AI matching, content, SEO, lejki, mailing i automatyzacje.</td></tr>
-                <tr><td>HR, Administracja, Kadry i Płace</td><td>zlecenie → UoP</td><td>4 500–7 500 zł</td><td>4 500–12 672,04 zł</td><td>81 823,81–141 080,51 zł</td><td>Rekrutacja, onboarding, dokumenty, umowy, kadry, płace i rozliczenia.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </details>
-
+        <div class="slide-tablewrap" style="margin-bottom:12px;"><table class="slide-table" style="min-width:0; font-size:11px;"><thead><tr><th>Q</th><th>Wersja</th><th>Cel zespołu</th><th>Nowe osoby</th><th>Łącznie</th><th>Koszt / msc</th><th>Koszt Q</th></tr></thead><tbody>${rows([
+          ['Q3 2026','<strong>MVP 1.1</strong>','rdzeń MVP: zarządzanie, web dev, UI/UX, research','7','7','65 655,81 zł','196 967,43 zł'],
+          ['Q4 2026','<strong>MVP 1.2</strong>','sprzedaż, marketing, komercjalizacja','2','9','81 645,81 zł','244 937,43 zł'],
+          ['Q1 2027','<strong>MVP 1.3</strong>','finanse, BOK, architektura','3','12','120 899,04 zł','362 697,12 zł'],
+          ['Q2 2027','<strong>MVP 1.4</strong>','sprzedaż, administracja, obsługa, księgowość','5','17','152 268,56 zł','456 805,68 zł'],
+          ['Q3 2027','<strong>V1.5</strong>','mobile + marketing','3','20','193 530,79 zł','580 592,37 zł'],
+          ['Q4 2027','<strong>V1.8</strong>','HR + AI','2','22','237 581,71 zł','712 745,13 zł'],
+          ['Q1 2028','<strong>V2.0</strong>','AI, content, SEO, automatyzacje, kadry/płace','5','27','290 928,42 zł','872 785,26 zł']
+        ])}</tbody></table></div>
+        <div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('Start zespołu','7 osób: CEO, senior full stack, junior front-end, junior back-end, UI/UX, researcher i obsługa biura.','#2DD4BF')}${infoBox('Po MVP 1.4','17 osób: dołącza sprzedaż, marketing, BOK, księgowość, architektura, przedstawiciel handlowy i administracja.','#FBBF24')}${infoBox('Po V2.0','27 osób: mobile, HR, AI, content, SEO, automatyzacja marketingu oraz kadry, płace i rozliczenia.','#34D399')}</div>
+        <details style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;"><summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Tabela szczegółowa stanowisk do rozwinięcia</summary><div class="slide-tablewrap" style="margin-top:10px; max-height:210px; overflow:auto;"><table class="slide-table" style="font-size:10.5px; min-width:980px;"><thead><tr><th>Stanowisko</th><th>Forma</th><th>Netto / msc</th><th>Pełny koszt / msc</th><th>12 msc</th><th>Opis</th></tr></thead><tbody>${rows([
+          ['CEO','B2B VAT 23%','8 000,00 zł','9 840,00 zł','118 080,00 zł','Strategia, inwestorzy, finanse, produkt i tempo realizacji roadmapy.'],
+          ['Starszy Programista Full Stack','B2B VAT 23%','19 000,00 zł','23 370,00 zł','280 440,00 zł','Rdzeń aplikacji webowej, integracje i code review.'],
+          ['Junior Front-end / Junior Back-end','zlecenie student &lt;26','7 000,00 zł','7 000,00 zł','84 000,00 zł','Widoki, komponenty, API, dane i logika backendowa.'],
+          ['UI/UX Designer','B2B VAT 23%','7 000,00 zł','8 610,00 zł','103 320,00 zł','Makiety, prototypy, UX, design system i przepływy użytkownika.'],
+          ['Researcher','zlecenie student &lt;26','6 500,00 zł','6 500,00 zł','78 000,00 zł','Dane rynkowe, zawody, certyfikaty, konkurencja i potrzeby użytkowników.'],
+          ['KAM / Marketing & Social Media','B2B VAT 23%','6 500,00 zł','7 995,00 zł','95 940,00 zł','Relacje B2B, pipeline, content, kampanie i lead generation.'],
+          ['Software Architect','B2B VAT 23%','17 000,00 zł','20 910,00 zł','250 920,00 zł','Architektura systemu, standardy, skalowalność i bezpieczeństwo.'],
+          ['Mobile / AI / SEO / Automatyzacje','B2B / zlecenia','5 000–22 500 zł','5 000–27 675 zł','60 000–332 100 zł','Mobile, AI matching, content, SEO, lejki, mailing i automatyzacje.']
+        ])}</tbody></table></div></details>
         <div class="slide-conclusion">Zespół rośnie zgodnie z ryzykiem produktu: najpierw MVP, potem sprzedaż, mobile, AI, automatyzacje i zaplecze operacyjne.</div>
       </div>`;
-
-    slide8.dataset.teamPatched = '1';
+    s8.dataset.teamPatched = '1';
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchTeamSlide);
-  else patchTeamSlide();
+  function patchRoadmapSlide() {
+    const s9 = slide(9);
+    if (!s9 || s9.dataset.roadmapPatched === '1') return;
+    const stages = [
+      ['MVP 1.3','Q1 2027','demo testowe + księgowość v0'],
+      ['MVP 1.4','Q2 2027','publikacja przygotowana'],
+      ['v1.5','Q3 2027','oficjalny start'],
+      ['v1.9','Q4 2027','ATS, komunikacja, partnerzy'],
+      ['v2.0','Q1 2028','AI Matching + SEO + Career Advisor'],
+      ['v2.9','Q2 2028','Document Vault + Compliance'],
+      ['v3.0','Q3 2028','marketplace produktów i usług'],
+      ['v3.9','Q4 2028','Project Dashboard + Payroll + Safety'],
+      ['v4.0','Q1 2029','API + Market Intelligence'],
+      ['v4.9','Q2 2029','Digital Offshore ID + Trust Score']
+    ];
+    const deepStages = [
+      ['v1.9 — Q4 2027','październik – grudzień 2027','Wzmocnienie platformy po publicznym starcie: rekrutacja, komunikacja, partnerzy, pierwsze funkcje społecznościowe.','ATS/CRM rekrutacyjny v1, komunikator basic, panel partnera v1, konto eksperta/doradcy, pierwsze oceny, kalendarz basic, kampanie e-mail, marketplace leadowy.','Firmy lepiej zarządzają kandydatami, użytkownicy mają komunikację i statusy, partnerzy generują leady, platforma buduje warstwę zaufania.'],
+      ['v2.0 — Q1 2028','styczeń – marzec 2028','Uruchomienie dużej warstwy AI, treści, SEO i automatyzacji marketingu.','AI Matching v1, analiza braków certyfikatów, rekomendacje szkoleń, AI Career Advisor basic, centrum treści zawodowych, SEO hub, automatyzacje i segmentacja.','Platforma nie tylko pokazuje oferty, ale zaczyna doradzać użytkownikowi; powstają ścieżki kariery i rośnie organiczne pozyskiwanie.'],
+      ['v2.9 — Q2 2028','kwiecień – czerwiec 2028','Rozwinięcie dokumentów, certyfikatów i compliance jako rdzenia przewagi obronnej.','Document Vault v1, OCR, alerty 90/60/30/14/7 dni, status certyfikatów, checklisty per projekt, centrum certyfikacji i raport zgodności.','Użytkownik wie, czego mu brakuje, firma widzi status dokumentów, platforma odpowiada: „czy ta osoba jest gotowa do projektu?”.'],
+      ['v3.0 — Q3 2028','lipiec – wrzesień 2028','Przejście z platformy rekrutacyjnej w marketplace produktów, usług i ekspertów.','Sklep/marketplace v1, produkty BHP/PPE/narzędzia/szkolenia, usługi doradcze, centrum doradców, płatności, prowizje, oceny i profile partnerów.','Platforma zarabia nie tylko na rekrutacji; użytkownik dostaje produkty i usługi dobrane do zawodu, a partnerzy własny kanał sprzedaży.'],
+      ['v3.9 — Q4 2028','październik – grudzień 2028','Zbudowanie warstwy operacyjnej projektu: dashboard, bezpieczeństwo, payroll i logistyka.','Project Dashboard, status projektu, rotacje, taski, payroll i faktury v1, logistyka mobilizacji, incydenty BHP, safety dashboard i ubezpieczenia.','Platforma obsługuje cały cykl projektu, firma zarządza ekipą, użytkownik ma jeden panel operacyjny kontraktu.'],
+      ['v4.0 — Q1 2029','styczeń – marzec 2029','Wejście w moduły enterprise, integracje API, dane rynkowe i zaawansowane raportowanie.','API Integration Hub, integracje ATS/CRM/ERP/płace/certyfikatorzy, Market Intelligence, dashboard analityczny, benchmarki i raporty.','Platforma staje się narzędziem dla większych firm, a dane tworzą osobny produkt: raporty, API i analityka.'],
+      ['v4.9 — Q2 2029','kwiecień – czerwiec 2029','Finalizacja docelowej warstwy zaufania: Digital Offshore ID, reputacja, mobilna karta pracownika i pełna gotowość projektowa.','Digital Offshore ID, mobilna karta pracownika, QR/NFC, status certyfikatów, status ubezpieczenia, Trust Score, oceny 360°, reputacja i tryb offline/mobile-ready.','Użytkownik ma cyfrową tożsamość branżową, firma potwierdza gotowość pracownika, platforma zamyka pętlę: profil → certyfikaty → projekt → compliance → ubezpieczenie → reputacja.']
+    ];
+    s9.innerHTML = `
+      <div class="slide-content roadmap-slide-content">
+        <p class="slide-thesis">MVP 1.1–1.4 = fundament, demo testowe i publikacja. v1.5+ = oficjalny start oraz kolejne duże aktualizacje funkcji.</p>
+        <div class="slide-tablewrap" style="margin-bottom:14px;"><table class="slide-table" style="min-width:0; font-size:11.2px;"><thead><tr><th>Etap</th><th>Q</th><th>Główna aktualizacja</th></tr></thead><tbody>${rows(stages.map(r => ['<strong>' + r[0] + '</strong>', r[1], r[2]]))}</tbody></table></div>
+        <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:12px;">
+          ${card('Fundament MVP 1.1–1.4','<p>Budujemy rdzeń: profil, demo testowe, księgowość v0, przygotowanie publikacji, podstawowe procesy i pierwszą walidację.</p>','accent-teal')}
+          ${card('Oficjalny start v1.5+','<p>Po publikacji dokładamy rekrutację, komunikację, partnerów, społeczność, AI, SEO, compliance i marketplace.</p>','accent-amber')}
+          ${card('Warstwa operacyjna v3.9–v4.9','<p>Project Dashboard, payroll, safety, API, Market Intelligence, Digital Offshore ID, Trust Score i mobilna karta pracownika.</p>','accent-green')}
+        </div>
+        <details open style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;">
+          <summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Kamienie milowe v1.9–v4.9</summary>
+          <div class="slide-tablewrap" style="margin-top:10px; max-height:360px; overflow:auto;"><table class="slide-table" style="font-size:10.5px; min-width:1040px;"><thead><tr><th>Etap</th><th>Termin</th><th>Cel etapu</th><th>Praca</th><th>Efekt końcowy</th></tr></thead><tbody>${rows(deepStages.map(r => ['<strong>' + r[0] + '</strong>', r[1], r[2], r[3], r[4]]))}</tbody></table></div>
+        </details>
+        <div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('AI + treści + SEO','v2.0 tworzy ścieżki kariery, rekomendacje szkoleń i organiczny silnik pozyskiwania użytkowników.','#2DD4BF')}${infoBox('Compliance jako przewaga','v2.9 rozwija Document Vault, OCR, alerty i raport zgodności dla firm.','#FBBF24')}${infoBox('Trust layer','v4.9 zamyka pętlę Digital Offshore ID, Trust Score, QR/NFC, ubezpieczenie i reputację 360°.','#34D399')}</div>
+        <div class="slide-conclusion">Roadmapa nie skaluje funkcji losowo — każdy etap dodaje kolejną warstwę systemu operacyjnego dla pracy wysokiego ryzyka.</div>
+      </div>`;
+    s9.dataset.roadmapPatched = '1';
+  }
+
+  ready(() => {
+    patchCompetitionSlide();
+    patchMarketEntrySlide();
+    patchTeamSlide();
+    patchRoadmapSlide();
+  });
 })();
