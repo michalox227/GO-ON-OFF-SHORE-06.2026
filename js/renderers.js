@@ -154,32 +154,40 @@
   function patchRiskSlide() {
     const s12 = slide(12);
     if (!s12 || s12.dataset.riskPatched === '1') return;
-    const risks = [
-      ['Kluczowa osoba: founder, sieć, marka','Projekt startuje na zaufaniu do foundera, jego sieci i znajomości sektora.','Przenosić relacje do CRM, budować markę platformy obok marki osobistej i tworzyć zespół sprzedaży/KAM.'],
-      ['Zimny start rynku dwustronnego','Platforma potrzebuje jednocześnie użytkowników, firm i partnerów.','Start przez sieć foundera, 8 zawodów startowych, ambasadorów, ręczne dopasowania i pierwsze 20+ firm testujących.'],
-      ['Wahania pipeline offshore','Projekty offshore mogą być opóźniane przez koszty, stopy procentowe i decyzje inwestycyjne.','Beachhead nie tylko offshore: Pomorze, Zachodniopomorskie, onshore energetyczno-przemysłowy, stocznie, serwis, HSE, NDT, IRATA i budownictwo przemysłowe.'],
-      ['Fragmentacja regulacyjna: A1, podatki, ZUS, medycyna pracy, certyfikaty','Różne kraje, formy kontraktu i wymagania dokumentacyjne zwiększają ryzyko błędu.','Platforma jako pre-check i centrum dokumentów, nie jako automatyczny doradca prawno-podatkowy; wrażliwe obszary obsługiwane przez ekspertów.'],
-      ['Własny compliance: KRAZ, IDD, KNF, fintech','Rekrutacja, pośrednictwo pracy, ubezpieczenia, obligacje i płatności mogą wejść w obszary regulowane.','Wczesny prawnik, mapa licencji, KRAZ przed modelem prowizji od zatrudnienia, ubezpieczenia przez licencjonowanych partnerów, emisje tylko z obsługą prawną.'],
-      ['Insurance scope creep','Ryzyko, że platforma zacznie wyglądać jak ubezpieczyciel lub underwriting.','GO ON [OFF] SHORE nie przejmuje ryzyka ubezpieczeniowego; działa jako marketplace/pośrednik, a underwriting zostaje u licencjonowanych partnerów.'],
-      ['Obligacje korporacyjne i komunikacja inwestycyjna','Błędna komunikacja oferty długu może stworzyć ryzyko prawne i reputacyjne.','Nie używać języka „gwarantowany zysk”; przygotować warunki emisji, analizę ryzyk, dokumentację i doradcę prawnego/finansowego.'],
-      ['Przeszacowanie zakresu prac','Projekt ma potencjalnie 25 modułów, ale zbyt szerokie MVP może przepalić budżet.','Twarda dyscyplina MVP: profil, certyfikaty, oferty, firma/ATS basic, partnerzy i rozliczenia basic; pełne AI, payroll, marketplace i Digital ID później.'],
-      ['Higiena danych w pitchu','Niezweryfikowane liczby o rynku mogą osłabić wiarygodność inwestorską.','Każda liczba ma status: potwierdzona / szacunek / do weryfikacji. Słabsze statystyki wycofać albo oznaczyć jako robocze.'],
-      ['Jakość danych użytkowników i dokumentów','Fałszywe certyfikaty, niepełne profile i błędne daty mogą obniżyć wartość matchingu.','Statusy dokumentów, ręczna weryfikacja na początku, alerty ważności, historia zmian i stopniowe wdrażanie OCR/API po walidacji.'],
-      ['Zaufanie firm do nowej platformy','Firmy mogą zostać przy LinkedIn, agencjach i Excelu, jeśli platforma nie pokaże szybkiego ROI.','Ręczne shortlisty, raporty zgodności, pilotaże i case studies: czas do short-listy, braki certyfikatów, gotowość mobilizacyjna.']
-    ];
-    s12.innerHTML = `
-      <div class="slide-content risk-slide-content">
-        <p class="slide-thesis">Największe ryzyka projektu nie wynikają z samej technologii, tylko z operacyjnego złożenia rynku: regulacji, zaufania, danych, dwustronnego marketplace’u i tempa rozwoju produktu.</p>
-        <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">
-          ${card('Ryzyko rynku dwustronnego','<p style="font-size:24px; font-weight:950; color:#FBBF24; margin:0 0 6px;">users + firmy + partnerzy</p><p>Start przez 8 zawodów, ambasadorów, sieć foundera i ręczne dopasowania.</p>','accent-amber')}
-          ${card('Ryzyko regulacyjne','<p style="font-size:24px; font-weight:950; color:#F87171; margin:0 0 6px;">KRAZ / IDD / KNF / fintech</p><p>Compliance-by-design, licencjonowani partnerzy i prawnik od początku.</p>','accent-red')}
-          ${card('Ryzyko zakresu MVP','<p style="font-size:24px; font-weight:950; color:#2DD4BF; margin:0 0 6px;">25 modułów ≠ MVP</p><p>Najpierw profil, certyfikaty, oferty, ATS basic, partnerzy i rozliczenia basic.</p>','accent-teal')}
-        </div>
-        ${table(['Ryzyko','Znaczenie dla GO ON [OFF] SHORE','Plan mitygacji'], risks, '10.4px')}
-        <div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('Compliance-by-design','Platforma ma być pre-checkiem i centrum dokumentów, a nie automatycznym doradcą prawnym, podatkowym, ubezpieczeniowym ani emitentem bez obsługi prawnej.','#F87171')}${infoBox('Kontrolowany MVP','Zakres MVP ograniczony do elementów walidujących popyt, zaufanie, dane, matching i pierwsze płatności.','#2DD4BF')}${infoBox('Zaufanie przez dane','CRM, ręczna weryfikacja, statusy dokumentów, historia zmian, case studies i jasny status każdej liczby w pitchu.','#34D399')}</div>
-        <div class="slide-conclusion">Strategia mitygacji: nie budować wszystkiego od razu, nie obiecywać pełnej automatyzacji i nie wchodzić samodzielnie w obszary regulowane. Najpierw walidacja, partnerzy, compliance-by-design i kontrolowany zakres MVP.</div>
-      </div>`;
+    const risks = [['Kluczowa osoba: founder, sieć, marka','Projekt startuje na zaufaniu do foundera, jego sieci i znajomości sektora.','Przenosić relacje do CRM, budować markę platformy obok marki osobistej i tworzyć zespół sprzedaży/KAM.'],['Zimny start rynku dwustronnego','Platforma potrzebuje jednocześnie użytkowników, firm i partnerów.','Start przez sieć foundera, 8 zawodów startowych, ambasadorów, ręczne dopasowania i pierwsze 20+ firm testujących.'],['Wahania pipeline offshore','Projekty offshore mogą być opóźniane przez koszty, stopy procentowe i decyzje inwestycyjne.','Beachhead nie tylko offshore: Pomorze, Zachodniopomorskie, onshore energetyczno-przemysłowy, stocznie, serwis, HSE, NDT, IRATA i budownictwo przemysłowe.'],['Fragmentacja regulacyjna: A1, podatki, ZUS, medycyna pracy, certyfikaty','Różne kraje, formy kontraktu i wymagania dokumentacyjne zwiększają ryzyko błędu.','Platforma jako pre-check i centrum dokumentów, nie jako automatyczny doradca prawno-podatkowy; wrażliwe obszary obsługiwane przez ekspertów.'],['Własny compliance: KRAZ, IDD, KNF, fintech','Rekrutacja, pośrednictwo pracy, ubezpieczenia, obligacje i płatności mogą wejść w obszary regulowane.','Wczesny prawnik, mapa licencji, KRAZ przed modelem prowizji od zatrudnienia, ubezpieczenia przez licencjonowanych partnerów, emisje tylko z obsługą prawną.'],['Insurance scope creep','Ryzyko, że platforma zacznie wyglądać jak ubezpieczyciel lub underwriting.','GO ON [OFF] SHORE nie przejmuje ryzyka ubezpieczeniowego; działa jako marketplace/pośrednik, a underwriting zostaje u licencjonowanych partnerów.'],['Obligacje korporacyjne i komunikacja inwestycyjna','Błędna komunikacja oferty długu może stworzyć ryzyko prawne i reputacyjne.','Nie używać języka „gwarantowany zysk”; przygotować warunki emisji, analizę ryzyk, dokumentację i doradcę prawnego/finansowego.'],['Przeszacowanie zakresu prac','Projekt ma potencjalnie 25 modułów, ale zbyt szerokie MVP może przepalić budżet.','Twarda dyscyplina MVP: profil, certyfikaty, oferty, firma/ATS basic, partnerzy i rozliczenia basic; pełne AI, payroll, marketplace i Digital ID później.'],['Higiena danych w pitchu','Niezweryfikowane liczby o rynku mogą osłabić wiarygodność inwestorską.','Każda liczba ma status: potwierdzona / szacunek / do weryfikacji. Słabsze statystyki wycofać albo oznaczyć jako robocze.'],['Jakość danych użytkowników i dokumentów','Fałszywe certyfikaty, niepełne profile i błędne daty mogą obniżyć wartość matchingu.','Statusy dokumentów, ręczna weryfikacja na początku, alerty ważności, historia zmian i stopniowe wdrażanie OCR/API po walidacji.'],['Zaufanie firm do nowej platformy','Firmy mogą zostać przy LinkedIn, agencjach i Excelu, jeśli platforma nie pokaże szybkiego ROI.','Ręczne shortlisty, raporty zgodności, pilotaże i case studies: czas do short-listy, braki certyfikatów, gotowość mobilizacyjna.']];
+    s12.innerHTML = `<div class="slide-content risk-slide-content"><p class="slide-thesis">Największe ryzyka projektu nie wynikają z samej technologii, tylko z operacyjnego złożenia rynku: regulacji, zaufania, danych, dwustronnego marketplace’u i tempa rozwoju produktu.</p><div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">${card('Ryzyko rynku dwustronnego','<p style="font-size:24px; font-weight:950; color:#FBBF24; margin:0 0 6px;">users + firmy + partnerzy</p><p>Start przez 8 zawodów, ambasadorów, sieć foundera i ręczne dopasowania.</p>','accent-amber')}${card('Ryzyko regulacyjne','<p style="font-size:24px; font-weight:950; color:#F87171; margin:0 0 6px;">KRAZ / IDD / KNF / fintech</p><p>Compliance-by-design, licencjonowani partnerzy i prawnik od początku.</p>','accent-red')}${card('Ryzyko zakresu MVP','<p style="font-size:24px; font-weight:950; color:#2DD4BF; margin:0 0 6px;">25 modułów ≠ MVP</p><p>Najpierw profil, certyfikaty, oferty, ATS basic, partnerzy i rozliczenia basic.</p>','accent-teal')}</div>${table(['Ryzyko','Znaczenie dla GO ON [OFF] SHORE','Plan mitygacji'], risks, '10.4px')}<div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('Compliance-by-design','Platforma ma być pre-checkiem i centrum dokumentów, a nie automatycznym doradcą prawnym, podatkowym, ubezpieczeniowym ani emitentem bez obsługi prawnej.','#F87171')}${infoBox('Kontrolowany MVP','Zakres MVP ograniczony do elementów walidujących popyt, zaufanie, dane, matching i pierwsze płatności.','#2DD4BF')}${infoBox('Zaufanie przez dane','CRM, ręczna weryfikacja, statusy dokumentów, historia zmian, case studies i jasny status każdej liczby w pitchu.','#34D399')}</div><div class="slide-conclusion">Strategia mitygacji: nie budować wszystkiego od razu, nie obiecywać pełnej automatyzacji i nie wchodzić samodzielnie w obszary regulowane. Najpierw walidacja, partnerzy, compliance-by-design i kontrolowany zakres MVP.</div></div>`;
     s12.dataset.riskPatched = '1';
+  }
+
+  function patchInvestmentRoundSlide() {
+    const s13 = slide(13);
+    if (!s13 || s13.dataset.investmentRoundPatched === '1') return;
+    const roundOptions = [['Minimum','<strong>1,8 mln zł</strong>','pokrycie bazowego kosztu MVP1'],['Rekomendowany','<strong>2,2 mln zł</strong>','MVP1 + bufor operacyjny'],['Bezpieczny','<strong>2,5 mln zł</strong>','MVP1 + bufor + szybsza sprzedaż/marketing']];
+    const financingForm = [['Forma','Pożyczka inwestorska / pożyczka konwertowalna'],['Okres finansowania','12 miesięcy'],['Konwersja','możliwość konwersji na udziały przy kolejnej rundzie'],['Uruchamianie środków','etapowo, zgodnie z kamieniami milowymi'],['Raportowanie','raport kwartalny: produkt, użytkownicy, firmy, partnerzy, koszty']];
+    const useOfFunds = [['Zatrudnienie etapowe','1 261 407,66 zł','71%'],['Programy, AI i subskrypcje','220 215,78 zł','12%'],['Sprzęt, leasing, wyposażenie','164 977,86 zł','9%'],['Biuro 12 miesięcy','130 360,32 zł','7%'],['<strong>Razem MVP1</strong>','<strong style="color:#34D399">1 776 961,62 zł</strong>','<strong>100%</strong>']];
+    const milestones = [['MVP 1.1','szkielet aplikacji, CRM, baza zawodów, panel admina'],['MVP 1.2','beta, 8 zawodów, pierwsze firmy i partnerzy'],['MVP 1.3','demo testowe, księgowość v0, architektura systemu'],['MVP 1.4','publikacja przygotowana, sprzedaż, BOK, administracja'],['V1.5','publiczny start, płatne konta, pierwsze projekty']];
+    s13.innerHTML = `
+      <div class="slide-content investment-round-slide-content">
+        <p class="slide-thesis">Pozyskujemy kapitał na 12 miesięcy MVP1: budowę produktu, uruchomienie spółki operacyjnej, walidację rynku i przygotowanie do finansowania grantowego oraz dłużnego.</p>
+        <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">
+          ${card('Minimum','<p style="font-size:30px; font-weight:950; color:#FBBF24; margin:0 0 6px;">1,8 mln zł</p><p>Pokrycie bazowego kosztu MVP1.</p>','accent-amber')}
+          ${card('Rekomendowany','<p style="font-size:30px; font-weight:950; color:#34D399; margin:0 0 6px;">2,2 mln zł</p><p>MVP1 + bufor operacyjny.</p>','accent-green')}
+          ${card('Bezpieczny','<p style="font-size:30px; font-weight:950; color:#2DD4BF; margin:0 0 6px;">2,5 mln zł</p><p>MVP1 + bufor + szybsza sprzedaż/marketing.</p>','accent-teal')}
+        </div>
+        ${table(['Wariant','Kwota','Cel'], roundOptions)}
+        <div class="responsive-grid-3b" style="margin-bottom:12px;">
+          ${infoBox('Forma finansowania','Pożyczka inwestorska / pożyczka konwertowalna, finansowanie na 12 miesięcy z możliwością konwersji na udziały przy kolejnej rundzie.','#FBBF24')}
+          ${infoBox('Kontrola wydatkowania','Środki uruchamiane etapowo zgodnie z kamieniami milowymi oraz rozliczane raportem kwartalnym.','#2DD4BF')}
+          ${infoBox('Co walidujemy','Produkt, użytkowników, firmy, partnerów, koszty, gotowość do grantów i późniejszego długu korporacyjnego.','#34D399')}
+        </div>
+        <div class="responsive-grid-3b" style="align-items:start; margin-bottom:12px;">
+          <div>${table(['Parametr','Założenie'], financingForm, '11px')}</div>
+          <div style="grid-column:span 2;">${table(['Kategoria','Kwota brutto / cashflow','Udział'], useOfFunds, '11px')}</div>
+        </div>
+        ${detail('Kamienie milowe po finansowaniu', table(['Etap','Efekt'], milestones, '11.2px'), true)}
+        <div class="slide-conclusion">Kapitał nie finansuje „pomysłu”, tylko 12-miesięczną walidację operacyjnego systemu: produkt + zespół + sprzedaż + pierwsi użytkownicy + pierwsze firmy.</div>
+      </div>`;
+    s13.dataset.investmentRoundPatched = '1';
   }
 
   ready(() => {
@@ -190,5 +198,6 @@
     patchFinancialSlide();
     patchFundingSlide();
     patchRiskSlide();
+    patchInvestmentRoundSlide();
   });
 })();
