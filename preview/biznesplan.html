@@ -193,9 +193,44 @@
   .slide-titlebar .hash{color:var(--teal); letter-spacing:-.02em}
   .slide-titlebar .name{max-width:980px}
   .slide-stage{position:relative; border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; min-height:960px; background:radial-gradient(1000px 525px at 80% 10%, rgba(45,212,191,.12), transparent 62%), linear-gradient(135deg, rgba(15,24,34,.98), rgba(8,13,20,.98)); box-shadow:0 32px 80px rgba(0,0,0,.42)}
-  .deck-slide{display:none; min-height:960px; padding:80px 98px; align-items:center; justify-content:center; text-align:center}
+  .deck-slide{display:none; min-height:960px; padding:80px 98px; align-items:flex-start; justify-content:center; text-align:center}
   .deck-slide.active{display:flex}
   .deck-slide-body{max-width:760px; text-align:left; font-size:17px; line-height:1.7; color:#dfe6ee; white-space:pre-line}
+  .slide-content{width:100%; max-width:1180px; margin:0 auto; text-align:left; display:flex; flex-direction:column; gap:22px}
+  .slide-thesis{font-family:var(--display); font-size:clamp(16px,1.8vw,22px); line-height:1.4; font-weight:800; color:#fff; letter-spacing:.01em; max-width:980px}
+  .slide-subtitle{font-size:13px; letter-spacing:.10em; text-transform:uppercase; color:var(--muted); margin-top:-8px}
+  .slide-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .slide-grid-3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px}
+  .slide-grid-5{display:grid; grid-template-columns:repeat(5, 1fr); gap:14px}
+  .slide-card{border:1px solid rgba(255,255,255,.14); border-radius:18px; padding:18px 20px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); min-width:0}
+  .slide-card.accent-red{border-color:rgba(248,113,113,.4); box-shadow:0 0 0 1px rgba(248,113,113,.08) inset}
+  .slide-card.accent-amber{border-color:rgba(251,191,36,.4); box-shadow:0 0 0 1px rgba(251,191,36,.08) inset}
+  .slide-card.accent-purple{border-color:rgba(192,132,252,.4); box-shadow:0 0 0 1px rgba(192,132,252,.08) inset}
+  .slide-card.accent-teal{border-color:rgba(45,212,191,.4); box-shadow:0 0 0 1px rgba(45,212,191,.08) inset}
+  .slide-card.accent-green{border-color:rgba(52,211,153,.4); box-shadow:0 0 0 1px rgba(52,211,153,.08) inset}
+  .slide-card h4{margin:0 0 8px; font-family:var(--display); font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:#fff}
+  .slide-card .kpi{font-family:var(--display); font-size:clamp(20px,2.4vw,30px); font-weight:900; color:var(--teal); line-height:1.1; margin-bottom:6px}
+  .slide-card p{margin:0; font-size:13px; line-height:1.55; color:#cdd7e1}
+  .slide-conclusion{border-radius:18px; padding:18px 24px; background:linear-gradient(135deg, rgba(45,212,191,.16), rgba(45,212,191,.04)); border:1px solid rgba(45,212,191,.35); font-family:var(--display); font-size:clamp(14px,1.5vw,17px); font-weight:800; color:#fff; line-height:1.5}
+  .slide-tablewrap{overflow-x:auto; border:1px solid rgba(255,255,255,.12); border-radius:16px}
+  .slide-table{width:100%; min-width:560px; border-collapse:separate; border-spacing:0; font-size:13px; color:#dbe6ee}
+  .slide-table th,.slide-table td{border-bottom:1px solid rgba(255,255,255,.08); border-right:1px solid rgba(255,255,255,.06); padding:9px 14px; text-align:left; vertical-align:top}
+  .slide-table th:last-child,.slide-table td:last-child{border-right:0}
+  .slide-table tr:last-child td{border-bottom:0}
+  .slide-table thead th{font-family:var(--display); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); background:rgba(255,255,255,.03)}
+  .slide-chips{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+  .slide-chip{border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:8px 16px; font-size:12px; letter-spacing:.04em; color:#dfe6ee; background:rgba(255,255,255,.03)}
+  @media(max-width:900px){
+    .slide-grid-2,.slide-grid-3{grid-template-columns:1fr}
+    .slide-grid-5{grid-template-columns:repeat(2, 1fr)}
+  }
+  .responsive-grid-3{display:grid; grid-template-columns:1fr 1.08fr 1fr; gap:18px; align-items:stretch; margin-bottom:24px}
+  .responsive-grid-5{display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:24px}
+  .responsive-grid-3b{display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; align-items:stretch; margin-bottom:22px}
+  @media(max-width:900px){
+    .responsive-grid-3,.responsive-grid-3b{grid-template-columns:1fr !important}
+    .responsive-grid-5{grid-template-columns:repeat(2, 1fr) !important}
+  }
   .slide-arrow{position:absolute; top:50%; transform:translateY(-50%); width:54px; height:54px; border-radius:50%; border:1px solid rgba(255,255,255,.16); background:rgba(7,11,17,.74); color:#fff; cursor:pointer; font-size:34px; line-height:1; display:flex; align-items:center; justify-content:center; transition:background .18s ease, border-color .18s ease, transform .18s ease}
   .slide-arrow:hover{background:rgba(45,212,191,.18); border-color:rgba(45,212,191,.58); transform:translateY(-50%) scale(1.04)}
   .slide-arrow.prev{left:22px}
@@ -445,7 +480,7 @@
   .roadmap-detail.detail-mode .roadmap-q-card .fin-tile > strong{font-size:22.75px !important; line-height:1.2}
   .topic-present-btn{display:inline-flex; align-items:center; gap:6px; vertical-align:middle; margin-left:14px; border:1px solid rgba(45,212,191,.45); background:rgba(45,212,191,.10); color:var(--teal); font-family:var(--display); font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:6px 12px; border-radius:999px; cursor:pointer; transition:.18s ease}
   .topic-present-btn:hover{background:var(--teal); color:#06151b}
-  @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}}
+  @media(max-width:760px){.view-btn{width:100%; max-width:360px}.presentation-shell{padding:24px 14px 60px}.slide-stage{min-height:748px}.deck-slide{min-height:748px; padding:60px 68px}.slide-arrow{width:44px; height:44px; font-size:28px}.slide-arrow.prev{left:12px}.slide-arrow.next{right:12px}.slide-titlebar{font-size:16px; flex-direction:column; gap:4px; margin-bottom:16px}.slide-grid-5{grid-template-columns:1fr}.slide-card{padding:14px 16px}.slide-table{min-width:480px}}
 
 </style>
 </head>
@@ -966,7 +1001,7 @@
             <p style="margin:0; font-size:18px; font-weight:700; line-height:1.45; color:#fff;">Rynek pracy wysokiego ryzyka nie ma problemu z popytem — ma problem z <span style="color:#2DD4BF;">operacyjnym dopasowaniem</span> ludzi, certyfikatów i gotowości do projektu.</p>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1.08fr 1fr; gap:18px; align-items:stretch; margin-bottom:24px;">
+          <div class="responsive-grid-3">
 
             <div style="background:rgba(248,113,113,.06); border:1px solid rgba(248,113,113,.35); border-radius:12px; padding:18px 20px;">
               <strong style="display:block; font-size:12px; font-weight:800; letter-spacing:.05em; color:#F87171; margin-bottom:10px;">PROBLEM PRACOWNIKA</strong>
@@ -1010,21 +1045,23 @@
             <p style="margin:4px 0 0; font-size:15px; font-weight:800; color:#fff;">GO ON [OFF] SHORE ma zamienić to w system: <span style="color:#2DD4BF;">dostępność</span> + <span style="color:#FBBF24;">certyfikaty</span> + <span style="color:#C084FC;">compliance</span> + <span style="color:#34D399;">mobilizacja</span>.</p>
           </div>
 
-          <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
+          <div class="slide-tablewrap">
+          <table class="slide-table" style="min-width:0;">
             <thead>
               <tr>
-                <th style="text-align:left; padding:6px 10px; color:#9fb3c8; border-bottom:1px solid rgba(255,255,255,.15); font-weight:700; font-size:11px; letter-spacing:.04em;">KPI</th>
-                <th style="text-align:left; padding:6px 10px; color:#9fb3c8; border-bottom:1px solid rgba(255,255,255,.15); font-weight:700; font-size:11px; letter-spacing:.04em;">TREŚĆ</th>
+                <th>KPI</th>
+                <th>TREŚĆ</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td style="padding:7px 10px; font-weight:800; color:#fff; white-space:nowrap;">2–3 mies.</td><td style="padding:7px 10px; color:#d4dde6;">typowy przestój między kontraktami</td></tr>
-              <tr><td style="padding:7px 10px; font-weight:800; color:#fff; white-space:nowrap;">do 6 mies.</td><td style="padding:7px 10px; color:#d4dde6;">skrajny przestój przy braku projektu</td></tr>
-              <tr><td style="padding:7px 10px; font-weight:800; color:#fff; white-space:nowrap;">75–80%</td><td style="padding:7px 10px; color:#d4dde6;">minimalna obsada potrzebna do uruchomienia projektu</td></tr>
-              <tr><td style="padding:7px 10px; font-weight:800; color:#fff; white-space:nowrap;">6–10 tys. zł+</td><td style="padding:7px 10px; color:#d4dde6;">koszt podstawowych certyfikatów offshore</td></tr>
-              <tr><td style="padding:7px 10px; font-weight:800; color:#F87171; white-space:nowrap;">1 wygasły certyfikat</td><td style="padding:7px 10px; color:#d4dde6;">może zablokować cały wyjazd</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">2–3 mies.</td><td>typowy przestój między kontraktami</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">do 6 mies.</td><td>skrajny przestój przy braku projektu</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">75–80%</td><td>minimalna obsada potrzebna do uruchomienia projektu</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">6–10 tys. zł+</td><td>koszt podstawowych certyfikatów offshore</td></tr>
+              <tr><td style="font-weight:800; color:#F87171;">1 wygasły certyfikat</td><td>może zablokować cały wyjazd</td></tr>
             </tbody>
           </table>
+          </div>
 
         </div>
         </section>
@@ -1036,7 +1073,7 @@
           </div>
           <p style="margin:0 0 20px; font-size:12.5px; line-height:1.6; color:#97a4b2; font-style:italic;">Produkt rozwija się etapowo: od MVP 1.1–1.4 walidującego najważniejszy problem operacyjny, po V4.8 jako pełny ekosystem pracy wysokiego ryzyka.</p>
 
-          <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:24px;">
+          <div class="responsive-grid-5">
             <div style="background:linear-gradient(135deg, rgba(250,204,21,.22), rgba(250,204,21,.06)); box-shadow:inset 0 0 0 1px rgba(250,204,21,.35); border-radius:8px; padding:10px 8px; text-align:center;">
               <div style="font-size:12px; font-weight:800; color:#facc15;">MVP 1.1–1.4</div>
               <div style="font-size:10px; color:#97a4b2; margin-top:2px;">Q3 2026–Q2 2027</div>
@@ -1064,7 +1101,7 @@
             </div>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; align-items:stretch; margin-bottom:22px;">
+          <div class="responsive-grid-3b">
             <div style="background:rgba(45,212,191,.06); border:1px solid rgba(45,212,191,.35); border-radius:12px; padding:18px 20px;">
               <strong style="display:block; font-size:12px; font-weight:800; letter-spacing:.05em; color:#2DD4BF; margin-bottom:10px;">DLA SPECJALISTY</strong>
               <ul style="margin:0; padding-left:16px; list-style:disc; font-size:12.5px; line-height:1.65; color:#dfe6ee;">
@@ -1104,30 +1141,170 @@
             <p style="margin:0; font-size:14px; font-weight:700; color:#fff; line-height:1.5;">MVP nie jest portalem ogłoszeniowym. To pierwsza warstwa operacyjna rynku: <span style="color:#2DD4BF;">profil</span> + <span style="color:#FBBF24;">certyfikaty</span> + <span style="color:#C084FC;">dopasowanie</span> + <span style="color:#34D399;">compliance</span> + partnerzy.</p>
           </div>
 
-          <table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <div class="slide-tablewrap">
+          <table class="slide-table" style="min-width:0;">
             <thead>
               <tr>
-                <th style="text-align:left; padding:6px 10px; color:#9fb3c8; border-bottom:1px solid rgba(255,255,255,.15); font-weight:700; font-size:10.5px; letter-spacing:.04em;">CLAIM</th>
-                <th style="text-align:left; padding:6px 10px; color:#9fb3c8; border-bottom:1px solid rgba(255,255,255,.15); font-weight:700; font-size:10.5px; letter-spacing:.04em;">ZNACZENIE</th>
+                <th>CLAIM</th>
+                <th>ZNACZENIE</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td style="padding:6px 10px; font-weight:800; color:#fff; white-space:nowrap;">10 modułów MVP</td><td style="padding:6px 10px; color:#d4dde6;">wystarczający zakres do walidacji popytu</td></tr>
-              <tr><td style="padding:6px 10px; font-weight:800; color:#fff; white-space:nowrap;">5 etapów rozwoju</td><td style="padding:6px 10px; color:#d4dde6;">kontrolowane skalowanie produktu</td></tr>
-              <tr><td style="padding:6px 10px; font-weight:800; color:#fff; white-space:nowrap;">Q3 2026 → Q2 2029</td><td style="padding:6px 10px; color:#d4dde6;">jasna ścieżka wersji i roadmapy</td></tr>
-              <tr><td style="padding:6px 10px; font-weight:800; color:#2DD4BF; white-space:nowrap;">1 profil = wiele projektów</td><td style="padding:6px 10px; color:#d4dde6;">wartość dla pracownika</td></tr>
-              <tr><td style="padding:6px 10px; font-weight:800; color:#C084FC; white-space:nowrap;">1 panel = kandydaci + compliance</td><td style="padding:6px 10px; color:#d4dde6;">wartość dla firmy</td></tr>
-              <tr><td style="padding:6px 10px; font-weight:800; color:#FBBF24; white-space:nowrap;">AI Basic → AI 2.0</td><td style="padding:6px 10px; color:#d4dde6;">ostrożne wdrażanie AI po zebraniu danych</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">10 modułów MVP</td><td>wystarczający zakres do walidacji popytu</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">5 etapów rozwoju</td><td>kontrolowane skalowanie produktu</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">Q3 2026 → Q2 2029</td><td>jasna ścieżka wersji i roadmapy</td></tr>
+              <tr><td style="font-weight:800; color:#2DD4BF;">1 profil = wiele projektów</td><td>wartość dla pracownika</td></tr>
+              <tr><td style="font-weight:800; color:#C084FC;">1 panel = kandydaci + compliance</td><td>wartość dla firmy</td></tr>
+              <tr><td style="font-weight:800; color:#FBBF24;">AI Basic → AI 2.0</td><td>ostrożne wdrażanie AI po zebraniu danych</td></tr>
             </tbody>
           </table>
+          </div>
 
         </div>
         </section>
       <section class="deck-slide" data-slide="4">
         </section>
       <section class="deck-slide" data-slide="5">
+        <div class="slide-content">
+
+          <p class="slide-thesis">GO ON [OFF] SHORE startuje w Polsce, ale adresuje europejski rynek mobilnej pracy technicznej, offshore, onshore i wysokiego ryzyka.</p>
+
+          <div class="slide-grid-2">
+            <div class="slide-tablewrap">
+              <table class="slide-table" style="min-width:0;">
+                <thead><tr><th>Etap</th><th>Rynek</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:800; color:#2DD4BF;">Start</td><td>polski offshore + polski onshore energetyczno-przemysłowy</td></tr>
+                  <tr><td style="font-weight:800; color:#FBBF24;">Skalowanie</td><td>Polacy pracujący technicznie w UE</td></tr>
+                  <tr><td style="font-weight:800; color:#C084FC;">Ekspansja</td><td>Europa: offshore wind, maritime, oil &amp; gas, przemysł, budownictwo, energetyka</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="slide-tablewrap">
+              <table class="slide-table" style="min-width:0;">
+                <thead><tr><th>Segment</th><th>Wielkość</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:800; color:#fff;">TAM</td><td>miliony pracowników technicznych w UE</td></tr>
+                  <tr><td style="font-weight:800; color:#2DD4BF;">SAM dziś</td><td>25–40 tys. osób</td></tr>
+                  <tr><td style="font-weight:800; color:#FBBF24;">SAM 2030</td><td>80–150 tys. osób</td></tr>
+                  <tr><td style="font-weight:800; color:#34D399;">SOM startowy</td><td>pierwsze 5 000+ użytkowników</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p style="margin:-8px 0 0; font-size:12px; color:var(--muted); font-style:italic;">Dane robocze z analizy wskazują m.in. SAM 25–40 tys. dziś oraz 80–150 tys. do 2030 roku.</p>
+
+          <div>
+            <h4 style="margin:0 0 12px; font-family:var(--display); font-size:14px; letter-spacing:.06em; text-transform:uppercase; color:#fff;">Dlaczego teraz? Polski offshore wchodzi w fazę wykonawczą</h4>
+            <div class="slide-grid-5">
+              <div class="slide-card accent-teal"><div class="kpi">60–70 tys.</div><p>potencjalnych miejsc pracy w pełnym ekosystemie offshore</p></div>
+              <div class="slide-card accent-amber"><div class="kpi">31–34 tys.</div><p>etatów / etatoroków w fazie budowy do 2030</p></div>
+              <div class="slide-card accent-green"><div class="kpi">27–29 tys.</div><p>miejsc pracy w O&amp;M po 2030</p></div>
+              <div class="slide-card accent-purple"><div class="kpi">100+</div><p>polskich podmiotów z doświadczeniem offshore</p></div>
+              <div class="slide-card accent-red"><div class="kpi">2026–2028</div><p>okno wejścia przed pełną fragmentacją rynku</p></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="slide-chips">
+              <span class="slide-chip">Polska</span><span style="color:var(--muted);">→</span>
+              <span class="slide-chip">Niemcy</span><span style="color:var(--muted);">→</span>
+              <span class="slide-chip">Holandia</span><span style="color:var(--muted);">→</span>
+              <span class="slide-chip">Norwegia</span><span style="color:var(--muted);">→</span>
+              <span class="slide-chip">UK</span><span style="color:var(--muted);">→</span>
+              <span class="slide-chip">Irlandia</span>
+            </div>
+            <p style="margin:10px 0 0; font-size:12px; color:var(--muted);">To rynki z popytem na techników, monterów, spawaczy, elektryków, IRATA, NDT, HSE, offshore wind, maritime i przemysł.</p>
+          </div>
+
+          <div class="slide-conclusion">To nie jest nisza „portalu pracy". To beachhead do rynku mobilnej pracy wysokiego ryzyka w Europie.</div>
+
+        </div>
         </section>
       <section class="deck-slide" data-slide="6">
+        <div class="slide-content">
+
+          <p class="slide-thesis">Platforma monetyzuje cały cykl kontraktu: dostęp użytkownika, rekrutację, marketplace, partnerów, usługi i skuteczne dopasowanie.</p>
+
+          <div class="slide-grid-5">
+            <div class="slide-card accent-teal"><h4>B2C Subscription</h4><p>Konto użytkownika od <strong style="color:#fff;">29,99 zł</strong>/mies.</p></div>
+            <div class="slide-card accent-purple"><h4>B2B Subscription</h4><p>Pakiety firm od 499 zł do 3 400+ zł/mies.</p></div>
+            <div class="slide-card accent-amber"><h4>Partner MRR</h4><p>Partnerzy od 299 zł do 2 499+ zł/mies.</p></div>
+            <div class="slide-card accent-green"><h4>Success Fee</h4><p>1,90% od wartości kontraktu</p></div>
+            <div class="slide-card accent-red"><h4>Marketplace Fee</h4><p>1% produkty / 5% usługi i doradztwo</p></div>
+          </div>
+
+          <div class="slide-grid-2" style="align-items:start;">
+            <div class="slide-tablewrap">
+              <table class="slide-table" style="min-width:0; font-size:12px;">
+                <thead><tr><th>Kategoria / Produkt</th><th>Cena / prowizja</th><th>Typ</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-weight:700; color:#fff;">Konto użytkownika</td><td>od 29,99 zł/mies.</td><td>MRR B2C</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Prowizja od kontraktu</td><td>1,90%</td><td>success fee</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Marketplace — produkty</td><td>1%</td><td>fee</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Marketplace — usługi / doradztwo</td><td>5%</td><td>fee</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Ogłoszenia Standard</td><td>299 zł/30 dni</td><td>cykliczny</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Ogłoszenia Premium</td><td>699 zł/30 dni</td><td>cykliczny</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Firma Start — 2 ogłoszenia</td><td>499 zł/mies.</td><td>MRR B2B</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Firma Pro — 6 ogłoszeń</td><td>999 zł/mies.</td><td>MRR B2B</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Firma Project — 10 ogłoszeń</td><td>1 999 zł/mies.</td><td>MRR B2B</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Enterprise Pilot — 15 ogłoszeń</td><td>od 3 400 zł/mies.</td><td>MRR B2B</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Partnerzy Basic/Pro/Premium/Enterprise</td><td>299–2 499+ zł/mies.</td><td>MRR partnerski</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Księgowość JDG Basic/Standard/Pro</td><td>229–999,99 zł/mies.</td><td>MRR usługowy</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Rekrutacja — shortlista/sourcing/mobilizacja</td><td>2 000–12 000 zł/projekt</td><td>projektowy</td></tr>
+                  <tr><td style="font-weight:700; color:#fff;">Reklama — promowane kafelki/kampanie</td><td>599–5 000 zł</td><td>reklamowy</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <p style="margin:0; font-size:13.5px; font-weight:700; color:#fff;">MVP1 nie maksymalizuje ceny — MVP1 waliduje, kto realnie płaci.</p>
+              <div class="slide-tablewrap">
+                <table class="slide-table" style="min-width:0;">
+                  <thead><tr><th>Strona rynku</th><th>Za co płaci</th></tr></thead>
+                  <tbody>
+                    <tr><td style="font-weight:800; color:#2DD4BF;">Specjalista</td><td>konto, CV/profil, doradztwo, księgowość, dostęp do ofert</td></tr>
+                    <tr><td style="font-weight:800; color:#C084FC;">Firma</td><td>ogłoszenia, pakiety, sourcing, shortlisty, mobilizacja</td></tr>
+                    <tr><td style="font-weight:800; color:#FBBF24;">Partner</td><td>widoczność, leady, promocja, sprzedaż usług</td></tr>
+                    <tr><td style="font-weight:800; color:#34D399;">Platforma</td><td>prowizja od kontraktu i transakcji marketplace</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-conclusion">Model biznesowy łączy MRR + success fee + marketplace fee + usługi projektowe. Dzięki temu platforma może zarabiać zarówno przed kontraktem, w trakcie kontraktu, jak i po jego zakończeniu.</div>
+
+          <div>
+            <h4 style="margin:0 0 10px; font-family:var(--display); font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:#fff;">Trakcja planowana</h4>
+            <div class="slide-tablewrap">
+              <table class="slide-table" style="min-width:0; text-align:center;">
+                <thead>
+                  <tr><th style="text-align:center;">MVP 1.4</th><th style="text-align:center;">V1.8</th><th style="text-align:center;">V2.8</th><th style="text-align:center;">V3.8</th><th style="text-align:center;">V4.8 / V4.9</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="text-align:center; font-weight:800; color:#fff;">300 users</td>
+                    <td style="text-align:center; font-weight:800; color:#fff;">1 500</td>
+                    <td style="text-align:center; font-weight:800; color:#fff;">4 000</td>
+                    <td style="text-align:center; font-weight:800; color:#fff;">9 200</td>
+                    <td style="text-align:center; font-weight:800; color:#fff;">18 700–25 700</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:center; color:#2DD4BF;">45 paying</td>
+                    <td style="text-align:center; color:#2DD4BF;">227</td>
+                    <td style="text-align:center; color:#2DD4BF;">665</td>
+                    <td style="text-align:center; color:#2DD4BF;">1 780</td>
+                    <td style="text-align:center; color:#2DD4BF;">3 975–5 715</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="margin:10px 0 0; font-size:12px; color:var(--muted); font-style:italic;">Model rośnie razem z produktem: od walidacji płatności do wielostronnego marketplace'u.</p>
+          </div>
+
+        </div>
         </section>
       <section class="deck-slide" data-slide="7">
         </section>
