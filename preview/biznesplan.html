@@ -276,6 +276,22 @@
   .org-team-columns{display:flex; gap:24px; flex-wrap:wrap; margin-top:6px}
   .org-team-col{flex:1 1 380px; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:18px 22px; background:rgba(255,255,255,.03)}
   .org-team-col h3{margin:0 0 12px; font-family:var(--display); font-size:13px; letter-spacing:.08em; color:#2DD4BF; text-transform:uppercase}
+  .org-dept-btn.active{background:rgba(45,212,191,.22); box-shadow:inset 0 0 0 1px rgba(45,212,191,.6)}
+  .org-dept-block{margin:0 0 18px}
+  .org-dept-block-title{margin:0 0 10px; font-family:var(--display); font-size:13px; letter-spacing:.06em; color:#2DD4BF; text-transform:uppercase}
+  .org-role-cards{display:flex; flex-direction:column; gap:10px}
+  .org-role-card{border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:12px 14px; background:rgba(255,255,255,.03)}
+  .org-role-card-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; color:#fff; font-size:13px}
+  .org-role-card-parent{color:var(--muted); font-size:11px}
+  .org-role-card-meta{display:flex; gap:6px; margin:6px 0}
+  .org-badge{display:inline-flex; align-items:center; border-radius:999px; padding:2px 9px; font-size:10px; font-weight:700; border:1px solid rgba(255,255,255,.18); color:#d4dde6; background:rgba(255,255,255,.05)}
+  .org-badge-collab{color:#38bdf8; border-color:rgba(56,189,248,.4)}
+  .org-badge-cost{color:#facc15; border-color:rgba(250,204,21,.4)}
+  .org-role-pay{width:100%; border-collapse:collapse; font-size:11px; margin-top:6px}
+  .org-role-pay th{text-align:right; padding:3px 6px; color:#9fb3c8; border-bottom:1px solid rgba(255,255,255,.12); font-weight:700}
+  .org-role-pay th:first-child, .org-role-pay td:first-child{text-align:left}
+  .org-role-pay td{padding:3px 6px; color:#d4dde6; text-align:right}
+  .org-role-card-desc{margin:8px 0 0; color:#c4ced8; font-size:12px}
   .settings-actions{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 14px}
   #settingsReport{width:100%; min-height:260px; margin-top:10px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:10px; color:#e7edf3; font-family:ui-monospace, monospace; font-size:12px; padding:14px; resize:vertical}
   #business-plan.editing-active .wrap{outline:2px dashed rgba(45,212,191,.5); outline-offset:6px; border-radius:10px}
@@ -779,6 +795,29 @@
 <tr><td class="k">3 msc</td><td>57 674,28 zł</td></tr>
 <tr><td class="k">12 msc</td><td>230 697,12 zł</td></tr>
 </tbody></table></div>
+
+<h4 class="subh" style="font-size:15px;">Dodatkowe programy i dostępy — wg działu/roli</h4>
+<p>Przeliczenie po kursach NBP (tabela A, stan ok. 22.06.2026, do aktualizacji w razie zmiany kursu): <strong>USD/PLN ≈ 3,73</strong>, <strong>GBP/PLN ≈ 4,92</strong>. Brutto = netto × 1,23 (VAT 23%, analogicznie do pozostałych pozycji B2B). <strong>Canva Enterprise</strong> ma wycenę indywidualną (kontakt z Canva) — w sumach kosztorysu liczona jest realna pozycja zastępcza <strong>Canva Business</strong> (20 USD netto/msc). <strong>Vercel Pro</strong> i <strong>Supabase Team</strong> to koszty płaskie (1 konto/organizacja dla działu IT, nie mnożone na pracownika), podobnie <strong>GetResponse Creator</strong> (1 konto dla Marketingu).</p>
+<div class="cmpwrap"><table class="dt"><thead><tr><th>Pozycja</th><th>Grupa odbiorców</th><th>Cena oryg. netto/msc</th><th>Cena oryg. brutto/msc</th><th>PLN netto/msc/os.</th><th>PLN brutto/msc/os.</th><th>Liczba osób</th><th>Razem netto/msc</th><th>Razem brutto/msc</th></tr></thead><tbody>
+<tr><td class="k">GitHub Enterprise</td><td>CEO + 8 ról programistycznych</td><td>21,00 USD</td><td>25,83 USD</td><td>78,33 zł</td><td>96,35 zł</td><td>9</td><td>704,97 zł</td><td>867,15 zł</td></tr>
+<tr><td class="k">Copilot Enterprise</td><td>CEO + 8 ról programistycznych</td><td>39,00 USD</td><td>47,97 USD</td><td>145,47 zł</td><td>178,93 zł</td><td>9</td><td>1 309,23 zł</td><td>1 610,37 zł</td></tr>
+<tr><td class="k">Apple Business — 2 TB</td><td>wszyscy (24 osoby)</td><td>9,99 USD</td><td>12,29 USD</td><td>37,26 zł</td><td>45,83 zł</td><td>24</td><td>894,24 zł</td><td>1 099,92 zł</td></tr>
+<tr><td class="k">Jira Premium</td><td>wszyscy (24 osoby)</td><td>14,54 USD</td><td>17,88 USD</td><td>54,23 zł</td><td>66,70 zł</td><td>24</td><td>1 301,52 zł</td><td>1 600,80 zł</td></tr>
+<tr><td class="k">Slack Pro</td><td>wszyscy aktywni (24 osoby)</td><td>7,25 USD</td><td>8,92 USD</td><td>27,04 zł</td><td>33,26 zł</td><td>24</td><td>648,96 zł</td><td>798,24 zł</td></tr>
+<tr><td class="k">Bitwarden Business Teams</td><td>wszyscy (24 osoby)</td><td>4,00 USD</td><td>4,92 USD</td><td>14,92 zł</td><td>18,35 zł</td><td>24</td><td>358,08 zł</td><td>440,40 zł</td></tr>
+<tr><td class="k">Figma Professional Full Seat</td><td>UI/UX Designer</td><td>16,00 USD</td><td>19,68 USD</td><td>59,68 zł</td><td>73,41 zł</td><td>1</td><td>59,68 zł</td><td>73,41 zł</td></tr>
+<tr><td class="k">Canva Business (alternatywa do Enterprise)</td><td>UI/UX Designer</td><td>20,00 USD</td><td>24,60 USD</td><td>74,60 zł</td><td>91,76 zł</td><td>1</td><td>74,60 zł</td><td>91,76 zł</td></tr>
+<tr><td class="k">Vercel Pro</td><td>IT (1 konto, płaskie)</td><td>20,00 USD</td><td>24,60 USD</td><td>74,60 zł</td><td>91,76 zł</td><td>1</td><td>74,60 zł</td><td>91,76 zł</td></tr>
+<tr><td class="k">Supabase Team</td><td>IT (1 organizacja, płaskie)</td><td>599,00 USD</td><td>736,77 USD</td><td>2 234,27 zł</td><td>2 748,15 zł</td><td>1</td><td>2 234,27 zł</td><td>2 748,15 zł</td></tr>
+<tr><td class="k">GetResponse Creator</td><td>Marketing (1 konto, płaskie)</td><td>51,00 GBP</td><td>62,73 GBP</td><td>250,92 zł</td><td>308,63 zł</td><td>1</td><td>250,92 zł</td><td>308,63 zł</td></tr>
+<tr><td class="k"><strong>SUMA (11 pozycji)</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td><strong>7 911,07 zł</strong></td><td><strong>9 730,59 zł</strong></td></tr>
+</tbody></table></div>
+<div class="cmpwrap"><table class="dt"><thead><tr><th>Okres</th><th>Razem netto (11 pozycji)</th><th>Razem brutto (11 pozycji)</th></tr></thead><tbody>
+<tr><td class="k">1 msc</td><td>7 911,07 zł</td><td>9 730,59 zł</td></tr>
+<tr><td class="k">3 msc</td><td>23 733,21 zł</td><td>29 191,77 zł</td></tr>
+<tr><td class="k">12 msc</td><td>94 932,84 zł</td><td>116 767,08 zł</td></tr>
+</tbody></table></div>
+<p><strong>Łączna suma kategorii „Programy i dostępy”</strong> (poprzednie 6 pozycji + nowe 11 pozycji): 1 msc — <strong>27 135,83 zł netto</strong> / <strong>33 377,04 zł brutto</strong>; 3 msc — <strong>81 407,49 zł netto</strong> / <strong>100 131,12 zł brutto</strong>; 12 msc — <strong>325 629,96 zł netto</strong> / <strong>400 524,48 zł brutto</strong>.</p>
 
 <h4 class="subh" style="font-size:15px;">Sprzęt do pracy nad modelem AI (zakup warunkowy)</h4>
 <p>Koszt aktywowany dopiero po starcie prac nad modelem AI — <strong>nieujęty w sumach kosztorysu MVP1 powyżej</strong>, traktowany jako odrębna, warunkowa pozycja.</p>
@@ -1749,6 +1788,17 @@
   <div class="org-view">
     <div class="org-filter-rows">
       <div class="org-filter-row">
+        <button class="org-filter-btn org-dept-btn active" type="button" id="orgDeptAllBtn">Wszyscy</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="Zarząd">Zarząd</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="IT">IT</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="R&amp;D">R&amp;D</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="Sprzedaż">Sprzedaż</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="Marketing">Marketing</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="BOK">BOK</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="HR &amp; Administracja">HR &amp; Administracja</button>
+        <button class="org-filter-btn org-dept-btn" type="button" data-org-dept="Finanse">Finanse</button>
+      </div>
+      <div class="org-filter-row">
         <button class="org-all-btn active" type="button" data-org-all>ALL</button>
         <span class="org-filter-divider"></span>
         <button class="org-filter-btn org-stage-btn stage-mvp1" type="button" data-org-stage="mvp1"><span class="org-tag">#1</span><span class="org-filter-label"> MVP 1.1 → 1.4</span></button>
@@ -2377,6 +2427,8 @@
     const stageBtns = Array.from(document.querySelectorAll('.org-stage-btn'));
     const qBtns = Array.from(document.querySelectorAll('.org-q-btn'));
     const yearBtns = Array.from(document.querySelectorAll('.org-year-btn'));
+    const deptAllBtn = document.getElementById('orgDeptAllBtn');
+    const deptBtns = Array.from(document.querySelectorAll('.org-dept-btn[data-org-dept]'));
 
     const ORG_QUARTERS = ['Q3 2026','Q4 2026','Q1 2027','Q2 2027','Q3 2027','Q4 2027','Q1 2028','Q2 2028','Q3 2028','Q4 2028','Q1 2029','Q2 2029'];
     const ORG_STAGE_LAST_Q = { mvp1:'Q2 2027', two:'Q4 2027', three:'Q2 2028', four:'Q4 2028', five:'Q2 2029' };
@@ -2391,26 +2443,33 @@
     }
 
     const ORG_DEPARTMENTS_DEFAULT_RAW = [
-      { title: 'Zarząd', roles: 'Founder / Product Owner@Q3 2026' },
-      { title: 'Inwestorzy', roles: 'Runda inwestycyjna MVP1@Q3 2026' },
-      { title: 'CEO', roles: 'Founder / Product Owner (CEO)@Q3 2026' },
-      { title: 'IT', roles: 'Starszy Programista Full Stack@Q3 2026;Junior Front-end programmer@Q3 2026@Starszy Programista Full Stack;Junior Back-end programmer@Q3 2026@Starszy Programista Full Stack;Główny programista@Q1 2027;Główny programista aplikacji / mobile / v2@Q3 2027;Developer dodatkowy #1@Q3 2027;Developer dodatkowy #2@Q3 2027' },
-      { title: 'R&D', roles: 'Researcher@Q3 2026' },
-      { title: 'SPRZEDAŻ', roles: 'Sprzedaż / KAM@Q4 2026;Handlowiec #1@Q2 2027;Handlowiec #2@Q2 2027' },
-      { title: 'MARKETING', roles: 'UI/UX Designer@Q3 2026;Marketing / Content@Q4 2026;Marketing / content dodatkowy@Q3 2027' },
-      { title: 'BOK', roles: 'BOK@Q1 2027;BOK dodatkowy@Q2 2027' },
-      { title: 'HR & Administracja', roles: 'Administracja / granty@Q2 2027' },
-      { title: 'FINANSE', roles: 'Główna księgowa@Q1 2027;Księgowa pomocnicza@Q2 2027' }
+      { title: 'Zarząd', roles: 'CEO@Q3 2026@@B2B@8000@9840@8000@96000@stały@Wizja produktu, strategia, fundraising, kluczowe decyzje biznesowe i reprezentacja spółki.' },
+      { title: 'IT', roles: 'Starszy Programista Full Stack@Q3 2026@@B2B@19000@23370@19000@228000@stały@Architektura i rozwój głównych modułów platformy, code review, mentoring juniorów.;Junior Front-end programmer@Q3 2026@Starszy Programista Full Stack@Zlecenie (student <26 r.ż.)@7000@7000@7000@84000@stały@Rozwój interfejsu użytkownika i komponentów front-end pod nadzorem starszego programisty.;Junior Back-end programmer@Q3 2026@Starszy Programista Full Stack@Zlecenie (student <26 r.ż.)@7000@7000@7000@84000@stały@Rozwój API i logiki backendowej pod nadzorem starszego programisty.;Software Architect@Q1 2027@@B2B@17000@20910@17000@204000@stały@Projektowanie architektury systemu, standardy techniczne, decyzje technologiczne.;Średni Programista mobile (Android/iOS)@Q2 2027@@B2B@17000@20910@17000@204000@stały@Rozwój aplikacji mobilnych na Android i iOS.;Junior Programista mobile (Android/iOS)@Q2 2027@Średni Programista mobile (Android/iOS)@B2B@7000@8610@7000@84000@stały@Wsparcie rozwoju aplikacji mobilnych pod nadzorem starszego programisty mobile.' },
+      { title: 'R&D', roles: 'UI/UX Designer@Q3 2026@@B2B@7000@8610@7000@84000@stały@Projektowanie interfejsów, makiety, system designu i badania użyteczności.;Researcher@Q3 2026@@Zlecenie (student <26 r.ż.)@6500@6500@6500@78000@stały@Analiza rynku, konkurencji, wymagań branżowych i wsparcie decyzji produktowych danymi.;Senior programista AI@Q3 2027@@B2B@22500@27675@22500@270000@stały@Projektowanie i rozwój modeli AI, architektura systemów uczenia maszynowego.;Junior programista AI@Q3 2027@Senior programista AI@B2B@12500@15375@12500@150000@stały@Wsparcie rozwoju modeli AI pod nadzorem senior programisty AI.' },
+      { title: 'Sprzedaż', roles: 'KAM@Q4 2026@@B2B@6500@7995@6500@78000@stały@Zarządzanie relacjami z kluczowymi klientami i partnerami, utrzymanie i rozwój kont.;Przedstawiciel Handlowy@Q2 2027@@B2B@5500@6765@5500@66000@stały@Pozyskiwanie nowych klientów, prowadzenie sprzedaży i negocjacji.' },
+      { title: 'Marketing', roles: 'Specjalista ds. Marketingu i Social Mediów@Q4 2026@@B2B@6500@7995@6500@78000@stały@Prowadzenie kanałów social media, kampanii i komunikacji marki.;Specjalista ds. treści i autor treści@Q3 2027@@Zlecenie (student <26 r.ż.)@5000@5000@5000@60000@stały@Tworzenie treści marketingowych, blogowych i materiałów sprzedażowych.;Specjalista SEO@Q3 2027@@Zlecenie standard 12 msc → UoP@7000@9275@11175@134096@stały@Optymalizacja SEO, analiza słów kluczowych, widoczność w wyszukiwarkach.;Specjalista ds. automatyzacji marketingu@Q3 2027@@B2B@8500@10455@8500@102000@stały@Wdrażanie i obsługa narzędzi automatyzacji marketingu, lead nurturing.' },
+      { title: 'BOK', roles: 'Specjalista ds. Obsługi Klienta@Q1 2027@@Zlecenie (student <26 r.ż.)@5000@5000@5000@60000@stały@Wsparcie użytkowników, obsługa zgłoszeń, onboarding klientów.' },
+      { title: 'HR & Administracja', roles: 'Specjalista ds. Administracji i Dokumentacji@Q2 2027@@Zlecenie student 6 msc → UoP@4500@4500@4500@81821@stały@Obsługa administracyjna spółki, dokumentacja, archiwizacja, zamówienia.;Specjalista ds. HR i rekrutacji@Q2 2027@@Zlecenie 6 msc → UoP@5500@7198@8673@117462@stały@Rekrutacja, onboarding, polityki HR i wsparcie zespołu.;Specjalista ds. Kadr, Płac i Rozliczeń@Q4 2027@@Zlecenie 6 msc → UoP@6500@8583@10341@138075@stały@Naliczanie wynagrodzeń, rozliczenia kadrowe i podatkowe pracowników.;Sprzątanie i czyste biuro (1/3 etatu, 50h/msc)@Q4 2027@@Zlecenie standard@2000@2477@2984@35807@stały@Utrzymanie czystości i porządku w biurze.' },
+      { title: 'Finanse', roles: 'Główna Księgowa@Q1 2027@@Zlecenie 6 msc → UoP@8000@10660@12843@179600@stały@Prowadzenie pełnej księgowości spółki, rozliczenia, raportowanie finansowe.;Młodsza Księgowa@Q2 2027@@Zlecenie 6 msc → UoP@5000@6506@7839@112458@stały@Wsparcie księgowości, dokumenty, rozliczenia pomocnicze.' }
     ];
 
-    const ORG_STORAGE_KEY = 'goShoreOrgDepts_v1';
+    const ORG_STORAGE_KEY = 'goShoreOrgDepts_v2';
 
     function buildDepartments(rawList) {
       return rawList.map(dept => ({
         title: dept.title,
         roles: dept.roles.split(';').filter(Boolean).map(part => {
-          const [role, q, parent] = part.split('@');
-          return { role, q, parent: parent || null };
+          const [role, q, parent, collab, netto, brutto, employerCost1, employerCost12, costType, desc] = part.split('@');
+          return {
+            role, q, parent: parent || null,
+            collab: collab || '',
+            netto: netto ? Number(netto) : 0,
+            brutto: brutto ? Number(brutto) : 0,
+            employerCost1: employerCost1 ? Number(employerCost1) : 0,
+            employerCost12: employerCost12 ? Number(employerCost12) : 0,
+            costType: costType || 'stały',
+            desc: desc || ''
+          };
         })
       }));
     }
@@ -2418,7 +2477,7 @@
     function rawFromDepartments(depts) {
       return depts.map(dept => ({
         title: dept.title,
-        roles: dept.roles.map(r => r.role + '@' + r.q + (r.parent ? '@' + r.parent : '')).join(';')
+        roles: dept.roles.map(r => [r.role, r.q, r.parent || '', r.collab, r.netto, r.brutto, r.employerCost1, r.employerCost12, r.costType, r.desc].join('@')).join(';')
       }));
     }
 
@@ -2433,25 +2492,37 @@
       localStorage.setItem(ORG_STORAGE_KEY, JSON.stringify(rawFromDepartments(ORG_DEPARTMENTS)));
     }
 
-    // Buduje czytelny opis hierarchii: rola wiodąca + podwładni wciągnięci pod nią ("↳").
-    // Podwładni bez obecnego rodzica w danym oknie są wypisywani jako samodzielne role.
-    function formatRoleTree(activeRoles, separator) {
-      const activeRoleNames = new Set(activeRoles.map(r => r.role));
-      const top = activeRoles.filter(r => !r.parent || !activeRoleNames.has(r.parent));
-      const subsByParent = {};
-      activeRoles.filter(r => r.parent && activeRoleNames.has(r.parent)).forEach(r => {
-        (subsByParent[r.parent] = subsByParent[r.parent] || []).push(r.role);
-      });
-      return top.map(t => {
-        const subs = subsByParent[t.role];
-        return t.role + (subs && subs.length ? ' (↳ ' + subs.join(', ') + ')' : '');
-      }).join(separator);
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function fmtPln(n) {
+      return Number(n || 0).toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' zł';
+    }
+
+    function renderRoleCard(r) {
+      return '<div class="org-role-card">' +
+        '<div class="org-role-card-head"><b>' + escapeHtml(r.role) + '</b>' +
+          (r.parent ? '<span class="org-role-card-parent">↳ podlega: ' + escapeHtml(r.parent) + '</span>' : '') +
+        '</div>' +
+        '<div class="org-role-card-meta">' +
+          '<span class="org-badge org-badge-collab">' + escapeHtml(r.collab) + '</span>' +
+          '<span class="org-badge org-badge-cost">koszt: ' + escapeHtml(r.costType) + '</span>' +
+        '</div>' +
+        '<table class="org-role-pay"><thead><tr><th></th><th>1 msc</th><th>3 msc</th><th>12 msc</th></tr></thead><tbody>' +
+          '<tr><td>Netto</td><td>' + fmtPln(r.netto) + '</td><td>' + fmtPln(r.netto * 3) + '</td><td>' + fmtPln(r.netto * 12) + '</td></tr>' +
+          '<tr><td>Brutto</td><td>' + fmtPln(r.brutto) + '</td><td>' + fmtPln(r.brutto * 3) + '</td><td>' + fmtPln(r.brutto * 12) + '</td></tr>' +
+          '<tr><td>Koszt pracodawcy</td><td>' + fmtPln(r.employerCost1) + '</td><td>' + fmtPln(r.employerCost1 * 3) + '</td><td>' + fmtPln(r.employerCost12) + '</td></tr>' +
+        '</tbody></table>' +
+        (r.desc ? '<p class="org-role-card-desc">' + escapeHtml(r.desc) + '</p>' : '') +
+      '</div>';
     }
 
     let cutoffIndex = ORG_QUARTERS.length - 1;
     let startIndex = 0;
     let filterMode = 'all';
     let filterValue = null;
+    let deptFilter = null;
 
     function setRange(mode, value, end, start) {
       filterMode = mode;
@@ -2464,12 +2535,13 @@
     function renderScope(containerEl, fromIdx, toIdx) {
       const parts = [];
       ORG_DEPARTMENTS.forEach(dept => {
+        if (deptFilter && dept.title !== deptFilter) return;
         const windowRoles = dept.roles.filter(r => {
           const idx = ORG_QUARTERS.indexOf(r.q);
           return idx >= fromIdx && idx <= toIdx;
         });
         if (windowRoles.length) {
-          parts.push('<span class="org-team-scope-dept"><b>' + dept.title + ':</b> ' + formatRoleTree(windowRoles, ', ') + '</span>');
+          parts.push('<div class="org-dept-block"><h4 class="org-dept-block-title">' + escapeHtml(dept.title) + '</h4><div class="org-role-cards">' + windowRoles.map(renderRoleCard).join('') + '</div></div>');
         }
       });
       containerEl.innerHTML = parts.length ? parts.join('') : '<span class="org-team-scope-empty">Brak obsadzonych ról w wybranym widoku.</span>';
@@ -2511,6 +2583,21 @@
     yearBtns.forEach(btn => btn.addEventListener('click', () => {
       const year = btn.dataset.orgYear;
       setRange('year', year, ORG_QUARTERS.indexOf(ORG_YEAR_LAST_Q[year]), ORG_QUARTERS.indexOf(ORG_YEAR_FIRST_Q[year]));
+    }));
+
+    if (deptAllBtn) {
+      deptAllBtn.addEventListener('click', () => {
+        deptFilter = null;
+        [deptAllBtn, ...deptBtns].forEach(b => b.classList.remove('active'));
+        deptAllBtn.classList.add('active');
+        applyFilter();
+      });
+    }
+    deptBtns.forEach(btn => btn.addEventListener('click', () => {
+      deptFilter = btn.dataset.orgDept;
+      [deptAllBtn, ...deptBtns].forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter();
     }));
 
     applyFilter();
@@ -2623,7 +2710,7 @@
         const dept = currentDept();
         const name = orgRoleName.value.trim();
         if (!dept || !name) return;
-        dept.roles.push({ role: name, q: orgRoleQ.value, parent: orgRoleParent.value || null });
+        dept.roles.push({ role: name, q: orgRoleQ.value, parent: orgRoleParent.value || null, collab: '', netto: 0, brutto: 0, employerCost1: 0, employerCost12: 0, costType: 'stały', desc: '' });
         persistOrgDepartments();
         refreshRoleParent();
         refreshRoleList();
@@ -2879,6 +2966,17 @@
       { cat: 'oprogramowanie', name: 'Google Workspace Business Plus', detail: 'wszyscy (24 osoby)', netto: 99, brutto: null },
       { cat: 'oprogramowanie', name: 'Perplexity Pro', detail: '34 USD netto/msc, standard (22 osoby), kurs USD/PLN≈3,73', netto: 126.82, brutto: null },
       { cat: 'oprogramowanie', name: 'Perplexity Enterprise Max', detail: '271 USD netto/msc, CEO + Researcher (2 osoby), kurs USD/PLN≈3,73', netto: 1010.83, brutto: null },
+      { cat: 'oprogramowanie', name: 'GitHub Enterprise', detail: '21 USD netto/msc/os., CEO + 8 ról programistycznych (9 osób), kurs USD/PLN≈3,73; suma PLN/msc', netto: 704.97, brutto: 867.15 },
+      { cat: 'oprogramowanie', name: 'Copilot Enterprise', detail: '39 USD netto/msc/os., CEO + 8 ról programistycznych (9 osób), kurs USD/PLN≈3,73; suma PLN/msc', netto: 1309.23, brutto: 1610.37 },
+      { cat: 'oprogramowanie', name: 'Apple Business — 2 TB', detail: '9,99 USD netto/msc/os., wszyscy (24 osoby), kurs USD/PLN≈3,73; suma PLN/msc', netto: 894.24, brutto: 1099.92 },
+      { cat: 'oprogramowanie', name: 'Jira Premium', detail: '14,54 USD netto/msc/os., wszyscy (24 osoby), kurs USD/PLN≈3,73; suma PLN/msc', netto: 1301.52, brutto: 1600.80 },
+      { cat: 'oprogramowanie', name: 'Slack Pro', detail: '7,25 USD netto/msc/os., wszyscy aktywni (24 osoby), kurs USD/PLN≈3,73; suma PLN/msc', netto: 648.96, brutto: 798.24 },
+      { cat: 'oprogramowanie', name: 'Bitwarden Business Teams', detail: '4,00 USD netto/msc/os., wszyscy (24 osoby), kurs USD/PLN≈3,73; suma PLN/msc', netto: 358.08, brutto: 440.40 },
+      { cat: 'oprogramowanie', name: 'Figma Professional Full Seat', detail: '16,00 USD netto/msc, UI/UX Designer (1 osoba), kurs USD/PLN≈3,73', netto: 59.68, brutto: 73.41 },
+      { cat: 'oprogramowanie', name: 'Canva Business (alternatywa do Canva Enterprise — wycena indywidualna)', detail: '20,00 USD netto/msc, UI/UX Designer (1 osoba), kurs USD/PLN≈3,73', netto: 74.60, brutto: 91.76 },
+      { cat: 'oprogramowanie', name: 'Vercel Pro', detail: '20,00 USD netto/msc, IT (1 konto/deploying seat, płaskie), kurs USD/PLN≈3,73', netto: 74.60, brutto: 91.76 },
+      { cat: 'oprogramowanie', name: 'Supabase Team', detail: '599,00 USD netto/msc, IT (1 projekt/organizacja, płaskie), kurs USD/PLN≈3,73', netto: 2234.27, brutto: 2748.15 },
+      { cat: 'oprogramowanie', name: 'GetResponse Creator', detail: '51,00 GBP netto/msc, Marketing (1 konto, płaskie), kurs GBP/PLN≈4,92', netto: 250.92, brutto: 308.63 },
     ];
 
     const catLabels = { biuro: 'Biuro', wynagrodzenie: 'Wynagrodzenie', sprzet: 'Sprzęt', oprogramowanie: 'Programy i dostępy' };
