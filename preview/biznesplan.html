@@ -2585,6 +2585,7 @@
   const buttons = Array.from(document.querySelectorAll('.view-btn'));
   const views = Array.from(document.querySelectorAll('.page-view'));
   let slides = Array.from(document.querySelectorAll('.deck-slide'));
+  let slideRichBodies = slides.map(el => el.innerHTML);
   let dots = Array.from(document.querySelectorAll('.slide-dot'));
   const counter = document.getElementById('slideCounter');
   const titleHash = document.getElementById('slideTitleHash');
@@ -2643,9 +2644,10 @@
   const deckStage = document.querySelector('.slide-stage');
   const dotsContainer = document.querySelector('.slide-dots');
 
-  function rebuildDeck(titles, bodies) {
+  function rebuildDeck(titles, bodies, richBodies) {
     slideTitles = titles.slice();
     slideBodies = (bodies || []).slice();
+    slideRichBodies = (richBodies || []).slice();
     deckStage.querySelectorAll('.deck-slide').forEach(el => el.remove());
     dotsContainer.innerHTML = '';
     const arrowPrev = deckStage.querySelector('.slide-arrow.prev');
@@ -2655,11 +2657,14 @@
       section.className = 'deck-slide' + (n === 1 ? ' active' : '');
       section.dataset.slide = String(n);
       const body = slideBodies[i] || '';
+      const rich = slideRichBodies[i] || '';
       if (body) {
         const bodyEl = document.createElement('div');
         bodyEl.className = 'deck-slide-body';
         bodyEl.textContent = body;
         section.appendChild(bodyEl);
+      } else if (rich) {
+        section.innerHTML = rich;
       }
       deckStage.insertBefore(section, arrowPrev);
       const dot = document.createElement('button');
@@ -2681,9 +2686,9 @@
     try {
       const parsed = JSON.parse(presSaved);
       if (Array.isArray(parsed)) {
-        rebuildDeck(parsed, []);
+        rebuildDeck(parsed, [], slideRichBodies);
       } else if (parsed && Array.isArray(parsed.titles)) {
-        rebuildDeck(parsed.titles, parsed.bodies || []);
+        rebuildDeck(parsed.titles, parsed.bodies || [], parsed.richBodies || slideRichBodies);
       }
     } catch (e) {}
   }
@@ -3698,8 +3703,10 @@
 
     const ORIGINAL_PRES_TITLES = slideTitles.slice();
     const ORIGINAL_PRES_BODIES = slideBodies.slice();
+    const ORIGINAL_PRES_RICH = slideRichBodies.slice();
     let draftTitles = slideTitles.slice();
     let draftBodies = slideBodies.slice();
+    let draftRich = slideRichBodies.slice();
     const presListEl = document.getElementById('presEditorList');
     const presAddBtn = document.getElementById('presAddSlideBtn');
     const presSaveBtn = document.getElementById('presSaveBtn');
@@ -3731,16 +3738,19 @@
         row.querySelector('[data-act="up"]').addEventListener('click', () => {
           [draftTitles[i - 1], draftTitles[i]] = [draftTitles[i], draftTitles[i - 1]];
           [draftBodies[i - 1], draftBodies[i]] = [draftBodies[i], draftBodies[i - 1]];
+          [draftRich[i - 1], draftRich[i]] = [draftRich[i], draftRich[i - 1]];
           renderPresEditor();
         });
         row.querySelector('[data-act="down"]').addEventListener('click', () => {
           [draftTitles[i + 1], draftTitles[i]] = [draftTitles[i], draftTitles[i + 1]];
           [draftBodies[i + 1], draftBodies[i]] = [draftBodies[i], draftBodies[i + 1]];
+          [draftRich[i + 1], draftRich[i]] = [draftRich[i], draftRich[i + 1]];
           renderPresEditor();
         });
         row.querySelector('[data-act="del"]').addEventListener('click', () => {
           draftTitles.splice(i, 1);
           draftBodies.splice(i, 1);
+          draftRich.splice(i, 1);
           renderPresEditor();
         });
         presListEl.appendChild(row);
@@ -3752,12 +3762,13 @@
     presAddBtn.addEventListener('click', () => {
       draftTitles.push('NOWY SLAJD ' + draftTitles.length);
       draftBodies.push('');
+      draftRich.push('');
       renderPresEditor();
     });
 
     presSaveBtn.addEventListener('click', () => {
-      localStorage.setItem(PRES_STORAGE_KEY, JSON.stringify({ titles: draftTitles, bodies: draftBodies }));
-      rebuildDeck(draftTitles, draftBodies);
+      localStorage.setItem(PRES_STORAGE_KEY, JSON.stringify({ titles: draftTitles, bodies: draftBodies, richBodies: draftRich }));
+      rebuildDeck(draftTitles, draftBodies, draftRich);
       presStatusEl.textContent = 'Zapisano prezentację (' + draftTitles.length + ' slajdów) — ' + new Date().toLocaleString('pl-PL') + '.';
     });
 
@@ -3765,7 +3776,8 @@
       localStorage.removeItem(PRES_STORAGE_KEY);
       draftTitles = ORIGINAL_PRES_TITLES.slice();
       draftBodies = ORIGINAL_PRES_BODIES.slice();
-      rebuildDeck(draftTitles, draftBodies);
+      draftRich = ORIGINAL_PRES_RICH.slice();
+      rebuildDeck(draftTitles, draftBodies, draftRich);
       renderPresEditor();
       presStatusEl.textContent = 'Przywrócono opublikowaną wersję prezentacji.';
     });
@@ -3784,7 +3796,10 @@
     if (!rmContainer || !editToggleBtn) return;
 
     const STORAGE_KEY = 'goShoreRoadmap_edited_v1';
+    const TIMELINE_STORAGE_KEY = 'goShoreRoadmap_timeline_v1';
     const originalHTML = rmContainer.innerHTML;
+    const rmTimelineTable = document.querySelector('.roadmap-q-table');
+    const originalTimelineHTML = rmTimelineTable ? rmTimelineTable.innerHTML : '';
 
     function escapeHtml(s) {
       return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -3846,6 +3861,8 @@
 
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) rmContainer.innerHTML = saved;
+    const savedTimeline = localStorage.getItem(TIMELINE_STORAGE_KEY);
+    if (savedTimeline && rmTimelineTable) rmTimelineTable.innerHTML = savedTimeline;
     decorateExisting();
     rebindRoadmapNav();
     rebuildStageSummaries();
@@ -3865,13 +3882,16 @@
 
     saveBtn.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, rmContainer.innerHTML);
+      if (rmTimelineTable) localStorage.setItem(TIMELINE_STORAGE_KEY, rmTimelineTable.innerHTML);
       rebuildStageSummaries();
       statusEl.textContent = 'Zapisano do podglądu w tej przeglądarce — ' + new Date().toLocaleString('pl-PL') + '.';
     });
 
     resetBtn.addEventListener('click', () => {
       localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(TIMELINE_STORAGE_KEY);
       rmContainer.innerHTML = originalHTML;
+      if (rmTimelineTable) rmTimelineTable.innerHTML = originalTimelineHTML;
       decorateExisting();
       rebindRoadmapNav();
       refreshStageOptions();
