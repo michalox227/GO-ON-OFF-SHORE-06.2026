@@ -1,0 +1,3 @@
+GO ON [OFF] SHORE to Marketplace & Trust Infrastructure dla sektora offshore, onshore i high-risk industries. Projekt nie jest klasycznym portalem pracy, lecz operacyjnym systemem rynku pracy projektowej: łączy zweryfikowanych specjalistów, firmy, partnerów, certyfikaty, dostępność, dokumenty, ubezpieczenia, doradztwo i podstawową warstwę rozliczeniową.
+
+Pracownicy tracą ciągłość kontraktów, firmy ręcznie kompletują zespoły, certyfikaty wygasają w krytycznym momencie, a rynek nie ma wspólnej warstwy zaufania. GO ON [OFF] SHORE odpowiada na to poprzez Digital ID, Document Vault, Centrum Certyfikacji, AI Matching basic, ATS/CRM dla firm, marketplace partnerów, moduł rozliczeń lite oraz warstwę reputacji i anty-scam.
