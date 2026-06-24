@@ -192,16 +192,7 @@
     const s9 = slide(9);
     if (!s9 || s9.dataset.roadmapPatched === '1') return;
     const stages = [
-      ['MVP 1.3','Q1 2027','demo testowe + księgowość v0'],
-      ['MVP 1.4','Q2 2027','publikacja przygotowana'],
-      ['v1.5','Q3 2027','oficjalny start'],
-      ['v1.9','Q4 2027','ATS, komunikacja, partnerzy'],
-      ['v2.0','Q1 2028','AI Matching + SEO + Career Advisor'],
-      ['v2.9','Q2 2028','Document Vault + Compliance'],
-      ['v3.0','Q3 2028','marketplace produktów i usług'],
-      ['v3.9','Q4 2028','Project Dashboard + Payroll + Safety'],
-      ['v4.0','Q1 2029','API + Market Intelligence'],
-      ['v4.9','Q2 2029','Digital Offshore ID + Trust Score']
+      ['MVP 1.3','Q1 2027','demo testowe + księgowość v0'],['MVP 1.4','Q2 2027','publikacja przygotowana'],['v1.5','Q3 2027','oficjalny start'],['v1.9','Q4 2027','ATS, komunikacja, partnerzy'],['v2.0','Q1 2028','AI Matching + SEO + Career Advisor'],['v2.9','Q2 2028','Document Vault + Compliance'],['v3.0','Q3 2028','marketplace produktów i usług'],['v3.9','Q4 2028','Project Dashboard + Payroll + Safety'],['v4.0','Q1 2029','API + Market Intelligence'],['v4.9','Q2 2029','Digital Offshore ID + Trust Score']
     ];
     const deepStages = [
       ['v1.9 — Q4 2027','październik – grudzień 2027','Wzmocnienie platformy po publicznym starcie: rekrutacja, komunikacja, partnerzy, pierwsze funkcje społecznościowe.','ATS/CRM rekrutacyjny v1, komunikator basic, panel partnera v1, konto eksperta/doradcy, pierwsze oceny, kalendarz basic, kampanie e-mail, marketplace leadowy.','Firmy lepiej zarządzają kandydatami, użytkownicy mają komunikację i statusy, partnerzy generują leady, platforma buduje warstwę zaufania.'],
@@ -212,23 +203,55 @@
       ['v4.0 — Q1 2029','styczeń – marzec 2029','Wejście w moduły enterprise, integracje API, dane rynkowe i zaawansowane raportowanie.','API Integration Hub, integracje ATS/CRM/ERP/płace/certyfikatorzy, Market Intelligence, dashboard analityczny, benchmarki i raporty.','Platforma staje się narzędziem dla większych firm, a dane tworzą osobny produkt: raporty, API i analityka.'],
       ['v4.9 — Q2 2029','kwiecień – czerwiec 2029','Finalizacja docelowej warstwy zaufania: Digital Offshore ID, reputacja, mobilna karta pracownika i pełna gotowość projektowa.','Digital Offshore ID, mobilna karta pracownika, QR/NFC, status certyfikatów, status ubezpieczenia, Trust Score, oceny 360°, reputacja i tryb offline/mobile-ready.','Użytkownik ma cyfrową tożsamość branżową, firma potwierdza gotowość pracownika, platforma zamyka pętlę: profil → certyfikaty → projekt → compliance → ubezpieczenie → reputacja.']
     ];
-    s9.innerHTML = `
-      <div class="slide-content roadmap-slide-content">
-        <p class="slide-thesis">MVP 1.1–1.4 = fundament, demo testowe i publikacja. v1.5+ = oficjalny start oraz kolejne duże aktualizacje funkcji.</p>
-        <div class="slide-tablewrap" style="margin-bottom:14px;"><table class="slide-table" style="min-width:0; font-size:11.2px;"><thead><tr><th>Etap</th><th>Q</th><th>Główna aktualizacja</th></tr></thead><tbody>${rows(stages.map(r => ['<strong>' + r[0] + '</strong>', r[1], r[2]]))}</tbody></table></div>
-        <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:12px;">
-          ${card('Fundament MVP 1.1–1.4','<p>Budujemy rdzeń: profil, demo testowe, księgowość v0, przygotowanie publikacji, podstawowe procesy i pierwszą walidację.</p>','accent-teal')}
-          ${card('Oficjalny start v1.5+','<p>Po publikacji dokładamy rekrutację, komunikację, partnerów, społeczność, AI, SEO, compliance i marketplace.</p>','accent-amber')}
-          ${card('Warstwa operacyjna v3.9–v4.9','<p>Project Dashboard, payroll, safety, API, Market Intelligence, Digital Offshore ID, Trust Score i mobilna karta pracownika.</p>','accent-green')}
-        </div>
-        <details open style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;">
-          <summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Kamienie milowe v1.9–v4.9</summary>
-          <div class="slide-tablewrap" style="margin-top:10px; max-height:360px; overflow:auto;"><table class="slide-table" style="font-size:10.5px; min-width:1040px;"><thead><tr><th>Etap</th><th>Termin</th><th>Cel etapu</th><th>Praca</th><th>Efekt końcowy</th></tr></thead><tbody>${rows(deepStages.map(r => ['<strong>' + r[0] + '</strong>', r[1], r[2], r[3], r[4]]))}</tbody></table></div>
-        </details>
-        <div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('AI + treści + SEO','v2.0 tworzy ścieżki kariery, rekomendacje szkoleń i organiczny silnik pozyskiwania użytkowników.','#2DD4BF')}${infoBox('Compliance jako przewaga','v2.9 rozwija Document Vault, OCR, alerty i raport zgodności dla firm.','#FBBF24')}${infoBox('Trust layer','v4.9 zamyka pętlę Digital Offshore ID, Trust Score, QR/NFC, ubezpieczenie i reputację 360°.','#34D399')}</div>
-        <div class="slide-conclusion">Roadmapa nie skaluje funkcji losowo — każdy etap dodaje kolejną warstwę systemu operacyjnego dla pracy wysokiego ryzyka.</div>
-      </div>`;
+    s9.innerHTML = `<div class="slide-content roadmap-slide-content"><p class="slide-thesis">MVP 1.1–1.4 = fundament, demo testowe i publikacja. v1.5+ = oficjalny start oraz kolejne duże aktualizacje funkcji.</p><div class="slide-tablewrap" style="margin-bottom:14px;"><table class="slide-table" style="min-width:0; font-size:11.2px;"><thead><tr><th>Etap</th><th>Q</th><th>Główna aktualizacja</th></tr></thead><tbody>${rows(stages.map(r => ['<strong>' + r[0] + '</strong>', r[1], r[2]]))}</tbody></table></div><div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:12px;">${card('Fundament MVP 1.1–1.4','<p>Budujemy rdzeń: profil, demo testowe, księgowość v0, przygotowanie publikacji, podstawowe procesy i pierwszą walidację.</p>','accent-teal')}${card('Oficjalny start v1.5+','<p>Po publikacji dokładamy rekrutację, komunikację, partnerów, społeczność, AI, SEO, compliance i marketplace.</p>','accent-amber')}${card('Warstwa operacyjna v3.9–v4.9','<p>Project Dashboard, payroll, safety, API, Market Intelligence, Digital Offshore ID, Trust Score i mobilna karta pracownika.</p>','accent-green')}</div><details open style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;"><summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Kamienie milowe v1.9–v4.9</summary><div class="slide-tablewrap" style="margin-top:10px; max-height:360px; overflow:auto;"><table class="slide-table" style="font-size:10.5px; min-width:1040px;"><thead><tr><th>Etap</th><th>Termin</th><th>Cel etapu</th><th>Praca</th><th>Efekt końcowy</th></tr></thead><tbody>${rows(deepStages.map(r => ['<strong>' + r[0] + '</strong>', r[1], r[2], r[3], r[4]]))}</tbody></table></div></details><div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('AI + treści + SEO','v2.0 tworzy ścieżki kariery, rekomendacje szkoleń i organiczny silnik pozyskiwania użytkowników.','#2DD4BF')}${infoBox('Compliance jako przewaga','v2.9 rozwija Document Vault, OCR, alerty i raport zgodności dla firm.','#FBBF24')}${infoBox('Trust layer','v4.9 zamyka pętlę Digital Offshore ID, Trust Score, QR/NFC, ubezpieczenie i reputację 360°.','#34D399')}</div><div class="slide-conclusion">Roadmapa nie skaluje funkcji losowo — każdy etap dodaje kolejną warstwę systemu operacyjnego dla pracy wysokiego ryzyka.</div></div>`;
     s9.dataset.roadmapPatched = '1';
+  }
+
+  function patchFinancialSlide() {
+    const s10 = slide(10);
+    if (!s10 || s10.dataset.financialPatched === '1') return;
+    const mvpCosts = [
+      ['Zatrudnienie etapowe MVP1','—','—','<strong>1 261 407,66 zł</strong>'],
+      ['Biuro 12 mies. z rezerwą mediów','105 984,00 zł','24 376,32 zł','130 360,32 zł'],
+      ['Programy i subskrypcje etapowe','179 037,22 zł','41 178,56 zł','220 215,78 zł'],
+      ['Sprzęt / leasing / wyposażenie MVP1','134 128,34 zł','30 849,52 zł','164 977,86 zł'],
+      ['<strong>Razem MVP1</strong>','','','<strong style="color:#34D399">1 776 961,62 zł</strong>']
+    ];
+    const office = [
+      ['Czynsz','5 250,00 zł','1 207,50 zł','6 457,50 zł'],['Eksploatacja z 15% części wspólnej','2 582,00 zł','593,86 zł','3 175,86 zł'],['Rezerwa media','1 000,00 zł','230,00 zł','1 230,00 zł'],['<strong>Razem biuro</strong>','8 832,00 zł','2 031,36 zł','<strong>10 863,36 zł</strong>']
+    ];
+    const startCash = [
+      ['Zespół — 1 miesiąc','65 655,81 zł'],['Biuro — 1 miesiąc','10 863,36 zł'],['Subskrypcje — 1 miesiąc','13 947,65 zł'],['Sprzęt — opłaty startowe Q3','40 542,55 zł'],['Sprzęt — raty 1 miesiąc','4 862,56 zł'],['Kaucja biura','6 457,50 zł'],['<strong>Razem start + 1 miesiąc</strong>','<strong style="color:#34D399">142 329,43 zł</strong>']
+    ];
+    const employment = [
+      ['CEO','B2B VAT','8 000,00 zł','9 840,00 zł','9 840,00 zł','118 080,00 zł'],['Starszy Full Stack','B2B VAT','19 000,00 zł','23 370,00 zł','23 370,00 zł','280 440,00 zł'],['Junior Front-end','student &lt;26','7 000,00 zł','7 000,00 zł','7 000,00 zł','84 000,00 zł'],['Junior Back-end','student &lt;26','7 000,00 zł','7 000,00 zł','7 000,00 zł','84 000,00 zł'],['UI/UX Designer','B2B VAT','7 000,00 zł','8 610,00 zł','8 610,00 zł','103 320,00 zł'],['Researcher','student &lt;26','6 500,00 zł','6 500,00 zł','6 500,00 zł','78 000,00 zł'],['KAM','B2B VAT','6 500,00 zł','7 995,00 zł','7 995,00 zł','95 940,00 zł'],['Marketing & Social Media','B2B VAT','6 500,00 zł','7 995,00 zł','7 995,00 zł','95 940,00 zł'],['Główna Księgowa','zlecenie → UoP','8 000 / 10 000 zł','11 075 / 14 185 zł','13 343 / 17 090 zł','182 602,20 zł'],['BOK','student &lt;26','5 000,00 zł','5 000,00 zł','5 000,00 zł','60 000,00 zł'],['Software Architect','B2B VAT','17 000,00 zł','20 910,00 zł','20 910,00 zł','250 920,00 zł'],['Młodsza Księgowa','zlecenie → UoP','5 000 / 6 500 zł','6 922 / 9 051 zł','8 340 / 10 905 zł','115 465,15 zł'],['Przedstawiciel Handlowy','B2B VAT','5 500,00 zł','6 765,00 zł','6 765,00 zł','81 180,00 zł'],['Administracja i Dokumentacja','student → UoP','4 500 / 5 500 zł','4 500 / 7 584 zł','4 500 / 9 137 zł','81 823,81 zł'],['Średni Mobile Developer','B2B VAT','17 000,00 zł','20 910,00 zł','20 910,00 zł','250 920,00 zł'],['Junior Mobile Developer','B2B VAT','7 000,00 zł','8 610,00 zł','8 610,00 zł','103 320,00 zł'],['HR & Rekrutacja','zlecenie → UoP','5 500 / 6 500 zł','7 614 / 9 051 zł','9 173 / 10 905 zł','120 468,87 zł'],['Senior AI Developer','B2B VAT','22 500,00 zł','27 675,00 zł','27 675,00 zł','332 100,00 zł'],['Junior AI Developer','B2B VAT','12 500,00 zł','15 375,00 zł','15 375,00 zł','184 500,00 zł'],['Autor treści','student &lt;26','5 000,00 zł','5 000,00 zł','5 000,00 zł','60 000,00 zł'],['Specjalista SEO','zlecenie ZUS','7 000,00 zł','9 690,68 zł','11 675,33 zł','140 103,96 zł'],['Automatyzacja Marketingu','B2B VAT','8 500,00 zł','10 455,00 zł','10 455,00 zł','125 460,00 zł'],['Kadry, Płace i Rozliczenia','zlecenie → UoP','6 500 / 7 500 zł','8 998 / 10 518 zł','10 841 / 12 672 zł','141 080,51 zł'],['Sprzątanie / czyste biuro','zlecenie ZUS','2 000,00 zł','2 768,77 zł','3 335,81 zł','40 029,70 zł']
+    ];
+    const subscriptions = [
+      ['Apple Business 2 TB','24','900,39 zł','207,09 zł','1 107,49 zł'],['Jira Premium','24','1 310,48 zł','301,41 zł','1 611,90 zł'],['Slack Pro','24','653,44 zł','150,29 zł','803,73 zł'],['Bitwarden Teams','24','360,52 zł','82,92 zł','443,44 zł'],['Microsoft 365 Business Standard','24','1 113,55 zł','256,12 zł','1 369,67 zł'],['ChatGPT Business + Codex','24','1 704,00 zł','391,92 zł','2 095,92 zł'],['Claude Team Premium','24','9 253,87 zł','2 128,39 zł','11 382,26 zł'],['Google Workspace Business Plus','24','2 376,00 zł','546,48 zł','2 922,48 zł'],['Perplexity Pro','22','2 809,04 zł','646,08 zł','3 455,12 zł'],['Perplexity Enterprise Max','2','2 035,43 zł','468,15 zł','2 503,57 zł'],['GitHub Enterprise','9','709,77 zł','163,25 zł','873,02 zł'],['Copilot Enterprise','9','1 318,15 zł','303,17 zł','1 621,32 zł'],['Figma Professional','1','60,09 zł','13,82 zł','73,91 zł'],['Canva Business','1','75,11 zł','17,27 zł','92,38 zł'],['Vercel Pro','8','600,86 zł','138,20 zł','739,06 zł'],['Supabase Team','1','2 249,48 zł','517,38 zł','2 766,87 zł'],['GetResponse Creator','1','253,19 zł','58,23 zł','311,43 zł'],['<strong>Razem</strong>','','<strong>27 783,38 zł</strong>','<strong>6 390,18 zł</strong>','<strong>34 173,55 zł</strong>']
+    ];
+    const equipment = [
+      ['CEO / programiści / UI/UX / researcher — MacBook Pro + iPhone 17 + stanowisko','5 049,56 zł','729,94 zł'],['Pozostali pracownicy — MacBook Air + iPhone 16e + stanowisko','3 880,55 zł','482,90 zł'],['QNAP TS-873A-8G','6 364,66 zł','—'],['2× Mac mini M4 Pro — etap AI','1 499,81 zł','490,01 zł']
+    ];
+    const departments = [
+      ['Zarząd','CEO'],['IT','Full Stack, Front-end, Back-end, Software Architect, Mobile, AI'],['R&D / Product','UI/UX Designer, Researcher'],['Sprzedaż','KAM, Przedstawiciel Handlowy'],['Marketing','Social Media, Content, SEO, Automatyzacja Marketingu'],['BOK','Specjalista ds. Obsługi Klienta'],['HR & Administracja','HR, Administracja i Dokumentacja, Sprzątanie'],['Finanse','Główna Księgowa, Młodsza Księgowa, Kadry/Płace/Rozliczenia']
+    ];
+    s10.innerHTML = `
+      <div class="slide-content finance-slide-content">
+        <p class="slide-thesis">MVP1 kosztuje ok. 1,78 mln zł brutto/cashflow w wariancie zoptymalizowanym i etapowym. Budżet obejmuje aplikację, zespół, biuro, sprzęt, leasing urządzeń, subskrypcje AI/SaaS oraz podstawową infrastrukturę pracy.</p>
+        <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">
+          ${card('Razem MVP1','<p style="font-size:28px; font-weight:950; color:#34D399; margin:0 0 6px;">1 776 961,62 zł</p><p>12 miesięcy brutto / cashflow.</p>','accent-green')}
+          ${card('Start + 1 miesiąc','<p style="font-size:28px; font-weight:950; color:#FBBF24; margin:0 0 6px;">142 329,43 zł</p><p>Minimalny cash potrzebny na uruchomienie MVP 1.1.</p>','accent-amber')}
+          ${card('Pełna baza 24 osób','<p style="font-size:26px; font-weight:950; color:#2DD4BF; margin:0 0 6px;">260 218,74 zł / msc</p><p>3 msc: 780 656,23 zł · 12 msc: 3 209 694,20 zł.</p>','accent-teal')}
+        </div>
+        <div class="slide-tablewrap" style="margin-bottom:12px;"><table class="slide-table" style="min-width:0; font-size:11.4px;"><thead><tr><th>Kategoria</th><th>Netto / cashflow</th><th>VAT</th><th>Brutto / cashflow</th></tr></thead><tbody>${rows(mvpCosts)}</tbody></table></div>
+        <div class="responsive-grid-3b" style="margin-bottom:12px;">${infoBox('Kursy do przeliczeń','USD 3,7554 zł, EUR 4,2842 zł, GBP 4,9646 zł, VAT 23%. Źródło w notatce: NBP — Serwis Informacyjny.','#2DD4BF')}${infoBox('Biuro — Gdańsk Wrzeszcz','Al. Grunwaldzka; miesięcznie 10 863,36 zł brutto, 12 miesięcy 130 360,32 zł.','#FBBF24')}${infoBox('Działy organizacji','Zarząd, IT, R&D/Product, Sprzedaż, Marketing, BOK, HR & Administracja, Finanse.','#34D399')}</div>
+        <div class="slide-tablewrap" style="margin-bottom:12px;"><table class="slide-table" style="min-width:0; font-size:11.2px;"><thead><tr><th>Pozycja</th><th>Netto / msc</th><th>VAT</th><th>Brutto / msc</th></tr></thead><tbody>${rows(office)}</tbody></table></div>
+        <div class="slide-tablewrap" style="margin-bottom:12px;"><table class="slide-table" style="min-width:0; font-size:11.2px;"><thead><tr><th>Start MVP 1.1 — cash potrzebny na uruchomienie</th><th>Brutto</th></tr></thead><tbody>${rows(startCash)}</tbody></table></div>
+        <details style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;"><summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Zatrudnienie — pełna baza 24 stanowisk</summary><div class="slide-tablewrap" style="margin-top:10px; max-height:260px; overflow:auto;"><table class="slide-table" style="font-size:10.4px; min-width:1000px;"><thead><tr><th>Stanowisko</th><th>Forma</th><th>Netto / msc</th><th>Brutto / msc</th><th>Koszt pracodawcy / msc</th><th>12 msc</th></tr></thead><tbody>${rows(employment)}</tbody></table></div></details>
+        <details style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;"><summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Programy, subskrypcje, sprzęt i działy</summary><div class="responsive-grid-3b" style="margin-top:10px; align-items:start;"><div class="slide-tablewrap"><table class="slide-table" style="font-size:10.2px; min-width:650px;"><thead><tr><th>Subskrypcja</th><th>Liczba</th><th>Netto</th><th>VAT</th><th>Brutto / msc</th></tr></thead><tbody>${rows(subscriptions)}</tbody></table></div><div class="slide-tablewrap"><table class="slide-table" style="font-size:10.2px; min-width:420px;"><thead><tr><th>Pakiet sprzętu</th><th>Start / osoba</th><th>Rata / msc</th></tr></thead><tbody>${rows(equipment)}</tbody></table></div><div class="slide-tablewrap"><table class="slide-table" style="font-size:10.2px; min-width:420px;"><thead><tr><th>Dział</th><th>Stanowiska</th></tr></thead><tbody>${rows(departments)}</tbody></table></div></div></details>
+        <div class="slide-conclusion">MVP1 to nie tylko koszt aplikacji — to budżet pierwszej operacyjnej wersji spółki: zespół, narzędzia, biuro, sprzęt, AI/SaaS i infrastruktura pracy.</div>
+      </div>`;
+    s10.dataset.financialPatched = '1';
   }
 
   ready(() => {
@@ -236,5 +259,6 @@
     patchMarketEntrySlide();
     patchTeamSlide();
     patchRoadmapSlide();
+    patchFinancialSlide();
   });
 })();
