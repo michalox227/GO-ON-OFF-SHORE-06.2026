@@ -306,6 +306,11 @@
   .org-editor-rolelist .org-role-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:8px 10px; color:#fff; font-size:13px}
   .org-editor-rolelist .org-role-row .rm-del-btn{display:inline-flex; margin-left:auto}
   .org-editor-rolelist .org-role-meta{color:var(--muted); font-size:12px}
+  .labels-group{margin:14px 0}
+  .labels-group h3{margin:0 0 8px; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--teal)}
+  .labels-group label{display:flex; gap:8px; align-items:center; margin:6px 0; font-size:13px; color:#fff}
+  .labels-group label span{flex:0 0 320px; color:#c4ced8}
+  .labels-group label input{flex:1; min-width:160px}
   .oc-close:hover{background:#fff; color:#000}
   .zespol-heading{color: #2DD4BF; display: block; margin-bottom: 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.04em;}
   .fin-tile{margin-bottom: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.10);}
@@ -873,8 +878,8 @@
 <main class="page-view" id="roadmap">
   <div class="roadmap-view">
     <div class="roadmap-hero">
-      <h1>ROAD MAP - GO ON [OFF] SHORE</h1>
-      <p>Kliknij etap albo kwartał, aby zobaczyć szczegóły pod mapą</p>
+      <h1 id="rmHeroTitle">ROAD MAP - GO ON [OFF] SHORE</h1>
+      <p id="rmHeroDesc">Kliknij etap albo kwartał, aby zobaczyć szczegóły pod mapą</p>
     </div>
     <div class="roadmap-table-wrap">
       <table class="roadmap-q-table" aria-label="Road Map GO ON OFF SHORE 2026–2029 w podziale na kwartały">
@@ -1650,25 +1655,25 @@
       <div class="org-filter-row">
         <button class="org-all-btn active" type="button" data-org-all>ALL</button>
         <span class="org-filter-divider"></span>
-        <button class="org-filter-btn org-stage-btn stage-mvp1" type="button" data-org-stage="mvp1"><span class="org-tag">#1</span> MVP 1.1 → 1.4</button>
-        <button class="org-filter-btn org-stage-btn stage-two" type="button" data-org-stage="two"><span class="org-tag">#2</span> v1.5 → v1.9</button>
-        <button class="org-filter-btn org-stage-btn stage-three" type="button" data-org-stage="three"><span class="org-tag">#3</span> v2.0 → v2.9</button>
-        <button class="org-filter-btn org-stage-btn stage-four" type="button" data-org-stage="four"><span class="org-tag">#4</span> v3.0 → v3.9</button>
-        <button class="org-filter-btn org-stage-btn stage-five" type="button" data-org-stage="five"><span class="org-tag">#5</span> v4.0 → v4.9</button>
+        <button class="org-filter-btn org-stage-btn stage-mvp1" type="button" data-org-stage="mvp1"><span class="org-tag">#1</span><span class="org-filter-label"> MVP 1.1 → 1.4</span></button>
+        <button class="org-filter-btn org-stage-btn stage-two" type="button" data-org-stage="two"><span class="org-tag">#2</span><span class="org-filter-label"> v1.5 → v1.9</span></button>
+        <button class="org-filter-btn org-stage-btn stage-three" type="button" data-org-stage="three"><span class="org-tag">#3</span><span class="org-filter-label"> v2.0 → v2.9</span></button>
+        <button class="org-filter-btn org-stage-btn stage-four" type="button" data-org-stage="four"><span class="org-tag">#4</span><span class="org-filter-label"> v3.0 → v3.9</span></button>
+        <button class="org-filter-btn org-stage-btn stage-five" type="button" data-org-stage="five"><span class="org-tag">#5</span><span class="org-filter-label"> v4.0 → v4.9</span></button>
       </div>
       <div class="org-filter-row">
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2026"><span class="org-tag" style="background:#facc15"></span>Q3 2026</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2026"><span class="org-tag" style="background:#fb923c"></span>Q4 2026</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2027"><span class="org-tag" style="background:#f87171"></span>Q1 2027</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2027"><span class="org-tag" style="background:#e879f9"></span>Q2 2027</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2027"><span class="org-tag" style="background:#22c55e"></span>Q3 2027</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2027"><span class="org-tag" style="background:#4ade80"></span>Q4 2027</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2028"><span class="org-tag" style="background:#2dd4bf"></span>Q1 2028</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2028"><span class="org-tag" style="background:#38bdf8"></span>Q2 2028</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2028"><span class="org-tag" style="background:#60a5fa"></span>Q3 2028</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2028"><span class="org-tag" style="background:#818cf8"></span>Q4 2028</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2029"><span class="org-tag" style="background:#a78bfa"></span>Q1 2029</button>
-        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2029"><span class="org-tag" style="background:#f472b6"></span>Q2 2029</button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2026"><span class="org-tag" style="background:#facc15"></span><span class="org-filter-label">Q3 2026</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2026"><span class="org-tag" style="background:#fb923c"></span><span class="org-filter-label">Q4 2026</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2027"><span class="org-tag" style="background:#f87171"></span><span class="org-filter-label">Q1 2027</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2027"><span class="org-tag" style="background:#e879f9"></span><span class="org-filter-label">Q2 2027</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2027"><span class="org-tag" style="background:#22c55e"></span><span class="org-filter-label">Q3 2027</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2027"><span class="org-tag" style="background:#4ade80"></span><span class="org-filter-label">Q4 2027</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2028"><span class="org-tag" style="background:#2dd4bf"></span><span class="org-filter-label">Q1 2028</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2028"><span class="org-tag" style="background:#38bdf8"></span><span class="org-filter-label">Q2 2028</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q3 2028"><span class="org-tag" style="background:#60a5fa"></span><span class="org-filter-label">Q3 2028</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q4 2028"><span class="org-tag" style="background:#818cf8"></span><span class="org-filter-label">Q4 2028</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q1 2029"><span class="org-tag" style="background:#a78bfa"></span><span class="org-filter-label">Q1 2029</span></button>
+        <button class="org-filter-btn org-q-btn" type="button" data-org-q="Q2 2029"><span class="org-tag" style="background:#f472b6"></span><span class="org-filter-label">Q2 2029</span></button>
       </div>
       <div class="org-filter-row">
         <button class="org-filter-btn org-year-btn" type="button" data-org-year="2026">2026</button>
@@ -1677,16 +1682,16 @@
         <button class="org-filter-btn org-year-btn" type="button" data-org-year="2029">2029</button>
       </div>
     </div>
-    <h2 style="margin:0 0 8px;">STRUKTURA ORGANIZACYJNA</h2>
-    <p style="margin:0 0 6px; color:#c4ced8;">Skład zespołu GO ON [OFF] SHORE. Wybierz etap, kwartał lub rok, aby zobaczyć kto jest już w zespole oraz kto został zrekrutowany w tym okresie. Dane o stanowiskach pochodzą z Road Mapy.</p>
+    <h2 id="orgPageHeading" style="margin:0 0 8px;">STRUKTURA ORGANIZACYJNA</h2>
+    <p id="orgIntroText" style="margin:0 0 6px; color:#c4ced8;">Skład zespołu GO ON [OFF] SHORE. Wybierz etap, kwartał lub rok, aby zobaczyć kto jest już w zespole oraz kto został zrekrutowany w tym okresie. Dane o stanowiskach pochodzą z Road Mapy.</p>
     <p class="org-filter-status" id="orgFilterStatus">Widok: <b>cała struktura</b></p>
     <div class="org-team-columns">
       <section class="org-team-col">
-        <h3>Zespół</h3>
+        <h3 id="orgTeamColHeading">Zespół</h3>
         <div class="org-team-scope" id="orgTeamScope"></div>
       </section>
       <section class="org-team-col">
-        <h3>Zrekrutowani</h3>
+        <h3 id="orgRecruitedColHeading">Zrekrutowani</h3>
         <div class="org-team-scope" id="orgRecruitedScope"></div>
       </section>
     </div>
@@ -1846,6 +1851,17 @@
       <button type="submit" class="org-filter-btn">+ Dodaj rolę</button>
     </form>
   </div>
+
+  <h2 style="margin:32px 0 8px;">ETYKIETY I NAGŁÓWKI (cała platforma)</h2>
+  <p style="margin:0 0 6px; color:#c4ced8;">Tu poprawiasz pozostałe napisy widoczne na stronie, które nie są częścią treści Biznes Planu, Road Mapy ani Organizacji — np. nazwy zakładek, nagłówek Road Mapy, etykiety filtrów Organizacji. Każda zmiana zapisuje się po kliknięciu „Zapisz wszystkie etykiety”.</p>
+  <div class="settings-actions">
+    <button class="org-filter-btn" type="button" id="labelsSaveBtn">Zapisz wszystkie etykiety</button>
+    <button class="org-filter-btn" type="button" id="labelsReportBtn">Wyświetl poprawione</button>
+    <button class="org-filter-btn" type="button" id="labelsResetBtn">Przywróć opublikowaną wersję</button>
+  </div>
+  <p class="org-filter-status" id="labelsEditStatus"></p>
+  <textarea id="labelsReport" readonly placeholder="Tu pojawi się lista zmian po kliknięciu „Wyświetl poprawione”..."></textarea>
+  <div id="labelsEditorFields"></div>
 </div>
 </main>
 
@@ -2534,6 +2550,156 @@
         orgEditStatus.textContent = 'Wygenerowano raport zmian — skopiuj treść poniżej.';
       });
     }
+  })();
+
+  (function initLabelsEditor(){
+    const fieldsEl = document.getElementById('labelsEditorFields');
+    if (!fieldsEl) return;
+    const STORAGE_KEY = 'goShoreLabels_v1';
+    const saveBtn = document.getElementById('labelsSaveBtn');
+    const reportBtn = document.getElementById('labelsReportBtn');
+    const resetBtn = document.getElementById('labelsResetBtn');
+    const statusEl = document.getElementById('labelsEditStatus');
+    const reportEl = document.getElementById('labelsReport');
+
+    const ORG_Q_LIST = ['Q3 2026','Q4 2026','Q1 2027','Q2 2027','Q3 2027','Q4 2027','Q1 2028','Q2 2028','Q3 2028','Q4 2028','Q1 2029','Q2 2029'];
+    const STAGE_LIST = [
+      ['mvp1', 'etap 1 (MVP)'],
+      ['two', 'etap 2'],
+      ['three', 'etap 3'],
+      ['four', 'etap 4'],
+      ['five', 'etap 5']
+    ];
+    const TAB_LIST = [
+      ['business-plan', 'Biznes Plan'],
+      ['presentation', 'Prezentacja'],
+      ['roadmap', 'Road Mapa'],
+      ['organization', 'Organizacja'],
+      ['settings', 'Ustawienia witryny']
+    ];
+
+    function entry(key, group, label, getEl, kind, attr) {
+      return { key, group, label, getEl, kind: kind || 'text', attr: attr || null };
+    }
+
+    const REGISTRY = [];
+
+    REGISTRY.push(entry('page-title', 'Globalne', 'Tytuł karty przeglądarki', () => null, 'title'));
+    REGISTRY.push(entry('appbar-aria', 'Globalne', 'Etykieta dostępności belki nawigacji', () => document.querySelector('.top-appbar'), 'attr', 'aria-label'));
+    TAB_LIST.forEach(([id, name]) => {
+      REGISTRY.push(entry('tab-' + id, 'Globalne', 'Nazwa zakładki: ' + name, () => document.querySelector('.view-btn[data-view="' + id + '"]')));
+    });
+
+    REGISTRY.push(entry('rm-hero-title', 'Road Mapa', 'Nagłówek Road Mapy', () => document.getElementById('rmHeroTitle')));
+    REGISTRY.push(entry('rm-hero-desc', 'Road Mapa', 'Opis pod nagłówkiem Road Mapy', () => document.getElementById('rmHeroDesc')));
+    STAGE_LIST.forEach(([id, name]) => {
+      REGISTRY.push(entry('rm-stage-' + id, 'Road Mapa', 'Etykieta w tabeli: ' + name, () => document.querySelector('.stage-btn[data-roadmap-stage="' + id + '"] > span:first-child')));
+    });
+    ORG_Q_LIST.forEach((q, i) => {
+      REGISTRY.push(entry('rm-th-' + i, 'Road Mapa', 'Nagłówek kolumny kwartału: ' + q, () => document.querySelector('.roadmap-q-table thead th:nth-child(' + (i + 2) + ')')));
+    });
+
+    REGISTRY.push(entry('org-heading', 'Organizacja', 'Nagłówek strony Organizacja', () => document.getElementById('orgPageHeading')));
+    REGISTRY.push(entry('org-intro', 'Organizacja', 'Opis pod nagłówkiem Organizacji', () => document.getElementById('orgIntroText')));
+    REGISTRY.push(entry('org-col-team', 'Organizacja', 'Nagłówek kolumny: Zespół', () => document.getElementById('orgTeamColHeading')));
+    REGISTRY.push(entry('org-col-recruited', 'Organizacja', 'Nagłówek kolumny: Zrekrutowani', () => document.getElementById('orgRecruitedColHeading')));
+    REGISTRY.push(entry('org-filter-all', 'Organizacja', 'Etykieta filtra: ALL', () => document.querySelector('.org-all-btn')));
+    STAGE_LIST.forEach(([id, name]) => {
+      REGISTRY.push(entry('org-stage-' + id, 'Organizacja', 'Etykieta filtra etapu: ' + name, () => document.querySelector('.org-stage-btn[data-org-stage="' + id + '"] .org-filter-label')));
+    });
+    ORG_Q_LIST.forEach(q => {
+      REGISTRY.push(entry('org-q-' + q, 'Organizacja', 'Etykieta filtra kwartału: ' + q, () => document.querySelector('.org-q-btn[data-org-q="' + q + '"] .org-filter-label')));
+    });
+    ['2026', '2027', '2028', '2029'].forEach(year => {
+      REGISTRY.push(entry('org-year-' + year, 'Organizacja', 'Etykieta filtra roku: ' + year, () => document.querySelector('.org-year-btn[data-org-year="' + year + '"]')));
+    });
+
+    function readValue(item) {
+      if (item.kind === 'title') return document.title;
+      const el = item.getEl();
+      if (!el) return null;
+      if (item.kind === 'attr') return el.getAttribute(item.attr) || '';
+      return el.textContent;
+    }
+
+    function writeValue(item, value) {
+      if (item.kind === 'title') { document.title = value; return; }
+      const el = item.getEl();
+      if (!el) return;
+      if (item.kind === 'attr') { el.setAttribute(item.attr, value); return; }
+      el.textContent = value;
+    }
+
+    const ORIGINAL_LABELS = {};
+    REGISTRY.forEach(item => { ORIGINAL_LABELS[item.key] = readValue(item); });
+
+    let savedLabels = null;
+    try { savedLabels = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch (e) { savedLabels = null; }
+    if (savedLabels) {
+      REGISTRY.forEach(item => {
+        if (Object.prototype.hasOwnProperty.call(savedLabels, item.key) && ORIGINAL_LABELS[item.key] != null) {
+          writeValue(item, savedLabels[item.key]);
+        }
+      });
+    }
+
+    function renderFields() {
+      const groups = {};
+      REGISTRY.forEach(item => {
+        if (ORIGINAL_LABELS[item.key] == null) return;
+        (groups[item.group] = groups[item.group] || []).push(item);
+      });
+      fieldsEl.innerHTML = Object.keys(groups).map(group => (
+        '<div class="labels-group"><h3>' + group + '</h3>' +
+        groups[group].map(item => (
+          '<label><span>' + item.label + '</span><input type="text" data-label-key="' + item.key + '" /></label>'
+        )).join('') +
+        '</div>'
+      )).join('');
+      fieldsEl.querySelectorAll('input[data-label-key]').forEach(input => {
+        const item = REGISTRY.find(r => r.key === input.dataset.labelKey);
+        input.value = readValue(item) || '';
+      });
+    }
+
+    renderFields();
+
+    saveBtn.addEventListener('click', () => {
+      const map = {};
+      fieldsEl.querySelectorAll('input[data-label-key]').forEach(input => {
+        const item = REGISTRY.find(r => r.key === input.dataset.labelKey);
+        if (!item) return;
+        map[item.key] = input.value;
+        writeValue(item, input.value);
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+      statusEl.textContent = 'Zapisano wszystkie etykiety do podglądu lokalnego.';
+    });
+
+    reportBtn.addEventListener('click', () => {
+      const lines = ['ETYKIETY I NAGŁÓWKI — lista zmian względem opublikowanej wersji:', ''];
+      fieldsEl.querySelectorAll('input[data-label-key]').forEach(input => {
+        const item = REGISTRY.find(r => r.key === input.dataset.labelKey);
+        if (!item) return;
+        const orig = ORIGINAL_LABELS[item.key];
+        if (input.value !== orig) {
+          lines.push(item.label + ': "' + orig + '" → "' + input.value + '"');
+        }
+      });
+      reportEl.value = lines.length > 2 ? lines.join('\n') : 'Brak zmian względem opublikowanej wersji.';
+      statusEl.textContent = 'Wygenerowano raport zmian etykiet — skopiuj treść poniżej.';
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if (!confirm('Przywrócić opublikowaną wersję wszystkich etykiet? Lokalne zmiany zostaną utracone.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      REGISTRY.forEach(item => {
+        if (ORIGINAL_LABELS[item.key] != null) writeValue(item, ORIGINAL_LABELS[item.key]);
+      });
+      renderFields();
+      reportEl.value = '';
+      statusEl.textContent = 'Przywrócono opublikowaną wersję wszystkich etykiet.';
+    });
   })();
 
   (function initSiteSettings(){
