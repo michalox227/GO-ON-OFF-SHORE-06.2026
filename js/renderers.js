@@ -232,3 +232,103 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchMarketEntrySlide);
   else patchMarketEntrySlide();
 })();
+
+/* Prezentacja — uzupełnienie slajdu 08: Zespół i Founder-Market Fit. */
+(function () {
+  function patchTeamSlide() {
+    const slide8 = document.querySelector('.deck-slide[data-slide="8"]');
+    if (!slide8 || slide8.dataset.teamPatched === '1') return;
+
+    slide8.innerHTML = `
+      <div class="slide-content team-slide-content">
+        <p class="slide-thesis">Founder zna rynek wysokiego ryzyka od strony realnych potrzeb pracowników: ubezpieczeń, odpowiedzialności, kontraktów, ryzyk i decyzji finansowych. Zespół budowany jest etapowo: od 7 osób w MVP 1.1 do 27 osób w V2.0.</p>
+
+        <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">
+          <div class="slide-card accent-teal">
+            <h4>Founder-Market Fit</h4>
+            <p style="font-size:18px; font-weight:900; color:#fff; margin:0 0 8px;">Michał Ćwikła</p>
+            <p>Ekspert ds. ubezpieczeń sektora high-risk. 3. rok pracy w obszarze zawodów wysokiego ryzyka.</p>
+            <div class="slide-chips" style="margin-top:10px;"><span class="slide-chip">220+ klientów</span><span class="slide-chip">~7 000 obserwujących</span><span class="slide-chip">kontrakty / ryzyko / odpowiedzialność</span></div>
+          </div>
+          <div class="slide-card accent-amber">
+            <h4>Team Ramp</h4>
+            <p style="font-size:26px; font-weight:900; color:#fff; margin:0 0 8px;">7 → 27 osób</p>
+            <p><strong>Q3 2026:</strong> core product team.</p>
+            <p><strong>Q2 2027:</strong> sprzedaż + obsługa + administracja.</p>
+            <p><strong>Q3–Q4 2027:</strong> mobile + HR + AI.</p>
+            <p><strong>Q1 2028:</strong> AI + SEO + automatyzacje + kadry/płace.</p>
+          </div>
+          <div class="slide-card accent-green">
+            <h4>Koszt zespołu</h4>
+            <table class="slide-table" style="min-width:0; font-size:11.5px; margin-top:4px;">
+              <tbody>
+                <tr><td style="font-weight:800; color:#fff;">Start MVP 1.1</td><td>65 655,81 zł / msc</td></tr>
+                <tr><td style="font-weight:800; color:#fff;">Po MVP 1.4</td><td>152 268,56 zł / msc</td></tr>
+                <tr><td style="font-weight:800; color:#fff;">Po V2.0</td><td>290 928,42 zł / msc</td></tr>
+                <tr><td style="font-weight:800; color:#fff;">Q3 2026–Q1 2028</td><td>3 427 530,42 zł</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="slide-tablewrap" style="margin-bottom:12px;">
+          <table class="slide-table" style="min-width:0; font-size:11px;">
+            <thead><tr><th>Q</th><th>Wersja</th><th>Cel zespołu</th><th>Nowe osoby</th><th>Łącznie</th><th>Koszt / msc</th><th>Koszt Q</th></tr></thead>
+            <tbody>
+              <tr><td>Q3 2026</td><td style="font-weight:800; color:#fff;">MVP 1.1</td><td>rdzeń MVP: zarządzanie, web dev, UI/UX, research</td><td>7</td><td>7</td><td>65 655,81 zł</td><td>196 967,43 zł</td></tr>
+              <tr><td>Q4 2026</td><td style="font-weight:800; color:#fff;">MVP 1.2</td><td>sprzedaż, marketing, komercjalizacja</td><td>2</td><td>9</td><td>81 645,81 zł</td><td>244 937,43 zł</td></tr>
+              <tr><td>Q1 2027</td><td style="font-weight:800; color:#fff;">MVP 1.3</td><td>finanse, BOK, architektura</td><td>3</td><td>12</td><td>120 899,04 zł</td><td>362 697,12 zł</td></tr>
+              <tr><td>Q2 2027</td><td style="font-weight:800; color:#fff;">MVP 1.4</td><td>sprzedaż, administracja, obsługa, księgowość</td><td>5</td><td>17</td><td>152 268,56 zł</td><td>456 805,68 zł</td></tr>
+              <tr><td>Q3 2027</td><td style="font-weight:800; color:#fff;">V1.5</td><td>mobile + marketing</td><td>3</td><td>20</td><td>193 530,79 zł</td><td>580 592,37 zł</td></tr>
+              <tr><td>Q4 2027</td><td style="font-weight:800; color:#fff;">V1.8</td><td>HR + AI</td><td>2</td><td>22</td><td>237 581,71 zł</td><td>712 745,13 zł</td></tr>
+              <tr><td>Q1 2028</td><td style="font-weight:800; color:#fff;">V2.0</td><td>AI, content, SEO, automatyzacje, kadry/płace</td><td>5</td><td>27</td><td>290 928,42 zł</td><td>872 785,26 zł</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="responsive-grid-3b" style="margin-bottom:12px;">
+          <div style="background:rgba(45,212,191,.06); border:1px solid rgba(45,212,191,.28); border-radius:10px; padding:12px 14px;">
+            <strong style="display:block; color:#2DD4BF; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Start zespołu</strong>
+            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">7 osób: CEO, senior full stack, junior front-end, junior back-end, UI/UX, researcher i obsługa biura.</p>
+          </div>
+          <div style="background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.32); border-radius:10px; padding:12px 14px;">
+            <strong style="display:block; color:#FBBF24; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Po MVP 1.4</strong>
+            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">17 osób: dołącza sprzedaż, marketing, BOK, księgowość, architektura, przedstawiciel handlowy i administracja.</p>
+          </div>
+          <div style="background:rgba(52,211,153,.06); border:1px solid rgba(52,211,153,.28); border-radius:10px; padding:12px 14px;">
+            <strong style="display:block; color:#34D399; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Po V2.0</strong>
+            <p style="margin:0; font-size:12px; line-height:1.55; color:#dfe6ee;">27 osób: mobile, HR, AI, content, SEO, automatyzacja marketingu oraz kadry, płace i rozliczenia.</p>
+          </div>
+        </div>
+
+        <details style="margin-bottom:12px; background:rgba(110,139,168,.08); border:1px solid rgba(110,139,168,.25); border-radius:10px; padding:10px 12px;">
+          <summary style="cursor:pointer; color:#fff; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">Tabela szczegółowa stanowisk do rozwinięcia</summary>
+          <div class="slide-tablewrap" style="margin-top:10px; max-height:210px; overflow:auto;">
+            <table class="slide-table" style="font-size:10.5px; min-width:980px;">
+              <thead><tr><th>Stanowisko</th><th>Forma</th><th>Netto / msc</th><th>Pełny koszt / msc</th><th>12 msc</th><th>Opis</th></tr></thead>
+              <tbody>
+                <tr><td>CEO</td><td>B2B VAT 23%</td><td>8 000,00 zł</td><td>9 840,00 zł</td><td>118 080,00 zł</td><td>Strategia, inwestorzy, finanse, produkt i tempo realizacji roadmapy.</td></tr>
+                <tr><td>Starszy Programista Full Stack</td><td>B2B VAT 23%</td><td>19 000,00 zł</td><td>23 370,00 zł</td><td>280 440,00 zł</td><td>Rdzeń aplikacji webowej, integracje i code review.</td></tr>
+                <tr><td>Junior Front-end / Junior Back-end</td><td>zlecenie student &lt;26</td><td>7 000,00 zł</td><td>7 000,00 zł</td><td>84 000,00 zł</td><td>Widoki, komponenty, API, dane i logika backendowa.</td></tr>
+                <tr><td>UI/UX Designer</td><td>B2B VAT 23%</td><td>7 000,00 zł</td><td>8 610,00 zł</td><td>103 320,00 zł</td><td>Makiety, prototypy, UX, design system i przepływy użytkownika.</td></tr>
+                <tr><td>Researcher</td><td>zlecenie student &lt;26</td><td>6 500,00 zł</td><td>6 500,00 zł</td><td>78 000,00 zł</td><td>Dane rynkowe, zawody, certyfikaty, konkurencja i potrzeby użytkowników.</td></tr>
+                <tr><td>KAM / Marketing & Social Media</td><td>B2B VAT 23%</td><td>6 500,00 zł</td><td>7 995,00 zł</td><td>95 940,00 zł</td><td>Relacje B2B, pipeline, content, kampanie i lead generation.</td></tr>
+                <tr><td>Główna Księgowa</td><td>zlecenie pełny ZUS → UoP</td><td>M1–6: 8 000 / M7–12: 10 000 zł</td><td>M1–6: 13 343,23 / M7–12: 17 090,46 zł</td><td>182 602,20 zł</td><td>Finanse, rozliczenia, budżet, podatki i raportowanie inwestorskie.</td></tr>
+                <tr><td>Specjalista BOK</td><td>zlecenie student &lt;26</td><td>5 000,00 zł</td><td>5 000,00 zł</td><td>60 000,00 zł</td><td>Obsługa użytkowników, zgłoszenia, wsparcie kont i feedback.</td></tr>
+                <tr><td>Software Architect</td><td>B2B VAT 23%</td><td>17 000,00 zł</td><td>20 910,00 zł</td><td>250 920,00 zł</td><td>Architektura systemu, standardy, skalowalność i bezpieczeństwo.</td></tr>
+                <tr><td>Mobile / AI / SEO / Automatyzacje</td><td>B2B / zlecenia</td><td>5 000–22 500 zł</td><td>5 000–27 675 zł</td><td>60 000–332 100 zł</td><td>Mobile, AI matching, content, SEO, lejki, mailing i automatyzacje.</td></tr>
+                <tr><td>HR, Administracja, Kadry i Płace</td><td>zlecenie → UoP</td><td>4 500–7 500 zł</td><td>4 500–12 672,04 zł</td><td>81 823,81–141 080,51 zł</td><td>Rekrutacja, onboarding, dokumenty, umowy, kadry, płace i rozliczenia.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <div class="slide-conclusion">Zespół rośnie zgodnie z ryzykiem produktu: najpierw MVP, potem sprzedaż, mobile, AI, automatyzacje i zaplecze operacyjne.</div>
+      </div>`;
+
+    slide8.dataset.teamPatched = '1';
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchTeamSlide);
+  else patchTeamSlide();
+})();
