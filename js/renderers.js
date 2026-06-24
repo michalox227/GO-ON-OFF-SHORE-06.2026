@@ -152,3 +152,83 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchCompetitionSlide);
   else patchCompetitionSlide();
 })();
+
+/* Prezentacja — uzupełnienie slajdu 07: Strategia wejścia na rynek. */
+(function () {
+  function patchMarketEntrySlide() {
+    const slide7 = document.querySelector('.deck-slide[data-slide="7"]');
+    if (!slide7 || slide7.dataset.marketEntryPatched === '1') return;
+
+    slide7.innerHTML = `
+      <div class="slide-content market-entry-slide-content">
+        <p class="slide-thesis">Startujemy wąsko: 8 zawodów, Pomorze i Zachodniopomorskie, ambasadorzy zawodów, ankiety, wywiady i pierwsze firmy. Skalujemy dopiero po walidacji danych, potrzeb i płatności.</p>
+
+        <div class="responsive-grid-3b" style="align-items:stretch; margin-bottom:14px;">
+          <div class="slide-card accent-teal">
+            <h4>Beachhead: 8 zawodów</h4>
+            <p>Wind Turbine Technician, Rope Access / IRATA, Offshore Electrician, Welder Offshore/Stoczniowy, Rigger/Slinger, NDT Inspector, Marine Engineer, HSE Officer.</p>
+            <p style="margin-top:8px; color:#fff; font-weight:800;">3 ambasadorów na zawód = 24 ambasadorów startowych.</p>
+          </div>
+          <div class="slide-card accent-amber">
+            <h4>Proces wejścia</h4>
+            <p><strong>Q2 2027:</strong> ankiety, wywiady, ambasadorzy, pierwsze firmy, test profilu i certyfikatów.</p>
+            <p><strong>Q3 2027:</strong> oficjalny start, pakiety firmowe, partnerzy, treści zawodowe, kampanie LinkedIn.</p>
+            <p><strong>Q4 2027+:</strong> skalowanie zawodów, partnerów, marketplace, webinarów i społeczności.</p>
+          </div>
+          <div class="slide-card accent-green">
+            <h4>Mini-ekosystem per zawód</h4>
+            <p>Firmy, projekty, certyfikaty, centra szkoleniowe, produkty, źródła branżowe, ścieżka kariery, doradcy, materiały marketingowe i wywiady z rynkiem.</p>
+          </div>
+        </div>
+
+        <div class="slide-tablewrap" style="margin-bottom:12px;">
+          <table class="slide-table" style="min-width:0; font-size:11.2px;">
+            <thead><tr><th>Zawód startowy</th><th>Dlaczego startowy</th><th>Zawód startowy</th><th>Dlaczego startowy</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:800; color:#fff;">Wind Turbine Technician</td><td>rdzeń offshore wind</td><td style="font-weight:800; color:#fff;">Rope Access / IRATA</td><td>wysokość i trudno dostępne miejsca</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">Offshore Electrician</td><td>kluczowy profil techniczny</td><td style="font-weight:800; color:#fff;">Welder Offshore / Stoczniowy</td><td>offshore, stocznie, konstrukcje</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">Rigger / Slinger Signaller</td><td>lifting i heavy operations</td><td style="font-weight:800; color:#fff;">NDT Inspector</td><td>kontrola jakości i certyfikacja</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">Marine Engineer</td><td>maritime, CTV/SOV, serwis</td><td style="font-weight:800; color:#fff;">HSE Officer</td><td>compliance, safety, audyty, BHP</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="responsive-grid-3b" style="margin-bottom:12px;">
+          <div style="background:rgba(45,212,191,.06); border:1px solid rgba(45,212,191,.28); border-radius:10px; padding:12px 14px;">
+            <strong style="display:block; color:#2DD4BF; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Pierwsze firmy — Polska</strong>
+            <p style="margin:0; font-size:11.6px; line-height:1.5; color:#dfe6ee;">ORLEN/Baltic Power, PGE Baltica/Baltica 2, Ørsted Polska, Polenergia/Equinor Bałtyk 2 i 3, RWE Offshore Wind Poland, Vestas Poland, Siemens Gamesa/Siemens Energy, CRIST, Remontowa, Port Gdańsk/Port Gdynia.</p>
+          </div>
+          <div style="background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.32); border-radius:10px; padding:12px 14px;">
+            <strong style="display:block; color:#FBBF24; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Pierwsze firmy — Europa</strong>
+            <p style="margin:0; font-size:11.6px; line-height:1.5; color:#dfe6ee;">Ørsted, Equinor, RWE Offshore Wind, Vestas, Siemens Gamesa, Van Oord, DEME Offshore, Boskalis, Jan De Nul, Seaway7 / Saipem / Heerema.</p>
+          </div>
+          <div style="background:rgba(52,211,153,.06); border:1px solid rgba(52,211,153,.28); border-radius:10px; padding:12px 14px;">
+            <strong style="display:block; color:#34D399; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;">Partnerzy startowi</strong>
+            <p style="margin:0; font-size:11.6px; line-height:1.5; color:#dfe6ee;">10 produktowych, 10 usługowych, 10 doradców/ekspertów i 10 placówek szkoleniowych: PPE, IRATA, GWO, BOSIET, OPITO, STCW, NDT, SEP, UDT, ISO 9606, HSE, offshore medical.</p>
+          </div>
+        </div>
+
+        <div class="slide-tablewrap" style="margin-bottom:12px;">
+          <table class="slide-table" style="min-width:0; font-size:11.2px;">
+            <thead><tr><th>Obszar</th><th>Działanie</th><th>KPI Q2–Q3 2027</th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:800; color:#fff;">Marketing</td><td>LinkedIn founder-led, ambasadorzy, webinary, newsletter, podcast/video, SEO content hub, case study „od 0 do pierwszego kontraktu offshore”.</td><td>24 ambasadorów, 400–800 ankiet, 40–80 wywiadów, 80–120 publikacji, 8–16 webinarów, 1 500–3 000 kontaktów, 300–800 użytkowników testowych.</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">Sprzedaż</td><td>Spotkania z firmami offshore/onshore, agencjami, centrami szkoleń, partnerami produktowymi, doradcami i firmami usługowymi.</td><td>60–100 firm w rozmowach, min. 20 testujących, 10 partnerów produktowych, 10 usługowych, 10 ekspertów, 10 placówek, 10–30 płatnych pakietów.</td></tr>
+              <tr><td style="font-weight:800; color:#fff;">Operacje / Product / Community</td><td>Checklisty zawodowe, mapa certyfikatów, test profilu, test centrum certyfikatów, test panelu firmy, Q&A ambasadorów i grupy zawodowe.</td><td>Pełna walidacja profilu, certyfikatów, ofert, statusów aplikacji, partnerów i feedbacku od ambasadorów.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="background:rgba(110,139,168,.08); border-left:3px solid #2DD4BF; border-radius:8px; padding:12px 16px; margin-bottom:12px;">
+          <p style="margin:0; font-size:12.5px; line-height:1.55; color:#dfe6ee;">Strategia wejścia na rynek zakłada start w województwach pomorskim i zachodniopomorskim oraz koncentrację na 8 zawodach wysokiego ryzyka. Dla każdego zawodu budujemy mini-ekosystem: ambasadorzy, ankiety, wywiady, mapa firm, mapa projektów, certyfikaty, centra szkoleniowe, produkty, usługi, doradcy i treści edukacyjne. Q2 2027 to faza testów z pierwszymi klientami i partnerami, a Q3 2027 to oficjalny start platformy z pierwszą bazą użytkowników, firm i ambasadorów.</p>
+        </div>
+
+        <div class="slide-conclusion">Nie startujemy jako ogólny portal pracy. Startujemy jako wyspecjalizowany system dla 8 zawodów, budowany razem z ludźmi z rynku.</div>
+      </div>`;
+
+    slide7.dataset.marketEntryPatched = '1';
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchMarketEntrySlide);
+  else patchMarketEntrySlide();
+})();
