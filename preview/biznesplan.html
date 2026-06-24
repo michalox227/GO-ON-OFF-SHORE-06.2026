@@ -195,6 +195,7 @@
   .slide-stage{position:relative; border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; min-height:960px; background:radial-gradient(1000px 525px at 80% 10%, rgba(45,212,191,.12), transparent 62%), linear-gradient(135deg, rgba(15,24,34,.98), rgba(8,13,20,.98)); box-shadow:0 32px 80px rgba(0,0,0,.42)}
   .deck-slide{display:none; min-height:960px; padding:80px 98px; align-items:center; justify-content:center; text-align:center}
   .deck-slide.active{display:flex}
+  .deck-slide-body{max-width:760px; text-align:left; font-size:17px; line-height:1.7; color:#dfe6ee; white-space:pre-line}
   .slide-arrow{position:absolute; top:50%; transform:translateY(-50%); width:54px; height:54px; border-radius:50%; border:1px solid rgba(255,255,255,.16); background:rgba(7,11,17,.74); color:#fff; cursor:pointer; font-size:34px; line-height:1; display:flex; align-items:center; justify-content:center; transition:background .18s ease, border-color .18s ease, transform .18s ease}
   .slide-arrow:hover{background:rgba(45,212,191,.18); border-color:rgba(45,212,191,.58); transform:translateY(-50%) scale(1.04)}
   .slide-arrow.prev{left:22px}
@@ -280,9 +281,12 @@
   #business-plan.editing-active .wrap{outline:2px dashed rgba(45,212,191,.5); outline-offset:6px; border-radius:10px}
   #business-plan.editing-active .wrap *[contenteditable]:focus{outline:1px solid rgba(45,212,191,.8); background:rgba(45,212,191,.06)}
   .pres-editor-list{display:flex; flex-direction:column; gap:8px; margin:10px 0}
-  .pres-editor-row{display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:8px 10px}
-  .pres-editor-row .pres-num{flex:0 0 28px; color:var(--muted); font-size:12px; font-weight:800}
+  .pres-editor-row{display:flex; align-items:flex-start; gap:8px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:8px 10px}
+  .pres-editor-row .pres-num{flex:0 0 28px; color:var(--muted); font-size:12px; font-weight:800; padding-top:8px}
+  .pres-editor-row .pres-editor-fields{flex:1 1 auto; display:flex; flex-direction:column; gap:6px}
   .pres-editor-row input[type="text"]{flex:1 1 auto; background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.16); border-radius:8px; color:#fff; padding:8px 10px; font-size:13px; font-family:inherit}
+  .pres-editor-row textarea{flex:1 1 auto; background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.16); border-radius:8px; color:#fff; padding:8px 10px; font-size:13px; font-family:inherit; min-height:64px; resize:vertical}
+  .pres-editor-row .pres-row-actions{flex:0 0 auto; display:flex; gap:6px; padding-top:8px}
   .pres-editor-row button{flex:0 0 auto; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; border-radius:8px; padding:6px 10px; font-size:12px; cursor:pointer}
   .pres-editor-row button:hover{background:rgba(255,255,255,.16)}
   .pres-editor-row button:disabled{opacity:.3; cursor:default}
@@ -1892,6 +1896,7 @@
     'OTWARTE DECYZJE I NASTĘPNE KROKI',
     'Q&A / KONTAKT INWESTORSKI'
   ];
+  let slideBodies = new Array(slideTitles.length).fill('');
   let currentSlide = 1;
 
   function showView(viewId) {
@@ -1927,8 +1932,9 @@
   const deckStage = document.querySelector('.slide-stage');
   const dotsContainer = document.querySelector('.slide-dots');
 
-  function rebuildDeck(titles) {
+  function rebuildDeck(titles, bodies) {
     slideTitles = titles.slice();
+    slideBodies = (bodies || []).slice();
     deckStage.querySelectorAll('.deck-slide').forEach(el => el.remove());
     dotsContainer.innerHTML = '';
     const arrowPrev = deckStage.querySelector('.slide-arrow.prev');
@@ -1937,6 +1943,13 @@
       const section = document.createElement('section');
       section.className = 'deck-slide' + (n === 1 ? ' active' : '');
       section.dataset.slide = String(n);
+      const body = slideBodies[i] || '';
+      if (body) {
+        const bodyEl = document.createElement('div');
+        bodyEl.className = 'deck-slide-body';
+        bodyEl.textContent = body;
+        section.appendChild(bodyEl);
+      }
       deckStage.insertBefore(section, arrowPrev);
       const dot = document.createElement('button');
       dot.className = 'slide-dot' + (n === 1 ? ' active' : '');
@@ -1954,7 +1967,14 @@
 
   const presSaved = localStorage.getItem(PRES_STORAGE_KEY);
   if (presSaved) {
-    try { rebuildDeck(JSON.parse(presSaved)); } catch (e) {}
+    try {
+      const parsed = JSON.parse(presSaved);
+      if (Array.isArray(parsed)) {
+        rebuildDeck(parsed, []);
+      } else if (parsed && Array.isArray(parsed.titles)) {
+        rebuildDeck(parsed.titles, parsed.bodies || []);
+      }
+    } catch (e) {}
   }
 
 
@@ -2768,7 +2788,9 @@
     });
 
     const ORIGINAL_PRES_TITLES = slideTitles.slice();
+    const ORIGINAL_PRES_BODIES = slideBodies.slice();
     let draftTitles = slideTitles.slice();
+    let draftBodies = slideBodies.slice();
     const presListEl = document.getElementById('presEditorList');
     const presAddBtn = document.getElementById('presAddSlideBtn');
     const presSaveBtn = document.getElementById('presSaveBtn');
@@ -2782,24 +2804,34 @@
         row.className = 'pres-editor-row';
         row.innerHTML =
           '<span class="pres-num">#' + (i + 1) + '</span>' +
-          '<input type="text" value="" />' +
-          '<button type="button" data-act="up">↑</button>' +
-          '<button type="button" data-act="down">↓</button>' +
-          '<button type="button" data-act="del">Usuń</button>';
+          '<div class="pres-editor-fields">' +
+            '<input type="text" value="" placeholder="Tytuł slajdu" />' +
+            '<textarea placeholder="Treść slajdu (opcjonalnie) — pojawi się na slajdzie podczas prezentacji."></textarea>' +
+          '</div>' +
+          '<div class="pres-row-actions">' +
+            '<button type="button" data-act="up">↑</button>' +
+            '<button type="button" data-act="down">↓</button>' +
+            '<button type="button" data-act="del">Usuń</button>' +
+          '</div>';
         row.querySelector('input').value = title;
+        row.querySelector('textarea').value = draftBodies[i] || '';
         row.querySelector('input').addEventListener('input', e => { draftTitles[i] = e.target.value; });
+        row.querySelector('textarea').addEventListener('input', e => { draftBodies[i] = e.target.value; });
         row.querySelector('[data-act="up"]').disabled = i === 0;
         row.querySelector('[data-act="down"]').disabled = i === draftTitles.length - 1;
         row.querySelector('[data-act="up"]').addEventListener('click', () => {
           [draftTitles[i - 1], draftTitles[i]] = [draftTitles[i], draftTitles[i - 1]];
+          [draftBodies[i - 1], draftBodies[i]] = [draftBodies[i], draftBodies[i - 1]];
           renderPresEditor();
         });
         row.querySelector('[data-act="down"]').addEventListener('click', () => {
           [draftTitles[i + 1], draftTitles[i]] = [draftTitles[i], draftTitles[i + 1]];
+          [draftBodies[i + 1], draftBodies[i]] = [draftBodies[i], draftBodies[i + 1]];
           renderPresEditor();
         });
         row.querySelector('[data-act="del"]').addEventListener('click', () => {
           draftTitles.splice(i, 1);
+          draftBodies.splice(i, 1);
           renderPresEditor();
         });
         presListEl.appendChild(row);
@@ -2810,19 +2842,21 @@
 
     presAddBtn.addEventListener('click', () => {
       draftTitles.push('NOWY SLAJD ' + draftTitles.length);
+      draftBodies.push('');
       renderPresEditor();
     });
 
     presSaveBtn.addEventListener('click', () => {
-      localStorage.setItem(PRES_STORAGE_KEY, JSON.stringify(draftTitles));
-      rebuildDeck(draftTitles);
+      localStorage.setItem(PRES_STORAGE_KEY, JSON.stringify({ titles: draftTitles, bodies: draftBodies }));
+      rebuildDeck(draftTitles, draftBodies);
       presStatusEl.textContent = 'Zapisano prezentację (' + draftTitles.length + ' slajdów) — ' + new Date().toLocaleString('pl-PL') + '.';
     });
 
     presResetBtn.addEventListener('click', () => {
       localStorage.removeItem(PRES_STORAGE_KEY);
       draftTitles = ORIGINAL_PRES_TITLES.slice();
-      rebuildDeck(draftTitles);
+      draftBodies = ORIGINAL_PRES_BODIES.slice();
+      rebuildDeck(draftTitles, draftBodies);
       renderPresEditor();
       presStatusEl.textContent = 'Przywrócono opublikowaną wersję prezentacji.';
     });
