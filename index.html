@@ -357,6 +357,15 @@
   .roadmap-details.editing-active .rm-del-btn{display:inline-flex}
   .rm-del-btn{display:none; margin-left:8px; border:1px solid rgba(248,113,113,.4); background:rgba(248,113,113,.12); color:#F87171; border-radius:6px; padding:2px 8px; font-size:11px; cursor:pointer}
   .rm-del-btn:hover{background:rgba(248,113,113,.28)}
+  .gs-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:14px; margin:10px 0}
+  .gs-field{display:flex; flex-direction:column; gap:6px; font-size:12.5px; color:#c4ced8}
+  .gs-field input[type="text"], .gs-field select{background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.16); border-radius:8px; color:#fff; padding:8px 10px; font-size:13px; font-family:inherit}
+  .gs-field input[type="color"]{width:100%; height:38px; padding:2px; background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.16); border-radius:8px; cursor:pointer}
+  .gs-field input[type="range"]{width:100%}
+  .gs-rangeval{color:var(--muted); font-size:11px}
+  .gs-toggle{flex-direction:row; align-items:center; gap:8px; font-size:13px; color:#d4dde6}
+  .gs-visibility{margin-bottom:6px}
+  #gsJsonArea{width:100%; min-height:140px; margin-top:10px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:10px; color:#e7edf3; font-family:ui-monospace, monospace; font-size:12px; padding:14px; resize:vertical}
   .org-editor-rolelist{display:flex; flex-direction:column; gap:6px; margin:10px 0}
   .org-editor-rolelist .org-role-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:8px 10px; color:#fff; font-size:13px}
   .org-editor-rolelist .org-role-row .rm-del-btn{display:inline-flex; margin-left:auto}
@@ -2395,6 +2404,71 @@
 <main class="page-view" id="settings">
 <div class="wrap">
   <h2 style="margin:0 0 8px;">USTAWIENIA WITRYNY</h2>
+  <p style="margin:0 0 14px; color:#c4ced8;">Panel ustawień jest podzielony na sekcje: Globalne ustawienia strony, Biznes Plan, Prezentacja, Road Mapa, Organizacja, Baza wartości i Etykiety. Każda sekcja zapisuje się lokalnie w tej przeglądarce (localStorage) i odświeża właściwą podstronę natychmiast.</p>
+
+  <h2 style="margin:8px 0 8px;" id="gsPanelHeading">PANEL USTAWIEŃ: GLOBALNE USTAWIENIA STRONY</h2>
+  <p style="margin:0 0 14px; color:#c4ced8;">Wygląd i widoczność sekcji obowiązujące na całej witrynie. Zmiany stosują się na żywo, jeszcze przed kliknięciem „Zapisz”.</p>
+
+  <div class="gs-grid">
+    <label class="gs-field">Nazwa projektu
+      <input type="text" id="gsSiteName" data-setting-key="global.siteName" placeholder="GO ON [OFF] SHORE" />
+    </label>
+    <label class="gs-field">Slogan / podtytuł
+      <input type="text" id="gsSlogan" data-setting-key="global.slogan" placeholder="(opcjonalnie)" />
+    </label>
+    <label class="gs-field gs-color">Kolor akcentu (teal)
+      <input type="color" id="gsAccentColor" data-setting-key="global.accentColor" />
+    </label>
+    <label class="gs-field gs-color">Kolor akcentu 2 (gold)
+      <input type="color" id="gsAccentColor2" data-setting-key="global.accentColor2" />
+    </label>
+    <label class="gs-field gs-color">Kolor tła
+      <input type="color" id="gsBgColor" data-setting-key="global.bgColor" />
+    </label>
+    <label class="gs-field gs-color">Kolor tekstu
+      <input type="color" id="gsTextColor" data-setting-key="global.textColor" />
+    </label>
+    <label class="gs-field gs-color">Kolor kart / paneli
+      <input type="color" id="gsCardColor" data-setting-key="global.cardColor" />
+    </label>
+    <label class="gs-field">Font główny
+      <select id="gsFontFamily" data-setting-key="global.fontFamily">
+        <option value="default">Domyślny (Helvetica/Arial)</option>
+        <option value="serif">Klasyczny (Georgia/Times)</option>
+        <option value="mono">Techniczny (Menlo/Consolas)</option>
+        <option value="rounded">Zaokrąglony (system-ui)</option>
+      </select>
+    </label>
+    <label class="gs-field">Zaokrąglenie kart
+      <input type="range" id="gsCardRadius" data-setting-key="global.cardRadius" min="0" max="28" step="1" />
+      <span id="gsCardRadiusVal" class="gs-rangeval"></span>
+    </label>
+    <label class="gs-field">Intensywność cienia
+      <input type="range" id="gsShadowStrength" data-setting-key="global.shadowStrength" min="0" max="80" step="5" />
+      <span id="gsShadowStrengthVal" class="gs-rangeval"></span>
+    </label>
+    <label class="gs-field gs-toggle"><input type="checkbox" id="gsDarkMode" data-setting-key="global.darkMode" /> Tryb jasny (domyślnie ciemny)</label>
+  </div>
+
+  <p style="margin:18px 0 6px; color:#c4ced8; font-size:13.5px;">Widoczność zakładek</p>
+  <div class="gs-grid gs-visibility">
+    <label class="gs-field gs-toggle"><input type="checkbox" id="gsVisBusinessPlan" data-setting-key="global.visibility.businessPlan" checked /> Biznes Plan</label>
+    <label class="gs-field gs-toggle"><input type="checkbox" id="gsVisPresentation" data-setting-key="global.visibility.presentation" checked /> Prezentacja</label>
+    <label class="gs-field gs-toggle"><input type="checkbox" id="gsVisRoadmap" data-setting-key="global.visibility.roadmap" checked /> Road Mapa</label>
+    <label class="gs-field gs-toggle"><input type="checkbox" id="gsVisOrganization" data-setting-key="global.visibility.organization" checked /> Organizacja</label>
+  </div>
+
+  <div class="settings-actions">
+    <button class="org-filter-btn" type="button" id="gsSaveBtn">Zapisz</button>
+    <button class="org-filter-btn" type="button" id="gsPreviewBtn">Podgląd</button>
+    <button class="org-filter-btn" type="button" id="gsResetBtn">Resetuj</button>
+    <button class="org-filter-btn" type="button" id="gsExportBtn">Eksportuj JSON</button>
+    <button class="org-filter-btn" type="button" id="gsImportBtn">Importuj JSON</button>
+  </div>
+  <p class="org-filter-status" id="gsStatus"></p>
+  <textarea id="gsJsonArea" placeholder="Tu pojawi się eksport JSON po kliknięciu „Eksportuj JSON”. Aby zaimportować — wklej JSON i kliknij „Importuj JSON”."></textarea>
+
+  <h2 style="margin:32px 0 8px;">PANEL USTAWIEŃ: BIZNES PLAN</h2>
   <p style="margin:0 0 6px; color:#c4ced8;">Edycja treści Biznes Planu na żywo w tej przeglądarce. Włącz edycję, popraw tekst klikając w niego, zapisz do podglądu, a gdy zbierzesz wszystkie poprawki — kliknij „Wyświetl poprawione”, skopiuj treść i wklej ją z powrotem, żebym wgrał ją na stałe do wszystkich odwiedzających.</p>
   <p style="margin:0 0 14px; color:var(--muted); font-size:13px;">Edycja Organizacji odbywa się przez filtry na samej zakładce „Organizacja” (diagram zastąpiony listami ZESPÓŁ / ZREKRUTOWANI). Edytor Road Mapy znajduje się poniżej.</p>
   <div class="settings-actions">
@@ -2406,7 +2480,7 @@
   <p class="org-filter-status" id="settingsStatus"></p>
   <textarea id="settingsReport" readonly placeholder="Tu pojawi się lista zmian po kliknięciu „Wyświetl poprawione”..."></textarea>
 
-  <h2 style="margin:32px 0 8px;">PREZENTACJA — slajdy</h2>
+  <h2 style="margin:32px 0 8px;">PANEL USTAWIEŃ: PREZENTACJA</h2>
   <p style="margin:0 0 6px; color:#c4ced8;">Edytuj tytuły slajdów, zmień ich kolejność lub dodaj/usuń slajd. Po kliknięciu „Zapisz prezentację” zmiany działają od razu w zakładce Prezentacja (zapisane w tej przeglądarce).</p>
   <div id="presEditorList" class="pres-editor-list"></div>
   <div class="settings-actions">
@@ -2416,7 +2490,7 @@
   </div>
   <p class="org-filter-status" id="presStatus"></p>
 
-  <h2 style="margin:32px 0 8px;">ROAD MAPA</h2>
+  <h2 style="margin:32px 0 8px;">PANEL USTAWIEŃ: ROAD MAPA</h2>
   <p style="margin:0 0 6px; color:#c4ced8;">Włącz edycję, popraw tekst (cel etapu, praca, efekt końcowy, opisy w tabelach, etykiety osób) klikając w niego na zakładce „Road Mapa”, zapisz do podglądu. Poniższe formularze dodają nowe wiersze kosztów/przychodów/grantów/osób do wybranego Etapu i Q — w trybie edycji przy istniejących pozycjach pojawi się przycisk „Usuń”.</p>
   <div class="settings-actions">
     <button class="org-filter-btn" type="button" id="rmEditToggle">Włącz edycję Road Mapy</button>
@@ -2515,7 +2589,7 @@
     <button class="org-filter-btn" type="button" id="rmAddStageBtn">+ Dodaj nowy etap</button>
   </div>
 
-  <h2 style="margin:32px 0 8px;">ORGANIZACJA</h2>
+  <h2 style="margin:32px 0 8px;">PANEL USTAWIEŃ: ORGANIZACJA</h2>
   <p style="margin:0 0 6px; color:#c4ced8;">Dodawaj/usuwaj działy i role — zmiany zapisują się od razu i są widoczne na zakładce „Organizacja” w listach ZESPÓŁ / ZREKRUTOWANI, zgodnie z przypisanym kwartałem. „Wyświetl poprawione” pokaże listę zmian względem opublikowanej wersji do skopiowania.</p>
   <div class="settings-actions">
     <button class="org-filter-btn" type="button" id="orgReportBtn">Wyświetl poprawione</button>
