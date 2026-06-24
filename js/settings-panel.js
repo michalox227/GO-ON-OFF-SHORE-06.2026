@@ -152,3 +152,100 @@
   window.GoShoreSettings = window.GoShoreSettings || {};
   Object.assign(window.GoShoreSettings, { renderPageSettings, readFormSettings, exportSettingsJSON, importSettingsJSON });
 })();
+
+/* Patch UI trybu edycji: sam przycisk ⚙️, domyślnie 30% opacity, aktywny 100%, bez checkboxa. */
+(function () {
+  const EDIT_MODE_KEY = 'goShoreInlineEditMode_v1';
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  function injectPatchStyles() {
+    if (document.getElementById('goInlineGearPatchStyles')) return;
+    const style = document.createElement('style');
+    style.id = 'goInlineGearPatchStyles';
+    style.textContent = `
+      #goInlineEditorToolbar{
+        opacity:.30!important;
+        transition:opacity .18s ease, transform .18s ease, box-shadow .18s ease, background .18s ease!important;
+        padding:7px!important;
+      }
+      #goInlineEditorToolbar:hover,
+      #goInlineEditorToolbar.go-toolbar-active,
+      body.go-edit-mode #goInlineEditorToolbar{
+        opacity:1!important;
+      }
+      #goInlineEditorToolbar label,
+      #goInlineEditorToolbar input[type="checkbox"]{
+        display:none!important;
+      }
+      #goInlineEditButton{
+        width:38px!important;
+        height:38px!important;
+        display:inline-grid!important;
+        place-items:center!important;
+      }
+      #goInlineEditButton.active,
+      body.go-edit-mode #goInlineEditButton{
+        opacity:1!important;
+      }
+      body:not(.go-edit-mode) .go-inline-edit-btn,
+      body:not(.go-edit-mode) #goRoadmapWholeEditBtn{
+        display:none!important;
+      }
+      body.go-edit-mode .go-inline-edit-btn{
+        display:inline-flex!important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function setVisualEditMode(enabled) {
+    document.body.classList.toggle('go-edit-mode', !!enabled);
+    const toolbar = document.getElementById('goInlineEditorToolbar');
+    const button = document.getElementById('goInlineEditButton');
+    if (toolbar) toolbar.classList.toggle('go-toolbar-active', !!enabled);
+    if (button) {
+      button.classList.toggle('active', !!enabled);
+      button.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+      button.title = enabled
+        ? 'Wyłącz tryb konfiguracji — ukryj ikonki edycji'
+        : 'Włącz tryb konfiguracji — pokaż ikonki edycji';
+    }
+    try { localStorage.removeItem(EDIT_MODE_KEY); } catch (e) {}
+  }
+
+  function patchToolbar() {
+    const toolbar = document.getElementById('goInlineEditorToolbar');
+    if (!toolbar) return false;
+
+    toolbar.querySelectorAll('label, input[type="checkbox"]').forEach(el => el.remove());
+
+    const currentButton = document.getElementById('goInlineEditButton');
+    if (!currentButton) return false;
+
+    if (currentButton.dataset.gearPatchApplied !== '1') {
+      const button = currentButton.cloneNode(true);
+      button.dataset.gearPatchApplied = '1';
+      button.setAttribute('aria-label', 'Włącz lub wyłącz tryb konfiguracji');
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        setVisualEditMode(!document.body.classList.contains('go-edit-mode'));
+      });
+      currentButton.replaceWith(button);
+    }
+
+    setVisualEditMode(false);
+    return true;
+  }
+
+  ready(() => {
+    injectPatchStyles();
+    setTimeout(patchToolbar, 0);
+    setTimeout(patchToolbar, 250);
+    setTimeout(patchToolbar, 900);
+  });
+})();
