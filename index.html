@@ -58,7 +58,11 @@
       align-items: center; justify-content: center;
       color: white; font-size: 18px; z-index: 100;
       gap: 20px;
+      text-align: center; padding: 24px;
     }
+    #loading.error { background: linear-gradient(135deg, #1d1020 0%, #311b2a 100%); }
+    #loading.error .loader { display: none; }
+    #loading.error span { max-width: 520px; line-height: 1.5; }
     .loader {
       width: 50px; height: 50px;
       border: 3px solid rgba(80,140,255,0.2);
@@ -74,6 +78,18 @@
     <div class="loader"></div>
     <span>Ładowanie mapy 3D…</span>
   </div>
+
+  <script>
+    function showMapLoadError(reason) {
+      const loading = document.getElementById('loading');
+      if (!loading || loading.style.display === 'none') return;
+      loading.classList.add('error');
+      loading.querySelector('span').textContent = 'Nie udało się załadować mapy 3D. Sprawdź połączenie z internetem i odśwież stronę.';
+      console.error('Map loading failed:', reason);
+    }
+    window.addEventListener('error', event => showMapLoadError(event.message || event.error));
+    window.addEventListener('unhandledrejection', event => showMapLoadError(event.reason));
+  </script>
 
   <div id="ui-panel">
     <h1>🗺️ Mapa 3D</h1>
@@ -109,6 +125,12 @@
   <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    let seed = 42;
+    function rand() {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    }
 
     // ─── RENDERER ────────────────────────────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -195,13 +217,13 @@
     // Kwiaty
     const flowerColors = [0xff3355, 0xffdd00, 0xff77aa, 0xaa33ff, 0xff6600, 0xffffff];
     for (let i = 0; i < 250; i++) {
-      const x = -120 + Math.random() * 340, z = -100 + Math.random() * 420;
+      const x = -120 + rand() * 340, z = -100 + rand() * 420;
       if (x > 105 && z > -180 && z < 130) continue; // pomijaj miasto
       if (z < -105 && x > -95 && x < 145) continue; // pomijaj lotnisko
       if (Math.abs(z - 30) < 9 || (Math.abs(x - 110) < 9 && z < 30)) continue; // pomijaj autostrady
       const flower = new THREE.Mesh(
         new THREE.SphereGeometry(0.7, 4, 3),
-        new THREE.MeshLambertMaterial({ color: flowerColors[Math.floor(Math.random() * flowerColors.length)] })
+        new THREE.MeshLambertMaterial({ color: flowerColors[Math.floor(rand() * flowerColors.length)] })
       );
       flower.position.set(x, 2.2, z);
       scene.add(flower);
@@ -209,13 +231,13 @@
 
     // Stawy
     for (let i = 0; i < 3; i++) {
-      const r = 7 + Math.random() * 7;
+      const r = 7 + rand() * 7;
       const pond = new THREE.Mesh(
         new THREE.CircleGeometry(r, 14),
         new THREE.MeshPhongMaterial({ color: 0x3388cc, shininess: 120, transparent: true, opacity: 0.82 })
       );
       pond.rotation.x = -Math.PI / 2;
-      pond.position.set(-60 + Math.random() * 60, 0.7, 50 + i * 90 + Math.random() * 30);
+      pond.position.set(-60 + rand() * 60, 0.7, 50 + i * 90 + rand() * 30);
       tag(pond, 'Staw', 'Naturalny staw na łące z roślinnością wodną i ptakami.');
       scene.add(pond);
     }
@@ -255,11 +277,11 @@
     // Kamienie przy brzegu
     for (let i = 0; i < 18; i++) {
       const rock = new THREE.Mesh(
-        new THREE.DodecahedronGeometry(1.5 + Math.random() * 4, 0),
+        new THREE.DodecahedronGeometry(1.5 + rand() * 4, 0),
         new THREE.MeshLambertMaterial({ color: 0x8a8a7a })
       );
-      rock.position.set(-140 + Math.random() * 20 - 10, 0.6 + Math.random() * 1.5, -340 + Math.random() * 680);
-      rock.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+      rock.position.set(-140 + rand() * 20 - 10, 0.6 + rand() * 1.5, -340 + rand() * 680);
+      rock.rotation.set(rand() * Math.PI, rand() * Math.PI, rand() * Math.PI);
       rock.castShadow = true;
       scene.add(rock);
     }
@@ -346,10 +368,10 @@
     // Paprocie / krzewy
     for (let i = 0; i < 50; i++) {
       const bush = new THREE.Mesh(
-        new THREE.SphereGeometry(2 + Math.random() * 2.5, 6, 4),
+        new THREE.SphereGeometry(2 + rand() * 2.5, 6, 4),
         new THREE.MeshLambertMaterial({ color: 0x1a4a10 })
       );
-      bush.position.set(-310 + Math.random() * 240, 1.8, 70 + Math.random() * 250);
+      bush.position.set(-310 + rand() * 240, 1.8, 70 + rand() * 250);
       bush.scale.y = 0.6;
       bush.castShadow = true;
       scene.add(bush);
@@ -379,9 +401,9 @@
     }
 
     for (let i = 0; i < 110; i++) {
-      const x = -315 + Math.random() * 230, z = 68 + Math.random() * 255;
+      const x = -315 + rand() * 230, z = 68 + rand() * 255;
       if (x < -132) continue;
-      scene.add(createTree(x, z, 0.6 + Math.random() * 0.9));
+      scene.add(createTree(x, z, 0.6 + rand() * 0.9));
     }
 
     // ─── MIASTO ──────────────────────────────────────────────────────────────
@@ -398,11 +420,11 @@
     // Parki miejskie
     for (let i = 0; i < 6; i++) {
       const park = new THREE.Mesh(
-        new THREE.PlaneGeometry(18 + Math.random() * 14, 18 + Math.random() * 14),
+        new THREE.PlaneGeometry(18 + rand() * 14, 18 + rand() * 14),
         new THREE.MeshLambertMaterial({ color: 0x50a028 })
       );
       park.rotation.x = -Math.PI / 2;
-      park.position.set(110 + Math.random() * 170, 0.3, -145 + Math.random() * 280);
+      park.position.set(110 + rand() * 170, 0.3, -145 + rand() * 280);
       scene.add(park);
     }
 
@@ -704,17 +726,43 @@
 
     // Znaki drogowe
     function createSign(x, z, text) {
+      const group = new THREE.Group();
       const pole = new THREE.Mesh(
         new THREE.CylinderGeometry(0.3, 0.3, 8, 6),
         new THREE.MeshLambertMaterial({ color: 0x888888 })
       );
-      pole.position.set(x, 4, z);
+      pole.position.set(0, 4, 0);
+      pole.castShadow = true;
       const board = new THREE.Mesh(
         new THREE.BoxGeometry(10, 3.5, 0.4),
         new THREE.MeshLambertMaterial({ color: 0x006600 })
       );
-      board.position.set(x, 9, z);
-      scene.add(pole, board);
+      board.position.set(0, 9, 0);
+      board.castShadow = true;
+
+      const labelCanvas = document.createElement('canvas');
+      labelCanvas.width = 256;
+      labelCanvas.height = 96;
+      const ctx = labelCanvas.getContext('2d');
+      ctx.fillStyle = '#006600';
+      ctx.fillRect(0, 0, labelCanvas.width, labelCanvas.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 28px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, labelCanvas.width / 2, labelCanvas.height / 2);
+
+      const label = new THREE.Mesh(
+        new THREE.PlaneGeometry(9.2, 2.8),
+        new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(labelCanvas), transparent: true })
+      );
+      label.position.set(0, 9, 0.23);
+
+      group.add(pole, board, label);
+      group.position.set(x, 0, z);
+      if (Math.abs(x - 110) < 8) group.rotation.y = -Math.PI / 2;
+      tagGroup(group, 'Znak Drogowy', `Drogowskaz: ${text}.`);
+      scene.add(group);
     }
     createSign(-50, 32, 'MIASTO'); createSign(60, 32, 'LOTNISKO');
     createSign(112, -80, 'CENTRUM'); createSign(112, 80, 'POŁUDNIE');
